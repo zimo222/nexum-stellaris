@@ -6,14 +6,36 @@ public class SceneDataManager : Singleton<SceneDataManager>
 {
     [Header("Loading Settings")]
     [SerializeField] private LoadingPanel loadingPanel;  // 拖入加载面板
-    [SerializeField] private float minimumLoadTime = 1f; // 最短加载时间（避免一闪而过）
+    [SerializeField] private float minimumLoadTime = 1f; // 最短加载时间
+    [SerializeField] private float fadeInDuration = 0.3f;  // 淡入时间
+    [SerializeField] private float fadeOutDuration = 0.3f; // 淡出时间
 
     private bool isLoading = false;
+    private CanvasGroup canvasGroup; // 用于控制透明度
 
     protected override void Awake()
     {
         base.Awake();
-        if (loadingPanel != null) loadingPanel.gameObject.SetActive(false);
+
+        if (loadingPanel != null)
+        {
+            loadingPanel.gameObject.SetActive(false);
+            // 确保 CanvasGroup 组件存在
+            canvasGroup = loadingPanel.GetComponent<CanvasGroup>();
+            if (canvasGroup == null)
+                canvasGroup = loadingPanel.gameObject.AddComponent<CanvasGroup>();
+
+            // 将加载面板所在的根 Canvas 设为常驻，避免场景切换时被销毁
+            Canvas rootCanvas = loadingPanel.GetComponentInParent<Canvas>();
+            if (rootCanvas != null)
+                DontDestroyOnLoad(rootCanvas.gameObject);
+            else
+                DontDestroyOnLoad(loadingPanel.gameObject);
+        }
+        else
+        {
+            Debug.LogError("LoadingPanel 未赋值！");
+        }
     }
 
     /// <summary>
@@ -29,41 +51,51 @@ public class SceneDataManager : Singleton<SceneDataManager>
     {
         isLoading = true;
 
-        // 1. 保存当前游戏状态
-        SaveCurrentGameState();
-
-        // 2. 显示加载面板
+        // ---- 淡入动画 ----
         loadingPanel.gameObject.SetActive(true);
+        canvasGroup.alpha = 0f;
+        float elapsedFade = 0f;
+        while (elapsedFade < fadeInDuration)
+        {
+            elapsedFade += Time.deltaTime;
+            canvasGroup.alpha = Mathf.Clamp01(elapsedFade / fadeInDuration);
+            yield return null;
+        }
+        canvasGroup.alpha = 1f;
+
+        yield return new WaitForSecondsRealtime(0.1f);
+
+        // 淡入完成，开始加载流程
+        float startTime = Time.time;
+
+        // 保存当前游戏状态（根据需要启用）
+        // SaveCurrentGameState();
+
         loadingPanel.SetProgress(0f);
         loadingPanel.SetTip("正在寻找记忆丝线...");
 
-        // 3. 开始异步加载
         AsyncOperation operation = SceneManager.LoadSceneAsync(targetScene);
-        operation.allowSceneActivation = false; // 先不激活，等进度100%后再手动激活
+        operation.allowSceneActivation = false;
 
-        float elapsedTime = 0f;
-
-        // 4. 更新进度条（progress 在 0~0.9 之间）
         while (!operation.isDone)
         {
-            elapsedTime += Time.deltaTime;
+            float elapsed = Time.time - startTime;
+            float t = Mathf.Clamp01(elapsed / minimumLoadTime);                // 基于时间的虚拟进度
+            float realProgress = Mathf.Clamp01(operation.progress / 0.9f);     // 真实加载进度
+            float displayProgress = Mathf.Min(t, realProgress);                // 显示进度（取两者较小值）
+            loadingPanel.SetProgress(displayProgress);
 
-            // 计算显示进度（0~0.9 映射到 0~1，剩余 0.1 是激活场景的瞬间）
-            float progress = Mathf.Clamp01(operation.progress / 0.9f);
-            loadingPanel.SetProgress(progress);
-
-            // 根据进度更换提示文本（可选）
-            if (progress < 0.3f)
+            // 根据显示进度更换提示文本（可选）
+            if (displayProgress < 0.3f)
                 loadingPanel.SetTip("梳理记忆脉络...");
-            else if (progress < 0.6f)
+            else if (displayProgress < 0.6f)
                 loadingPanel.SetTip("编织羁绊之网...");
-            else if (progress < 0.9f)
+            else if (displayProgress < 0.9f)
                 loadingPanel.SetTip("点亮星辰坐标...");
             else
                 loadingPanel.SetTip("即将抵达...");
 
-            // 当进度达到 0.9（即加载完成）且满足最短加载时间，允许激活
-            if (operation.progress >= 0.9f && elapsedTime >= minimumLoadTime)
+            if (operation.progress >= 0.90f && elapsed >= minimumLoadTime)
             {
                 operation.allowSceneActivation = true;
             }
@@ -71,10 +103,28 @@ public class SceneDataManager : Singleton<SceneDataManager>
             yield return null;
         }
 
-        // 5. 场景激活后，恢复游戏状态（玩家位置等）
-        RestoreGameStateForScene(targetScene);
+        // 场景激活后，恢复游戏状态（例如将玩家位置归零）
+        RestoreGameStateForScene();
 
-        // 6. 隐藏加载面板
+        yield return new WaitForSecondsRealtime(0.5f);
+
+        // ---- 淡出动画 ----
+        // 先禁用所有子物体（即内部 UI 元素），背景保留
+        foreach (Transform child in loadingPanel.transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+
+        elapsedFade = 0f;
+        while (elapsedFade < fadeOutDuration)
+        {
+            elapsedFade += Time.deltaTime;
+            canvasGroup.alpha = 1f - Mathf.Clamp01(elapsedFade / fadeOutDuration);
+            yield return null;
+        }
+        canvasGroup.alpha = 0f;
+
+        // 隐藏整个面板
         loadingPanel.gameObject.SetActive(false);
         isLoading = false;
     }
@@ -84,44 +134,29 @@ public class SceneDataManager : Singleton<SceneDataManager>
     /// </summary>
     private void SaveCurrentGameState()
     {
-        GameData data = new GameData();
-        data.currentScene = SceneManager.GetActiveScene().name;
-
-        // 查找玩家位置（假设场景中有 Player 标签的对象）
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
-        {
-            data.playerPosX = player.transform.position.x;
-            data.playerPosY = player.transform.position.y;
-        }
-
         // 其他数据（如收集物）也可在此保存
-        SaveManager.Instance.SaveGame(data);
+        // SaveManager.Instance.SaveGame(data);
     }
 
     /// <summary>
     /// 新场景加载后，恢复玩家位置等状态
     /// </summary>
-    private void RestoreGameStateForScene(string sceneName)
+    private void RestoreGameStateForScene()
     {
-        GameData data = SaveManager.Instance.LoadGame(); // 加载最新的存档
+        // 查找名为 "Player" 的游戏对象
+        GameObject player = GameObject.Find("Player");
 
-        // 如果存档中的场景与当前场景一致，则设置玩家位置
-        if (data.currentScene == sceneName)
+        if (player != null)
         {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            if (player != null)
-            {
-                player.transform.position = new Vector3(data.playerPosX, data.playerPosY, 0);
-            }
+            Vector3 position = player.transform.position;
+            position.x = 0f;
+            position.y = 0f;
+            player.transform.position = position;
+            Debug.Log("已将 Player 的位置重置为 (0, 0, " + position.z + ")");
         }
         else
         {
-            // 场景不一致，可能使用默认出生点（由场景中的 SpawnPoint 决定）
-            // 这里可以触发一个事件，让场景自己去处理
-            Debug.LogWarning("存档场景与当前场景不符，使用默认出生点");
+            Debug.LogWarning("未找到名为 'Player' 的对象！");
         }
-
-        // 其他数据恢复（如收集物状态）可在此处广播事件，让各系统自行处理
     }
 }

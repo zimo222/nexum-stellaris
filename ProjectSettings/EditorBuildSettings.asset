@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameScene/0_MainMenu.unity
     guid: 281768a2b93663b47acabe11751b3829
+  - enabled: 1
+    path: Assets/Scenes/GameScene/1_TheNestOfWarmLight.unity
+    guid: b685ba932e120e3479fd7feda38d2483
   m_configObjects: {}
