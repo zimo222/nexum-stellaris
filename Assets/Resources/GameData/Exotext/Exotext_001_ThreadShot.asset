@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6e4ae76b7f7c714398abf8655814f07, type: 3}
+  m_Name: Exotext_001_ThreadShot
+  m_EditorClassIdentifier: 
+  id: Exotext_001_ThreadShot
+  exotextName: "\u5C04\u7F15 \xB7 \u672A\u5BC4\u7684\u4FE1"
+  type: 3
+  element: 
+  baseStars: 0
+  maxStars: 0
+  baseHealth: 0
+  baseAttack: 0
+  baseDefence: 0
+  baseEnergy: 0
+  baseCritRate: 0
+  baseCritDamage: 0
+  baseElementBonus: 0
+  icon: {fileID: 0}
+  introduction: "\u4E00\u628A\u6CA1\u6709\u5F13\u5F26\u7684\u5F13\uFF0C\u5F13\u8EAB\u7531\u534A\u900F\u660E\u7684\u601D\u5FF5\u51DD\u6210\u3002\u4F7F\u7528\u65F6\uFF0C\u9700\u8981\u4ECE\u5FC3\u5E95\u62BD\u51FA\u4E00\u7F15\u601D\u5FF5\uFF0C\u7CFB\u5728\u5F13\u7684\u4E24\u7AEF\u2014\u2014\u601D\u5FF5\u6709\u591A\u957F\uFF0C\u5F13\u5F26\u5C31\u6709\u591A\u957F\u3002\u5C04\u51FA\u7684\u77AC\u95F4\uFF0C\u601D\u5FF5\u4F1A\u53D8\u6210\u53EF\u89C1\u7684\u4E1D\u7EBF\uFF0C\u7A7F\u8D8A\u4E00\u5207\u963B\u9694\uFF0C\u62B5\u8FBE\u5B83\u8BE5\u53BB\u7684\u5730\u65B9\u3002"
+  description: "\u6709\u4E9B\u8BDD\u65E0\u6CD5\u5F53\u9762\u8BF4\uFF0C\u6709\u4E9B\u4EBA\u5728\u8FDC\u65B9\u3002\u5C04\u7F15\u7684\u5B58\u5728\uFF0C\u662F\u4E3A\u4E86\u8BA9\u601D\u5FF5\u80FD\u7A7F\u8D8A\u8DDD\u79BB\u3002\u4E3B\u89D2\u7B2C\u4E00\u6B21\u610F\u8BC6\u5230\uFF0C\u81EA\u5DF1\u70ED\u7231\u7684\u4E8B\u7269\u65E0\u6CD5\u4E0E\u8FDC\u65B9\u7684\u670B\u53CB\u5206\u4EAB\u2014\u2014\u4E8E\u662F\u8FD9\u628A\u5F13\u8BDE\u751F\u4E86\u3002"

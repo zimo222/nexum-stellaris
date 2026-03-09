@@ -11,4 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameScene/1_TheNestOfWarmLight.unity
     guid: b685ba932e120e3479fd7feda38d2483
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 9a12e7df25f076b44827fe1b26bdd51d, type: 2}
+    com.unity.localization.settings: {fileID: 11400000, guid: 783f1df97d1f8f447812ab9aa802d6f0, type: 2}
