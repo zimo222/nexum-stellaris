@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6e4ae76b7f7c714398abf8655814f07, type: 3}
+  m_Name: Exotext_005_EdgeText
+  m_EditorClassIdentifier: 
+  id: Exotext_004_EdgeText
+  exotextName: "\u950B\u8BED \xB7 \u5BD2\u6684"
+  type: 2
+  element: 
+  baseStars: 0
+  maxStars: 0
+  baseHealth: 0
+  baseAttack: 0
+  baseDefence: 0
+  baseEnergy: 0
+  baseCritRate: 0
+  baseCritDamage: 0
+  baseElementBonus: 0
+  icon: {fileID: 0}
+  introduction: "\u4E00\u67C4\u77ED\u5251\uFF0C\u5251\u8EAB\u523B\u7740\u201C\u4F60\u597D\u201D\u4E0E\u201C\u518D\u89C1\u201D\u3002\u6BCF\u6B21\u51FA\u5251\uFF0C\u90FD\u662F\u4E00\u6B21\u95EE\u5019\uFF1B\u6BCF\u6B21\u6536\u5251\uFF0C\u90FD\u662F\u4E00\u6B21\u544A\u522B\u3002"
+  description: "\u6709\u4E9B\u4EBA\u76F8\u9047\u5C31\u662F\u4E3A\u4E86\u544A\u522B\u3002\u8FD9\u628A\u5251\u6559\u4F1Ata\uFF1A\u597D\u597D\u8BF4\u518D\u89C1\uFF0C\u4E5F\u662F\u4E00\u79CD\u5B88\u62A4\u3002"

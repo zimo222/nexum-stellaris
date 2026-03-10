@@ -1,0 +1,168 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Exotext_Introduction Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: Exotext_Introduction
+  m_TableCollectionNameGuidString: 342aebace168d574bbce4672df44c0a4
+  m_Entries:
+  - m_Id: 609198235648
+    m_Key: Exotext_001_DuoVoice
+    m_Metadata:
+      m_Items: []
+  - m_Id: 616555044864
+    m_Key: Exotext_001_EdgeText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 622179606528
+    m_Key: Exotext_001_MnemonicTool
+    m_Metadata:
+      m_Items: []
+  - m_Id: 625241448448
+    m_Key: Exotext_001_StellarScribe
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1806151933952
+    m_Key: Exotext_001_ThoughtChime
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1810933440512
+    m_Key: Exotext_001_ThreadShot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1813798150144
+    m_Key: Exotext_001_VotiveEmber
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1833314246656
+    m_Key: Exotext_002_DuoVoice
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1838561320960
+    m_Key: Exotext_002_EdgeText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1841430224896
+    m_Key: Exotext_002_MnemonicTool
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1844089413632
+    m_Key: Exotext_002_StellarScribe
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1848879308800
+    m_Key: Exotext_002_ThoughtChime
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1852721291264
+    m_Key: Exotext_002_ThreadShot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1856248700928
+    m_Key: Exotext_002_VotiveEmber
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1861709684736
+    m_Key: Exotext_003_DuoVoice
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1864591171584
+    m_Key: Exotext_003_EdgeText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1874540060672
+    m_Key: Exotext_003_MnemonicTool
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1877429936128
+    m_Key: Exotext_003_StellarScribe
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1880290451456
+    m_Key: Exotext_003_ThoughtChime
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1882890919936
+    m_Key: Exotext_003_ThreadShot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1885621411840
+    m_Key: Exotext_003_VotiveEmber
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1890377752576
+    m_Key: Exotext_004_DuoVoice
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1894169403392
+    m_Key: Exotext_004_EdgeText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1899915599872
+    m_Key: Exotext_004_MnemonicTool
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1905636630528
+    m_Key: Exotext_004_StellarScribe
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1908253876224
+    m_Key: Exotext_004_ThoughtChime
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1912045527040
+    m_Key: Exotext_004_ThreadShot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1914637606912
+    m_Key: Exotext_004_VotiveEmber
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1931309965312
+    m_Key: Exotext_005_DuoVoice
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1936603176960
+    m_Key: Exotext_005_EdgeText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1940235444224
+    m_Key: Exotext_005_MnemonicTool
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1942961741824
+    m_Key: Exotext_005_StellarScribe
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10715671519232
+    m_Key: Exotext_005_ThoughtChime
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10734642356224
+    m_Key: Exotext_005_ThreadShot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10738949906432
+    m_Key: Exotext_005_VotiveEmber
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 1156908562813550609
+  references:
+    version: 2
+    RefIds:
+    - rid: 1156908562813550609
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1773147756321

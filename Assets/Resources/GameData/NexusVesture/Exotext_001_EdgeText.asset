@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6e4ae76b7f7c714398abf8655814f07, type: 3}
+  m_Name: Exotext_001_EdgeText
+  m_EditorClassIdentifier: 
+  id: Exotext_001_EdgeText
+  exotextName: "\u950B\u8BED \xB7 \u7EAF\u767D\u4E4B\u8A93"
+  type: 2
+  element: 
+  baseStars: 0
+  maxStars: 0
+  baseHealth: 0
+  baseAttack: 0
+  baseDefence: 0
+  baseEnergy: 0
+  baseCritRate: 0
+  baseCritDamage: 0
+  baseElementBonus: 0
+  icon: {fileID: 0}
+  introduction: "\t\u4E00\u67C4\u901A\u4F53\u94F6\u767D\u7684\u957F\u5251\uFF0C\u5251\u8EAB\u6709\u82E5\u6709\u82E5\u65E0\u7684\u4E1D\u7EBF\u7EB9\u8DEF\u3002\u63E1\u5728\u624B\u4E2D\u65F6\uFF0C\u80FD\u611F\u53D7\u5230\u53E6\u4E00\u4E2A\u4EBA\u7684\u5FC3\u8DF3\u3002\u5251\u9537\u5904\u9576\u5D4C\u7740\u4E00\u679A\u5C0F\u5C0F\u7684\u94F6\u94C3\u2014\u2014\u90A3\u662F\u7EAF\u767D\u5411\u5BFC\u7684\u201C\u9E23\u601D\u201D\u788E\u7247\u3002"
+  description: "\u8FD9\u662F\u7EAF\u767D\u5411\u5BFC\u5C06\u81EA\u5DF1\u7684\u7ECE\u8BED\u5206\u51FA\u4E00\u7F15\uFF0C\u4EA4\u5230\u4E3B\u89D2\u624B\u4E2D\u3002\u5979\u65A9\u65AD\u4E86\u81EA\u5DF1\u5728\u7EAF\u767D\u56DE\u5ECA\u7684\u6C38\u6052\u5B64\u5BC2\uFF0C\u9009\u62E9\u4E86\u4E0E\u4E3B\u89D2\u540C\u884C\u7684\u6709\u9650\u65F6\u5149\u3002\u6BCF\u4E00\u5251\u6325\u51FA\uFF0C\u90FD\u662F\u8FD9\u4E2A\u8A93\u8A00\u7684\u91CD\u590D\u3002"

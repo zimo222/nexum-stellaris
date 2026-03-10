@@ -7,24 +7,22 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerData
 {
-    // ================== 基础账户信息 ==================
+    // ==================== 基础账户信息 ====================
     public string PlayerID;                         // 唯一标识
     public string PlayerName;
     public DateTime CreateTime;                     // 账号创建时间
     public DateTime LastLoginTime;                  // 上次登录时间
 
-    // ================== 游戏进度与资源 ==================
+    // ==================== 游戏进度与资源 ====================
     public int Level = 88;
     public int Experience;
     public int Crystals;                            // 水晶
     public int Coins;                               // 金币
 
-
-    // ================== 角色与装备系统 ==================
+    // ==================== 角色与装备系统 ====================
     public CharacterStats BaseStats;                 // 基础属性
     public int skillNum;
     public SkillData[] Skills;
-
     // 装备索引（指向EquipmentBag的下标）
     public int EquippedExotextIndex = -1;             // 绎语索引
     public int EquippedCogniThreadIndex = -1;         // 思缕索引
@@ -32,18 +30,21 @@ public class PlayerData
     public int EquippedAbyssalHeartIndex = -1;        // 装心索引
     public int EquippedVolitionVeinIndex = -1;        // 志脉索引
     public int EquippedImprintStepIndex = -1;         // 迹印索引
-
     public List<ExotextData> ExotextBag = new List<ExotextData>();
     public List<NexusVestureData> NexusVestureBag = new List<NexusVestureData>();
     public List<MaterialData> MaterialBag = new List<MaterialData>();
 
-    // ================== 设置与其他 ==================
+    // ==================== 任务角色与装备系统 ====================
+    public string currentQuestId;      // 当前主线任务ID
+    public int currentQuestProgress; // 0~1 表示进度
+
+    // ==================== 设置与其他 ====================
     public float MusicVolume = 0.8f;
     public float SFXVolume = 0.8f;
     public string LastLoginIP = "";
 
 
-    // ================== 构造函数 ==================
+    // ==================== 构造函数 ====================
     #region 构造方法
     // 空构造函数为JSON反序列化所需
     public PlayerData() { }
@@ -57,6 +58,9 @@ public class PlayerData
 
         Crystals = 50000;
         Coins = 3000000;
+
+        currentQuestId = "Quest_001"; // 第一个任务ID
+        currentQuestProgress = -1;
 
         InitializeDefaultEquipment();
         InitializeDefaultMaterial();
@@ -99,7 +103,7 @@ public class PlayerData
 
 
 
-    // ================== 装备相关方法 ==================
+    // ==================== 装备相关方法 ====================
     #region 装备方法
     // 初始化默认装备
     private void InitializeDefaultEquipment()
@@ -160,7 +164,7 @@ public class PlayerData
 
 
 
-    // ================== 材料相关方法 ==================
+    // ==================== 材料相关方法 ====================
     #region  材料方法
     // 初始化默认材料
     private void InitializeDefaultMaterial()
@@ -186,7 +190,7 @@ public class PlayerData
     #endregion
 }
 
-// ================== 角色数据类 ==================
+// ==================== 角色数据类 ====================
 [System.Serializable]
 public class SkillBranchData
 {
@@ -205,7 +209,7 @@ public class SkillData
     public SkillBranchData[] branches; // 分支数组，长度可变（1或3）
 }
 
-// ================== 装备数据类 ==================
+// ==================== 装备数据类 ====================
 [System.Serializable]// 绎络本我
 public class NexumIdemData
 {
@@ -280,7 +284,7 @@ public class NexusVestureData: NexumIdemData
         Position = position;
     }
 }
-// ================== 材料数据类 ==================
+// ==================== 材料数据类 ====================
 [System.Serializable]
 public class MaterialData
 {
@@ -308,8 +312,44 @@ public class MaterialData
         };
     }
 }
+// ==================== 任务数据类 ====================
+// 单个目标进度数据（可序列化）
+[System.Serializable]
+public class ObjectiveProgress
+{
+    public string objectiveId;          // 目标ID（与静态数据对应）
+    public int currentAmount;           // 当前完成数量
+    public bool isCompleted;            // 是否已完成
 
-// ================== 属性结构体 ==================
+    public ObjectiveProgress(string objId, int amount = 0, bool completed = false)
+    {
+        objectiveId = objId;
+        currentAmount = amount;
+        isCompleted = completed;
+    }
+}
+
+// 单个任务的玩家进度数据（可序列化）
+[System.Serializable]
+public class PlayerQuestProgress
+{
+    public string questId;                      // 任务ID
+    public QuestState state;                     // 任务状态
+    public List<ObjectiveProgress> objectives;   // 所有目标的进度
+    public float startTime;                       // 开始时间（可选，用于计时任务）
+    public float completeTime;                    // 完成时间（可选）
+
+    public PlayerQuestProgress(string qid)
+    {
+        questId = qid;
+        state = QuestState.NotStarted;
+        objectives = new List<ObjectiveProgress>();
+        startTime = 0;
+        completeTime = 0;
+    }
+}
+
+// ==================== 属性结构体 ====================
 [System.Serializable]
 public struct CharacterStats
 {
@@ -380,7 +420,8 @@ public struct TextStats
     public string Description;                           // 描述
 }
 
-// ================== 枚举定义 ==================
+// ==================== 枚举定义 ====================
+//绎语类型枚举
 public enum ExotextType
 {
     VotiveEmber,    // 愿烬,   第一章 · 暖光之巢,     愿烬 · 暖光余温, 愿烬 · 万家灯火
@@ -391,7 +432,7 @@ public enum ExotextType
     DuoVoice,       // 双声,   第六章 · 痴迷工坊, 	   射缕 · 未寄的信
     MnemonicTool,   // 刻忆器, 第七章 · 万物共鸣之厅, 刻忆器 · 纯白之书
 }
-
+//络身类型枚举
 public enum NexusVesturePosition
 {
     CogniThread,    // 思缕
@@ -399,4 +440,26 @@ public enum NexusVesturePosition
     AbyssalHeart,   // 渊心
     VolitionVein,   // 志脉
     ImprintStep     // 迹印
+}
+// 任务状态枚举
+public enum QuestState
+{
+    NotStarted,     // 未开始
+    InProgress,     // 进行中
+    Completed,      // 已完成
+    RewardTaken     // 奖励已领取
+}
+// 任务目标类型枚举（可根据游戏需要扩展）
+public enum QuestObjectiveType
+{
+    KillEnemy,      // 击败特定敌人
+    ReachLocation,  // 到达指定地点
+    CollectItem,    // 收集物品
+    TalkToNPC,      // 与NPC对话
+    CompletePuzzle, // 完成解谜
+    UseSkill,       // 使用特定技能
+    ProtectTarget,  // 保护目标
+    SurviveTime,    // 存活一段时间
+    BossFight,      // 击败BOSS
+    Any             // 无条件（自动完成）
 }

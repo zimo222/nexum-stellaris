@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6e4ae76b7f7c714398abf8655814f07, type: 3}
+  m_Name: Exotext_004_StellarScribe
+  m_EditorClassIdentifier: 
+  id: Exotext_004_StellarScribe
+  exotextName: "\u8BE0\u661F\u6756 \xB7 \u7AE5\u8C23"
+  type: 4
+  element: 
+  baseStars: 0
+  maxStars: 0
+  baseHealth: 0
+  baseAttack: 0
+  baseDefence: 0
+  baseEnergy: 0
+  baseCritRate: 0
+  baseCritDamage: 0
+  baseElementBonus: 0
+  icon: {fileID: 0}
+  introduction: "\u4E00\u628A\u77ED\u5C0F\u7684\u6CD5\u6756\uFF0C\u6756\u8EAB\u523B\u7740\u513F\u65F6\u7684\u6B4C\u8C23\u3002\u65BD\u6CD5\u65F6\uFF0C\u4F1A\u54CD\u8D77\u7AE5\u58F0\u5408\u5531\uFF0C\u8BA9\u542C\u89C1\u7684\u4EBA\u60F3\u8D77\u81EA\u5DF1\u4E5F\u66FE\u662F\u4E2A\u5B69\u5B50\u3002"
+  description: "\u6700\u6DF1\u7684\u5B87\u5B99\uFF0C\u4E0D\u5728\u5929\u4E0A\uFF0C\u5728\u6BCF\u4E2A\u4EBA\u5FC3\u91CC\u90A3\u4E2A\u8FD8\u6CA1\u957F\u5927\u7684\u5730\u65B9\u3002"

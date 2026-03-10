@@ -17,8 +17,23 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 7287993e0da7e8b4a92f08bdb6328489
   m_SerializeEntries:
+  - m_GUID: 02614e261197de645b10f594fff6f43f
+    m_Address: Assets/Resources/Language/Exotext/Exotext_Name Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 342aebace168d574bbce4672df44c0a4
+    m_Address: Assets/Resources/Language/Exotext/Exotext_Introduction Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 75fcc26bbb82a2e4f86c15a95e781df7
     m_Address: Assets/Resources/Language/0_MainMenu Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7bec11777633f064fb11a023a24103dc
+    m_Address: Assets/Resources/Language/LoadingPanel Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Exotext_004_ThreadShot
   m_EditorClassIdentifier: 
   id: Exotext_004_ThreadShot
-  exotextName: "\u5C04\u7F15 \xB7 \u5343\u7EB8"
+  exotextName: Name
   type: 3
   element: 
   baseStars: 0
@@ -26,5 +26,5 @@ MonoBehaviour:
   baseCritDamage: 0
   baseElementBonus: 0
   icon: {fileID: 0}
-  introduction: "\u7BAD\u77E2\u5C04\u51FA\u540E\u4F1A\u5316\u4F5C\u5343\u53EA\u7EB8\u9E64\uFF0C\u6BCF\u4E00\u53EA\u90FD\u8F7D\u7740\u4E00\u53E5\u795D\u798F\u3002\u4E0D\u4F24\u4EBA\uFF0C\u53EA\u6CBB\u6108\u3002"
-  description: "\u795D\u798F\u662F\u6700\u8F7B\u7684\u6B66\u5668\uFF0C\u5374\u80FD\u7A7F\u8D8A\u6700\u8FDC\u7684\u8DDD\u79BB\u3002"
+  introduction: Introduction
+  description: Description

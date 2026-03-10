@@ -1,0 +1,249 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Exotext_Introduction_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 342aebace168d574bbce4672df44c0a4, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 609198235648
+    m_Localized: On the side of the original "Pure White Oath" sword, another faint
+      sword shadow emerged. The two swords are born from the same source and can
+      be held separately with both hands or combined into one. When separated, the
+      sword in the left hand is lighter, while the sword in the right hand is heavier
+      - the light one is "I'm sorry", and the heavy one is "It's okay".
+    m_Metadata:
+      m_Items: []
+  - m_Id: 616555044864
+    m_Localized: "A long silver-white sword, its body adorned with faint thread patterns.
+      When held in hand, one can feel the heartbeat of another. A small silver bell
+      is embedded at the hilt\u2014it is a fragment of the Pure White Guide's \"Ming
+      Si\"."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 622179606528
+    m_Localized: A seemingly ordinary book with a pure white cover. When opened,
+      there are no words inside - but when the protagonist recalls his memories with
+      the pure white guide, those memories will automatically emerge as pictures
+      and words on the pages. Each page represents a bond, and each line is a moment
+      that cannot be forgotten.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 625241448448
+    m_Localized: A magic staff with a tip made of star fragments, its body forged
+      from solidified love. When wielded, it leaves a faint trail of star paths,
+      as if writing in the void. When casting spells, words emerge from the tip that
+      only the user can see - they are the verses the universe is whispering to him.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1806151933952
+    m_Localized: 'A small silver bell, entirely pure white, has delicate patterns
+      engraved on its body - those are the heartbeat traces of someone. When it doesn''t
+      ring, it''s silent; but when it does, it echoes the words that the pure white
+      guide wanted to say at that time: words she never uttered, but were heard by
+      the protagonist''s heart.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1810933440512
+    m_Localized: A bow without a bowstring, its body formed from translucent thoughts.
+      When used, one must draw a strand of thought from the depths of their heart
+      and tie it to both ends of the bow - the length of the bowstring is equal to
+      the length of the thought. At the moment of shooting, the thought turns into
+      a visible thread, cutting through all obstacles and reaching its intended destination.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1813798150144
+    m_Localized: Initially, it was just a faint, almost imperceptible glow, entwined
+      around the protagonist's fingertips, impossible to grasp but never dissipating.
+      It had no physical form and no offensive power, but it would slightly warm
+      up when he felt the most lonely. In the final chapter, this glow transformed
+      into countless light points, like a myriad of lights. Each light represented
+      a person he remembered, a bond he cherished.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1833314246656
+    m_Localized: One sword is pure black, the other pure white. The black sword is
+      heavy and slow, while the white sword is light and swift. Neither is complete
+      when used alone; only when wielded together can one possess both heaviness
+      and lightness.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1838561320960
+    m_Localized: The sword blade is woven from countless fine and dense memory threads,
+      each representing a cherished past event. When the sword is wielded, the threads
+      quiver slightly, emitting a whisper that only the holder can hear.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1841430224896
+    m_Localized: A pen stemming from the same origin, akin to a sword with the same
+      name but different forms. When used to write, every word penned becomes a memory,
+      capable of being touched, seen, and cherished.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1844089413632
+    m_Localized: The staff is embedded with seven star cores, each representing a
+      different emotion. When casting a spell, the seven star cores illuminate in
+      sequence, akin to translating a seven-line poem.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1848879308800
+    m_Localized: The sword body is hollow, with seven small bells embedded inside.
+      When the sword is wielded, the sound of the bells resonates with the heartbeat
+      of nearby companions. The more people resonate, the sharper the sword becomes.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1852721291264
+    m_Localized: The bow is woven from countless intertwined threads of bonds, each
+      thread originating from a genuine connection. When the bow is drawn, all those
+      connected will feel a slight sensation - someone is thinking of them.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1856248700928
+    m_Localized: A dissipating sword, its body covered in cracks. With each use,
+      another crack appears. It is said that when the sword is filled with cracks,
+      it will completely disappear. But the user says that at that time, it will
+      reignite elsewhere.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1861709684736
+    m_Localized: One sword is engraved with question marks, while the other is engraved
+      with full stops. The sword with question marks is responsible for asking questions,
+      while the sword with full stops is responsible for answering. Sometimes the
+      sword with question marks takes the initiative, and sometimes the sword with
+      full stops responds first.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1864591171584
+    m_Localized: A nearly transparent sword emerges only when determination is set.
+      The blade is extremely thin, so thin that it can cut through thoughts.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1874540060672
+    m_Localized: A scroll that can extend infinitely. Every time a memory is recorded,
+      the scroll grows one inch. It is said that someone has recorded their entire
+      life, and the length of the scroll is enough to encircle the singularity of
+      the mind.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1877429936128
+    m_Localized: The tip of the staff always shines with a faint light, like a lighthouse
+      guiding ships at night. Users won't get lost in the darkness, as the light
+      from the tip of the staff points to the nearest star.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1880290451456
+    m_Localized: A bell that can ring out memories. When gently shaken, one can hear
+      the voice of someone who has gone far away. The harder it is shaken, the clearer
+      the voice becomes, but it also dissipates faster.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1882890919936
+    m_Localized: A bow that always points in a certain direction. The owner of the
+      bow points it towards home, shooting arrow after arrow day after day, but none
+      of them ever reach their target.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1885621411840
+    m_Localized: It appears to be an ordinary wooden staff, with a stone no longer
+      shining embedded at its tip. Yet, it remains perpetually warm, even in the
+      coldest winter. Anyone who touches it will be reminded of someone who has departed.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1890377752576
+    m_Localized: The sword in the left hand is named "Retain", featuring a barbed
+      blade that is difficult to extract once it has been stabbed; the sword in the
+      right hand is named "Let Go", with a smooth blade that can be easily withdrawn
+      with a single strike.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1894169403392
+    m_Localized: A broken sword, with its tip nowhere to be found. Yet it remains
+      sharp - for the sharpest are often the unspoken words.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1899915599872
+    m_Localized: A tiny carving knife can etch memories onto any material. The carved
+      stone speaks, the carved wind sings, and the carved person - will never be
+      forgotten.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1905636630528
+    m_Localized: A short and compact staff, with a childhood rhyme carved on its
+      body. When casting spells, a chorus of children's voices will ring out, reminding
+      those who hear it that they too were once children.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1908253876224
+    m_Localized: A bell that can only be rung when it's pressed against your heart.
+      When it rings, the hearts of all those nearby who share a bond with you will
+      beat in sync.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1912045527040
+    m_Localized: After being shot, the arrow will transform into thousands of paper
+      cranes, each carrying a blessing. It does not harm people, but only heals.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1914637606912
+    m_Localized: A candle that has never been extinguished still has a white wick.
+      Its owner has been waiting for a moment worth igniting. But after waiting for
+      too long, they have forgotten what they were waiting for.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1942961741824
+    m_Localized: 'A nameless staff, as its owner has yet to find his or her own star.
+      A small inscription is carved on the staff: "When you find that star, come
+      and name me."'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1940235444224
+    m_Localized: A peculiar stone slab can "carve" memories that one wishes to forget.
+      The moment it is carved, the memory disappears, and a scene emerges on the
+      stone slab. However, the stone slab will become heavier and heavier until one
+      day, the bearer can no longer walk.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1936603176960
+    m_Localized: A short sword, with "Hello" and "Goodbye" engraved on its blade.
+      Every time the sword is drawn, it is a greeting; every time it is sheathed,
+      it is a farewell.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1931309965312
+    m_Localized: Two identical swords, like mirror images. Only those who truly understand
+      each other can wield them simultaneously - the swords will speak for their
+      masters what they cannot say.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10715671519232
+    m_Localized: A bell that never rings. But its very existence is a kind of sound
+      - the echo of "some words are never necessary to say".
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10734642356224
+    m_Localized: A peculiar bow, whose arrows, upon hitting their target, will bounce
+      back to the archer's hand, carrying back the heartbeat of the person struck.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10738949906432
+    m_Localized: Two intertwined glimmers of light originated from two people who
+      made vows to each other. Their wishes were granted, and they both burned out
+      at the moment they were fulfilled. Yet, the embers remained intertwined, never
+      to be separated again.
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

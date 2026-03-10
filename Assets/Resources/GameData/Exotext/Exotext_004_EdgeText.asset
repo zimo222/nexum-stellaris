@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Exotext_004_EdgeText
   m_EditorClassIdentifier: 
   id: Exotext_004_EdgeText
-  exotextName: "\u950B\u8BED \xB7 \u672A\u7ADF"
+  exotextName: Name
   type: 2
   element: 
   baseStars: 0
@@ -26,5 +26,5 @@ MonoBehaviour:
   baseCritDamage: 0
   baseElementBonus: 0
   icon: {fileID: 0}
-  introduction: "\u4E00\u67C4\u65AD\u5251\uFF0C\u5251\u5C16\u4E0D\u77E5\u6240\u8E2A\u3002\u4F46\u5B83\u4F9D\u7136\u950B\u5229\u2014\u2014\u56E0\u4E3A\u6700\u950B\u5229\u7684\uFF0C\u5F80\u5F80\u662F\u90A3\u4E9B\u6CA1\u6709\u8BF4\u5B8C\u7684\u8BDD\u3002"
-  description: "\u672A\u7ADF\u4E4B\u4E8B\uFF0C\u662F\u6700\u6DF1\u7684\u6267\u5FF5\u3002\u8FD9\u628A\u5251\u7684\u4E3B\u4EBA\uFF0C\u4E00\u76F4\u5728\u7B49\u4E00\u4E2A\u80FD\u63A5\u4E0A\u65AD\u53E5\u7684\u4EBA\u3002"
+  introduction: Introduction
+  description: Description

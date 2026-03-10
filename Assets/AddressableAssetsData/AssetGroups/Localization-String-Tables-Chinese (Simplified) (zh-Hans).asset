@@ -17,8 +17,26 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 62eb34d7cb5959749aec6f2579a0d9f4
   m_SerializeEntries:
+  - m_GUID: 409a2961f1a0bfd46965ffdd0d6abcf3
+    m_Address: Exotext_Introduction_zh-Hans
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-zh-Hans
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4990b74b2e0235447b8f9257710d0847
     m_Address: 0_MainMenu_zh-Hans
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-zh-Hans
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c8ac6954881014249a065dc80d5a2efa
+    m_Address: LoadingPanel_zh-Hans
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-zh-Hans
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e57aed5e6f1b5cb4fb37b2221bf6d945
+    m_Address: Exotext_Name_zh-Hans
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-zh-Hans

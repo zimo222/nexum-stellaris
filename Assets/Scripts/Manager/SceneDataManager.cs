@@ -50,6 +50,9 @@ public class SceneDataManager : Singleton<SceneDataManager>
     private IEnumerator LoadSceneAsync(string targetScene)
     {
         isLoading = true;
+        //等这玩意儿初始化完成
+        while (!LocalizationManager.Instance.IsInitialized)
+            yield return null;
 
         // ---- 淡入动画 ----
         loadingPanel.gameObject.SetActive(true);
@@ -85,15 +88,25 @@ public class SceneDataManager : Singleton<SceneDataManager>
             float displayProgress = Mathf.Min(t, realProgress);                // 显示进度（取两者较小值）
             loadingPanel.SetProgress(displayProgress);
 
+            string tipKey = "";
+
             // 根据显示进度更换提示文本（可选）
             if (displayProgress < 0.3f)
-                loadingPanel.SetTip("梳理记忆脉络...");
+                tipKey = "0";
+            //loadingPanel.SetTip("梳理记忆脉络...");
             else if (displayProgress < 0.6f)
-                loadingPanel.SetTip("编织羁绊之网...");
+                tipKey = "1";
+            //loadingPanel.SetTip("编织羁绊之网...");
             else if (displayProgress < 0.9f)
-                loadingPanel.SetTip("点亮星辰坐标...");
+                tipKey = "2";
+            //loadingPanel.SetTip("点亮星辰坐标...");
             else
-                loadingPanel.SetTip("即将抵达...");
+                tipKey = "3";
+            //loadingPanel.SetTip("即将抵达...");
+
+            // 从管理器获取当前语言的文本（同步，因为已初始化）
+            string tipText = LocalizationManager.Instance.GetText("LoadingPanel", tipKey);
+            loadingPanel.SetTip(tipText);
 
             if (operation.progress >= 0.90f && elapsed >= minimumLoadTime)
             {
