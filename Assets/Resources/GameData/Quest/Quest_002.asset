@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d476a2b0564d52b4882c53d711eeea11, type: 3}
-  m_Name: Quest_001
+  m_Name: Quest_002
   m_EditorClassIdentifier: 
-  id: Quest_001
-  questName: "\u6696\u5149\u4F59\u6E29"
-  nextQuestId: Quest_002
+  id: Quest_002
+  questName: "\u591C"
+  nextQuestId: Quest_003
   category: 0
   contentType: 0
   dialogueEntries:
   - background: {fileID: 0}
-    speakerId: 
+    speakerId: Player
     content: "\u9EC4\u660F\u3002\u4E94\u5C81\u3002"
   - background: {fileID: 0}
-    speakerId: 
+    speakerId: Player
     content: "\u6211\u5750\u5728\u95E8\u69DB\u4E0A\uFF0C\u770B\u6BCD\u4EB2\u5728\u9662\u5B50\u91CC\u667E\u8863\u670D\u3002\u5979\u628A\u6E7F\u6F09\u6F09\u7684\u5E8A\u5355\u6296\u5F00\uFF0C\u5915\u9633\u4ECE\u80CC\u540E\u900F\u8FC7\u6765\uFF0C\u6574\u4E2A\u4EBA\u9540\u7740\u4E00\u5C42\u91D1\u8FB9\u3002\u7236\u4EB2\u5728\u5288\u67F4\uFF0C\u65A7\u5934\u843D\u4E0B\u53BB\uFF0C\u549A\uFF0C\u6728\u5934\u88C2\u5F00\u3002"
   - background: {fileID: 0}
     speakerId: Player
-    content: "\u5988\u5988\u4F1A\u4E00\u76F4\u5728\u5417\uFF1F\""
+    content: "\"\u5988\u5988\u4F1A\u4E00\u76F4\u5728\u5417\uFF1F\""
   - background: {fileID: 0}
-    speakerId: 
+    speakerId: Player
     content: "\u6BCD\u4EB2\u6CA1\u6709\u56DE\u7B54\u3002\u5979\u8D70\u8FC7\u6765\uFF0C\u5728\u6211\u8EAB\u8FB9\u5750\u4E0B\uFF0C\u628A\u6211\u7684\u624B\u63E1\u5728\u638C\u5FC3\u3002\u5979\u7684\u624B\u5F88\u7C97\u7CD9\uFF0C\u6709\u5F88\u591A\u8327\uFF0C\u4F46\u5F88\u6696\u3002\u90A3\u6E29\u5EA6\u4ECE\u638C\u5FC3\u6E17\u8FDB\u6765\uFF0C\u987A\u7740\u80F3\u818A\u5F80\u4E0A\u722C\uFF0C\u6700\u540E\u505C\u5728\u80F8\u53E3\u67D0\u4E2A\u5730\u65B9\u3002"
   objectives: []

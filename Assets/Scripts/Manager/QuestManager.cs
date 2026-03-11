@@ -1,5 +1,5 @@
-using DG.Tweening.Core.Easing;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -8,18 +8,37 @@ public class QuestManager : MonoBehaviour
 {
     public static QuestManager Instance { get; private set; }
 
-    [Header("UI 引用")]
+    [Header("常驻UI")]
     public TMP_Text guestText;               // 常驻任务名
-    public GameObject questPanel;         // 弹出面板
-    public TMP_Text panelTaskNameText;        // 面板上的任务名
-    public TMP_Text panelStatusText;          // 面板上的状态（开始/完成）
+
+    [Header("弹出面板")]
+    public GameObject questPanel;
+    public TMP_Text panelTaskNameText;
+    public TMP_Text panelStatusText;
+
+    [Header("对话UI")]
+    public GameObject dialoguePanel;          // 对话面板（整体）
+    public Image backgroundImage;             // 背景图
+    public TMP_Text speakerText;              // 说话者名称
+    public TMP_Text dialogueContentText;      // 对话内容
 
     [Header("动画参数")]
-    public float fadeDuration = 0.3f;     // 渐入渐出时间
-    public float displayTime = 1f;        // 面板总显示时间（含动画）
+    public float fadeDuration = 0.3f;
+    public float displayTime = 1f;
 
     private CanvasGroup panelCanvasGroup;
     private Coroutine panelCoroutine;
+
+    // 对话控制
+    private List<DialogueEntry> currentDialogue;
+    private int currentDialogueIndex;
+    private bool isDialoguePlaying;
+
+    // 玩家控制脚本引用
+    private Player playerController;
+
+    // 等待交互状态（用于对话性任务）
+    private bool waitingForInteraction = false;
 
     void Awake()
     {
@@ -41,46 +60,93 @@ public class QuestManager : MonoBehaviour
                 panelCanvasGroup = questPanel.AddComponent<CanvasGroup>();
             questPanel.SetActive(false);
         }
+
+        if (dialoguePanel != null)
+            dialoguePanel.SetActive(false);
+
+        // 初始化背景图为禁用
+        if (backgroundImage != null)
+            backgroundImage.gameObject.SetActive(false);
     }
 
     void Start()
     {
-        // 游戏启动时刷新显示并检查进度
         RefreshCurrentQuestDisplay();
 
-        // 检查当前任务进度，决定是否弹出提示
+        // 启动时如果当前任务进度为-1，什么也不做（等区域触发）
+        // 如果进度=100（异常情况），尝试完成
         var playerData = PlayerDataManager.Instance?.CurrentPlayerData;
-        if (playerData != null && !string.IsNullOrEmpty(playerData.currentQuestId))
+        if (playerData != null && playerData.currentQuestProgress >= 100)
         {
-            if (playerData.currentQuestProgress >= 1f)
+            CompleteCurrentQuest();
+        }
+
+        // 查找玩家控制脚本
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            playerController = player.GetComponent<Player>();
+            if (playerController == null)
+                Debug.LogWarning("玩家身上没有找到 PlayerController 脚本");
+        }
+        else
+        {
+            Debug.LogWarning("场景中没有 Tag 为 'Player' 的对象");
+        }
+    }
+
+    void Update()
+    {
+        // 对话进行中：按空格翻页
+        if (isDialoguePlaying && Input.GetKeyDown(KeyCode.Space))
+        {
+            currentDialogueIndex++;
+            if (currentDialogueIndex < currentDialogue.Count)
             {
-                // 进度已满 → 完成任务（会自动弹出完成并开始下一个）
-                CompleteCurrentQuest();
+                ShowDialogueEntry(currentDialogue[currentDialogueIndex]);
             }
-            else if (playerData.currentQuestProgress == 0f)
+            else
             {
-                // 进度为0 → 弹出“开始”提示
-                ShowPanel(GetQuestName(playerData.currentQuestId), "开始");
+                EndDialogue();
+            }
+        }
+
+        // 等待玩家按F键开始对话
+        if (waitingForInteraction && Input.GetKeyDown(KeyCode.F))
+        {
+            // 检查玩家是否正在移动（如果 PlayerController 有 IsMoving 属性）
+            if (!playerController.isIdle)
+            {
+                Debug.Log("移动中不能开始对话"); // 可以在这里播放一个提示音或显示文字
+                return;
+            }
+
+            var playerData = PlayerDataManager.Instance?.CurrentPlayerData;
+            if (playerData != null && GameDataManager.Instance.QuestDict.TryGetValue(playerData.currentQuestId, out var questData))
+            {
+                if (questData.contentType == QuestContentType.Dialogue)
+                {
+                    waitingForInteraction = false; // 取消等待状态
+                    StartDialogue(questData.dialogueEntries);
+                }
             }
         }
     }
 
-    // 刷新常驻任务名显示
+    // 刷新常驻任务名
     public void RefreshCurrentQuestDisplay()
     {
-        if (PlayerDataManager.Instance?.CurrentPlayerData == null) return;
+        var playerData = PlayerDataManager.Instance?.CurrentPlayerData;
+        if (playerData == null) return;
 
-        string currentId = PlayerDataManager.Instance.CurrentPlayerData.currentQuestId;
+        string currentId = playerData.currentQuestId;
         if (string.IsNullOrEmpty(currentId))
         {
-            guestText.text = ""; // 无任务
+            guestText.text = "";
             return;
         }
-        Debug.Log(currentId);
-        var questData = GameDataManager.Instance.QuestDict[currentId];
 
-
-        if (questData != null)
+        if (GameDataManager.Instance.QuestDict.TryGetValue(currentId, out var questData))
         {
             guestText.text = questData.questName;
         }
@@ -91,28 +157,136 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    // 开始一个新任务（通常由完成上一个任务时自动调用）
-    private void StartQuest(string questId)
+    // 玩家进入任务区域时调用
+    public void OnPlayerEnterQuestArea(string questId)
     {
-        if (PlayerDataManager.Instance?.CurrentPlayerData == null) return;
-        if (!GameDataManager.Instance.QuestDict.ContainsKey(questId))
+        var playerData = PlayerDataManager.Instance?.CurrentPlayerData;
+        if (playerData == null) return;
+
+        // 只处理当前任务
+        if (playerData.currentQuestId != questId) return;
+
+        // 如果进度为 -1，激活任务
+        if (playerData.currentQuestProgress == -1)
         {
-            Debug.LogError($"任务 {questId} 不存在");
+            playerData.currentQuestProgress = 0;
+            ShowPanel(GetQuestName(questId), "开始");
+
+            var questData = GameDataManager.Instance.QuestDict[questId];
+            if (questData.contentType == QuestContentType.Dialogue)
+            {
+                // 对话任务：进入等待交互状态，不立即开始对话
+                waitingForInteraction = true;
+                // 可以在这里显示一个“按F开始对话”的提示（需额外UI）
+                Debug.Log("按F开始对话");
+            }
+            else if (questData.contentType == QuestContentType.Combat)
+            {
+                // 战斗任务：可以在这里生成敌人或开启战斗区域
+                Debug.Log("战斗任务已激活，请击败敌人");
+            }
+        }
+    }
+
+    // 开始对话
+    private void StartDialogue(List<DialogueEntry> dialogueList)
+    {
+        if (dialogueList == null || dialogueList.Count == 0)
+        {
+            CompleteCurrentQuest(); // 没有对话直接完成
             return;
         }
 
-        // 更新玩家数据
-        PlayerDataManager.Instance.CurrentPlayerData.currentQuestId = questId;
-        PlayerDataManager.Instance.CurrentPlayerData.currentQuestProgress = -1;
+        // 进入对话前强制关闭背景图
+        if (backgroundImage != null)
+            backgroundImage.gameObject.SetActive(false);
 
-        // 刷新常驻文本
-        RefreshCurrentQuestDisplay();
+        // 禁用玩家控制
+        if (playerController != null)
+            playerController.enabled = false;
 
-        // 弹出“开始”提示
-        ShowPanel(GetQuestName(questId), "开始");
+        currentDialogue = dialogueList;
+        currentDialogueIndex = 0;
+        isDialoguePlaying = true;
+        dialoguePanel.SetActive(true);
+        ShowDialogueEntry(currentDialogue[0]);
     }
 
-    // 完成当前任务（外部调用：比如任务目标达成时）
+    // 显示一条对话
+    private void ShowDialogueEntry(DialogueEntry entry)
+    {
+        // 背景图
+        if (backgroundImage != null)
+        {
+            if (entry.background != null)
+            {
+                backgroundImage.sprite = entry.background;
+                backgroundImage.gameObject.SetActive(true);
+            }
+            else
+            {
+                backgroundImage.gameObject.SetActive(false);
+            }
+        }
+
+        // 说话者和内容
+        speakerText.text = GetSpeakerName(entry.speakerId);
+        dialogueContentText.text = entry.content;
+    }
+
+    // 获取说话者显示名称（简单返回ID，你可以扩展为中文名表）
+    private string GetSpeakerName(string speakerId)
+    {
+        return speakerId; // 暂时返回ID
+    }
+
+    // 结束对话
+    private void EndDialogue()
+    {
+        isDialoguePlaying = false;
+        dialoguePanel.SetActive(false);
+
+        // 对话结束关闭背景图
+        if (backgroundImage != null)
+            backgroundImage.gameObject.SetActive(false);
+
+        // 启用玩家控制
+        if (playerController != null)
+            playerController.enabled = true;
+
+        CompleteCurrentQuest(); // 对话结束直接完成任务
+    }
+
+    // 敌人死亡时调用
+    public void OnEnemyKilled(string enemyId)
+    {
+        var playerData = PlayerDataManager.Instance?.CurrentPlayerData;
+        if (playerData == null || playerData.currentQuestProgress < 0) return;
+
+        string currentId = playerData.currentQuestId;
+        var questData = GameDataManager.Instance.QuestDict[currentId];
+        if (questData.contentType != QuestContentType.Combat) return;
+
+        // 查找目标，找到对应敌人ID后增加进度
+        foreach (var obj in questData.objectives)
+        {
+            if (obj.type == QuestObjectiveType.KillEnemy && obj.targetId == enemyId)
+            {
+                int increment = 100 / obj.requiredAmount; // 整除，每个敌人固定贡献
+                playerData.currentQuestProgress += increment;
+                if (playerData.currentQuestProgress > 100)
+                    playerData.currentQuestProgress = 100;
+                break;
+            }
+        }
+
+        if (playerData.currentQuestProgress >= 100)
+        {
+            CompleteCurrentQuest();
+        }
+    }
+
+    // 完成任务
     public void CompleteCurrentQuest()
     {
         var playerData = PlayerDataManager.Instance?.CurrentPlayerData;
@@ -126,38 +300,40 @@ public class QuestManager : MonoBehaviour
             return;
         }
 
-        // 弹出“完成”提示
+        playerData.currentQuestProgress = 100;
         ShowPanel(questData.questName, "完成");
 
-        // 标记进度为1（可选）
-        playerData.currentQuestProgress = 100;
-
-        // 自动推进到下一个任务
+        // 开启下一个任务
         if (!string.IsNullOrEmpty(questData.nextQuestId))
         {
             StartQuest(questData.nextQuestId);
         }
         else
         {
-            // 主线完结，清除当前任务
             playerData.currentQuestId = null;
             RefreshCurrentQuestDisplay();
         }
     }
 
-    // 更新当前任务进度（由外部事件调用，如击杀敌人）
-    public void UpdateCurrentQuestProgress(int delta)
+    // 开始一个新任务（由CompleteCurrentQuest调用）
+    private void StartQuest(string questId)
     {
-        var playerData = PlayerDataManager.Instance?.CurrentPlayerData;
-        if (playerData == null || string.IsNullOrEmpty(playerData.currentQuestId)) return;
-
-        playerData.currentQuestProgress += delta;
-
-        // 如果进度达到或超过1，自动完成
-        if (playerData.currentQuestProgress >= 1f)
+        if (PlayerDataManager.Instance?.CurrentPlayerData == null) return;
+        if (!GameDataManager.Instance.QuestDict.ContainsKey(questId))
         {
-            CompleteCurrentQuest();
+            Debug.LogError($"任务 {questId} 不存在");
+            return;
         }
+
+        var playerData = PlayerDataManager.Instance.CurrentPlayerData;
+        playerData.currentQuestId = questId;
+        playerData.currentQuestProgress = -1; // 需要进入区域激活
+
+        // 新任务开始时，重置等待交互状态（因为还没有进入区域）
+        waitingForInteraction = false;
+
+        RefreshCurrentQuestDisplay();
+        ShowPanel(GetQuestName(questId), "开始");
     }
 
     // 弹出面板（带渐变动画）
@@ -182,7 +358,6 @@ public class QuestManager : MonoBehaviour
         questPanel.SetActive(true);
         panelCanvasGroup.alpha = 0f;
 
-        // 渐入
         float elapsed = 0f;
         while (elapsed < fadeDuration)
         {
@@ -192,10 +367,8 @@ public class QuestManager : MonoBehaviour
         }
         panelCanvasGroup.alpha = 1f;
 
-        // 停留（总显示时间减去渐入渐出时间的一半？这里简单固定）
         yield return new WaitForSeconds(displayTime - fadeDuration * 2);
 
-        // 渐出
         elapsed = 0f;
         while (elapsed < fadeDuration)
         {
@@ -208,7 +381,7 @@ public class QuestManager : MonoBehaviour
         panelCoroutine = null;
     }
 
-    // 辅助：根据ID获取任务名
+    // 辅助
     private string GetQuestName(string questId)
     {
         if (GameDataManager.Instance.QuestDict.TryGetValue(questId, out var data))

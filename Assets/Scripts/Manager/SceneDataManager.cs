@@ -1,36 +1,41 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System.Text;
+using System.IO;
 
 public class SceneDataManager : Singleton<SceneDataManager>
 {
     [Header("Loading Settings")]
-    [SerializeField] private LoadingPanel loadingPanel;  // 拖入加载面板
-    [SerializeField] private float minimumLoadTime = 1f; // 最短加载时间
-    [SerializeField] private float fadeInDuration = 0.3f;  // 淡入时间
-    [SerializeField] private float fadeOutDuration = 0.3f; // 淡出时间
+    [SerializeField] private LoadingPanel loadingPanel;
+    [SerializeField] private float minimumLoadTime = 3f;
+    [SerializeField] private float fadeInDuration = 0.3f;
+    [SerializeField] private float fadeOutDuration = 0.3f;
 
     private bool isLoading = false;
-    private CanvasGroup canvasGroup; // 用于控制透明度
+    private CanvasGroup canvasGroup;
 
     protected override void Awake()
     {
+        if (transform.parent != null)
+        {
+            transform.SetParent(null);
+            Debug.LogWarning($"管理器对象 {gameObject.name} 不是根对象，已自动移动到根层级。");
+        }
+
         base.Awake();
+
+        if (gameObject.scene.name != "DontDestroyOnLoad")
+        {
+            DontDestroyOnLoad(gameObject);
+        }
 
         if (loadingPanel != null)
         {
-            loadingPanel.gameObject.SetActive(false);
-            // 确保 CanvasGroup 组件存在
             canvasGroup = loadingPanel.GetComponent<CanvasGroup>();
             if (canvasGroup == null)
                 canvasGroup = loadingPanel.gameObject.AddComponent<CanvasGroup>();
-
-            // 将加载面板所在的根 Canvas 设为常驻，避免场景切换时被销毁
-            Canvas rootCanvas = loadingPanel.GetComponentInParent<Canvas>();
-            if (rootCanvas != null)
-                DontDestroyOnLoad(rootCanvas.gameObject);
-            else
-                DontDestroyOnLoad(loadingPanel.gameObject);
+            loadingPanel.gameObject.SetActive(false);
         }
         else
         {
@@ -38,9 +43,6 @@ public class SceneDataManager : Singleton<SceneDataManager>
         }
     }
 
-    /// <summary>
-    /// 加载场景（自动保存当前状态）
-    /// </summary>
     public void LoadScene(string sceneName)
     {
         if (isLoading) return;
@@ -49,8 +51,37 @@ public class SceneDataManager : Singleton<SceneDataManager>
 
     private IEnumerator LoadSceneAsync(string targetScene)
     {
+        string logPath = Application.persistentDataPath + "/load_log.txt";
+        StringBuilder sb = new StringBuilder();
+        sb.AppendLine($"=== Load Started at {System.DateTime.Now} ===");
+        sb.AppendLine($"Target Scene (name): {targetScene}");
+
+        // 检查场景是否在 Build Settings 中
+        bool sceneExists = Application.CanStreamedLevelBeLoaded(targetScene);
+        sb.AppendLine($"Scene exists in Build Settings: {sceneExists}");
+
+        int buildIndex = -1;
+        for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
+        {
+            string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
+            string sceneNameOnly = Path.GetFileNameWithoutExtension(scenePath);
+            if (sceneNameOnly == targetScene)
+            {
+                buildIndex = i;
+                break;
+            }
+        }
+        sb.AppendLine($"Scene build index: {buildIndex}");
+
+        if (!sceneExists && buildIndex == -1)
+        {
+            sb.AppendLine($"错误：场景 \"{targetScene}\" 不在 Build Settings 中。加载已中止。");
+            File.WriteAllText(logPath, sb.ToString());
+            Debug.LogError($"场景 \"{targetScene}\" 不存在于 Build Settings 中，无法加载。");
+            yield break;
+        }
+
         isLoading = true;
-        //等这玩意儿初始化完成
         while (!LocalizationManager.Instance.IsInitialized)
             yield return null;
 
@@ -68,65 +99,88 @@ public class SceneDataManager : Singleton<SceneDataManager>
 
         yield return new WaitForSecondsRealtime(0.1f);
 
-        // 淡入完成，开始加载流程
-        float startTime = Time.time;
-
-        // 保存当前游戏状态（根据需要启用）
-        // SaveCurrentGameState();
+        // 开始异步加载（允许自动激活）
+        float startTime = Time.realtimeSinceStartup;
+        sb.AppendLine($"Start Time (realtime): {startTime}");
 
         loadingPanel.SetProgress(0f);
         loadingPanel.SetTip("正在寻找记忆丝线...");
 
-        AsyncOperation operation = SceneManager.LoadSceneAsync(targetScene);
-        operation.allowSceneActivation = false;
-
-        while (!operation.isDone)
+        AsyncOperation operation;
+        if (buildIndex >= 0)
         {
-            float elapsed = Time.time - startTime;
-            float t = Mathf.Clamp01(elapsed / minimumLoadTime);                // 基于时间的虚拟进度
-            float realProgress = Mathf.Clamp01(operation.progress / 0.9f);     // 真实加载进度
-            float displayProgress = Mathf.Min(t, realProgress);                // 显示进度（取两者较小值）
-            loadingPanel.SetProgress(displayProgress);
+            operation = SceneManager.LoadSceneAsync(buildIndex);
+            sb.AppendLine($"Loading by build index: {buildIndex}");
+        }
+        else
+        {
+            operation = SceneManager.LoadSceneAsync(targetScene);
+            sb.AppendLine($"Loading by scene name: {targetScene}");
+        }
 
-            string tipKey = "";
+        if (operation == null)
+        {
+            sb.AppendLine("错误：LoadSceneAsync 返回 null！");
+            File.WriteAllText(logPath, sb.ToString());
+            Debug.LogError($"无法加载场景：{targetScene}，操作返回 null。");
+            yield break;
+        }
 
-            // 根据显示进度更换提示文本（可选）
-            if (displayProgress < 0.3f)
-                tipKey = "0";
-            //loadingPanel.SetTip("梳理记忆脉络...");
-            else if (displayProgress < 0.6f)
-                tipKey = "1";
-            //loadingPanel.SetTip("编织羁绊之网...");
-            else if (displayProgress < 0.9f)
-                tipKey = "2";
-            //loadingPanel.SetTip("点亮星辰坐标...");
-            else
-                tipKey = "3";
-            //loadingPanel.SetTip("即将抵达...");
+        operation.allowSceneActivation = true; // 允许场景自动激活
 
-            // 从管理器获取当前语言的文本（同步，因为已初始化）
+        // 【关键修改】UI 进度完全基于时间，持续至少 minimumLoadTime 秒
+        float targetEndTime = startTime + minimumLoadTime;
+        while (Time.realtimeSinceStartup < targetEndTime)
+        {
+            float elapsed = Time.realtimeSinceStartup - startTime;
+            float progress = Mathf.Clamp01(elapsed / minimumLoadTime);
+            loadingPanel.SetProgress(progress);
+
+            // 根据进度更换提示文本
+            string tipKey = progress < 0.3f ? "0" :
+                            progress < 0.6f ? "1" :
+                            progress < 0.9f ? "2" : "3";
             string tipText = LocalizationManager.Instance.GetText("LoadingPanel", tipKey);
             loadingPanel.SetTip(tipText);
 
-            if (operation.progress >= 0.90f && elapsed >= minimumLoadTime)
-            {
-                operation.allowSceneActivation = true;
-            }
+            sb.AppendLine($"Frame: {Time.frameCount}, Realtime: {Time.realtimeSinceStartup:F4}, Elapsed: {elapsed:F4}, Progress: {progress:F4}, RealProgress: {operation.progress:F4}");
 
             yield return null;
         }
 
-        // 场景激活后，恢复游戏状态（例如将玩家位置归零）
-        RestoreGameStateForScene();
+        // 确保最终进度为 100%
+        loadingPanel.SetProgress(1f);
+        loadingPanel.SetTip(LocalizationManager.Instance.GetText("LoadingPanel", "3"));
 
-        yield return new WaitForSecondsRealtime(0.5f);
+        // 等待场景真正加载完成（如果还未完成）
+        while (!operation.isDone)
+        {
+            sb.AppendLine($"Waiting for scene to complete... RealProgress: {operation.progress:F4}");
+            yield return null;
+        }
+
+        sb.AppendLine($"Scene activated at realtime: {Time.realtimeSinceStartup}");
+
+        // 验证加载后的场景
+        string loadedSceneName = SceneManager.GetActiveScene().name;
+        sb.AppendLine($"Loaded scene name: {loadedSceneName}");
+        if (loadedSceneName != targetScene)
+        {
+            sb.AppendLine($"错误：当前场景为 {loadedSceneName}，目标为 {targetScene}，加载可能失败！");
+            Debug.LogError($"场景加载失败：当前仍处于 {loadedSceneName}，未能切换到 {targetScene}");
+        }
+        else
+        {
+            RestoreGameStateForScene(); // 恢复玩家位置等
+        }
+
+        File.WriteAllText(logPath, sb.ToString());
+
+        yield return new WaitForSecondsRealtime(0.5f); // 短暂停留
 
         // ---- 淡出动画 ----
-        // 先禁用所有子物体（即内部 UI 元素），背景保留
         foreach (Transform child in loadingPanel.transform)
-        {
             child.gameObject.SetActive(false);
-        }
 
         elapsedFade = 0f;
         while (elapsedFade < fadeOutDuration)
@@ -137,28 +191,16 @@ public class SceneDataManager : Singleton<SceneDataManager>
         }
         canvasGroup.alpha = 0f;
 
-        // 隐藏整个面板
         loadingPanel.gameObject.SetActive(false);
         isLoading = false;
     }
 
-    /// <summary>
-    /// 保存当前游戏状态到 SaveManager
-    /// </summary>
-    private void SaveCurrentGameState()
-    {
-        // 其他数据（如收集物）也可在此保存
-        // SaveManager.Instance.SaveGame(data);
-    }
+    // 保留原有占位方法
+    private void SaveCurrentGameState() { }
 
-    /// <summary>
-    /// 新场景加载后，恢复玩家位置等状态
-    /// </summary>
     private void RestoreGameStateForScene()
     {
-        // 查找名为 "Player" 的游戏对象
         GameObject player = GameObject.Find("Player");
-
         if (player != null)
         {
             Vector3 position = player.transform.position;

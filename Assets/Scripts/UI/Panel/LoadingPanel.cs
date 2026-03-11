@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class LoadingPanel : Singleton<BasePanel>
+public class LoadingPanel : MonoBehaviour
 {
     public Slider progressSlider;
     public TextMeshProUGUI progressText;

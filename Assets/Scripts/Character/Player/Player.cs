@@ -9,6 +9,7 @@ public class Player : Entity
     public float counterAttackDuration = .2f;
 
     public bool isBusy { get; private set; }
+    public bool isIdle;
 
     [Header("Move info")]
     public float moveSpeed = 12f;
