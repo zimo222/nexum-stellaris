@@ -99,6 +99,10 @@ public class SceneDataManager : Singleton<SceneDataManager>
 
         yield return new WaitForSecondsRealtime(0.1f);
 
+
+        foreach (Transform child in loadingPanel.transform)
+            child.gameObject.SetActive(true);
+
         // 开始异步加载（允许自动激活）
         float startTime = Time.realtimeSinceStartup;
         sb.AppendLine($"Start Time (realtime): {startTime}");
@@ -204,8 +208,8 @@ public class SceneDataManager : Singleton<SceneDataManager>
         if (player != null)
         {
             Vector3 position = player.transform.position;
-            position.x = 0f;
-            position.y = 0f;
+            position.x = 840f;
+            position.y = 510f;
             player.transform.position = position;
             Debug.Log("已将 Player 的位置重置为 (0, 0, " + position.z + ")");
         }

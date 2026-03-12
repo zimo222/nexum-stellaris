@@ -13,7 +13,7 @@ public class MainMenuPanel : BasePanel
         // 开始游戏按钮的逻辑
         Debug.Log("开始游戏");
         // 可以加载游戏场景等
-        SceneDataManager.Instance.LoadScene("1_TheNestOfWarmLight");
+        SceneDataManager.Instance.LoadScene("1_TheNestOfWarmLight_0");
     }
 
     public void OnClick(string name)
