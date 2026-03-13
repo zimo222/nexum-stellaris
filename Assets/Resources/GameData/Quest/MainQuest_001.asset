@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d476a2b0564d52b4882c53d711eeea11, type: 3}
-  m_Name: Quest_001
+  m_Name: MainQuest_001
   m_EditorClassIdentifier: 
-  id: Quest_001
+  id: MainQuest_001
   questName: "\u6696\u5149\u4F59\u6E29"
-  nextQuestId: Quest_002
   category: 0
   contentType: 0
+  nextQuestIds:
+  - MainQuest_002
   dialogueEntries:
   - background: {fileID: 0}
     speakerId: 

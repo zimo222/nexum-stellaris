@@ -35,8 +35,12 @@ public class PlayerData
     public List<MaterialData> MaterialBag = new List<MaterialData>();
 
     // ==================== 任务角色与装备系统 ====================
+    /*
     public string currentQuestId;      // 当前主线任务ID
     public int currentQuestProgress; // 0~1 表示进度
+    */
+    public List<PlayerQuestProgress> activeQuests;       // 进行中的任务列表
+    public List<string> completedQuestIds;               // 已完成的任务ID列表（用于判断前置任务）
 
     // ==================== 设置与其他 ====================
     public float MusicVolume = 0.8f;
@@ -59,11 +63,13 @@ public class PlayerData
         Crystals = 50000;
         Coins = 3000000;
 
-        currentQuestId = "Quest_001"; // 第一个任务ID
-        currentQuestProgress = -1;
+        // 任务系统初始化为空，第一个任务通常由剧情触发
+        activeQuests = new List<PlayerQuestProgress>();
+        completedQuestIds = new List<string>();
 
         InitializeDefaultEquipment();
         InitializeDefaultMaterial();
+        InitializeDefaultQuest();
         SortedBag();
     }
 
@@ -186,6 +192,26 @@ public class PlayerData
             introduction: def.introduction, description: def.description
         );
         MaterialBag.Add(material);
+    }
+    #endregion
+
+
+
+    // ==================== 任务相关方法 ====================
+    #region  任务方法
+    // 初始化默认材料
+    private void InitializeDefaultQuest()
+    {
+        AddDefaultQuest("MainQuest_001");
+    }
+
+    public void AddDefaultQuest(string defineId)
+    {
+        var def = GameDataManager.Instance.QuestDict[defineId];
+        var quest = new PlayerQuestProgress(
+            qid: def.id
+        );
+        activeQuests.Add(quest);
     }
     #endregion
 }
@@ -317,14 +343,16 @@ public class MaterialData
 [System.Serializable]
 public class ObjectiveProgress
 {
-    public string objectiveId;          // 目标ID（与静态数据对应）
-    public int currentAmount;           // 当前完成数量
-    public bool isCompleted;            // 是否已完成
+    public string objectiveId;
+    public int currentAmount;
+    public int requiredAmount;   // 新增字段
+    public bool isCompleted;
 
-    public ObjectiveProgress(string objId, int amount = 0, bool completed = false)
+    public ObjectiveProgress(string objId, int amount = 0, int required = 0, bool completed = false)
     {
         objectiveId = objId;
         currentAmount = amount;
+        requiredAmount = required;
         isCompleted = completed;
     }
 }

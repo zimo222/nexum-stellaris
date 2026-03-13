@@ -208,8 +208,8 @@ public class SceneDataManager : Singleton<SceneDataManager>
         if (player != null)
         {
             Vector3 position = player.transform.position;
-            position.x = 840f;
-            position.y = 510f;
+            position.x = 0f;
+            position.y = 0f;
             player.transform.position = position;
             Debug.Log("已将 Player 的位置重置为 (0, 0, " + position.z + ")");
         }

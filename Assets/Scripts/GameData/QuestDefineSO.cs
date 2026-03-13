@@ -15,31 +15,30 @@ public enum QuestContentType
     Combat      // 战斗型
 }
 
-// 对话条目（一句话）
+// 对话条目
 [System.Serializable]
 public class DialogueEntry
 {
-    public Sprite background;   // 背景图，可为空
-    public string speakerId;    // 说话者ID（例如 "mother", "pure_white"）
+    public Sprite background;
+    public string speakerId;
     [TextArea(1, 3)]
-    public string content;      // 说话内容
+    public string content;
 }
 
 [CreateAssetMenu(fileName = "NewQuest", menuName = "GameData/QuestDefine")]
 public class QuestDefineSO : ScriptableObject
 {
-    public string id;                     // 任务ID（唯一）
-    public string questName;               // 任务名称
-    public string nextQuestId;              // 完成后自动开始的下一个任务ID（可为空）
+    public string id;                           // 任务ID（唯一）
+    public string questName;                     // 任务名称
+    public QuestCategory category;                // 主线/世界
+    public QuestContentType contentType;          // 对话/战斗
 
-    public QuestCategory category;          // 主线/世界
-    public QuestContentType contentType;    // 对话/战斗
+    [Header("后续任务")]
+    public List<string> nextQuestIds;            // 完成后解锁的任务ID列表（支持多个）
 
-    // 如果 contentType == Dialogue，使用这个对话列表
-    public List<DialogueEntry> dialogueEntries;
+    [Header("对话型任务配置")]
+    public List<DialogueEntry> dialogueEntries;   // 对话内容
 
-    // 如果 contentType == Combat，使用这个目标列表（沿用你已有的目标系统）
-    public List<QuestObjectiveDefineSO> objectives;
-
-    // 其他字段（前置任务、自动开始等）可以保留，这里只列出必要的
+    [Header("战斗/目标型任务配置")]
+    public List<QuestObjectiveDefineSO> objectives; // 目标列表
 }

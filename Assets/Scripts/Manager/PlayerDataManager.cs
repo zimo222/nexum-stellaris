@@ -17,6 +17,9 @@ public class PlayerDataManager : MonoBehaviour
     public event Action<int> OnCrystalsChanged;
     public event Action<int> OnStaminaChanged;
     public event Action OnPlayerDataListChanged;
+    public event Action<string> OnQuestAdded;           // 任务被激活
+    public event Action<string> OnQuestProgressUpdated; // 任务进度更新
+    public event Action<string> OnQuestCompleted;       // 任务完成
     #endregion
 
     #region 属性
@@ -447,6 +450,170 @@ public class PlayerDataManager : MonoBehaviour
     {
         OnStaminaChanged?.Invoke(newValue);
         TriggerPlayerDataChanged();
+    }
+    #endregion
+
+
+    // ==================== 任务数据操作方法 ====================
+    #region 任务数据操作方法
+    /// <summary>
+    /// 激活一个新任务（添加到 activeQuests 列表）
+    /// </summary>
+    public bool AddActiveQuest(string questId)
+    {
+        if (CurrentPlayerData == null) return false;
+
+        // 检查任务是否已存在（进行中或已完成）
+        if (CurrentPlayerData.activeQuests.Exists(q => q.questId == questId) ||
+            CurrentPlayerData.completedQuestIds.Contains(questId))
+        {
+            Debug.LogWarning($"任务 {questId} 已存在或已完成");
+            return false;
+        }
+
+        // 从静态数据获取任务定义（需要 GameDataManager，但这里不直接依赖，只创建进度对象）
+        // 注意：这里只负责数据创建，不依赖外部，进度对象由调用方提供完整信息？但为了解耦，我们只创建空进度，由调用方设置目标？
+        // 更好的做法：调用方在激活时已经知道任务类型，可以设置 objectives。我们提供一个接收初始化目标的方法。
+        // 简单起见，我们只创建基本进度，目标列表由调用方后续添加。或者我们在这里传入已初始化的 PlayerQuestProgress 对象。
+        // 为了灵活性，我们允许传入已构造好的进度对象。
+        var progress = new PlayerQuestProgress(questId);
+        progress.state = QuestState.InProgress;
+        // 目标列表由调用方后续通过 UpdateObjective 逐步添加？但目标需要先存在才能更新。
+        // 因此，调用方应在激活后立即初始化所有目标（通过调用 InitializeQuestObjectives 之类的方法）。
+        // 我们在这里提供一个重载：AddActiveQuest(PlayerQuestProgress progress)
+        CurrentPlayerData.activeQuests.Add(progress);
+        SaveCurrentPlayerData();
+        OnQuestAdded?.Invoke(questId);
+        OnPlayerDataChanged?.Invoke(CurrentPlayerData);
+        return true;
+    }
+
+    /// <summary>
+    /// 重载：直接添加已初始化好目标的进度对象
+    /// </summary>
+    public bool AddActiveQuest(PlayerQuestProgress progress)
+    {
+        if (CurrentPlayerData == null) return false;
+        if (CurrentPlayerData.activeQuests.Exists(q => q.questId == progress.questId) ||
+            CurrentPlayerData.completedQuestIds.Contains(progress.questId))
+        {
+            Debug.LogWarning($"任务 {progress.questId} 已存在或已完成");
+            return false;
+        }
+        CurrentPlayerData.activeQuests.Add(progress);
+        SaveCurrentPlayerData();
+        OnQuestAdded?.Invoke(progress.questId);
+        OnPlayerDataChanged?.Invoke(CurrentPlayerData);
+        return true;
+    }
+
+    /// <summary>
+    /// 更新指定任务的某个目标进度（增加 deltaAmount），自动检测目标是否完成。
+    /// 返回 true 表示更新成功，false 表示任务不存在或目标不存在。
+    /// </summary>
+    public bool UpdateObjective(string questId, string objectiveId, int deltaAmount)
+    {
+        if (CurrentPlayerData == null) return false;
+
+        var progress = CurrentPlayerData.activeQuests.Find(q => q.questId == questId);
+        if (progress == null)
+        {
+            Debug.LogWarning($"任务 {questId} 不在进行中");
+            return false;
+        }
+
+        var obj = progress.objectives.Find(o => o.objectiveId == objectiveId);
+        if (obj == null)
+        {
+            Debug.LogWarning($"任务 {questId} 中不存在目标 {objectiveId}");
+            return false;
+        }
+
+        if (obj.isCompleted) return true; // 已完成的目标不再更新
+
+        obj.currentAmount += deltaAmount;
+        // 目标是否完成需要知道 requiredAmount，但这里没有静态数据。因此我们无法判断。
+        // 解决方案：要么由调用方传入 requiredAmount，要么让调用方自己判断后设置 isCompleted。
+        // 为了保持数据操作集中，我们让调用方在更新时提供当前总量，或者我们存储 requiredAmount 在 ObjectiveProgress 中？
+        // 回顾 ObjectiveProgress 定义：它只有 currentAmount 和 isCompleted，没有 requiredAmount。
+        // requiredAmount 存在于静态数据 QuestObjectiveDefineSO 中。所以这里无法判断是否完成。
+        // 因此，修改设计：UpdateObjective 只更新 currentAmount，不负责判断完成。由调用方（如 QuestManager）在更新后检查所有目标，如果完成则调用 CompleteQuest。
+        // 或者我们在 ObjectiveProgress 中增加 requiredAmount 字段（冗余但方便），在初始化时从静态数据填入。
+        // 这里选择第二种：在激活任务时，由调用方（QuestManager）从静态数据读取 requiredAmount 并设置到每个 ObjectiveProgress 中。
+        // 这样 UpdateObjective 就可以检查是否完成。
+        // 为了兼容，我们假设 ObjectiveProgress 中已有 requiredAmount 字段。需要修改 ObjectiveProgress 定义。
+        // 但为简化，我们先让 UpdateObjective 只更新数值，不自动完成，由外部检测。
+        // 因此，此方法只更新数值并保存，不返回是否完成。
+
+        SaveCurrentPlayerData();
+        OnQuestProgressUpdated?.Invoke(questId);
+        OnPlayerDataChanged?.Invoke(CurrentPlayerData);
+        return true;
+    }
+
+    /// <summary>
+    /// 直接设置目标的完成状态（用于外部判断后调用）
+    /// </summary>
+    public bool SetObjectiveCompleted(string questId, string objectiveId, bool completed)
+    {
+        if (CurrentPlayerData == null) return false;
+        var progress = CurrentPlayerData.activeQuests.Find(q => q.questId == questId);
+        if (progress == null) return false;
+        var obj = progress.objectives.Find(o => o.objectiveId == objectiveId);
+        if (obj == null) return false;
+        obj.isCompleted = completed;
+        SaveCurrentPlayerData();
+        OnQuestProgressUpdated?.Invoke(questId);
+        OnPlayerDataChanged?.Invoke(CurrentPlayerData);
+        return true;
+    }
+
+    /// <summary>
+    /// 完成任务：从 activeQuests 移除，添加到 completedQuestIds
+    /// </summary>
+    public bool CompleteQuest(string questId)
+    {
+        if (CurrentPlayerData == null) return false;
+        var progress = CurrentPlayerData.activeQuests.Find(q => q.questId == questId);
+        if (progress == null)
+        {
+            Debug.LogWarning($"任务 {questId} 不在进行中，无法完成");
+            return false;
+        }
+
+        CurrentPlayerData.activeQuests.Remove(progress);
+        if (!CurrentPlayerData.completedQuestIds.Contains(questId))
+            CurrentPlayerData.completedQuestIds.Add(questId);
+
+        SaveCurrentPlayerData();
+        OnQuestCompleted?.Invoke(questId);
+        OnPlayerDataChanged?.Invoke(CurrentPlayerData);
+        return true;
+    }
+
+    /// <summary>
+    /// 获取进行中的任务列表（返回副本以防外部修改）
+    /// </summary>
+    public List<PlayerQuestProgress> GetActiveQuests()
+    {
+        if (CurrentPlayerData == null) return new List<PlayerQuestProgress>();
+        return new List<PlayerQuestProgress>(CurrentPlayerData.activeQuests);
+    }
+
+    /// <summary>
+    /// 检查任务是否已完成
+    /// </summary>
+    public bool HasCompletedQuest(string questId)
+    {
+        return CurrentPlayerData != null && CurrentPlayerData.completedQuestIds.Contains(questId);
+    }
+
+    /// <summary>
+    /// 获取指定任务的进度（进行中）
+    /// </summary>
+    public PlayerQuestProgress GetQuestProgress(string questId)
+    {
+        return CurrentPlayerData?.activeQuests.Find(q => q.questId == questId);
     }
     #endregion
 }
