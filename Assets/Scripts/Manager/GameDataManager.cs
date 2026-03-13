@@ -33,7 +33,6 @@ public class GameDataManager : MonoBehaviour
         MaterialDict = materials.ToDictionary(w => w.id, w => w);
 
         QuestDefineSO[] quests = Resources.LoadAll<QuestDefineSO>("GameData/Quest");
-        Debug.Log(quests[0]);
         QuestDict = quests.ToDictionary(w => w.id, w => w);
     }
 }

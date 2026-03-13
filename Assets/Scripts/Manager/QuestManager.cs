@@ -9,7 +9,7 @@ public class QuestManager : MonoBehaviour
     public static QuestManager Instance { get; private set; }
 
     [Header("常驻UI")]
-    public TMP_Text guestText;               // 常驻任务名
+    public TMP_Text guestText;
 
     [Header("弹出面板")]
     public GameObject questPanel;
@@ -30,21 +30,20 @@ public class QuestManager : MonoBehaviour
     [Header("打字效果")]
     public float typingSpeed = 0.05f;
 
-    // 内部状态
     private CanvasGroup panelCanvasGroup;
     private Coroutine panelCoroutine;
-
-    // 对话控制
     private List<DialogueEntry> currentDialogue;
     private int currentDialogueIndex;
     private bool isDialoguePlaying;
     private Coroutine typingCoroutine;
     private bool isTextFullyDisplayed;
     private Player playerController;
-
-    // 交互管理
     private string currentInteractiveQuestId;
     private bool waitingForInteraction = false;
+
+    // 任务追踪相关
+    public string TrackedQuestId { get; private set; }
+    public event System.Action<string> OnTrackedQuestChanged;
 
     void Awake()
     {
@@ -59,7 +58,6 @@ public class QuestManager : MonoBehaviour
             return;
         }
 
-        // 初始化UI组件（同原有）
         if (questPanel != null)
         {
             panelCanvasGroup = questPanel.GetComponent<CanvasGroup>();
@@ -83,12 +81,45 @@ public class QuestManager : MonoBehaviour
             playerController = players[0].GetComponent<Player>();
         }
 
+        // 修复直接从 PlayerData 添加的任务
+        var playerData = PlayerDataManager.Instance?.CurrentPlayerData;
+        if (playerData != null)
+        {
+            bool dataChanged = false;
+            foreach (var progress in playerData.activeQuests)
+            {
+                if (progress.state == QuestState.NotStarted)
+                {
+                    if (GameDataManager.Instance.QuestDict.TryGetValue(progress.questId, out var questData))
+                    {
+                        progress.state = QuestState.InProgress;
+                        if (questData.contentType == QuestContentType.Combat && questData.objectives != null)
+                        {
+                            progress.objectives.Clear();
+                            foreach (var objDefine in questData.objectives)
+                            {
+                                var objProgress = new ObjectiveProgress(objDefine.objectiveId, 0, objDefine.requiredAmount, false);
+                                progress.objectives.Add(objProgress);
+                            }
+                        }
+                        dataChanged = true;
+                        Debug.Log($"修复任务: {progress.questId} 状态为 InProgress");
+                    }
+                }
+            }
+            if (dataChanged)
+            {
+                PlayerDataManager.Instance.SaveCurrentPlayerData();
+            }
+        }
+
         RefreshQuestUI();
+        AutoSetTrackedQuest();
     }
 
     void Update()
     {
-        // 对话空格处理（同原有）
+        // 对话空格处理
         if (isDialoguePlaying && Input.GetKeyDown(KeyCode.Space))
         {
             if (typingCoroutine != null)
@@ -123,7 +154,6 @@ public class QuestManager : MonoBehaviour
 
             if (!string.IsNullOrEmpty(currentInteractiveQuestId))
             {
-                // 检查该任务是否仍在进行中（可能已被完成）
                 var progress = PlayerDataManager.Instance?.GetQuestProgress(currentInteractiveQuestId);
                 if (progress != null && GameDataManager.Instance.QuestDict.TryGetValue(currentInteractiveQuestId, out var questData))
                 {
@@ -137,7 +167,6 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    // ---------- 任务激活 ----------
     public void ActivateQuest(string questId)
     {
         if (!GameDataManager.Instance.QuestDict.TryGetValue(questId, out var questData))
@@ -146,30 +175,25 @@ public class QuestManager : MonoBehaviour
             return;
         }
 
-        // 创建任务进度对象，并初始化目标（从静态数据读取 requiredAmount）
         var progress = new PlayerQuestProgress(questId);
         progress.state = QuestState.InProgress;
         if (questData.contentType == QuestContentType.Combat && questData.objectives != null)
         {
             foreach (var objDefine in questData.objectives)
             {
-                // 注意：ObjectiveProgress 需要存储 requiredAmount，这里我们扩展一下
-                // 假设 ObjectiveProgress 类增加了 public int requiredAmount;
-                var objProgress = new ObjectiveProgress(objDefine.objectiveId, 0, 100, false);
-                objProgress.requiredAmount = objDefine.requiredAmount; // 需要修改 ObjectiveProgress 定义
+                var objProgress = new ObjectiveProgress(objDefine.objectiveId, 0, objDefine.requiredAmount, false);
                 progress.objectives.Add(objProgress);
             }
         }
 
-        // 调用 PlayerDataManager 添加任务
         if (PlayerDataManager.Instance.AddActiveQuest(progress))
         {
             ShowPanel(questData.questName, "开始");
             RefreshQuestUI();
+            AutoSetTrackedQuest();
         }
     }
 
-    // ---------- 任务进度更新（击杀敌人）----------
     public void OnEnemyKilled(string enemyId)
     {
         var activeQuests = PlayerDataManager.Instance?.GetActiveQuests();
@@ -192,10 +216,8 @@ public class QuestManager : MonoBehaviour
                 {
                     if (!objProgress.isCompleted)
                     {
-                        // 更新数值
                         int newAmount = objProgress.currentAmount + 1;
                         PlayerDataManager.Instance.UpdateObjective(questProgress.questId, objProgress.objectiveId, 1);
-                        // 检查是否达到要求
                         if (newAmount >= objDefine.requiredAmount)
                         {
                             PlayerDataManager.Instance.SetObjectiveCompleted(questProgress.questId, objProgress.objectiveId, true);
@@ -208,7 +230,6 @@ public class QuestManager : MonoBehaviour
             if (objectiveUpdated)
             {
                 anyProgress = true;
-                // 重新获取最新进度（因为上面已经通过 PDM 修改了）
                 var updatedProgress = PlayerDataManager.Instance.GetQuestProgress(questProgress.questId);
                 if (updatedProgress != null && updatedProgress.objectives.TrueForAll(o => o.isCompleted))
                 {
@@ -223,7 +244,6 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    // ---------- 完成任务 ----------
     private void CompleteQuest(string questId)
     {
         if (PlayerDataManager.Instance.CompleteQuest(questId))
@@ -232,12 +252,10 @@ public class QuestManager : MonoBehaviour
             {
                 ShowPanel(questData.questName, "完成");
 
-                // 解锁后续任务
                 if (questData.nextQuestIds != null)
                 {
                     foreach (string nextId in questData.nextQuestIds)
                     {
-                        // 检查是否已完成过（可选）
                         if (!PlayerDataManager.Instance.HasCompletedQuest(nextId))
                         {
                             ActivateQuest(nextId);
@@ -246,10 +264,13 @@ public class QuestManager : MonoBehaviour
                 }
             }
             RefreshQuestUI();
+            if (questId == TrackedQuestId)
+            {
+                AutoSetTrackedQuest();
+            }
         }
     }
 
-    // ---------- 对话流程控制（基本不变，但结束时调用 CompleteQuest）----------
     private void StartDialogue(List<DialogueEntry> dialogueList, string questId)
     {
         if (dialogueList == null || dialogueList.Count == 0)
@@ -325,7 +346,6 @@ public class QuestManager : MonoBehaviour
         if (playerController != null)
             playerController.enabled = true;
 
-        // 对话结束，完成当前对话任务（如果有）
         if (!string.IsNullOrEmpty(currentInteractiveQuestId))
         {
             CompleteQuest(currentInteractiveQuestId);
@@ -333,14 +353,11 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    // ---------- 区域触发器接口（基本不变，但交互状态设置不变）----------
     public void OnPlayerEnterQuestArea(string questId)
     {
-        // 检查任务是否已在 activeQuests 中
         var progress = PlayerDataManager.Instance?.GetQuestProgress(questId);
         if (progress == null)
         {
-            // 如果任务未激活且未完成，则激活它（可根据需要决定是否自动激活）
             if (!PlayerDataManager.Instance.HasCompletedQuest(questId))
             {
                 ActivateQuest(questId);
@@ -372,13 +389,11 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    // ---------- UI 刷新 ----------
     private void RefreshQuestUI()
     {
         var activeQuests = PlayerDataManager.Instance?.GetActiveQuests();
         if (activeQuests == null) return;
 
-        // 常驻UI显示第一个主线任务
         var mainQuestProgress = activeQuests.Find(q =>
         {
             if (GameDataManager.Instance.QuestDict.TryGetValue(q.questId, out var qd))
@@ -397,7 +412,6 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    // ---------- 弹出面板 ----------
     private void ShowPanel(string taskName, string status)
     {
         if (!enablePanelAnimation) return;
@@ -441,5 +455,42 @@ public class QuestManager : MonoBehaviour
         panelCanvasGroup.alpha = 0f;
         questPanel.SetActive(false);
         panelCoroutine = null;
+    }
+
+    // ========== 追踪设置方法 ==========
+    public void SetTrackedQuest(string questId)
+    {
+        if (TrackedQuestId == questId) return;
+        TrackedQuestId = questId;
+        int subscriberCount = OnTrackedQuestChanged?.GetInvocationList()?.Length ?? 0;
+        Debug.Log($"追踪任务变更为: {questId}，当前事件订阅者数量: {subscriberCount}");
+        OnTrackedQuestChanged?.Invoke(questId);
+    }
+
+    private void AutoSetTrackedQuest()
+    {
+        var activeQuests = PlayerDataManager.Instance?.GetActiveQuests();
+        if (activeQuests == null) return;
+
+        var mainQuest = activeQuests.Find(q =>
+        {
+            if (GameDataManager.Instance.QuestDict.TryGetValue(q.questId, out var qd))
+            {
+                bool isMain = qd.category == QuestCategory.Main;
+                if (isMain) Debug.Log($"找到主线任务: {q.questId}");
+                return isMain;
+            }
+            return false;
+        });
+
+        if (mainQuest != null)
+        {
+            SetTrackedQuest(mainQuest.questId);
+        }
+        else
+        {
+            Debug.Log("未找到主线任务，清空追踪");
+            SetTrackedQuest(null);
+        }
     }
 }

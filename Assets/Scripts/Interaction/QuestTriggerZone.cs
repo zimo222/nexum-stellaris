@@ -2,30 +2,81 @@ using UnityEngine;
 
 public class QuestTriggerZone : MonoBehaviour
 {
-    // 触发器类型枚举
     public enum TriggerType
     {
-        Plot,   // 剧情触发：玩家进入区域时通知任务管理器
-        Scene   // 场景触发：玩家在区域内按 F 键切换场景
+        Plot,
+        Scene
     }
 
     [Header("基础设置")]
-    public TriggerType triggerType;     // 当前触发器的类型
-    public string questId;              // 任务 ID（剧情类型使用）
+    public TriggerType triggerType;
+    public string questId;
 
     [Header("场景切换设置（仅 Scene 类型有效）")]
-    public string targetSceneName;      // 目标场景名称，例如 "1_TheNestOfWarmLight_0"
+    public string targetSceneName;
 
-    private bool playerInZone;          // 玩家是否在触发器区域内
+    [Header("追踪指示器")]
+    public GameObject trackingIndicator;
+
+    private bool playerInZone;
+
+    private void OnEnable()
+    {
+        // 每次激活时尝试订阅
+        TrySubscribe();
+    }
+
+    private void Start()
+    {
+        // 再次尝试订阅（确保即使 OnEnable 时 Instance 为 null，也能在 Start 时成功）
+        TrySubscribe();
+        // 同时更新指示器状态
+        if (QuestManager.Instance != null)
+        {
+            OnTrackedQuestChanged(QuestManager.Instance.TrackedQuestId);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (QuestManager.Instance != null)
+        {
+            QuestManager.Instance.OnTrackedQuestChanged -= OnTrackedQuestChanged;
+        }
+    }
+
+    private void TrySubscribe()
+    {
+        if (QuestManager.Instance != null)
+        {
+            // 避免重复订阅（先取消再添加）
+            QuestManager.Instance.OnTrackedQuestChanged -= OnTrackedQuestChanged;
+            QuestManager.Instance.OnTrackedQuestChanged += OnTrackedQuestChanged;
+            // 立即更新状态
+            OnTrackedQuestChanged(QuestManager.Instance.TrackedQuestId);
+        }
+        // 如果 Instance 为 null，则等 Start 再试
+    }
+
+    private void OnTrackedQuestChanged(string trackedQuestId)
+    {
+        if (trackingIndicator != null)
+        {
+            bool shouldShow = (trackedQuestId == questId);
+            trackingIndicator.SetActive(shouldShow);
+        }
+        else
+        {
+            Debug.LogError($"[触发器 {questId}] trackingIndicator 未赋值！");
+        }
+    }
 
     private void Update()
     {
-        // 仅当类型为 Scene 且玩家在区域内时检测 F 键
         if (triggerType == TriggerType.Scene && playerInZone)
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
-                // 调用场景管理器加载目标场景
                 SceneDataManager.Instance.LoadScene(targetSceneName);
             }
         }
@@ -38,14 +89,11 @@ public class QuestTriggerZone : MonoBehaviour
 
         if (triggerType == TriggerType.Plot)
         {
-            // 剧情类型：通知任务管理器
             QuestManager.Instance?.OnPlayerEnterQuestArea(questId);
         }
         else if (triggerType == TriggerType.Scene)
         {
-            // 场景类型：标记玩家进入区域
             playerInZone = true;
-            // 可选：在这里显示提示 UI（例如“按 F 进入下一场景”）
         }
     }
 
@@ -56,9 +104,7 @@ public class QuestTriggerZone : MonoBehaviour
 
         if (triggerType == TriggerType.Scene)
         {
-            // 玩家离开区域，清除标记
             playerInZone = false;
-            // 可选：隐藏提示 UI
         }
     }
 }
