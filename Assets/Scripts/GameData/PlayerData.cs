@@ -1,8 +1,12 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using static UnityEditor.Rendering.FilterWindow;
+using static UnityEngine.EventSystems.EventTrigger;
 
 [System.Serializable]
 public class PlayerData
@@ -55,6 +59,18 @@ public class PlayerData
 
     public PlayerData(string playerName)
     {
+        BaseStats = new CharacterStats()
+        {
+            Level = 1,
+            Exp = 0,
+            Health = 100,
+            Attack = 100,
+            Defence = 100,
+            Energy = 100,
+            CritRate = 0.05f,
+            CritDamage = 0.50f,
+            ElementBonus = 0f
+        };
         PlayerID = System.Guid.NewGuid().ToString();
         PlayerName = playerName;
         CreateTime = DateTime.Now;
@@ -114,7 +130,6 @@ public class PlayerData
     // 初始化默认装备
     private void InitializeDefaultEquipment()
     {
-        /*
         for (int i = 1; i <= 5; i++)
         {
             AddDefaultNExotext("Exotext_00" + i + "_VotiveEmber");
@@ -125,7 +140,7 @@ public class PlayerData
             AddDefaultNExotext("Exotext_00" + i + "_DuoVoice");
             AddDefaultNExotext("Exotext_00" + i + "_MnemonicTool");
         }
-
+        /*
         for (int i = 1; i <= 2; i++)
         {
             AddDefaultNexusvesture("NexusVesture_00" + i + "_CogniThread");
@@ -141,7 +156,7 @@ public class PlayerData
     {
         var def = GameDataManager.Instance.ExotextDict[defineId];
         var weapon = new ExotextData(
-            id: def.id, name: def.exotextName,
+            id: def.id,
             type: def.type,
             element: def.element,
             stars: def.baseStars, maxstars: def.maxStars,
@@ -156,7 +171,7 @@ public class PlayerData
     {
         var def = GameDataManager.Instance.NexusVestureDict[defineId];
         var stigmata = new NexusVestureData(
-            id: def.id, name: def.nexusvectureName,
+            id: def.id,
             position: def.Position,
             element: def.element,
             stars: def.baseStars, maxstars: def.maxStars,
@@ -240,33 +255,26 @@ public class SkillData
 public class NexumIdemData
 {
     public string Id;               // ID
-    public string Name;             // 名称
     public CharacterStats Stats;    // 属性
-    public TextStats TextStats;     // 文本
 
     // 装备状态
     public int EquippedToCharacterIndex = -1;        // 被哪个角色装备（-1表示未装备）
 
     public NexumIdemData() { }
 
-    public NexumIdemData(string id, string name,
-                        string element = "", int stars = 0, int maxstars = 0,
+    public NexumIdemData(string id,
+                        string element = "", int stars = 0,
                         int health = 0, int attack = 0, int defence = 0,
-                        int energy = 0, float critRate = 0f, float critDamage = 0f, float elementBonus = 0f,
-                        string introduction = "", string description = "")
+                        int energy = 0, float critRate = 0f, float critDamage = 0f, float elementBonus = 0f)
     {
-        Id = id; Name = name;
+        Id = id;
         Stats = new CharacterStats()
         {
             Element = element,
             Level = 1, Exp = 0,
-            Stars = stars, MaxStars = maxstars, SStars = 0, Fragments = 0,
+            Stars = stars, SStars = 0, Fragments = 0,
             Health = health, Attack = attack, Defence = defence,
             Energy = energy, CritRate = critRate, CritDamage = critDamage, ElementBonus = elementBonus
-        };
-        TextStats = new TextStats()
-        {
-            Introduction = introduction, Description = description
         };
     }
 
@@ -283,12 +291,12 @@ public class ExotextData : NexumIdemData
 
     public ExotextData() { }
 
-    public ExotextData(string id, string name, ExotextType type,
+    public ExotextData(string id, ExotextType type,
                         string element = "", int stars = 0, int maxstars = 0,
                         int health = 0, int attack = 0, int defence = 0,
                         int energy = 0, float critRate = 0f, float critDamage = 0f, float elementBonus = 0f,
                         string introduction = "", string description = "")
-        : base(id, name, element, stars, maxstars, health, attack, defence, energy, critRate, critDamage, elementBonus, introduction, description)
+        : base(id, element, stars, health, attack, defence, energy, critRate, critDamage, elementBonus)
     {
         Type = type;
     }
@@ -300,12 +308,12 @@ public class NexusVestureData: NexumIdemData
 
     public NexusVestureData() { }
 
-    public NexusVestureData(string id, string name, NexusVesturePosition position,
+    public NexusVestureData(string id, NexusVesturePosition position,
                         string element = "", int stars = 0, int maxstars = 0,
                         int health = 0, int attack = 0, int defence = 0,
                         int energy = 0, float critRate = 0f, float critDamage = 0f, float elementBonus = 0f,
                         string introduction = "", string description = "")
-        : base(id, name, element, stars, maxstars, health, attack, defence, energy, critRate, critDamage, elementBonus, introduction, description)
+        : base(id, element, stars, health, attack, defence, energy, critRate, critDamage, elementBonus)
     {
         Position = position;
     }
@@ -387,7 +395,6 @@ public struct CharacterStats
     public int Exp;                                  // 经验
 
     public int Stars;                                // 星级
-    public int MaxStars;                             // 最大星级
     public int SStars;                               // 小星级
     public int Fragments;                            // 碎片
 

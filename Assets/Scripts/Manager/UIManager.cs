@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro; 
+using TMPro;
+using UnityEngine.SceneManagement; // 新增
 
 public class UIManager : Singleton<UIManager>
 {
-    [SerializeField] private BasePanel[] allPanels;
+    public static UIManager Instance { get; private set; }
+    [SerializeField] private List<BasePanel> allPanels;          // 动态面板列表
     [SerializeField] private float animationDuration = 0.3f;
     [SerializeField] private AnimationCurve animationCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
@@ -15,23 +17,101 @@ public class UIManager : Singleton<UIManager>
 
     protected override void Awake()
     {
-        base.Awake();
-        foreach (var panel in allPanels)
+        // 单例
+        if (Instance == null)
         {
-            if (panel.PanelName != "MainMenu")
-            {
-                panel.gameObject.SetActive(false);
-            }
-            else
-            {
-                panel.OnOpen();
-                panel.gameObject.SetActive(true);
-                panelStack.Push(panel);
-            }
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        base.Awake();
+
+        // 订阅场景加载事件
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDestroy()
+    {
+        // 取消订阅
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    /// <summary>
+    /// 场景加载完成后自动刷新面板列表
+    /// </summary>
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        RefreshPanelsForCurrentScene();
+    }
+
+    /// <summary>
+    /// 刷新当前场景的所有面板：清空旧列表，重新扫描并注册
+    /// </summary>
+    public void RefreshPanelsForCurrentScene()
+    {
+        // 清空列表和堆栈
+        allPanels.Clear();
+        panelStack.Clear();
+
+        // 查找场景中所有 BasePanel（包括未激活的）
+        BasePanel[] panels = FindObjectsOfType<BasePanel>(true);
+        foreach (var panel in panels)
+        {
+            RegisterPanel(panel, fromSceneLoad: true);
         }
     }
 
-    // 进入深层面板
+    /// <summary>
+    /// 动态注册面板（由面板自身在Awake中调用，或场景刷新时调用）
+    /// </summary>
+    public void RegisterPanel(BasePanel panel, bool fromSceneLoad = false)
+    {
+        if (panel == null) return;
+
+        // 避免重复注册
+        if (!allPanels.Contains(panel))
+        {
+            allPanels.Add(panel);
+        }
+
+        // 设置初始显隐规则（注意：来自场景刷新的调用会覆盖之前可能的手动设置）
+        if (panel.PanelName == "MainMenu")
+        {
+            // MainMenu 始终可见，并压入堆栈作为栈底
+            panel.gameObject.SetActive(true);
+            if (!panelStack.Contains(panel))
+                panelStack.Push(panel);
+        }
+        else if (panel.InitializeVisible)
+        {
+            // 其他面板如果标记为初始可见，则显示但不压栈
+            panel.gameObject.SetActive(true);
+            // 不加入堆栈
+        }
+        else
+        {
+            // 默认隐藏
+            panel.gameObject.SetActive(false);
+        }
+    }
+
+    /// <summary>
+    /// 注销面板（面板销毁时调用）
+    /// </summary>
+    public void UnregisterPanel(BasePanel panel)
+    {
+        if (panel != null && allPanels.Contains(panel))
+            allPanels.Remove(panel);
+    }
+
+    /// <summary>
+    /// 打开指定名称的面板
+    /// </summary>
     public void OpenPanel(string panelName)
     {
         if (isAnimating)
@@ -40,7 +120,7 @@ public class UIManager : Singleton<UIManager>
             return;
         }
 
-        var panel = System.Array.Find(allPanels, p => p.PanelName == panelName);
+        var panel = allPanels.Find(p => p != null && p.PanelName == panelName);
         if (panel == null)
         {
             Debug.LogError($"Panel {panelName} not found!");
@@ -61,7 +141,9 @@ public class UIManager : Singleton<UIManager>
         StartCoroutine(AnimateSwitch(oldPanel, panel, true));
     }
 
-    // 退出当前面板
+    /// <summary>
+    /// 关闭当前面板（返回上一个）
+    /// </summary>
     public void CloseCurrentPanel()
     {
         if (isAnimating)
@@ -78,7 +160,9 @@ public class UIManager : Singleton<UIManager>
         StartCoroutine(AnimateSwitch(currentPanel, previousPanel, false));
     }
 
-    // 关闭所有面板
+    /// <summary>
+    /// 关闭所有面板
+    /// </summary>
     public void CloseAll()
     {
         while (panelStack.Count > 0)
@@ -88,7 +172,6 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
-    // 平动动画
     private IEnumerator AnimateSwitch(BasePanel outPanel, BasePanel inPanel, bool isPush)
     {
         isAnimating = true;
@@ -193,7 +276,6 @@ public class UIManager : Singleton<UIManager>
         isAnimating = false;
     }
 
-    // 设置文本透明度
     private void SetTextsAlpha(List<Text> texts, float alpha)
     {
         foreach (var text in texts)
@@ -207,7 +289,6 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
-    //设置文本透明度
     private void SetTMPTextsAlpha(List<TextMeshProUGUI> texts, float alpha)
     {
         foreach (var text in texts)
