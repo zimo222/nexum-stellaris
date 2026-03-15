@@ -36,6 +36,9 @@ public class QuestDefineSO : ScriptableObject
     [Header("后续任务")]
     public List<string> nextQuestIds;            // 完成后解锁的任务ID列表（支持多个）
 
+    [Header("任务介绍")]
+    public string description;   // 对话内容
+
     [Header("对话型任务配置")]
     public List<DialogueEntry> dialogueEntries;   // 对话内容
 
