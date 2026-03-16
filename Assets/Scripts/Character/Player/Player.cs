@@ -36,6 +36,8 @@ public class Player : Entity
     // 移除墙相关状态：wallSlide, wallJump
     #endregion
 
+    private PlayerData playerData;
+
     protected override void Awake()
     {
         base.Awake();
@@ -54,6 +56,13 @@ public class Player : Entity
     protected override void Start()
     {
         base.Start();
+        playerData = PlayerDataManager.Instance.CurrentPlayerData;
+        // 确保玩家数据存在
+        if (playerData == null)
+            Debug.LogError("PlayerData is null!");
+
+        // 注册到战斗管理器（阶段五）
+        CombatManager.Instance.RegisterPlayer(gameObject);
         stateMachine.Initialize(idleState);
     }
 
@@ -87,10 +96,38 @@ public class Player : Entity
         {
             dashDirection = new Vector2(horizontal, vertical).normalized;
         }
+
+        // 冲刺键检测（注意：攻击状态下也能冲刺，会打断攻击）
         if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift) || Input.GetKeyDown(KeyCode.K)) && !isJumping)
         {
-
             stateMachine.ChangeState(dashState);
+        }
+    }
+
+    /// <summary>
+    /// 动画事件调用的生成子弹方法
+    /// </summary>
+    public void SpawnBullet()
+    {
+        // 从GameDataManager获取子弹定义，假设ID为"PlayerBullet"
+        BulletDefineSO bulletDef = GameDataManager.Instance.BulletDict["PlayerBullet"];
+        if (bulletDef == null || bulletDef.prefab == null)
+        {
+            Debug.LogError("Bullet prefab not found!");
+            return;
+        }
+
+        // 计算生成位置：玩家位置 + 面向方向 * 偏移量（例如0.5米）
+        Vector2 spawnPos = (Vector2)transform.position + dashDirection * 0.5f;
+
+        // 实例化子弹
+        GameObject bulletObj = Instantiate(bulletDef.prefab, spawnPos, Quaternion.identity);
+        Bullet bullet = bulletObj.GetComponent<Bullet>();
+        if (bullet != null)
+        {
+            // 伤害值 = 玩家攻击力（从PlayerData获取）
+            int damage = playerData.BaseStats.Attack;
+            bullet.Initialize(dashDirection, gameObject, bulletDef.speed, damage);
         }
     }
 }

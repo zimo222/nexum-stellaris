@@ -26,6 +26,20 @@ public class Enemy : Entity
     public EnemyStateMachine stateMachine { get; private set; }
 
 
+    [Header("Health")]
+    public int maxHealth = 50;          // 可在Inspector中设置
+    public int currentHealth;           // 当前血量
+
+    [Header("Combat")]
+    public int attackDamage = 10;       // 敌人攻击力（用于触碰伤害）
+
+    protected override void Start()
+    {
+        base.Start();
+        currentHealth = maxHealth;       // 初始化满血
+        CombatManager.Instance.RegisterEnemy(gameObject);
+    }
+
     protected override void Awake()
     {
         base.Awake();

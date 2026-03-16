@@ -8,7 +8,8 @@ public class GameDataManager : MonoBehaviour
     public Dictionary<string, ExotextDefineSO> ExotextDict { get; private set; }
     public Dictionary<string, NexusVestureDefineSO> NexusVestureDict { get; private set; }
     public Dictionary<string, MaterialDefineSO> MaterialDict { get; private set; }
-    public Dictionary<string, QuestDefineSO> QuestDict { get; private set;}
+    public Dictionary<string, QuestDefineSO> QuestDict { get; private set; }
+    public Dictionary<string, BulletDefineSO> BulletDict { get; private set; }
 
     void Awake()
     {
@@ -34,5 +35,8 @@ public class GameDataManager : MonoBehaviour
 
         QuestDefineSO[] quests = Resources.LoadAll<QuestDefineSO>("GameData/Quest");
         QuestDict = quests.ToDictionary(w => w.id, w => w);
+
+        BulletDefineSO[] bullets = Resources.LoadAll<BulletDefineSO>("GameData/Bullet");
+        BulletDict = bullets.ToDictionary(b => b.id, b => b);
     }
 }

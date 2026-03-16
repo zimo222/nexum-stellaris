@@ -9,6 +9,10 @@ public class PlayerAnimationTriggers : MonoBehaviour
     {
         player.AnimationTrigger();
     }
+    private void SpawnBullet()
+    {
+        player.SpawnBullet();
+    }
 
     private void AttackTrigger()
     {

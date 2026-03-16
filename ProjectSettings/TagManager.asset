@@ -12,7 +12,7 @@ TagManager:
   - Water
   - UI
   - Tag
-  - 
+  - Bullet
   - 
   - 
   - 
@@ -43,6 +43,9 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 789400323
+    locked: 0
+  - name: Bullet
+    uniqueID: 701432923
     locked: 0
   - name: Player
     uniqueID: 1493905729

@@ -11,20 +11,21 @@ using static UnityEngine.EventSystems.EventTrigger;
 [System.Serializable]
 public class PlayerData
 {
-    // ==================== 基础账户信息 ====================
+    // ====================      基础账户信息      ====================
     public string PlayerID;                         // 唯一标识
     public string PlayerName;
     public DateTime CreateTime;                     // 账号创建时间
     public DateTime LastLoginTime;                  // 上次登录时间
 
-    // ==================== 游戏进度与资源 ====================
+    // ====================     游戏进度与资源     ====================
     public int Level = 88;
     public int Experience;
     public int Crystals;                            // 水晶
     public int Coins;                               // 金币
 
-    // ==================== 角色与装备系统 ====================
+    // ====================     角色与装备系统     ====================
     public CharacterStats BaseStats;                 // 基础属性
+    public int CurrentHealth;   // 当前生命值
     public int skillNum;
     public SkillData[] Skills;
     // 装备索引（指向EquipmentBag的下标）
@@ -38,21 +39,17 @@ public class PlayerData
     public List<NexusVestureData> NexusVestureBag = new List<NexusVestureData>();
     public List<MaterialData> MaterialBag = new List<MaterialData>();
 
-    // ==================== 任务角色与装备系统 ====================
-    /*
-    public string currentQuestId;      // 当前主线任务ID
-    public int currentQuestProgress; // 0~1 表示进度
-    */
+    // ====================   任务角色与装备系统   ====================
     public List<PlayerQuestProgress> activeQuests;       // 进行中的任务列表
-    public List<string> completedQuestIds;               // 已完成的任务ID列表（用于判断前置任务）
+    public List<string> completedQuestIds;               // 已完成的任务ID列表
 
-    // ==================== 设置与其他 ====================
+    // ====================       设置与其他       ====================
     public float MusicVolume = 0.8f;
     public float SFXVolume = 0.8f;
     public string LastLoginIP = "";
 
 
-    // ==================== 构造函数 ====================
+    // ====================        构造函数        ====================
     #region 构造方法
     // 空构造函数为JSON反序列化所需
     public PlayerData() { }
@@ -61,16 +58,11 @@ public class PlayerData
     {
         BaseStats = new CharacterStats()
         {
-            Level = 1,
-            Exp = 0,
-            Health = 100,
-            Attack = 100,
-            Defence = 100,
-            Energy = 100,
-            CritRate = 0.05f,
-            CritDamage = 0.50f,
-            ElementBonus = 0f
+            Level = 1, Exp = 0,
+            Health = 100, Attack = 100, Defence = 100,
+            Energy = 100, CritRate = 0.05f, CritDamage = 0.50f, ElementBonus = 0f
         };
+        CurrentHealth = BaseStats.Health;   // 初始满血
         PlayerID = System.Guid.NewGuid().ToString();
         PlayerName = playerName;
         CreateTime = DateTime.Now;
@@ -83,7 +75,7 @@ public class PlayerData
         activeQuests = new List<PlayerQuestProgress>();
         completedQuestIds = new List<string>();
 
-        InitializeDefaultEquipment();
+        InitializeDefaultNexumIdem();
         InitializeDefaultMaterial();
         InitializeDefaultQuest();
         SortedBag();
@@ -124,11 +116,10 @@ public class PlayerData
     #endregion
 
 
-
-    // ==================== 装备相关方法 ====================
+    // ====================      装备相关方法      ====================
     #region 装备方法
     // 初始化默认装备
-    private void InitializeDefaultEquipment()
+    private void InitializeDefaultNexumIdem()
     {
         for (int i = 1; i <= 5; i++)
         {
@@ -184,7 +175,6 @@ public class PlayerData
     #endregion
 
 
-
     // ==================== 材料相关方法 ====================
     #region  材料方法
     // 初始化默认材料
@@ -209,7 +199,6 @@ public class PlayerData
         MaterialBag.Add(material);
     }
     #endregion
-
 
 
     // ==================== 任务相关方法 ====================
