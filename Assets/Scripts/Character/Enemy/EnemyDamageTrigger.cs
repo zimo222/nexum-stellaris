@@ -41,9 +41,10 @@ public class EnemyDamageTrigger : MonoBehaviour
             timer += Time.deltaTime;
             if (timer >= damageInterval)
             {
+                Debug.Log("你好啊小朋友");
                 timer = 0f;
                 // 造成伤害，伤害值取敌人的attackDamage
-                //CombatManager.Instance.ApplyDamage(enemy.gameObject, player.gameObject, enemy.attackDamage);
+                CombatManager.Instance.ApplyDamage(enemy.gameObject, player.gameObject, enemy.attackDamage);
             }
         }
     }

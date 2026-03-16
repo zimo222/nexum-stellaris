@@ -251,6 +251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panelName: Resolution
+  initializeVisible: 0
 --- !u!114 &59521037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2166,6 +2167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panelName: B2
+  initializeVisible: 0
 --- !u!114 &633403105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2551,6 +2553,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panelName: B3
+  initializeVisible: 0
 --- !u!1 &772849004
 GameObject:
   m_ObjectHideFlags: 0
@@ -12998,7 +13001,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -250}
-  m_SizeDelta: {x: 1500, y: 20}
+  m_SizeDelta: {x: 1500, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1049289205
 MonoBehaviour:
@@ -14213,6 +14216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panelName: Language
+  initializeVisible: 0
 --- !u!114 &1301383378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15235,7 +15239,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: 0}
+  m_SizeDelta: {x: 50, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1423808840
 MonoBehaviour:
@@ -18029,6 +18033,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panelName: MainMenu
+  initializeVisible: 0
 --- !u!1 &2062120919
 GameObject:
   m_ObjectHideFlags: 0

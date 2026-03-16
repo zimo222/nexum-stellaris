@@ -29,8 +29,10 @@ public class SkeletonAttackState : EnemyState
         base.Update();
 
         // 当动画事件触发（triggerCalled 变为 true）时，执行一次攻击
+        /*
         if (!hasAttacked && triggerCalled)
         {
+            Debug.Log("我攻击");
             hasAttacked = true;
 
             // 使用攻击检测范围查找所有碰撞体
@@ -40,14 +42,15 @@ public class SkeletonAttackState : EnemyState
                 Player player = hit.GetComponent<Player>();
                 if (player != null)
                 {
+                    Debug.Log("我打到");
                     // 通过战斗管理器造成伤害
                     CombatManager.Instance.ApplyDamage(enemy.gameObject, player.gameObject, enemy.attackDamage);
                 }
             }
         }
-
+        */
         // 攻击动画播放完毕后，回到战斗状态
-        if (triggerCalled && hasAttacked)
+        if (triggerCalled)
         {
             stateMachine.ChangeState(enemy.battleState);
         }

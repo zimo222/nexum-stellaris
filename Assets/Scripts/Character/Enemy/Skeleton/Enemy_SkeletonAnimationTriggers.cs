@@ -8,9 +8,10 @@ public class Enemy_SkeletonAnimationTriggers : MonoBehaviour
     {
         enemy.AnimationFinishTrigger();
     }
-
+    
     private void AttackTrigger()
     {
+        
         // 移除第三个参数 enemy.whatIsPlayer
         Collider2D[] colliders = Physics2D.OverlapCircleAll(enemy.attackCheck.position, enemy.attackCheckRadius);
         foreach (var hit in colliders)
@@ -21,8 +22,9 @@ public class Enemy_SkeletonAnimationTriggers : MonoBehaviour
                 CombatManager.Instance.ApplyDamage(enemy.gameObject, player.gameObject, enemy.attackDamage);
             }
         }
+        
     }
-
+    
     protected void OpenCounterWindow() => enemy.OpenCounterAttackWindow();
     protected void CloseCounterWindow() => enemy.CloseCounterAttackWindow();
 }
