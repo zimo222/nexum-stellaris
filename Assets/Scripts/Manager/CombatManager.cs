@@ -10,7 +10,9 @@ public class CombatManager : MonoBehaviour
     public event Action OnPlayerVictory;
     public event Action OnPlayerDefeat;
 
-    private GameObject player;
+    // 公开玩家对象，供其他脚本（如敌人）访问
+    public GameObject Player { get; private set; }
+
     private GameObject currentEnemy;
 
     void Awake()
@@ -31,7 +33,7 @@ public class CombatManager : MonoBehaviour
     /// </summary>
     public void RegisterPlayer(GameObject playerObj)
     {
-        player = playerObj;
+        Player = playerObj;
     }
 
     /// <summary>
@@ -82,7 +84,7 @@ public class CombatManager : MonoBehaviour
     {
         Debug.Log("Player defeated!");
         OnPlayerDefeat?.Invoke();
-        Time.timeScale = 0f; // 暂停游戏，可替换为显示失败UI
+        //Time.timeScale = 0f; // 暂停游戏，可替换为显示失败UI
         // 可以添加更多逻辑，如重新开始等
     }
 
@@ -92,7 +94,7 @@ public class CombatManager : MonoBehaviour
         OnPlayerVictory?.Invoke();
         Destroy(enemy);
         currentEnemy = null;
-        Time.timeScale = 0f; // 胜利后暂停，或恢复时间
+        //Time.timeScale = 0f; // 胜利后暂停，或恢复时间
     }
 
     /// <summary>

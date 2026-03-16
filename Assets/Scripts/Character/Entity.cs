@@ -8,6 +8,7 @@ public class Entity : MonoBehaviour
     public Animator anim { get; private set; }
     public Rigidbody2D rb { get; private set; }
     public EntityFX fx { get; private set; }
+    public SpriteRenderer sprite { get; private set; }
     #endregion
 
     [Header("Knockback info")]
@@ -40,6 +41,7 @@ public class Entity : MonoBehaviour
         fx = GetComponentInChildren<EntityFX>();
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        sprite= GetComponentInChildren<SpriteRenderer>();
 
     }
 
@@ -107,6 +109,8 @@ public class Entity : MonoBehaviour
         facingxDir = facingxDir * -1;
         facingRight = !facingRight;
         //transform.Rotate(0, 180, 0);
+
+        sprite.flipX = !sprite.flipX;   // Ë®Æ½·­×ª
     }
     public virtual void Flipy()
     {

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy_SkeletonAnimationTriggers : MonoBehaviour
@@ -13,13 +11,14 @@ public class Enemy_SkeletonAnimationTriggers : MonoBehaviour
 
     private void AttackTrigger()
     {
+        // 移除第三个参数 enemy.whatIsPlayer
         Collider2D[] colliders = Physics2D.OverlapCircleAll(enemy.attackCheck.position, enemy.attackCheckRadius);
-
         foreach (var hit in colliders)
         {
-            if (hit.GetComponent<Player>() != null)
+            Player player = hit.GetComponent<Player>();
+            if (player != null)
             {
-                hit.GetComponent<Player>().Damage();
+                CombatManager.Instance.ApplyDamage(enemy.gameObject, player.gameObject, enemy.attackDamage);
             }
         }
     }

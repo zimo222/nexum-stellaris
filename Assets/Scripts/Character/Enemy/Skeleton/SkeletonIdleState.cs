@@ -1,18 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class SkeletonIdleState : SkeletonGroundedState
+public class SkeletonIdleState : EnemyState
 {
-    public SkeletonIdleState(Enemy _enemyBase, EnemyStateMachine _stateMachine, string _animBoolName, Enemy_Skeleton _enemy) : base(_enemyBase, _stateMachine, _animBoolName, _enemy)
+    private Enemy_Skeleton enemy;
+    private float idleTimer;
+
+    public SkeletonIdleState(Enemy _enemyBase, EnemyStateMachine _stateMachine, string _animBoolName, Enemy_Skeleton _enemy)
+        : base(_enemyBase, _stateMachine, _animBoolName)
     {
+        enemy = _enemy;
     }
 
     public override void Enter()
     {
         base.Enter();
-
-        stateTimer = enemy.idleTime;
+        idleTimer = enemy.idleTime;  // 空闲等待时间
+        enemy.SetZeroVelocity();     // 停止移动
     }
 
     public override void Exit()
@@ -24,7 +27,15 @@ public class SkeletonIdleState : SkeletonGroundedState
     {
         base.Update();
 
-        if(stateTimer < 0)
+        idleTimer -= Time.deltaTime;
+
+        // 如果检测到玩家，进入战斗状态
+        if (enemy.PlayerDetected())
+        {
+            stateMachine.ChangeState(enemy.battleState);
+        }
+        // 空闲时间结束，进入移动状态（巡逻）
+        else if (idleTimer <= 0)
         {
             stateMachine.ChangeState(enemy.moveState);
         }

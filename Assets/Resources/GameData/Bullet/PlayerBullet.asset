@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerBullet
   m_EditorClassIdentifier: 
   id: PlayerBullet
-  speed: 200
-  damage: 10
+  speed: 150
+  damage: 2
   prefab: {fileID: 3305386069859194172, guid: 4c2371c4574876048a2eba38a1fac08b, type: 3}
   lifetime: 2

@@ -1,59 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class SkeletonBattleState : EnemyState
 {
-    private Transform player;
     private Enemy_Skeleton enemy;
-    private int moveDir;
+    private Transform playerTransform;
+    private float battleTimer;
 
-    public SkeletonBattleState(Enemy _enemyBase, EnemyStateMachine _stateMachine, string _animBoolName, Enemy_Skeleton _enemy) : base(_enemyBase, _stateMachine, _animBoolName)
+    public SkeletonBattleState(Enemy _enemyBase, EnemyStateMachine _stateMachine, string _animBoolName, Enemy_Skeleton _enemy)
+        : base(_enemyBase, _stateMachine, _animBoolName)
     {
-        this.enemy = _enemy;
+        enemy = _enemy;
     }
 
     public override void Enter()
     {
         base.Enter();
-
-        player = PlayerManager.instance.player.transform;
-    }
-
-    public override void Update()
-    {
-        base.Update();
-
-        if(enemy.IsPlayerDetected())
-        {
-            stateTimer = enemy.battleTime;
-            if(enemy.IsPlayerDetected().distance < enemy.attackDistance)
-            {
-                if(CanAttack())
-                {
-                    stateMachine.ChangeState(enemy.attackState);
-                }
-            }
-        }
-        else
-        {
-            if(stateTimer < 0 || Vector2.Distance(player.transform.position, enemy.transform.position) > 10)
-            {
-                stateMachine.ChangeState(enemy.idleState);
-            }
-        }
-
-        if (player.position.x > enemy.transform.position.x)
-        {
-            moveDir = 1;
-        }
-        else if (player.position.x < enemy.transform.position.x)
-        {
-            moveDir = -1;
-        }
-
-        enemy.SetVelocity(enemy.moveSpeed * moveDir, rb.velocity.y);
+        playerTransform = CombatManager.Instance.Player.transform;
+        battleTimer = enemy.battleTime;  // 战斗状态持续时间，超时后可能返回巡逻
     }
 
     public override void Exit()
@@ -61,13 +24,42 @@ public class SkeletonBattleState : EnemyState
         base.Exit();
     }
 
-    private bool CanAttack()
+    public override void Update()
     {
-        if(Time.time >= enemy.lastTimeAttacked + enemy.attackCooldown)
+        base.Update();
+
+        if (playerTransform == null)
         {
-            enemy.lastTimeAttacked = Time.time;
-            return true;
+            stateMachine.ChangeState(enemy.idleState);
+            return;
         }
-        return false;
+
+        battleTimer -= Time.deltaTime;
+
+        // 检查攻击范围
+        if (enemy.PlayerInAttackRange())
+        {
+            // 如果攻击冷却结束，进入攻击状态
+            if (Time.time >= enemy.lastTimeAttacked + enemy.attackCooldown)
+            {
+                stateMachine.ChangeState(enemy.attackState);
+            }
+            else
+            {
+                // 冷却中，原地等待或后退？这里简单设置为移动向玩家（但攻击距离内可能想保持距离？可根据需要调整）
+                enemy.MoveToPosition(playerTransform.position);
+            }
+        }
+        else
+        {
+            // 不在攻击范围内，向玩家移动
+            enemy.MoveToPosition(playerTransform.position);
+        }
+
+        // 如果战斗时间过长或玩家丢失（超出检测范围），返回空闲状态（或巡逻）
+        if (battleTimer <= 0 || !enemy.PlayerDetected())
+        {
+            stateMachine.ChangeState(enemy.idleState);
+        }
     }
 }

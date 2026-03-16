@@ -127,7 +127,7 @@ public class Player : Entity
         {
             // 伤害值 = 玩家攻击力（从PlayerData获取）
             int damage = playerData.BaseStats.Attack;
-            bullet.Initialize(dashDirection, gameObject, bulletDef.speed, damage);
+            bullet.Initialize(dashDirection, gameObject, bulletDef.speed, damage * bulletDef.damage);
         }
     }
 }
