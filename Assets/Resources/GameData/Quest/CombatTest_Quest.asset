@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d476a2b0564d52b4882c53d711eeea11, type: 3}
+  m_Name: CombatTest_Quest
+  m_EditorClassIdentifier: 
+  id: CombatTest_Quest
+  questName: "\u6218\u6597\u6D4B\u8BD5\u4EFB\u52A1"
+  category: 1
+  contentType: 1
+  nextQuestIds: []
+  description: 
+  dialogueEntries: []
+  objectives: []
+  waves:
+  - waveName: 
+    enemies:
+    - enemyPrefab: {fileID: 220537008825880356, guid: d543a5588c39db8419b36a4b17fa89da, type: 3}
+      count: 2
+  - waveName: 
+    enemies:
+    - enemyPrefab: {fileID: 220537008825880356, guid: d543a5588c39db8419b36a4b17fa89da, type: 3}
+      count: 3

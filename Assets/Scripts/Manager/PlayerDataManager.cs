@@ -615,5 +615,17 @@ public class PlayerDataManager : MonoBehaviour
     {
         return CurrentPlayerData?.activeQuests.Find(q => q.questId == questId);
     }
+
+    public bool RemoveActiveQuest(string questId)
+    {
+        var progress = CurrentPlayerData.activeQuests.Find(q => q.questId == questId);
+        if (progress != null)
+        {
+            CurrentPlayerData.activeQuests.Remove(progress);
+            SaveCurrentPlayerData();
+            return true;
+        }
+        return false;
+    }
     #endregion
 }

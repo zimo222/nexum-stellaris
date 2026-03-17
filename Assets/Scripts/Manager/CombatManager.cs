@@ -1,7 +1,8 @@
+using System;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI; // 添加 UI 命名空间
-using System;
-using TMPro;
 
 public class CombatManager : MonoBehaviour
 {
@@ -20,6 +21,12 @@ public class CombatManager : MonoBehaviour
     [Header("UI References")]
     [SerializeField] private Slider healthSlider; // 血条 Slider，可在 Inspector 中拖拽，或自动从子物体获取
     [SerializeField] private TMP_Text healthText;
+
+    // 战斗任务状态
+    private QuestDefineSO currentCombatQuest;   // 当前进行的战斗任务数据
+    private int currentWaveIndex = -1;           // 当前波次索引（-1表示未开始）
+    private List<GameObject> activeEnemies = new List<GameObject>(); // 当前存活的敌人列表
+    private Vector2 combatSpawnCenter;
 
     void Awake()
     {
@@ -78,7 +85,6 @@ public class CombatManager : MonoBehaviour
         {
             PlayerData playerData = PlayerDataManager.Instance.CurrentPlayerData;
             playerData.CurrentHealth -= amount;
-            Debug.Log(amount);
             playerComp.Damage(); // 触发受伤特效等
 
             // 血量变化后立即更新血条
@@ -97,7 +103,13 @@ public class CombatManager : MonoBehaviour
             enemyComp.Damage();
 
             if (enemyComp.currentHealth <= 0)
-                EnemyDefeated(enemyComp.gameObject);
+            {
+                // 敌人死亡
+                activeEnemies.Remove(target); // 从当前活动列表中移除
+                EnemyDefeated(target); // 调用原有的 EnemyDefeated 方法（销毁敌人等）
+                CheckWaveCompletion(); // 检查当前波次是否结束
+            }
+            return;
         }
     }
 
@@ -122,17 +134,27 @@ public class CombatManager : MonoBehaviour
     {
         Debug.Log("Player defeated!");
         OnPlayerDefeat?.Invoke();
-        //Time.timeScale = 0f; // 暂停游戏，可替换为显示失败UI
-        // 可以添加更多逻辑，如重新开始等
+
+        // 如果正在进行战斗任务，则战斗失败
+        if (currentCombatQuest != null)
+        {
+            CombatFailed();
+        }
+        // 否则，可能只是普通死亡，可以单独处理复活逻辑
+        else
+        {
+            // 普通死亡重置血量（如果需要）
+            PlayerData playerData = PlayerDataManager.Instance.CurrentPlayerData;
+            playerData.CurrentHealth = playerData.BaseStats.Health;
+        }
     }
 
     private void EnemyDefeated(GameObject enemy)
     {
         Debug.Log("Enemy defeated!");
-        OnPlayerVictory?.Invoke();
+        OnPlayerVictory?.Invoke(); // 这个事件可能不合适，需要区分玩家胜利还是敌人死亡？OnPlayerVictory 应是整个战斗胜利。建议改为 OnEnemyDefeated 事件。
         Destroy(enemy);
-        currentEnemy = null;
-        //Time.timeScale = 0f; // 胜利后暂停，或恢复时间
+        // currentEnemy = null; // 这是单个敌人，不应清空，因为我们可能有多个敌人
     }
 
     /// <summary>
@@ -147,5 +169,123 @@ public class CombatManager : MonoBehaviour
 
         // 血量重置后更新血条
         UpdateHealthSlider();
+    }
+
+    /// <summary>
+    /// 开始一场战斗（由任务管理器调用）
+    /// </summary>
+    public void StartCombat(QuestDefineSO questData, Vector2 spawnCenter)
+    {
+        if (currentCombatQuest != null)
+        {
+            Debug.LogWarning("已有战斗正在进行，无法开始新战斗");
+            return;
+        }
+
+        currentCombatQuest = questData;
+        currentWaveIndex = 0;
+        activeEnemies.Clear();
+
+        // 生成第一波敌人
+        //SpawnWave(currentWaveIndex, spawnCenter);
+
+        currentCombatQuest = questData;
+        combatSpawnCenter = spawnCenter;
+        currentWaveIndex = 0;
+        activeEnemies.Clear();
+        SpawnWave(currentWaveIndex, combatSpawnCenter);
+    }
+
+    private void SpawnWave(int waveIndex, Vector2 spawnCenter)
+    {
+        if (currentCombatQuest == null || waveIndex >= currentCombatQuest.waves.Count)
+        {
+            Debug.LogError("波次索引无效");
+            return;
+        }
+
+        WaveDefine wave = currentCombatQuest.waves[waveIndex];
+        foreach (var spawnInfo in wave.enemies)
+        {
+            for (int i = 0; i < spawnInfo.count; i++)
+            {
+                // 生成位置：围绕中心点随机偏移（例如半径2米内的随机点）
+                Vector2 randomOffset = UnityEngine.Random.insideUnitCircle * 2f;
+                Vector2 spawnPos = spawnCenter + randomOffset;
+
+                GameObject enemyObj = Instantiate(spawnInfo.enemyPrefab, spawnPos, Quaternion.identity);
+                activeEnemies.Add(enemyObj);
+
+                // 订阅敌人死亡事件（通过 Enemy 脚本的死亡通知，暂时用简单方法：在 Enemy 死亡时调用 CombatManager 的方法）
+                // 我们将在敌人脚本中添加死亡回调
+            }
+        }
+
+        Debug.Log($"生成第 {waveIndex + 1} 波敌人，共 {activeEnemies.Count} 个");
+    }
+
+    private void CheckWaveCompletion()
+    {
+        if (currentCombatQuest == null) return;
+
+        // 如果当前波次没有存活的敌人了
+        if (activeEnemies.Count == 0)
+        {
+            currentWaveIndex++;
+            if (currentWaveIndex < currentCombatQuest.waves.Count)
+            {
+                // 还有下一波，生成下一波
+                // 需要知道生成中心，可以在 StartCombat 时保存 spawnCenter
+                // 我们在 StartCombat 中添加一个字段 Vector2 combatSpawnCenter
+                SpawnWave(currentWaveIndex, combatSpawnCenter);
+            }
+            else
+            {
+                // 所有波次完成，战斗胜利
+                CombatVictory();
+            }
+        }
+    }
+
+    private void CombatVictory()
+    {
+        Debug.Log("战斗胜利！");
+        // 通知任务管理器任务完成
+        if (currentCombatQuest != null)
+        {
+            QuestManager.Instance.CompleteQuest(currentCombatQuest.id);
+        }
+        // 清理战斗状态
+        currentCombatQuest = null;
+        currentWaveIndex = -1;
+        activeEnemies.Clear();
+    }
+
+    private void CombatFailed()
+    {
+        if (currentCombatQuest == null) return;
+
+        Debug.Log("战斗失败，重置任务");
+
+        // 销毁所有生成的敌人
+        foreach (var enemy in activeEnemies)
+        {
+            if (enemy != null)
+                Destroy(enemy);
+        }
+        activeEnemies.Clear();
+
+        // 重置玩家血量
+        PlayerData playerData = PlayerDataManager.Instance.CurrentPlayerData;
+        playerData.CurrentHealth = playerData.BaseStats.Health;
+        // 可以触发玩家复活动画等，这里简单处理
+
+        // 通知任务管理器战斗失败，回退任务
+        QuestManager.Instance.OnCombatFailed(currentCombatQuest.id);
+        UpdateHealthSlider();
+
+        // 清理战斗状态
+        currentCombatQuest = null;
+        currentWaveIndex = -1;
     }
 }

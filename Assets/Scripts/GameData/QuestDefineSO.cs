@@ -44,4 +44,7 @@ public class QuestDefineSO : ScriptableObject
 
     [Header("战斗/目标型任务配置")]
     public List<QuestObjectiveDefineSO> objectives; // 目标列表
+
+    [Header("战斗型任务配置")]
+    public List<WaveDefine> waves;   // 战斗波次
 }

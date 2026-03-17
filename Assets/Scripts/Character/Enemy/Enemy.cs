@@ -31,6 +31,13 @@ public class Enemy : Entity
 
     public EnemyStateMachine stateMachine { get; private set; }
 
+    public event System.Action<GameObject> OnEnemyDied; // 敌人死亡时触发，参数为敌人自身
+
+    // 在血量归零的地方触发（例如在 ApplyDamage 中，或者敌人自己的死亡逻辑）
+    // 由于 CombatManager 通过 ApplyDamage 减少血量，我们在 ApplyDamage 中检测敌人死亡并调用事件？不，ApplyDamage 在 CombatManager 中，所以 CombatManager 可以直接处理。
+    // 更简单：在 CombatManager.ApplyDamage 中，当敌人血量归零时，直接调用 EnemyDefeated，并在此处处理波次逻辑。
+    // 这样不需要额外事件。
+
     protected override void Awake()
     {
         base.Awake();

@@ -244,7 +244,7 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    private void CompleteQuest(string questId)
+    public void CompleteQuest(string questId)
     {
         if (PlayerDataManager.Instance.CompleteQuest(questId))
         {
@@ -492,5 +492,44 @@ public class QuestManager : MonoBehaviour
             Debug.Log("未找到主线任务，清空追踪");
             SetTrackedQuest(null);
         }
+    }
+
+    /// <summary>
+    /// 开始战斗任务（由触发器调用）
+    /// </summary>
+    /// <param name="questId">任务ID</param>
+    /// <param name="spawnCenter">敌人生成中心</param>
+    public void StartCombatQuest(string questId, Vector2 spawnCenter)
+    {
+        // 先激活任务（如果尚未激活）
+        if (PlayerDataManager.Instance.GetQuestProgress(questId) == null)
+        {
+            ActivateQuest(questId);
+        }
+
+        // 获取任务静态数据
+        if (!GameDataManager.Instance.QuestDict.TryGetValue(questId, out var questData))
+        {
+            Debug.LogError($"任务 {questId} 不存在");
+            return;
+        }
+
+        // 调用战斗管理器开始战斗
+        CombatManager.Instance.StartCombat(questData, spawnCenter);
+    }
+
+    public void OnCombatFailed(string questId)
+    {
+        // 将任务状态回退到未开始（从 activeQuests 中移除）
+        var progress = PlayerDataManager.Instance.GetQuestProgress(questId);
+        if (progress != null)
+        {
+            // 简单移除，或标记为失败状态（可根据需求，这里直接移除以便重新触发）
+            PlayerDataManager.Instance.RemoveActiveQuest(progress.questId);
+            PlayerDataManager.Instance.SaveCurrentPlayerData();
+        }
+        // 刷新UI
+        RefreshQuestUI();
+        AutoSetTrackedQuest();
     }
 }
