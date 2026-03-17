@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : Entity
 {
@@ -38,6 +39,10 @@ public class Enemy : Entity
     // 更简单：在 CombatManager.ApplyDamage 中，当敌人血量归零时，直接调用 EnemyDefeated，并在此处处理波次逻辑。
     // 这样不需要额外事件。
 
+
+    [Header("UI")]
+    [SerializeField] private Slider healthSlider;   // 拖拽血条Slider到此处
+
     protected override void Awake()
     {
         base.Awake();
@@ -49,6 +54,18 @@ public class Enemy : Entity
         base.Start();
         startPosition = transform.position;
         currentHealth = maxHealth;        // 初始化生命值
+
+
+        // 初始化血条
+        if (healthSlider != null)
+        {
+            healthSlider.maxValue = maxHealth;       // 设置为最大血量，显示具体数值
+            healthSlider.value = currentHealth;
+        }
+        else
+        {
+            Debug.LogWarning("Enemy: 未绑定血条Slider", this);
+        }
     }
 
     protected override void Update()
@@ -127,5 +144,25 @@ public class Enemy : Entity
         }
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackDistance);
+    }
+
+
+
+    // 重写 Damage 方法（假设 Entity 中有虚方法 Damage）
+    public override void Damage()
+    {
+        base.Damage();          // 调用父类方法（如果有特效、动画等）
+        UpdateHealthBar();      // 更新血条
+    }
+
+
+
+    // 更新血条显示
+    private void UpdateHealthBar()
+    {
+        if (healthSlider != null)
+        {
+            healthSlider.value = currentHealth;
+        }
     }
 }
