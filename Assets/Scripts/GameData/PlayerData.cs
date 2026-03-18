@@ -38,6 +38,7 @@ public class PlayerData
     public List<ExotextData> ExotextBag = new List<ExotextData>();
     public List<NexusVestureData> NexusVestureBag = new List<NexusVestureData>();
     public List<MaterialData> MaterialBag = new List<MaterialData>();
+    public List<string> equippedModuleIds = new List<string>(); // 当前装备的模块ID列表
 
     // ====================   任务角色与装备系统   ====================
     public List<PlayerQuestProgress> activeQuests;       // 进行中的任务列表

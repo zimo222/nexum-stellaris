@@ -119,7 +119,7 @@ public class Player : Entity
 
         // 计算生成位置：玩家位置 + 面向方向 * 偏移量（例如0.5米）
         Vector2 spawnPos = (Vector2)transform.position + dashDirection * 0.5f;
-
+        /*
         // 实例化子弹
         GameObject bulletObj = Instantiate(bulletDef.prefab, spawnPos, Quaternion.identity);
         Bullet bullet = bulletObj.GetComponent<Bullet>();
@@ -128,6 +128,24 @@ public class Player : Entity
             // 伤害值 = 玩家攻击力（从PlayerData获取）
             int damage = playerData.BaseStats.Attack;
             bullet.Initialize(dashDirection, gameObject, bulletDef.speed, damage * bulletDef.damage);
+        }
+        */
+
+        List<string> moduleIds = playerData.equippedModuleIds;
+        List<SpellModuleSO> modules = new List<SpellModuleSO>();
+        foreach (string id in moduleIds)
+        {
+            if (!string.IsNullOrEmpty(id) && GameDataManager.Instance.SpellModuleDict.ContainsKey(id))
+                modules.Add(GameDataManager.Instance.SpellModuleDict[id]);
+        }
+
+        // 生成子弹
+        GameObject bulletObj = Instantiate(bulletDef.prefab, spawnPos, Quaternion.identity);
+        Bullet bullet = bulletObj.GetComponent<Bullet>();
+        if (bullet != null)
+        {
+            int damage = playerData.BaseStats.Attack;
+            bullet.Initialize(dashDirection, gameObject, bulletDef.speed, (int)(damage * bulletDef.damage), modules);
         }
     }
 }

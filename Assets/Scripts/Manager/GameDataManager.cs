@@ -10,6 +10,7 @@ public class GameDataManager : MonoBehaviour
     public Dictionary<string, MaterialDefineSO> MaterialDict { get; private set; }
     public Dictionary<string, QuestDefineSO> QuestDict { get; private set; }
     public Dictionary<string, BulletDefineSO> BulletDict { get; private set; }
+    public Dictionary<string, SpellModuleSO> SpellModuleDict { get; private set; }
 
     void Awake()
     {
@@ -38,5 +39,8 @@ public class GameDataManager : MonoBehaviour
 
         BulletDefineSO[] bullets = Resources.LoadAll<BulletDefineSO>("GameData/Bullet");
         BulletDict = bullets.ToDictionary(b => b.id, b => b);
+
+        SpellModuleSO[] modules = Resources.LoadAll<SpellModuleSO>("GameData/SpellModule");
+        SpellModuleDict = modules.ToDictionary(m => m.moduleId, m => m);
     }
 }
