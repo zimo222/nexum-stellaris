@@ -109,43 +109,20 @@ public class Player : Entity
     /// </summary>
     public void SpawnBullet()
     {
-        // 从GameDataManager获取子弹定义，假设ID为"PlayerBullet"
-        BulletDefineSO bulletDef = GameDataManager.Instance.BulletDict["PlayerBullet"];
-        if (bulletDef == null || bulletDef.prefab == null)
-        {
-            Debug.LogError("Bullet prefab not found!");
-            return;
-        }
+        // 获取玩家装备的法术模块ID列表（从 PlayerData 中）
+        List<string> moduleIds = playerData.equippedModuleIds; // 假设有此字段
+                                                               // 构建法术序列
+        SpellSequence sequence = SpellSequenceBuilder.BuildSequence(moduleIds);
 
-        // 计算生成位置：玩家位置 + 面向方向 * 偏移量（例如0.5米）
-        Vector2 spawnPos = (Vector2)transform.position + dashDirection * 0.5f;
-        /*
-        // 实例化子弹
-        GameObject bulletObj = Instantiate(bulletDef.prefab, spawnPos, Quaternion.identity);
-        Bullet bullet = bulletObj.GetComponent<Bullet>();
-        if (bullet != null)
+        // 获取 SpellExecutor 组件并执行
+        SpellExecutor executor = GetComponent<SpellExecutor>();
+        if (executor != null)
         {
-            // 伤害值 = 玩家攻击力（从PlayerData获取）
-            int damage = playerData.BaseStats.Attack;
-            bullet.Initialize(dashDirection, gameObject, bulletDef.speed, damage * bulletDef.damage);
+            executor.ExecuteSequence(sequence);
         }
-        */
-
-        List<string> moduleIds = playerData.equippedModuleIds;
-        List<SpellModuleSO> modules = new List<SpellModuleSO>();
-        foreach (string id in moduleIds)
+        else
         {
-            if (!string.IsNullOrEmpty(id) && GameDataManager.Instance.SpellModuleDict.ContainsKey(id))
-                modules.Add(GameDataManager.Instance.SpellModuleDict[id]);
-        }
-
-        // 生成子弹
-        GameObject bulletObj = Instantiate(bulletDef.prefab, spawnPos, Quaternion.identity);
-        Bullet bullet = bulletObj.GetComponent<Bullet>();
-        if (bullet != null)
-        {
-            int damage = playerData.BaseStats.Attack;
-            bullet.Initialize(dashDirection, gameObject, bulletDef.speed, (int)(damage * bulletDef.damage), spawnPos, modules);
+            Debug.LogError("玩家身上没有 SpellExecutor 组件");
         }
     }
 }

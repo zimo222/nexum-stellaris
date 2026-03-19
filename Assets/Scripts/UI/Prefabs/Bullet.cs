@@ -4,292 +4,260 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [HideInInspector] public string bulletId;       // 子弹ID（从定义读取）
-    [HideInInspector] public float speed;           // 速度
-    [HideInInspector] public int damage;            // 伤害值
-    [HideInInspector] public GameObject owner;      // 发射者（用于判断阵营）
-
-
-    // 轨道运动专用字段
-    private Vector2 firePoint;           // 发射点（圆心）
-    private float orbitAngle;             // 当前角度（度）
-    private bool isOrbiting = false;      // 是否正在圆周运动
-    private float orbitRadius;            // 轨道半径
-    private float actualOrbitRadius;   // 实际轨道半径（随机后）
-    private float actualRotateSpeed;   // 实际旋转速度（随机后）
-
-    public List<SpellModuleSO> modules;   // 要应用的模块列表（在生成时传入）
-    private float lifeTimer;
-    private Transform target;              // 用于追踪的目标（最近敌人）
+    [HideInInspector] public string bulletId;
+    [HideInInspector] public float speed;
+    [HideInInspector] public int damage;
+    [HideInInspector] public GameObject owner;
 
     private Rigidbody2D rb;
+    private List<SpellModuleSO> correctors;          // 修正类列表
+    private List<float> correctorTimers;             // 每个修正类的剩余延迟时间（从生成开始计时）
+    private bool isInitialized = false;
+
+    // 轨道运动专用字段（由旋转修正使用）
+    private Vector2 orbitCenter;
+    private float orbitAngle;
+    private float orbitRadius;
+    private float orbitSpeed;
+    private bool isOrbiting = false;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        // 设置生命周期自动销毁
-        Destroy(gameObject, 5f); // 临时值，实际可从定义读取
-
-
-        // 如果有模块，可能需要立即应用一些效果，比如分裂
-        foreach (var module in modules)
+        if (!isInitialized)
         {
-            switch (module.moduleType)
-            {
-                case SpellModuleType.Split:
-                    // 分裂：生成额外子弹
-                    SpawnSplitBullets();
-                    break;
-                case SpellModuleType.Burst:
-                    // 爆裂：生成多发子弹（可延迟生成）
-                    StartCoroutine(BurstCoroutine());
-                    break;
-                    // 其他模块在 Update 中处理
-            }
+            Debug.LogError("Bullet未正确初始化，请使用Initialize方法");
+            Destroy(gameObject);
         }
     }
 
     void Update()
     {
-        // 每帧应用模块效果
-        foreach (var module in modules)
+        if (!isInitialized) return;
+
+        // 更新修正类计时器
+        for (int i = correctorTimers.Count - 1; i >= 0; i--)
         {
-            ApplyModuleEffect(module);
+            correctorTimers[i] -= Time.deltaTime;
+            if (correctorTimers[i] <= 0)
+            {
+                // 执行对应的修正类
+                ExecuteCorrector(correctors[i]);
+                correctors.RemoveAt(i);
+                correctorTimers.RemoveAt(i);
+            }
+        }
+
+        // 如果是圆周运动，更新位置（由 ExecuteCorrector 启动）
+        if (isOrbiting)
+        {
+            UpdateOrbit();
         }
     }
 
     /// <summary>
-    /// 初始化子弹（由生成者调用）
+    /// 初始化子弹（必须调用）
     /// </summary>
-    public void Initialize(Vector2 direction, GameObject owner, float speed, int damage, Vector2 spawnPos, List<SpellModuleSO> modules = null)
+    public void Initialize(Vector2 direction, GameObject owner, float speed, int damage, Vector2 spawnPos, List<SpellModuleSO> correctors)
     {
         this.owner = owner;
-        this.speed = speed * Random.Range(0.8f, 1.2f);
+        this.speed = speed;
         this.damage = damage;
-        this.firePoint = spawnPos;
-        if (rb == null) rb = GetComponent<Rigidbody2D>();
-        rb.velocity = direction.normalized * speed * Random.Range(0.8f, 1.2f);
-        this.modules = modules ?? new List<SpellModuleSO>();
+        this.correctors = new List<SpellModuleSO>(correctors);
+        this.correctorTimers = new List<float>();
 
-        // 可选：根据模块初始化一些属性
-        ApplyInitialModules();
+        // 初始化计时器：每个修正类有自己的延迟（从当前时间开始累计）
+        float currentTime = 0f;
+        foreach (var corr in correctors)
+        {
+            currentTime += corr.delay; // 按顺序累加延迟（即前一个执行后，再等 delay 执行下一个）
+            correctorTimers.Add(currentTime);
+        }
+
+        rb = GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            rb.velocity = direction.normalized * speed;
+        }
+
+        isInitialized = true;
+
+        // 设置生命周期自动销毁
+        Destroy(gameObject, 5f); // 可从 bulletDefine 读取，暂时写死
     }
 
-
-
-    private void ApplyModuleEffect(SpellModuleSO module)
+    private void ExecuteCorrector(SpellModuleSO corrector)
     {
-        switch (module.moduleType)
+        switch (corrector.moduleType)
         {
-            case SpellModuleType.Homing:
-                ApplyHoming(module.homingStrength);
+            case SpellModuleType.Corrector:
+                // 根据具体参数执行效果
+                if (corrector.splitCount > 0)
+                {
+                    Split(corrector);
+                }
+                if (corrector.homingStrength > 0)
+                {
+                    StartHoming(corrector);
+                }
+                if (corrector.rotateSpeed != 0)
+                {
+                    if (corrector.orbitRadius > 0)
+                        StartOrbit(corrector);
+                    else
+                        StartRotate(corrector);
+                }
+                // 可扩展其他效果：加速、穿透等
                 break;
-            case SpellModuleType.Rotate:
-                ApplyRotation(module); // 传入模块对象
-                break;
-            case SpellModuleType.SpeedUp:
-                // 加速可以在生成时一次性应用，但也可以持续
-                break;
-                // 其他
         }
     }
 
-
-    private void ApplyInitialModules()
+    private void Split(SpellModuleSO corrector)
     {
-        // 有些模块可能需要在生成时立即生效，如分裂（立即生成额外子弹）
-        // 为了安全，我们在 Start 中处理
-    }
+        int count = corrector.splitCount;
+        float totalAngle = corrector.splitAngle;
+        Vector2 baseDir = rb.velocity.normalized;
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        // 根据发射者判断伤害对象
-        if (owner.CompareTag("Player"))
+        if (count <= 0) return;
+
+        if (count == 1)
         {
-            // 玩家发射的子弹伤害敌人
-            Enemy enemy = other.GetComponent<Enemy>();
-            if (enemy != null)
+            SpawnChildBullet(baseDir, corrector);
+        }
+        else
+        {
+            float delta = (2 * totalAngle) / (count - 1);
+            for (int i = 0; i < count; i++)
             {
-                CombatManager.Instance.ApplyDamage(owner, enemy.gameObject, damage);
-                Destroy(gameObject);
+                float angleOffset = -totalAngle + i * delta;
+                Vector2 dir = Quaternion.Euler(0, 0, angleOffset) * baseDir;
+                SpawnChildBullet(dir, corrector);
             }
-            // 可扩展：击中墙壁等也销毁
         }
-        else if (owner.CompareTag("Enemy"))
+    }
+
+    private void SpawnChildBullet(Vector2 dir, SpellModuleSO corrector)
+    {
+        // 子子弹：基础属性相同，但修正类列表？通常分裂出的子弹是一个新投射，可以继承原子弹的修正类（未执行的）或为空。
+        // 这里简化：子子弹不继承修正类，仅基础属性。
+        GameObject child = Instantiate(gameObject, transform.position, Quaternion.identity);
+        Bullet childBullet = child.GetComponent<Bullet>();
+        childBullet.Initialize(dir, owner, speed, damage, transform.position, new List<SpellModuleSO>()); // 无修正类
+        // 可选：让子子弹继承未执行的修正类？但可能造成无限递归，暂时不实现。
+    }
+
+    private void StartHoming(SpellModuleSO corrector)
+    {
+        // 启动追踪协程
+        StartCoroutine(HomingCoroutine(corrector.homingStrength));
+    }
+
+    private IEnumerator HomingCoroutine(float strength)
+    {
+        while (true)
         {
-            // 敌人发射的子弹伤害玩家
-            Player player = other.GetComponent<Player>();
-            if (player != null)
+            // 查找最近敌人
+            Transform target = FindNearestEnemy();
+            if (target != null)
             {
-                CombatManager.Instance.ApplyDamage(owner, player.gameObject, damage);
-                Destroy(gameObject);
+                Vector2 dirToTarget = (target.position - transform.position).normalized;
+                rb.velocity = Vector2.Lerp(rb.velocity, dirToTarget * speed, strength * Time.deltaTime);
             }
+            yield return null;
         }
     }
 
-
-    private void ApplyHoming(float strength)
+    private Transform FindNearestEnemy()
     {
-        if (target == null)
-        {
-            // 查找最近的敌人（可根据需求实现）
-            FindNearestEnemy();
-        }
-        if (target != null)
-        {
-            Vector2 dirToTarget = (target.position - transform.position).normalized;
-            rb.velocity = Vector2.Lerp(rb.velocity, dirToTarget * speed, strength * Time.deltaTime);
-        }
-    }
-
-    private void FindNearestEnemy()
-    {
-        // 简单查找：使用 OverlapCircleAll 查找 Enemy
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 1000f);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 20f);
         float minDist = float.MaxValue;
-        Enemy nearest = null;
+        Transform nearest = null;
         foreach (var hit in hits)
         {
-            Enemy enemy = hit.GetComponent<Enemy>();
-            if (enemy != null)
+            // 根据发射者判断敌人：如果发射者是玩家，敌人是Enemy；如果发射者是敌人，敌人是Player
+            if (owner.CompareTag("Player") && hit.CompareTag("Enemy"))
             {
                 float dist = Vector2.Distance(transform.position, hit.transform.position);
                 if (dist < minDist)
                 {
                     minDist = dist;
-                    nearest = enemy;
+                    nearest = hit.transform;
                 }
             }
-        }
-        if (nearest != null) target = nearest.transform;
-    }
-    /*
-    private void ApplyRotation(float speed)
-    {
-        // 旋转子弹速度方向
-        float angle = speed * Time.deltaTime;
-        rb.velocity = Quaternion.Euler(0, 0, angle) * rb.velocity;
-    }
-    */
-
-    private void ApplyRotation(SpellModuleSO module)
-    {
-        // 检查是否启用圆周运动（orbitRadius > 0）
-        if (module.orbitRadius > 0)
-        {
-            // 第一次进入圆周模式时初始化
-            if (!isOrbiting)
+            else if (owner.CompareTag("Enemy") && hit.CompareTag("Player"))
             {
-                isOrbiting = true;
-                firePoint = transform.position;      // 记录发射点（圆心）
-
-                // 生成随机因子（0.8 ~ 1.2）
-                float radiusRand = Random.Range(0.9f, 1.1f);
-                float speedRand = Random.Range(0.9f, 1.1f);
-                actualOrbitRadius = module.orbitRadius * radiusRand;
-                actualRotateSpeed = module.rotateSpeed * speedRand;
-
-                // 根据当前速度方向确定初始角度
-                Vector2 dir = rb.velocity.normalized;
-                orbitAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-
-                // 立即将子弹放到圆周上（发射点 + 随机半径 * 方向）
-                Vector2 offset = Quaternion.Euler(0, 0, orbitAngle) * Vector2.right * actualOrbitRadius;
-                transform.position = firePoint + offset;
-
-                // 切换为 Kinematic，避免物理干扰
-                rb.isKinematic = true;
-                rb.velocity = Vector2.zero;
-
-                // 使子弹面向切线方向（运动方向）
-                float rad = orbitAngle * Mathf.Deg2Rad;
-                Vector2 tangent = new Vector2(-Mathf.Sin(rad), Mathf.Cos(rad));
-                transform.up = tangent; // 若精灵方向不同，可改为 transform.right
-            }
-
-            // 每帧更新角度，计算新位置
-            orbitAngle += actualRotateSpeed * Time.deltaTime;
-            Vector2 newOffset = Quaternion.Euler(0, 0, orbitAngle) * Vector2.right * actualOrbitRadius;
-            transform.position = firePoint + newOffset;
-
-            // 更新面向方向
-            float newRad = orbitAngle * Mathf.Deg2Rad;
-            Vector2 newTangent = new Vector2(-Mathf.Sin(newRad), Mathf.Cos(newRad));
-            transform.up = newTangent;
-
-            return; // 圆周模式下不再执行旧旋转逻辑
-        }
-
-        // 旧逻辑：普通速度旋转（未启用圆周时）
-        float angle = module.rotateSpeed * Time.deltaTime;
-        rb.velocity = Quaternion.Euler(0, 0, angle) * rb.velocity;
-    }
-
-    private void SpawnSplitBullets()
-    {
-        SpellModuleSO splitModule = modules.Find(m => m.moduleType == SpellModuleType.Split);
-        if (splitModule != null)
-        {
-            float totalAngle = splitModule.splitAngle; // 总角度范围（从 -angle 到 angle）
-            int count = splitModule.splitCount;
-            if (count <= 0) return;
-
-            // 基准方向（当前子弹速度方向）
-            Vector2 baseDir = rb.velocity.normalized;
-
-            // 如果只有一个子弹，可以直接在中间
-            if (count == 1)
-            {
-                SpawnChildBullet(baseDir);
-            }
-            else
-            {
-                // 计算每个子弹的角度偏移
-                // 角度间隔 = totalAngle * 2 / (count - 1) ？不对，因为区间是从 -totalAngle 到 +totalAngle，总跨度是 2*totalAngle。
-                // 均匀分布意味着第一个子弹在 -totalAngle，最后一个在 +totalAngle，中间等间距。
-                // 间隔 delta = (2 * totalAngle) / (count - 1)
-                // 注意：如果 count=1，不应该进入此分支，已在上面处理。
-                float delta = (2 * totalAngle) / (count - 1);
-                for (int i = 0; i < count; i++)
+                float dist = Vector2.Distance(transform.position, hit.transform.position);
+                if (dist < minDist)
                 {
-                    // 当前子弹的角度偏移：从 -totalAngle 开始，每次增加 delta
-                    float angleOffset = -totalAngle + i * delta;
-                    Vector2 dir = Quaternion.Euler(0, 0, angleOffset) * baseDir;
-                    SpawnChildBullet(dir);
+                    minDist = dist;
+                    nearest = hit.transform;
                 }
             }
         }
+        return nearest;
     }
 
-    private void SpawnChildBullet(Vector2 dir)
+    private void StartRotate(SpellModuleSO corrector)
     {
-        // 复制当前子弹，但移除分裂模块以避免循环分裂
-        GameObject child = Instantiate(gameObject, transform.position, Quaternion.identity);
-        Bullet childBullet = child.GetComponent<Bullet>();
-        // 移除分裂模块（递归分裂？根据需要）
-        List<SpellModuleSO> childModules = new List<SpellModuleSO>(modules);
-        childModules.RemoveAll(m => m.moduleType == SpellModuleType.Split); // 避免无限分裂
-        childModules.RemoveAll(m => m.moduleType == SpellModuleType.Burst); // 避免无限分裂
-        childBullet.modules = childModules;
-        childBullet.Initialize(dir, owner, speed, damage, firePoint, childModules);
-        // 设置生命周期等
+        StartCoroutine(RotateCoroutine(corrector.rotateSpeed));
     }
 
-    private IEnumerator BurstCoroutine()
+    private IEnumerator RotateCoroutine(float speed)
     {
-        // 爆裂：连续生成多发子弹
-        SpellModuleSO burstModule = modules.Find(m => m.moduleType == SpellModuleType.Burst);
-        if (burstModule != null)
+        while (true)
         {
-            int t = burstModule.burstCount;
-            for (int i = 0; i < t; i++)
-            {
-                // 生成新子弹，方向随机偏移？可根据需求实现
-                Vector2 randomDir = Random.insideUnitCircle.normalized;
-                SpawnChildBullet(randomDir);
-                yield return new WaitForSeconds(burstModule.burstDelay);
-            }
+            float angle = speed * Time.deltaTime;
+            rb.velocity = Quaternion.Euler(0, 0, angle) * rb.velocity;
+            yield return null;
         }
-        // 爆裂后原子弹可销毁？这里保留原子弹。
+    }
+
+    private void StartOrbit(SpellModuleSO corrector)
+    {
+        isOrbiting = true;
+        orbitCenter = transform.position; // 以当前位置为圆心
+        orbitRadius = corrector.orbitRadius;
+        orbitSpeed = corrector.orbitSpeed;
+
+        // 根据当前速度方向确定初始角度
+        Vector2 dir = rb.velocity.normalized;
+        orbitAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+        // 立即将子弹放到圆周上
+        Vector2 offset = Quaternion.Euler(0, 0, orbitAngle) * Vector2.right * orbitRadius;
+        transform.position = orbitCenter + offset;
+
+        // 切换为 Kinematic，避免物理干扰
+        rb.isKinematic = true;
+        rb.velocity = Vector2.zero;
+    }
+
+    private void UpdateOrbit()
+    {
+        orbitAngle += orbitSpeed * Time.deltaTime;
+        Vector2 newOffset = Quaternion.Euler(0, 0, orbitAngle) * Vector2.right * orbitRadius;
+        transform.position = orbitCenter + newOffset;
+
+        // 使子弹面向切线方向
+        float rad = orbitAngle * Mathf.Deg2Rad;
+        Vector2 tangent = new Vector2(-Mathf.Sin(rad), Mathf.Cos(rad));
+        transform.up = tangent;
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!isInitialized) return;
+
+        // 根据发射者判断伤害对象
+        if (owner.CompareTag("Player") && other.CompareTag("Enemy"))
+        {
+            CombatManager.Instance.ApplyDamage(owner, other.gameObject, damage);
+            Destroy(gameObject);
+        }
+        else if (owner.CompareTag("Enemy") && other.CompareTag("Player"))
+        {
+            CombatManager.Instance.ApplyDamage(owner, other.gameObject, damage);
+            Destroy(gameObject);
+        }
+        // 可扩展：击中墙壁等也销毁
     }
 }

@@ -5,7 +5,6 @@ using Unity.Collections;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
-using static UnityEditor.Rendering.FilterWindow;
 using static UnityEngine.EventSystems.EventTrigger;
 
 [System.Serializable]

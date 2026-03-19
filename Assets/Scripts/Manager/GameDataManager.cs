@@ -41,6 +41,6 @@ public class GameDataManager : MonoBehaviour
         BulletDict = bullets.ToDictionary(b => b.id, b => b);
 
         SpellModuleSO[] modules = Resources.LoadAll<SpellModuleSO>("GameData/SpellModule");
-        SpellModuleDict = modules.ToDictionary(m => m.moduleId, m => m);
+        SpellModuleDict = modules.ToDictionary(m => m.id, m => m);
     }
 }

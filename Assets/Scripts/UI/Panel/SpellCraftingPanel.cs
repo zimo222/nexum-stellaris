@@ -96,7 +96,7 @@ public class SpellCraftingPanel : BPanel
         foreach (var slot in slots)
         {
             var module = slot.GetModule();
-            equippedIds.Add(module != null ? module.moduleId : "");
+            equippedIds.Add(module != null ? module.id : "");
         }
         PlayerDataManager.Instance.CurrentPlayerData.equippedModuleIds = equippedIds;
         PlayerDataManager.Instance.SaveCurrentPlayerData();
