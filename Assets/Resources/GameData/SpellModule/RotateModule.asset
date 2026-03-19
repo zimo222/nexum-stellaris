@@ -24,3 +24,5 @@ MonoBehaviour:
   rotateSpeed: 180
   homingStrength: 5
   speedMultiplier: 2
+  orbitRadius: 100
+  radialSpeed: 100

@@ -261,7 +261,7 @@ public class CombatManager : MonoBehaviour
         activeEnemies.Clear();
     }
 
-    private void CombatFailed()
+    public void CombatFailed()
     {
         if (currentCombatQuest == null) return;
 

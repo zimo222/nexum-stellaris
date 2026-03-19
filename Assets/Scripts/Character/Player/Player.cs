@@ -145,7 +145,7 @@ public class Player : Entity
         if (bullet != null)
         {
             int damage = playerData.BaseStats.Attack;
-            bullet.Initialize(dashDirection, gameObject, bulletDef.speed, (int)(damage * bulletDef.damage), modules);
+            bullet.Initialize(dashDirection, gameObject, bulletDef.speed, (int)(damage * bulletDef.damage), spawnPos, modules);
         }
     }
 }

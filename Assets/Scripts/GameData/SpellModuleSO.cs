@@ -28,4 +28,6 @@ public class SpellModuleSO : ScriptableObject
     public float rotateSpeed = 180f;            // 旋转速度（度/秒）
     public float homingStrength = 5f;           // 追踪强度
     public float speedMultiplier = 2f;          // 速度倍率
+    public float orbitRadius = 10f;             //旋转半径
+    public float radialSpeed = 0;               //径向增长速率
 }

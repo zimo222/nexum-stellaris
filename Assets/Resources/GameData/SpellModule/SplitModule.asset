@@ -17,7 +17,7 @@ MonoBehaviour:
   moduleName: "\u5206\u88C2"
   icon: {fileID: 21300000, guid: 5d3f69c6662b4f84b96b6f436b0ff033, type: 3}
   description: 
-  splitCount: 2
+  splitCount: 20
   splitAngle: 30
   burstCount: 3
   burstDelay: 0.1

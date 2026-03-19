@@ -9,6 +9,15 @@ public class Bullet : MonoBehaviour
     [HideInInspector] public int damage;            // 伤害值
     [HideInInspector] public GameObject owner;      // 发射者（用于判断阵营）
 
+
+    // 轨道运动专用字段
+    private Vector2 firePoint;           // 发射点（圆心）
+    private float orbitAngle;             // 当前角度（度）
+    private bool isOrbiting = false;      // 是否正在圆周运动
+    private float orbitRadius;            // 轨道半径
+    private float actualOrbitRadius;   // 实际轨道半径（随机后）
+    private float actualRotateSpeed;   // 实际旋转速度（随机后）
+
     public List<SpellModuleSO> modules;   // 要应用的模块列表（在生成时传入）
     private float lifeTimer;
     private Transform target;              // 用于追踪的目标（最近敌人）
@@ -19,7 +28,7 @@ public class Bullet : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         // 设置生命周期自动销毁
-        Destroy(gameObject, 2f); // 临时值，实际可从定义读取
+        Destroy(gameObject, 5f); // 临时值，实际可从定义读取
 
 
         // 如果有模块，可能需要立即应用一些效果，比如分裂
@@ -52,14 +61,14 @@ public class Bullet : MonoBehaviour
     /// <summary>
     /// 初始化子弹（由生成者调用）
     /// </summary>
-    public void Initialize(Vector2 direction, GameObject owner, float speed, int damage, List<SpellModuleSO> modules = null)
+    public void Initialize(Vector2 direction, GameObject owner, float speed, int damage, Vector2 spawnPos, List<SpellModuleSO> modules = null)
     {
         this.owner = owner;
-        this.speed = speed;
+        this.speed = speed * Random.Range(0.8f, 1.2f);
         this.damage = damage;
-
+        this.firePoint = spawnPos;
         if (rb == null) rb = GetComponent<Rigidbody2D>();
-        rb.velocity = direction.normalized * speed;
+        rb.velocity = direction.normalized * speed * Random.Range(0.8f, 1.2f);
         this.modules = modules ?? new List<SpellModuleSO>();
 
         // 可选：根据模块初始化一些属性
@@ -76,7 +85,7 @@ public class Bullet : MonoBehaviour
                 ApplyHoming(module.homingStrength);
                 break;
             case SpellModuleType.Rotate:
-                ApplyRotation(module.rotateSpeed);
+                ApplyRotation(module); // 传入模块对象
                 break;
             case SpellModuleType.SpeedUp:
                 // 加速可以在生成时一次性应用，但也可以持续
@@ -154,30 +163,102 @@ public class Bullet : MonoBehaviour
         }
         if (nearest != null) target = nearest.transform;
     }
-
+    /*
     private void ApplyRotation(float speed)
     {
         // 旋转子弹速度方向
         float angle = speed * Time.deltaTime;
         rb.velocity = Quaternion.Euler(0, 0, angle) * rb.velocity;
     }
+    */
+
+    private void ApplyRotation(SpellModuleSO module)
+    {
+        // 检查是否启用圆周运动（orbitRadius > 0）
+        if (module.orbitRadius > 0)
+        {
+            // 第一次进入圆周模式时初始化
+            if (!isOrbiting)
+            {
+                isOrbiting = true;
+                firePoint = transform.position;      // 记录发射点（圆心）
+
+                // 生成随机因子（0.8 ~ 1.2）
+                float radiusRand = Random.Range(0.9f, 1.1f);
+                float speedRand = Random.Range(0.9f, 1.1f);
+                actualOrbitRadius = module.orbitRadius * radiusRand;
+                actualRotateSpeed = module.rotateSpeed * speedRand;
+
+                // 根据当前速度方向确定初始角度
+                Vector2 dir = rb.velocity.normalized;
+                orbitAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+                // 立即将子弹放到圆周上（发射点 + 随机半径 * 方向）
+                Vector2 offset = Quaternion.Euler(0, 0, orbitAngle) * Vector2.right * actualOrbitRadius;
+                transform.position = firePoint + offset;
+
+                // 切换为 Kinematic，避免物理干扰
+                rb.isKinematic = true;
+                rb.velocity = Vector2.zero;
+
+                // 使子弹面向切线方向（运动方向）
+                float rad = orbitAngle * Mathf.Deg2Rad;
+                Vector2 tangent = new Vector2(-Mathf.Sin(rad), Mathf.Cos(rad));
+                transform.up = tangent; // 若精灵方向不同，可改为 transform.right
+            }
+
+            // 每帧更新角度，计算新位置
+            orbitAngle += actualRotateSpeed * Time.deltaTime;
+            Vector2 newOffset = Quaternion.Euler(0, 0, orbitAngle) * Vector2.right * actualOrbitRadius;
+            transform.position = firePoint + newOffset;
+
+            // 更新面向方向
+            float newRad = orbitAngle * Mathf.Deg2Rad;
+            Vector2 newTangent = new Vector2(-Mathf.Sin(newRad), Mathf.Cos(newRad));
+            transform.up = newTangent;
+
+            return; // 圆周模式下不再执行旧旋转逻辑
+        }
+
+        // 旧逻辑：普通速度旋转（未启用圆周时）
+        float angle = module.rotateSpeed * Time.deltaTime;
+        rb.velocity = Quaternion.Euler(0, 0, angle) * rb.velocity;
+    }
 
     private void SpawnSplitBullets()
     {
-        // 示例：分裂出两个子弹，与原方向左右偏移 splitAngle 度
-        // 注意：需要获取原模块参数，这里简单使用预设值，实际应从模块读取
-        // 由于没有模块参数，我们需要模块数据。可在模块列表中查找 Split 模块。
         SpellModuleSO splitModule = modules.Find(m => m.moduleType == SpellModuleType.Split);
         if (splitModule != null)
         {
-            float angle = splitModule.splitAngle;
-            Vector2 dirLeft = Quaternion.Euler(0, 0, angle) * rb.velocity.normalized;
-            Vector2 dirRight = Quaternion.Euler(0, 0, -angle) * rb.velocity.normalized;
-            // 生成两颗新子弹，不带分裂模块（避免无限分裂），但可以带其他模块
-            SpawnChildBullet(dirLeft);
-            SpawnChildBullet(dirRight);
+            float totalAngle = splitModule.splitAngle; // 总角度范围（从 -angle 到 angle）
+            int count = splitModule.splitCount;
+            if (count <= 0) return;
+
+            // 基准方向（当前子弹速度方向）
+            Vector2 baseDir = rb.velocity.normalized;
+
+            // 如果只有一个子弹，可以直接在中间
+            if (count == 1)
+            {
+                SpawnChildBullet(baseDir);
+            }
+            else
+            {
+                // 计算每个子弹的角度偏移
+                // 角度间隔 = totalAngle * 2 / (count - 1) ？不对，因为区间是从 -totalAngle 到 +totalAngle，总跨度是 2*totalAngle。
+                // 均匀分布意味着第一个子弹在 -totalAngle，最后一个在 +totalAngle，中间等间距。
+                // 间隔 delta = (2 * totalAngle) / (count - 1)
+                // 注意：如果 count=1，不应该进入此分支，已在上面处理。
+                float delta = (2 * totalAngle) / (count - 1);
+                for (int i = 0; i < count; i++)
+                {
+                    // 当前子弹的角度偏移：从 -totalAngle 开始，每次增加 delta
+                    float angleOffset = -totalAngle + i * delta;
+                    Vector2 dir = Quaternion.Euler(0, 0, angleOffset) * baseDir;
+                    SpawnChildBullet(dir);
+                }
+            }
         }
-        // 原子弹是否保留？按需，可以销毁原子弹或保留。这里保留原子弹。
     }
 
     private void SpawnChildBullet(Vector2 dir)
@@ -190,7 +271,7 @@ public class Bullet : MonoBehaviour
         childModules.RemoveAll(m => m.moduleType == SpellModuleType.Split); // 避免无限分裂
         childModules.RemoveAll(m => m.moduleType == SpellModuleType.Burst); // 避免无限分裂
         childBullet.modules = childModules;
-        childBullet.Initialize(dir, owner, speed, damage, childModules);
+        childBullet.Initialize(dir, owner, speed, damage, firePoint, childModules);
         // 设置生命周期等
     }
 
