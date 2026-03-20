@@ -23,8 +23,8 @@ public static class BulletFactory
         // 应用修饰类（修改子弹属性）
         foreach (var modifier in spellPackage.modifiers)
         {
+            Debug.Log(damage);
             ApplyModifier(modifier, ref speed, ref damage, ref num, ref fieldAngle);
-            Debug.Log(num);
         }
 
 
@@ -47,7 +47,6 @@ public static class BulletFactory
                 Object.Destroy(bulletObj);
                 return null;
             }
-            Debug.Log(i);
             // 初始化子弹（传递修正类列表，修正类将在子弹生命周期内执行）
             bullet.Initialize(finalDirection, owner, speed * Random.Range(0.5f, 2.0f), damage, position, spellPackage.correctors);
         }

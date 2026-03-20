@@ -56,6 +56,7 @@ public static class SpellSequenceBuilder
                     sequence.steps.Add(currentPackage);
                     // 跳过已处理的修正类（i 移动到 j-1，因为循环结束会 i++）
                     i = j - 1;
+                    currentPackage = null;
                     break;
 
                 case SpellModuleType.Corrector:

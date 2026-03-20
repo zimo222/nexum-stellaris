@@ -16,6 +16,7 @@ public class SpellCraftingPanel : BPanel
 
     private List<SpellSlot> slots = new List<SpellSlot>();
     private SpellModuleSO selectedModule;           // 当前从库中选中的模块（用于放入槽位）
+    private List<string> equippedModuleIds;
 
     void Awake()
     {
@@ -25,6 +26,7 @@ public class SpellCraftingPanel : BPanel
 
     void Start()
     {
+        equippedModuleIds = PlayerDataManager.Instance.CurrentPlayerData.equippedModuleIds;
         // 初始化槽位
         for (int i = 0; i < slotCount; i++)
         {
@@ -45,6 +47,7 @@ public class SpellCraftingPanel : BPanel
 
         // 初始隐藏面板
         //panelRoot.SetActive(false);
+        LoadPlayerConfiguration();
     }
 
     void Update()
@@ -58,7 +61,6 @@ public class SpellCraftingPanel : BPanel
 
     public void TogglePanel()
     {
-        UIManager.Instance.OpenPanel("SpellCrafting");
         if (panelRoot.activeSelf)
         {
             // 打开时，从玩家数据加载当前配置到槽位
@@ -78,9 +80,11 @@ public class SpellCraftingPanel : BPanel
         List<string> equippedIds = PlayerDataManager.Instance.CurrentPlayerData.equippedModuleIds;
         for (int i = 0; i < slots.Count; i++)
         {
+            Debug.Log(i.ToString() + equippedIds[i]);
             if (i < equippedIds.Count && !string.IsNullOrEmpty(equippedIds[i]))
             {
                 SpellModuleSO module = GameDataManager.Instance.SpellModuleDict[equippedIds[i]];
+                Debug.Log(module.id);
                 slots[i].SetModule(module);
             }
             else
@@ -122,6 +126,9 @@ public class SpellCraftingPanel : BPanel
         }
         else
         {
+            slot.SetModule(null);
+
+            SavePlayerConfiguration();
             // 如果没有选中模块，可以右键清除等，先简单处理：点击已有模块的槽位，可以移除（可选）
             // 这里实现双击或右键移除，暂时不做
         }

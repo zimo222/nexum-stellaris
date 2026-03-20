@@ -52,6 +52,19 @@ public class Bullet : MonoBehaviour
         {
             UpdateOrbit();
         }
+
+        if (rb != null && rb.velocity != Vector2.zero)
+        {
+            // 计算速度方向的角度（单位：度）
+            float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
+
+            // 获取当前欧拉角（局部空间，避免父物体干扰）
+            Vector3 angles = transform.localEulerAngles;
+            // 只修改 Z 分量
+            angles.z = angle;
+            // 重新赋值
+            transform.localEulerAngles = angles;
+        }
     }
 
     /// <summary>
@@ -83,6 +96,25 @@ public class Bullet : MonoBehaviour
 
         // 设置生命周期自动销毁
         Destroy(gameObject, 5f); // 可从 bulletDefine 读取，暂时写死
+        /*    
+        // 设置初始朝向
+        if (rb != null && rb.velocity != Vector2.zero)
+        {
+            transform.right = rb.velocity.normalized;
+        }
+        */
+        if (rb != null && rb.velocity != Vector2.zero)
+        {
+            // 计算速度方向的角度（单位：度）
+            float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
+
+            // 获取当前欧拉角（局部空间，避免父物体干扰）
+            Vector3 angles = transform.localEulerAngles;
+            // 只修改 Z 分量
+            angles.z = angle;
+            // 重新赋值
+            transform.localEulerAngles = angles;
+        }
     }
 
     private void ExecuteCorrector(SpellModuleSO corrector)
@@ -168,7 +200,7 @@ public class Bullet : MonoBehaviour
 
     private Transform FindNearestEnemy()
     {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 20f);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 1000f);
         float minDist = float.MaxValue;
         Transform nearest = null;
         foreach (var hit in hits)
@@ -216,7 +248,7 @@ public class Bullet : MonoBehaviour
         isOrbiting = true;
         orbitCenter = transform.position; // 以当前位置为圆心
         orbitRadius = corrector.orbitRadius;
-        orbitSpeed = corrector.orbitSpeed;
+        orbitSpeed = corrector.orbitSpeed * Random.Range(0.5f, 2.0f);
 
         // 根据当前速度方向确定初始角度
         Vector2 dir = rb.velocity.normalized;

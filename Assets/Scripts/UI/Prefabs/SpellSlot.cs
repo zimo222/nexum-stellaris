@@ -10,8 +10,8 @@ public class SpellSlot : MonoBehaviour, IPointerClickHandler
 
     private void Start()
     {
-        if (iconImage != null)
-            iconImage.gameObject.SetActive(false);
+        //if (iconImage != null)
+            //iconImage.gameObject.SetActive(false);
     }
 
     // ·ÅÈëÄ£¿é
@@ -20,6 +20,7 @@ public class SpellSlot : MonoBehaviour, IPointerClickHandler
         currentModule = module;
         if (module != null && module.icon != null)
         {
+            Debug.Log("haoye");
             iconImage.sprite = module.icon;
             iconImage.gameObject.SetActive(true);
         }
