@@ -30,6 +30,7 @@ public class QuestDefineSO : ScriptableObject
 {
     public string id;                           // 任务ID（唯一）
     public string questName;                     // 任务名称
+    public string lastQuestId;                 // 前置任务名称
     public QuestCategory category;                // 主线/世界
     public QuestContentType contentType;          // 对话/战斗
 

@@ -356,9 +356,10 @@ public class QuestManager : MonoBehaviour
     public void OnPlayerEnterQuestArea(string questId)
     {
         var progress = PlayerDataManager.Instance?.GetQuestProgress(questId);
+        var theQuest = GameDataManager.Instance.QuestDict[questId];
         if (progress == null)
         {
-            if (!PlayerDataManager.Instance.HasCompletedQuest(questId))
+            if (!PlayerDataManager.Instance.HasCompletedQuest(questId) && PlayerDataManager.Instance.HasCompletedQuest(theQuest.lastQuestId))
             {
                 ActivateQuest(questId);
             }
