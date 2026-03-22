@@ -12,7 +12,7 @@ public class PanelMenuSection
     public Button[] smallButtons;
     public GameObject[] smallPanel;
 }
-public class CharacterPanelController : BasePanel
+public class CharacterPanelController : BPanel
 {
     [Header("View引用")]
     [SerializeField] private CharacterPanelView view;
@@ -139,6 +139,8 @@ public class CharacterPanelController : BasePanel
             Debug.LogError($"smallPanel 数组长度不足：长度={menuSections[largeIdx].smallPanel.Length}，索引={smallIdx}");
             return;
         }
+        currentPanel = menuSections[largeIdx].smallPanel[smallIdx];
+        currentPanel.gameObject.SetActive(true);
     }
 
     private void SetLargeButtonAppearance(int largeIdx, bool isSelected)

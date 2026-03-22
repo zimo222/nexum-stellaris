@@ -28,7 +28,9 @@ public class PlayerData
     public int skillNum;
     public SkillData[] Skills;
     // 装备索引（指向EquipmentBag的下标）
-    public int EquippedExotextIndex = -1;             // 绎语索引
+    // 新增：每个武器类别当前装备的武器 ID（null 表示未装备）
+    public string[] EquippedExotextIds = new string[7];
+    //public int EquippedExotextIndex = -1;             // 绎语索引
     public int EquippedCogniThreadIndex = -1;         // 思缕索引
     public int EquippedTangibleNexusIndex = -1;       // 触络索引
     public int EquippedAbyssalHeartIndex = -1;        // 装心索引
@@ -79,6 +81,10 @@ public class PlayerData
         InitializeDefaultMaterial();
         InitializeDefaultQuest();
         SortedBag();
+
+        // 初始化装备数组为空
+        for (int i = 0; i < EquippedExotextIds.Length; i++)
+            EquippedExotextIds[i] = null;
     }
 
     public void SortedBag()
@@ -121,7 +127,7 @@ public class PlayerData
     // 初始化默认装备
     private void InitializeDefaultNexumIdem()
     {
-        for (int i = 1; i <= 5; i++)
+        for (int i = 1; i <= 3; i++)
         {
             AddDefaultNExotext("Exotext_00" + i + "_VotiveEmber");
             AddDefaultNExotext("Exotext_00" + i + "_ThoughtChime");

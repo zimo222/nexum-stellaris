@@ -628,4 +628,118 @@ public class PlayerDataManager : MonoBehaviour
         return false;
     }
     #endregion
+
+    #region 武器系统业务逻辑
+
+    /// <summary> 获取当前所有武器（绎语）</summary>
+    public List<ExotextData> GetAllExotexts()
+    {
+        return CurrentPlayerData?.ExotextBag ?? new List<ExotextData>();
+    }
+
+    /// <summary> 根据 defineId 获取武器数据 </summary>
+    public ExotextData GetExotextByDefineId(string defineId)
+    {
+        if (CurrentPlayerData == null) return null;
+        return CurrentPlayerData.ExotextBag.Find(w => w.Id == defineId);
+    }
+
+    /// <summary> 检查武器是否已获得 </summary>
+    public bool IsExotextUnlocked(string defineId)
+    {
+        return GetExotextByDefineId(defineId) != null;
+    }
+
+    /// <summary> 为玩家添加一个武器（唯一获得）</summary>
+    public bool AddExotext(string defineId)
+    {
+        if (CurrentPlayerData == null) return false;
+        if (IsExotextUnlocked(defineId)) return false;
+
+        // 从静态数据中获取定义
+        if (!GameDataManager.Instance.ExotextDict.TryGetValue(defineId, out var def))
+        {
+            Debug.LogError($"未找到武器定义: {defineId}");
+            return false;
+        }
+
+        var weapon = new ExotextData(
+            id: def.id,
+            type: def.type,
+            element: def.element,
+            stars: def.baseStars,
+            maxstars: def.maxStars,
+            health: def.baseHealth,
+            attack: def.baseAttack,
+            defence: def.baseDefence,
+            energy: def.baseEnergy,
+            critRate: def.baseCritRate,
+            critDamage: def.baseCritDamage,
+            elementBonus: def.baseElementBonus,
+            introduction: def.introduction,
+            description: def.description
+        );
+        CurrentPlayerData.ExotextBag.Add(weapon);
+        CurrentPlayerData.SortedBag(); // 保持排序
+        SaveCurrentPlayerData();
+        OnPlayerDataChanged?.Invoke(CurrentPlayerData);
+        return true;
+    }
+
+    /// <summary> 获取某个武器类别当前装备的武器 ID </summary>
+    public string GetEquippedExotextId(ExotextType type)
+    {
+        if (CurrentPlayerData == null) return null;
+        int idx = (int)type;
+        if (idx < 0 || idx >= CurrentPlayerData.EquippedExotextIds.Length) return null;
+        return CurrentPlayerData.EquippedExotextIds[idx];
+    }
+
+    /// <summary> 获取某个武器类别当前装备的武器数据 </summary>
+    public ExotextData GetEquippedExotext(ExotextType type)
+    {
+        string id = GetEquippedExotextId(type);
+        if (string.IsNullOrEmpty(id)) return null;
+        return GetExotextByDefineId(id);
+    }
+
+    /// <summary> 装备指定武器（自动替换同类别当前装备）</summary>
+    public bool EquipExotext(string defineId)
+    {
+        if (CurrentPlayerData == null) return false;
+        var weapon = GetExotextByDefineId(defineId);
+        if (weapon == null)
+        {
+            Debug.LogError($"未获得武器: {defineId}");
+            return false;
+        }
+
+        int typeIndex = (int)weapon.Type;
+        if (typeIndex < 0 || typeIndex >= CurrentPlayerData.EquippedExotextIds.Length) return false;
+
+        // 检查是否已经装备了同一武器（直接返回 true 避免无意义保存）
+        if (CurrentPlayerData.EquippedExotextIds[typeIndex] == defineId)
+            return true;
+
+        CurrentPlayerData.EquippedExotextIds[typeIndex] = defineId;
+        SaveCurrentPlayerData();
+        OnPlayerDataChanged?.Invoke(CurrentPlayerData);
+        return true;
+    }
+
+    /// <summary> 卸下指定类别的武器（置空）</summary>
+    public bool UnequipExotext(ExotextType type)
+    {
+        if (CurrentPlayerData == null) return false;
+        int idx = (int)type;
+        if (idx < 0 || idx >= CurrentPlayerData.EquippedExotextIds.Length) return false;
+        if (CurrentPlayerData.EquippedExotextIds[idx] == null) return false;
+
+        CurrentPlayerData.EquippedExotextIds[idx] = null;
+        SaveCurrentPlayerData();
+        OnPlayerDataChanged?.Invoke(CurrentPlayerData);
+        return true;
+    }
+
+    #endregion
 }

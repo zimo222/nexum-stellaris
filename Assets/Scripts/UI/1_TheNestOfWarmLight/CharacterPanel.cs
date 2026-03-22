@@ -97,12 +97,14 @@ public class CharacterPanel : BPanel
 
     private bool IsEquipped(NexumIdemData equip)
     {
+        /*
         if (equip is ExotextData)
         {
             return currentPlayerData.EquippedExotextIndex >= 0 &&
                    currentPlayerData.ExotextBag.Count > currentPlayerData.EquippedExotextIndex &&
                    currentPlayerData.ExotextBag[currentPlayerData.EquippedExotextIndex] == equip;
         }
+        *
         else if (equip is NexusVestureData vesture)
         {
             int index = currentPlayerData.NexusVestureBag.IndexOf(vesture);
@@ -113,9 +115,10 @@ public class CharacterPanel : BPanel
                    index == currentPlayerData.EquippedVolitionVeinIndex ||
                    index == currentPlayerData.EquippedImprintStepIndex;
         }
+        */
         return false;
     }
-
+        
     private void OnSlotPointerEnter(NexumIdemData data)
     {
         detailPanel.Show(data);
