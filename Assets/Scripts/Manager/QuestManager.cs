@@ -73,13 +73,19 @@ public class QuestManager : MonoBehaviour
             backgroundImage.gameObject.SetActive(false);
     }
 
-    void Start()
+    public void FindPlayer()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         if (players != null && players.Length > 0)
         {
             playerController = players[0].GetComponent<Player>();
         }
+    }
+
+
+    void Start()
+    {
+        FindPlayer();
 
         // 修复直接从 PlayerData 添加的任务
         var playerData = PlayerDataManager.Instance?.CurrentPlayerData;
