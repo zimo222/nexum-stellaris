@@ -24,4 +24,16 @@ public class QuestItemView : MonoBehaviour
     {
         
     }
+
+    public void UpdateUI(QuestDefineSO questData)
+    {
+        if (questNameText != null) questNameText.text = questData.questName;
+        if (chapterNameText != null) chapterNameText.text = questData.chapterName;
+
+        if (categoryText != null) categoryText.text = questData.category == QuestCategory.Main ? "主线" : "世界";
+        if (chapterNumText != null) chapterNumText.text = "第" + questData.chapterNum + "章";
+        if (questNumText != null) questNumText.text = "第" + questData.questNum + "幕";
+    }
+
+
 }

@@ -90,7 +90,7 @@ public class TaskDetailPanel : BPanel
             // 实例化按钮
             GameObject btnObj = Instantiate(taskButtonPrefab, leftContent);
             questButtons.Add(btnObj);
-
+            /*
             // 设置按钮上的文本（假设预制体结构：CategoryText / ChapterText / NameText）
             TMP_Text categoryText = btnObj.transform.Find("CategoryText")?.GetComponent<TMP_Text>();
             TMP_Text chapterText = btnObj.transform.Find("ChapterText")?.GetComponent<TMP_Text>();
@@ -104,6 +104,9 @@ public class TaskDetailPanel : BPanel
 
             if (nameText != null)
                 nameText.text = questData.questName;
+            */
+            QuestItemView itemView = btnObj.gameObject.GetComponent<QuestItemView>();
+            itemView.UpdateUI(questData);
 
             // 绑定点击事件
             Button btn = btnObj.GetComponent<Button>();

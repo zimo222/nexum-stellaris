@@ -75,9 +75,10 @@ public class QuestManager : MonoBehaviour
 
     public void FindPlayer()
     {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        if (players != null && players.Length > 0)
-        {
+        GameObject[] players = null;
+        while (playerController == null)
+        { 
+            players = GameObject.FindGameObjectsWithTag("Player");
             playerController = players[0].GetComponent<Player>();
         }
     }
@@ -286,6 +287,7 @@ public class QuestManager : MonoBehaviour
             {
                 AutoSetTrackedQuest();
             }
+            if (questId == "MainQuest_003") SceneDataManager.Instance.LoadScene("2_TheArgentCorridor");
         }
     }
 

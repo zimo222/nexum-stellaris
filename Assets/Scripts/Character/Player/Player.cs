@@ -50,6 +50,8 @@ public class Player : Entity
         dashState = new PlayerDashState(this, stateMachine, "Dash");
         primaryAttack = new PlayerPrimaryAttackState(this, stateMachine, "Attack");
         counterAttack = new PlayerCounterAttackState(this, stateMachine, "CounterAttack");
+
+        DontDestroyOnLoad(gameObject);
         // 不再初始化 wallSlide, wallJump
     }
 

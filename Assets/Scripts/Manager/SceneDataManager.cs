@@ -197,7 +197,7 @@ public class SceneDataManager : Singleton<SceneDataManager>
 
         loadingPanel.gameObject.SetActive(false);
         isLoading = false;
-        //QuestManager.Instance.FindPlayer();
+        QuestManager.Instance.FindPlayer();
     }
 
     // 保留原有占位方法
@@ -205,7 +205,9 @@ public class SceneDataManager : Singleton<SceneDataManager>
 
     private void RestoreGameStateForScene()
     {
-        GameObject player = GameObject.Find("Player");
+        GameObject player = null;
+        while(player == null)
+            player = GameObject.Find("Player");
         if (player != null)
         {
             Vector3 position = player.transform.position;

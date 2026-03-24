@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6110833239665103636}
   - component: {fileID: 3948936198353586356}
   - component: {fileID: 7725123185169380122}
+  - component: {fileID: 4676189639380258882}
   m_Layer: 5
   m_Name: QuestItemButton
   m_TagString: Untagged
@@ -125,6 +126,23 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4676189639380258882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51878450906487200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c545ff4495db15945980a2be72d24df5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questNameText: {fileID: 1163739604492446498}
+  chapterNameText: {fileID: 4025677775053815592}
+  categoryText: {fileID: 5307371770785137167}
+  chapterNumText: {fileID: 2773882052785777761}
+  questNumText: {fileID: 7481596489979479195}
 --- !u!1 &6448324585910267489
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,7 +155,7 @@ GameObject:
   - component: {fileID: 2787743408930850061}
   - component: {fileID: 7481596489979479195}
   m_Layer: 5
-  m_Name: ChapterText (1)
+  m_Name: QuestNumText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -271,7 +289,7 @@ GameObject:
   - component: {fileID: 7410705290142430062}
   - component: {fileID: 2773882052785777761}
   m_Layer: 5
-  m_Name: ChapterText
+  m_Name: ChapterNumText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -405,7 +423,7 @@ GameObject:
   - component: {fileID: 5562849229128050872}
   - component: {fileID: 1163739604492446498}
   m_Layer: 5
-  m_Name: NameText
+  m_Name: QuestNameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -539,7 +557,7 @@ GameObject:
   - component: {fileID: 33742146345621268}
   - component: {fileID: 4025677775053815592}
   m_Layer: 5
-  m_Name: NameText (1)
+  m_Name: ChapterNameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
