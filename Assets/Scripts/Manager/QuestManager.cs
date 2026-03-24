@@ -112,6 +112,18 @@ public class QuestManager : MonoBehaviour
                         Debug.Log($"修复任务: {progress.questId} 状态为 InProgress");
                     }
                 }
+                if (progress.state == QuestState.InProgress)
+                {
+                    if (GameDataManager.Instance.QuestDict.TryGetValue(progress.questId, out var questData))
+                    {
+                        if (questData.contentType == QuestContentType.Combat)
+                        {
+                            PlayerDataManager.Instance.RemoveActiveQuest(progress.questId);
+                        }
+                        dataChanged = true;
+                        Debug.Log($"修复任务: {progress.questId} 状态为 InProgress");
+                    }
+                }
             }
             if (dataChanged)
             {

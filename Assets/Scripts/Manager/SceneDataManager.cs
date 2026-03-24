@@ -197,7 +197,7 @@ public class SceneDataManager : Singleton<SceneDataManager>
 
         loadingPanel.gameObject.SetActive(false);
         isLoading = false;
-        QuestManager.Instance.FindPlayer();
+        //QuestManager.Instance.FindPlayer();
     }
 
     // 保留原有占位方法

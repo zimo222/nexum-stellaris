@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: MainQuest_002
   m_EditorClassIdentifier: 
   id: MainQuest_002
-  questName: "\u591C"
+  questName: "\u521D\u557C"
+  questNum: "\u4E8C"
+  chapterName: "\u6696\u5149\u4F59\u70EC"
+  chapterNum: "\u4E00"
   lastQuestId: MainQuest_001
   category: 0
   contentType: 0
