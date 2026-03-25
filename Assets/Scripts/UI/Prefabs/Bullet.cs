@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     [HideInInspector] public float speed;
     [HideInInspector] public int damage;
     [HideInInspector] public GameObject owner;
+    [HideInInspector] public GameObject sourcePrefab;   // 记录生成时使用的预制体，用于归还池
 
     private Rigidbody2D rb;
     private bool isInitialized = false;
@@ -33,6 +34,10 @@ public class Bullet : MonoBehaviour
 
     private Coroutine lifeCoroutine;
 
+    // 原代码中用于兼容的字段（实际上在新系统中已不使用，但保留以支持原有逻辑）
+    private List<SpellModuleSO> correctors;     // 保留，可能在其他地方使用
+    private List<float> correctorTimers;        // 保留，可能在其他地方使用
+
     // ----------------------------------------------------------------------
     // 生命周期
     // ----------------------------------------------------------------------
@@ -42,19 +47,20 @@ public class Bullet : MonoBehaviour
         if (!isInitialized)
         {
             Debug.LogError("Bullet未正确初始化，请使用Initialize方法");
-            BulletPool.Instance.ReturnBullet(gameObject);
+            if (sourcePrefab != null)
+                BulletPool.Instance.ReturnBullet(gameObject, sourcePrefab);
+            else
+                Destroy(gameObject);
         }
     }
 
     void Update()
     {
-
         if (!isInitialized) return;
 
         // 更新当前激活的修正类（按时间段切换）
         UpdateActiveCorrector();
 
-        //Debug.Log(currentActiveTiming.startTime.ToString() + "." + currentActiveTiming.endTime.ToString() + currentActiveTiming.module.id);
         // 如果是圆周运动，更新位置（由轨道协程或Update标志管理）
         if (isOrbiting)
         {
@@ -75,13 +81,15 @@ public class Bullet : MonoBehaviour
     // 初始化
     // ----------------------------------------------------------------------
 
-    public void Initialize(Vector2 direction, GameObject owner, float speed, int damage, Vector2 spawnPos, List<SpellModuleSO> correctors)
+    public void Initialize(Vector2 direction, GameObject owner, float speed, int damage,
+                          Vector2 spawnPos, List<SpellModuleSO> correctors, GameObject sourcePrefab)
     {
         ResetToPool();  // 确保状态干净
 
         this.owner = owner;
         this.speed = speed;
         this.damage = damage;
+        this.sourcePrefab = sourcePrefab;
 
         // 构建修正类时序列表
         timings.Clear();
@@ -93,10 +101,7 @@ public class Bullet : MonoBehaviour
             float end = (i == correctors.Count - 1) ? float.PositiveInfinity : currentTime + corr.delay;
             timings.Add(new CorrectorTiming { module = corr, startTime = start, endTime = end });
             currentTime += corr.delay;
-
-            //Debug.Log(start.ToString() + "." + end.ToString() + "." + corr.name);
         }
-
 
         rb = GetComponent<Rigidbody2D>();
         if (rb != null)
@@ -331,12 +336,13 @@ public class Bullet : MonoBehaviour
     private void SpawnChildBullet(Vector2 dir, SpellModuleSO corrector)
     {
         // 子子弹不继承修正类，仅基础属性
-        GameObject child = BulletPool.Instance.GetBullet(); // 使用对象池
+        // 使用父子弹的预制体（即 sourcePrefab）获取新子弹
+        GameObject child = BulletPool.Instance.GetBullet(sourcePrefab);
         child.transform.position = transform.position;
         child.transform.rotation = Quaternion.identity;
 
         Bullet childBullet = child.GetComponent<Bullet>();
-        childBullet.Initialize(dir, owner, speed, damage, transform.position, new List<SpellModuleSO>());
+        childBullet.Initialize(dir, owner, speed, damage, transform.position, new List<SpellModuleSO>(), sourcePrefab);
     }
 
     // ----------------------------------------------------------------------
@@ -379,7 +385,10 @@ public class Bullet : MonoBehaviour
     private IEnumerator AutoReturnToPool(float delay)
     {
         yield return new WaitForSeconds(delay);
-        BulletPool.Instance.ReturnBullet(gameObject);
+        if (sourcePrefab != null)
+            BulletPool.Instance.ReturnBullet(gameObject, sourcePrefab);
+        else
+            Destroy(gameObject);
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -389,12 +398,18 @@ public class Bullet : MonoBehaviour
         if (owner.CompareTag("Player") && other.CompareTag("Enemy"))
         {
             CombatManager.Instance.ApplyDamage(owner, other.gameObject, damage);
-            BulletPool.Instance.ReturnBullet(gameObject);
+            if (sourcePrefab != null)
+                BulletPool.Instance.ReturnBullet(gameObject, sourcePrefab);
+            else
+                Destroy(gameObject);
         }
         else if (owner.CompareTag("Enemy") && other.CompareTag("Player"))
         {
             CombatManager.Instance.ApplyDamage(owner, other.gameObject, damage);
-            BulletPool.Instance.ReturnBullet(gameObject);
+            if (sourcePrefab != null)
+                BulletPool.Instance.ReturnBullet(gameObject, sourcePrefab);
+            else
+                Destroy(gameObject);
         }
     }
 
@@ -427,18 +442,10 @@ public class Bullet : MonoBehaviour
         timings.Clear();
         currentActiveTiming = null;
 
-        // 清空其他列表
+        // 清空其他列表（原代码兼容）
         if (correctors != null)
             correctors.Clear();
         if (correctorTimers != null)
-            correctorTimers.Clear(); // 注意原代码中可能没有定义 correcterTimers，需要补充
-        // 这里原代码中 correctorTimers 变量名有误，应该是 correctorTimers
-        // 我注意到你之前有 private List<float> correctorTimers; 但后来未使用，可以删除或保留。
-        // 为了安全，我们先注释掉，如果你确实有 correctorTimers 变量，请取消注释并清空。
-        // 建议在类中定义 private List<float> correctorTimers; 并在这里清空。
+            correctorTimers.Clear();
     }
-
-    // 原代码中可能有 correctors 和 correctorTimers 的声明，这里补充（如果没有请忽略）
-    private List<SpellModuleSO> correctors;     // 实际上已在上面使用，但声明可能在前面
-    private List<float> correctorTimers;        // 原代码中可能已有，若没有请加上
 }

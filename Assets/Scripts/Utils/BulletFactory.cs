@@ -27,8 +27,7 @@ public static class BulletFactory
             ApplyModifier(modifier, ref speed, ref damage, ref num, ref fieldAngle);
         }
 
-
-        for(int i = 0; i < num; i++)
+        for (int i = 0; i < num; i++)
         {
             // 计算最终方向：若 fieldAngle > 0，则在 [ -fieldAngle/2 , fieldAngle/2 ] 范围内随机旋转
             Vector2 finalDirection = direction;
@@ -37,37 +36,25 @@ public static class BulletFactory
                 float randomAngle = Random.Range(-fieldAngle * 0.5f, fieldAngle * 0.5f);
                 finalDirection = Quaternion.Euler(0, 0, randomAngle) * direction;
             }
-            /*
-            // 实例化子弹
-            GameObject bulletObj = Object.Instantiate(spellPackage.projectile.prefab, position, Quaternion.identity);
-            Bullet bullet = bulletObj.GetComponent<Bullet>();
-            if (bullet == null)
-            {
-                Debug.LogError("子弹预制体没有 Bullet 组件");
-                Object.Destroy(bulletObj);
-                return null;
-            }
-            // 初始化子弹（传递修正类列表，修正类将在子弹生命周期内执行）
-            bullet.Initialize(finalDirection, owner, speed * Random.Range(0.5f, 2.0f), damage, position, spellPackage.correctors);
-            */
 
-            // 从对象池获取子弹对象
-            GameObject bulletObj = BulletPool.Instance.GetBullet();
+            // 从对象池获取子弹对象（传入预制体）
+            GameObject bulletObj = BulletPool.Instance.GetBullet(spellPackage.projectile.prefab);
+            Debug.Log(bulletObj);
             bulletObj.transform.position = position;
-            bulletObj.transform.rotation = Quaternion.identity; // 重置旋转
+            bulletObj.transform.rotation = Quaternion.identity;
 
             Bullet bullet = bulletObj.GetComponent<Bullet>();
             if (bullet == null)
             {
                 Debug.LogError("子弹预制体没有 Bullet 组件");
-                BulletPool.Instance.ReturnBullet(bulletObj); // 如果出错，立即放回池
+                BulletPool.Instance.ReturnBullet(bulletObj, spellPackage.projectile.prefab); // 归还
                 return null;
             }
 
-            // 初始化子弹
-            bullet.Initialize(finalDirection, owner, speed * Random.Range(0.5f, 2.0f), damage, position, spellPackage.correctors);
+            // 初始化子弹（传递修正类列表和源预制体）
+            bullet.Initialize(finalDirection, owner, speed * Random.Range(0.5f, 2.0f), damage, position,
+                             spellPackage.correctors, spellPackage.projectile.prefab);
         }
-        //return bulletObj;
         return null;
     }
 

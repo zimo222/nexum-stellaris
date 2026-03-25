@@ -1059,8 +1059,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0286d02b222c0844e8290762507b66d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 3305386069859194172, guid: 4c2371c4574876048a2eba38a1fac08b, type: 3}
-  initialPoolSize: 3000
+  autoCreateOnEmpty: 1
+  defaultInitialSize: 1500
 --- !u!4 &54640835
 Transform:
   m_ObjectHideFlags: 0
