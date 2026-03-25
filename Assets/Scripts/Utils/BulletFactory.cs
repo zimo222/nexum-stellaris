@@ -37,7 +37,7 @@ public static class BulletFactory
                 float randomAngle = Random.Range(-fieldAngle * 0.5f, fieldAngle * 0.5f);
                 finalDirection = Quaternion.Euler(0, 0, randomAngle) * direction;
             }
-
+            /*
             // 实例化子弹
             GameObject bulletObj = Object.Instantiate(spellPackage.projectile.prefab, position, Quaternion.identity);
             Bullet bullet = bulletObj.GetComponent<Bullet>();
@@ -48,6 +48,23 @@ public static class BulletFactory
                 return null;
             }
             // 初始化子弹（传递修正类列表，修正类将在子弹生命周期内执行）
+            bullet.Initialize(finalDirection, owner, speed * Random.Range(0.5f, 2.0f), damage, position, spellPackage.correctors);
+            */
+
+            // 从对象池获取子弹对象
+            GameObject bulletObj = BulletPool.Instance.GetBullet();
+            bulletObj.transform.position = position;
+            bulletObj.transform.rotation = Quaternion.identity; // 重置旋转
+
+            Bullet bullet = bulletObj.GetComponent<Bullet>();
+            if (bullet == null)
+            {
+                Debug.LogError("子弹预制体没有 Bullet 组件");
+                BulletPool.Instance.ReturnBullet(bulletObj); // 如果出错，立即放回池
+                return null;
+            }
+
+            // 初始化子弹
             bullet.Initialize(finalDirection, owner, speed * Random.Range(0.5f, 2.0f), damage, position, spellPackage.correctors);
         }
         //return bulletObj;

@@ -21,6 +21,14 @@ public class Bullet : MonoBehaviour
     private float orbitSpeed;
     private bool isOrbiting = false;
 
+    private Coroutine lifeCoroutine;
+
+    private IEnumerator AutoReturnToPool(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        BulletPool.Instance.ReturnBullet(gameObject);
+    }
+
     void Start()
     {
         if (!isInitialized)
@@ -72,6 +80,9 @@ public class Bullet : MonoBehaviour
     /// </summary>
     public void Initialize(Vector2 direction, GameObject owner, float speed, int damage, Vector2 spawnPos, List<SpellModuleSO> correctors)
     {
+        // 彻底重置状态（避免残留）
+        ResetToPool();
+
         this.owner = owner;
         this.speed = speed;
         this.damage = damage;
@@ -95,7 +106,12 @@ public class Bullet : MonoBehaviour
         isInitialized = true;
 
         // 设置生命周期自动销毁
-        Destroy(gameObject, 5f); // 可从 bulletDefine 读取，暂时写死
+        //Destroy(gameObject, 5f); // 可从 bulletDefine 读取，暂时写死
+
+        // 取消之前的协程（如果有）
+        if (lifeCoroutine != null)
+            StopCoroutine(lifeCoroutine);
+        lifeCoroutine = StartCoroutine(AutoReturnToPool(5f));
         /*    
         // 设置初始朝向
         if (rb != null && rb.velocity != Vector2.zero)
@@ -283,13 +299,46 @@ public class Bullet : MonoBehaviour
         if (owner.CompareTag("Player") && other.CompareTag("Enemy"))
         {
             CombatManager.Instance.ApplyDamage(owner, other.gameObject, damage);
-            Destroy(gameObject);
+            BulletPool.Instance.ReturnBullet(gameObject);
         }
         else if (owner.CompareTag("Enemy") && other.CompareTag("Player"))
         {
             CombatManager.Instance.ApplyDamage(owner, other.gameObject, damage);
-            Destroy(gameObject);
+            BulletPool.Instance.ReturnBullet(gameObject);
         }
         // 可扩展：击中墙壁等也销毁
+    }
+
+    /// <summary>
+    /// 重置子弹所有状态，准备放回池中
+    /// </summary>
+    public void ResetToPool()
+    {
+        // 停止所有协程（比如追踪、旋转等）
+        StopAllCoroutines();
+
+        // 重置物理状态
+        if (rb != null)
+        {
+            rb.velocity = Vector2.zero;
+            rb.angularVelocity = 0f;
+            rb.isKinematic = false;   // 如果之前被设为运动学（如轨道运动），要恢复
+        }
+
+        // 重置标记
+        isOrbiting = false;
+        isInitialized = false;
+
+        // 清空修正类相关列表
+        if (correctors != null)
+            correctors.Clear();
+        if (correctorTimers != null)
+            correctorTimers.Clear();
+
+        // 可选：重置其他自定义字段（如轨道参数等）
+        orbitCenter = Vector2.zero;
+        orbitAngle = 0f;
+        orbitRadius = 0f;
+        orbitSpeed = 0f;
     }
 }
