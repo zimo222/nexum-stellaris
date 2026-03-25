@@ -15,7 +15,7 @@ MonoBehaviour:
   id: Corrector_Homing
   moduleName: "\u8FFD\u8E2A"
   moduleType: 2
-  delay: 0
+  delay: 0.5
   bulletDefine: {fileID: 0}
   speedMultiplier: 0
   damageMultiplier: 0

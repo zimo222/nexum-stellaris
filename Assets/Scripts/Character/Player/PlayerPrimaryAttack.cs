@@ -54,7 +54,7 @@ public class PlayerPrimaryAttackState : PlayerState
         player.SetVelocity(xInput * player.moveSpeed, yInput * player.moveSpeed);
 
         // 动画播放完毕（triggerCalled 由 AnimationFinishTrigger 事件设置）后回到 Idle
-        if (triggerCalled)
+        if (triggerCalled || Input.GetKeyUp(KeyCode.J))
         {
             stateMachine.ChangeState(player.idleState);
         }
