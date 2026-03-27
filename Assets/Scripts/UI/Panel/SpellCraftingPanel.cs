@@ -1,10 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class SpellCraftingPanel : BPanel
+public class SpellCraftingPanel: MonoBehaviour
 {
-    public static SpellCraftingPanel Instance { get; private set; }
-
     [Header("UI References")]
     public GameObject panelRoot;                  // 整个面板根物体
     public Transform slotContainer;                // 槽位容器
@@ -20,8 +18,6 @@ public class SpellCraftingPanel : BPanel
 
     void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
     }
 
     void Start()
@@ -33,6 +29,7 @@ public class SpellCraftingPanel : BPanel
             GameObject slotObj = Instantiate(slotPrefab, slotContainer);
             SpellSlot slot = slotObj.GetComponent<SpellSlot>();
             slot.slotIndex = i;
+            slot.craftingPanel = this;   // 关键：将当前面板赋值给槽位
             slots.Add(slot);
         }
 
@@ -41,6 +38,7 @@ public class SpellCraftingPanel : BPanel
         {
             GameObject itemObj = Instantiate(libraryItemPrefab, libraryContainer);
             ModuleLibraryItem item = itemObj.GetComponent<ModuleLibraryItem>();
+            item.craftingPanel = this;   // 关键：将当前面板赋值给槽位
             item.Init(kv.Value);
             item.gameObject.SetActive(true);
         }
@@ -48,29 +46,6 @@ public class SpellCraftingPanel : BPanel
         // 初始隐藏面板
         //panelRoot.SetActive(false);
         LoadPlayerConfiguration();
-    }
-
-    void Update()
-    {
-        // 按 Tab 键开关面板（可根据需要改键）
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            TogglePanel();
-        }
-    }
-
-    public void TogglePanel()
-    {
-        if (panelRoot.activeSelf)
-        {
-            // 打开时，从玩家数据加载当前配置到槽位
-            LoadPlayerConfiguration();
-        }
-        else
-        {
-            // 关闭时，保存当前配置到玩家数据
-            SavePlayerConfiguration();
-        }
     }
 
     // 从玩家数据加载已装备的模块到槽位

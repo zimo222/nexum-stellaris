@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bullet_001
   m_EditorClassIdentifier: 
   id: Bullet_001
-  speed: 500
+  speed: 200
   damage: 1
   prefab: {fileID: 3305386069859194172, guid: 4c2371c4574876048a2eba38a1fac08b, type: 3}
   lifetime: 10

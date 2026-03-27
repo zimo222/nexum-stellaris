@@ -8,6 +8,7 @@ public class ModuleLibraryItem : MonoBehaviour, IPointerClickHandler
     public SpellModuleSO module;                 // 关联的模块数据
     public Image iconImage;
     public TMP_Text moduleNameText;
+    public SpellCraftingPanel craftingPanel;   // 新增：引用管理面板
 
     public void Init(SpellModuleSO moduleData)
     {
@@ -18,6 +19,8 @@ public class ModuleLibraryItem : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        SpellCraftingPanel.Instance.OnLibraryItemClicked(this);
+        // 通过引用来调用实例方法
+        if (craftingPanel != null)
+            craftingPanel.OnLibraryItemClicked(this);
     }
 }

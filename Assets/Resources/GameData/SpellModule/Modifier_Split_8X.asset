@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e4a0bcac50fd954092a1c8d99bd6843, type: 3}
   m_Name: Modifier_Split_8X
   m_EditorClassIdentifier: 
-  id: Modifier_Split_8X
-  moduleName: "\u5206\u88C2"
+  id: Modifier_Multishot_8X
+  moduleName: "\u6EE1\u819B\xB7\u634C"
   moduleType: 1
   delay: 0
   bulletDefine: {fileID: 0}
@@ -22,7 +22,7 @@ MonoBehaviour:
   homingStrength: 0
   rotateSpeed: 0
   splitCount: 8
-  splitAngle: 30
+  splitAngle: 0
   burstCount: 0
   burstDelay: 0
   multicastCount: 0

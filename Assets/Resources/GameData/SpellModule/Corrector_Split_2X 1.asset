@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e4a0bcac50fd954092a1c8d99bd6843, type: 3}
-  m_Name: Modifier_Split_4X
+  m_Name: Corrector_Split_2X 1
   m_EditorClassIdentifier: 
-  id: Modifier_Split_4X
-  moduleName: "\u5206\u88C2"
-  moduleType: 1
-  delay: 0
+  id: Corrector_Split_4X
+  moduleName: "\u5206\u88C2\xB7\u8086"
+  moduleType: 2
+  delay: 0.3
   bulletDefine: {fileID: 0}
   speedMultiplier: 1
   damageMultiplier: 1
   homingStrength: 0
   rotateSpeed: 0
-  splitCount: 4
+  splitCount: 3
   splitAngle: 30
   burstCount: 0
   burstDelay: 0
@@ -29,4 +29,4 @@ MonoBehaviour:
   orbitRadius: 0
   orbitSpeed: 0
   fieldAngle: 0
-  icon: {fileID: 21300000, guid: 99f2ee31f2c8d614388ff0a414b886af, type: 3}
+  icon: {fileID: 21300000, guid: db6878de7a6073b4d86dd8c518050eb4, type: 3}

@@ -111,10 +111,12 @@ public class CharacterPanelController : BPanel
         }
 
         if (menuSections[largeIndex].smallButtons.Length > 0)//有小面板
+        {
             OnSmallButtonClick(largeIndex, 0);
+        }
         else//没小面板
         {
-            if(currentPanel != null) currentPanel.gameObject.SetActive(false);
+            if (currentPanel != null) currentPanel.gameObject.SetActive(false);
             currentPanel = menuSections[largeIndex].largePanel;
             currentPanel.gameObject.SetActive(true);
         }
@@ -122,9 +124,9 @@ public class CharacterPanelController : BPanel
 
     private void OnSmallButtonClick(int largeIdx, int smallIdx)
     {
-        currentPanel.gameObject.SetActive(false);
 
         if (smallIndex == smallIdx) return;
+        currentPanel.gameObject.SetActive(false);
         smallIndex = smallIdx;
         SetSmallButtonHighlight(largeIdx, smallIdx);
 

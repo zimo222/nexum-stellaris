@@ -7,6 +7,7 @@ public class SpellSlot : MonoBehaviour, IPointerClickHandler
     public int slotIndex;                       // 槽位索引（0~n-1）
     public Image iconImage;                      // 显示模块图标的Image
     private SpellModuleSO currentModule;         // 当前槽位中的模块
+    public SpellCraftingPanel craftingPanel;   // 新增：引用管理面板
 
     private void Start()
     {
@@ -44,6 +45,8 @@ public class SpellSlot : MonoBehaviour, IPointerClickHandler
     // 这里我们使用外部管理器处理逻辑，槽位仅提供点击事件
     public void OnPointerClick(PointerEventData eventData)
     {
-        SpellCraftingPanel.Instance.OnSlotClicked(this);
+        // 通过引用来调用实例方法
+        if (craftingPanel != null)
+            craftingPanel.OnSlotClicked(this);
     }
 }

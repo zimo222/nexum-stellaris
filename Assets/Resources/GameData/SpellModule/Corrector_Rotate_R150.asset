@@ -15,7 +15,7 @@ MonoBehaviour:
   id: Corrector_Rotate_R150
   moduleName: "\u8F6E\u8F6C\xB7\u98CE\u66B4"
   moduleType: 2
-  delay: 0.5
+  delay: 1
   bulletDefine: {fileID: 0}
   speedMultiplier: 1
   damageMultiplier: 1

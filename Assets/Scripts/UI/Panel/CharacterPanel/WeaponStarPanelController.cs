@@ -34,7 +34,7 @@ public class WeaponStarPanelController : MonoBehaviour
         // ³õÊ¼Ë¢ÐÂ
         RefreshAllStars();
 
-        this.gameObject.SetActive(false);
+        //this.gameObject.SetActive(false);
     }
 
     private void OnDestroy()

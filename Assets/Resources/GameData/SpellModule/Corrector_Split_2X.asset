@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e4a0bcac50fd954092a1c8d99bd6843, type: 3}
-  m_Name: Corrector_Rotate_R100
+  m_Name: Corrector_Split_2X
   m_EditorClassIdentifier: 
-  id: Corrector_Rotate_R100
-  moduleName: "\u8F6E\u8F6C\xB7\u5FAE\u98CE"
+  id: Corrector_Split_2X
+  moduleName: "\u5206\u88C2\xB7\u8D30"
   moduleType: 2
-  delay: 1
+  delay: 0.3
   bulletDefine: {fileID: 0}
   speedMultiplier: 1
   damageMultiplier: 1
   homingStrength: 0
-  rotateSpeed: 180
-  splitCount: 0
-  splitAngle: 0
+  rotateSpeed: 0
+  splitCount: 1
+  splitAngle: 30
   burstCount: 0
   burstDelay: 0
   multicastCount: 0
-  orbitRadius: 100
-  orbitSpeed: 300
+  orbitRadius: 0
+  orbitSpeed: 0
   fieldAngle: 0
-  icon: {fileID: 21300000, guid: e0e302d84091fe040bf3de80fe764fec, type: 3}
+  icon: {fileID: 21300000, guid: f6a8f5b33833c4741b85b344fad8881a, type: 3}

@@ -8,24 +8,23 @@ public class Bullet : MonoBehaviour
     [HideInInspector] public float speed;
     [HideInInspector] public int damage;
     [HideInInspector] public GameObject owner;
-    [HideInInspector] public GameObject sourcePrefab;   // 记录生成时使用的预制体，用于归还池
+    [HideInInspector] public GameObject sourcePrefab;
 
     private Rigidbody2D rb;
     private bool isInitialized = false;
-    private float startTime;                          // 子弹生成时的游戏时间
+    private float startTime;
+    private float totalLifeTime = 5f;
 
-    // 修正类时序管理
     private class CorrectorTiming
     {
         public SpellModuleSO module;
-        public float startTime;      // 相对子弹生成的时间（秒）
-        public float endTime;        // 相对子弹生成的时间（秒），正无穷表示直到销毁
-        public Coroutine activeCoroutine; // 持续效果对应的协程
+        public float startTime;
+        public float endTime;
+        public Coroutine activeCoroutine;
     }
     private List<CorrectorTiming> timings = new List<CorrectorTiming>();
     private CorrectorTiming currentActiveTiming = null;
 
-    // 轨道运动专用字段（由旋转修正使用）
     private Vector2 orbitCenter;
     private float orbitAngle;
     private float orbitRadius;
@@ -34,9 +33,8 @@ public class Bullet : MonoBehaviour
 
     private Coroutine lifeCoroutine;
 
-    // 原代码中用于兼容的字段（实际上在新系统中已不使用，但保留以支持原有逻辑）
-    private List<SpellModuleSO> correctors;     // 保留，可能在其他地方使用
-    private List<float> correctorTimers;        // 保留，可能在其他地方使用
+    private List<SpellModuleSO> correctors;
+    private List<float> correctorTimers;
 
     // ----------------------------------------------------------------------
     // 生命周期
@@ -58,16 +56,13 @@ public class Bullet : MonoBehaviour
     {
         if (!isInitialized) return;
 
-        // 更新当前激活的修正类（按时间段切换）
         UpdateActiveCorrector();
 
-        // 如果是圆周运动，更新位置（由轨道协程或Update标志管理）
         if (isOrbiting)
         {
             UpdateOrbit();
         }
 
-        // 更新子弹朝向
         if (rb != null && rb.velocity != Vector2.zero)
         {
             float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
@@ -82,16 +77,20 @@ public class Bullet : MonoBehaviour
     // ----------------------------------------------------------------------
 
     public void Initialize(Vector2 direction, GameObject owner, float speed, int damage,
-                          Vector2 spawnPos, List<SpellModuleSO> correctors, GameObject sourcePrefab)
+                          Vector2 spawnPos, List<SpellModuleSO> correctors, GameObject sourcePrefab,
+                          float lifeTime = 5f)
     {
-        ResetToPool();  // 确保状态干净
+        ResetToPool();
 
         this.owner = owner;
         this.speed = speed;
         this.damage = damage;
         this.sourcePrefab = sourcePrefab;
+        this.totalLifeTime = lifeTime;
 
-        // 构建修正类时序列表
+        if (rb == null)
+            rb = GetComponent<Rigidbody2D>();
+
         timings.Clear();
         float currentTime = 0f;
         for (int i = 0; i < correctors.Count; i++)
@@ -103,7 +102,6 @@ public class Bullet : MonoBehaviour
             currentTime += corr.delay;
         }
 
-        rb = GetComponent<Rigidbody2D>();
         if (rb != null)
         {
             rb.velocity = direction.normalized * speed;
@@ -112,12 +110,10 @@ public class Bullet : MonoBehaviour
         isInitialized = true;
         startTime = Time.time;
 
-        // 自动返回池的协程
         if (lifeCoroutine != null)
             StopCoroutine(lifeCoroutine);
-        lifeCoroutine = StartCoroutine(AutoReturnToPool(5f));
+        lifeCoroutine = StartCoroutine(AutoReturnToPool(totalLifeTime));
 
-        // 设置初始朝向
         if (rb != null && rb.velocity != Vector2.zero)
         {
             float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
@@ -125,6 +121,75 @@ public class Bullet : MonoBehaviour
             angles.z = angle;
             transform.localEulerAngles = angles;
         }
+    }
+
+    // ----------------------------------------------------------------------
+    // 克隆方法（修复生命周期复制）
+    // ----------------------------------------------------------------------
+
+    public void CloneFrom(Bullet source)
+    {
+        if (rb == null)
+            rb = GetComponent<Rigidbody2D>();
+        if (rb == null)
+        {
+            Debug.LogError("子弹预制体缺少 Rigidbody2D 组件！");
+            BulletPool.Instance.ReturnBullet(gameObject, sourcePrefab);
+            return;
+        }
+
+        ResetToPool();
+
+        this.owner = source.owner;
+        this.speed = source.speed;
+        this.damage = source.damage;
+        this.sourcePrefab = source.sourcePrefab;
+
+        // ★ 关键修复：复制总寿命和起始时间，确保剩余时间一致
+        this.totalLifeTime = source.totalLifeTime;
+        this.startTime = source.startTime;
+
+        this.timings.Clear();
+        foreach (var timing in source.timings)
+        {
+            this.timings.Add(new CorrectorTiming
+            {
+                module = timing.module,
+                startTime = timing.startTime,
+                endTime = timing.endTime,
+                activeCoroutine = null
+            });
+        }
+
+        this.currentActiveTiming = null;
+        if (source.currentActiveTiming != null)
+        {
+            int idx = source.timings.IndexOf(source.currentActiveTiming);
+            if (idx >= 0 && idx < this.timings.Count)
+                this.currentActiveTiming = this.timings[idx];
+        }
+
+        this.isOrbiting = source.isOrbiting;
+        this.orbitCenter = source.orbitCenter;
+        this.orbitAngle = source.orbitAngle;
+        this.orbitRadius = source.orbitRadius;
+        this.orbitSpeed = source.orbitSpeed;
+
+        rb.velocity = source.rb.velocity;
+
+        this.isInitialized = true;
+
+        if (currentActiveTiming != null && IsContinuousEffect(currentActiveTiming.module))
+        {
+            currentActiveTiming.activeCoroutine = StartContinuousEffect(currentActiveTiming.module);
+        }
+
+        if (lifeCoroutine != null)
+            StopCoroutine(lifeCoroutine);
+        // 剩余生命周期 = totalLifeTime - 已存活时间
+        float remaining = totalLifeTime - (Time.time - startTime);
+        if (remaining < 0) remaining = 0;
+        lifeCoroutine = StartCoroutine(AutoReturnToPool(remaining));
     }
 
     // ----------------------------------------------------------------------
@@ -230,7 +295,7 @@ public class Bullet : MonoBehaviour
         while (true)
         {
             Transform target = FindNearestEnemy();
-            if (target != null)
+            if (target != null && rb != null)
             {
                 Vector2 dirToTarget = (target.position - transform.position).normalized;
                 rb.velocity = Vector2.Lerp(rb.velocity, dirToTarget * speed, strength * Time.deltaTime);
@@ -243,6 +308,7 @@ public class Bullet : MonoBehaviour
     {
         while (true)
         {
+            if (rb == null) yield break;
             float angle = speed * Time.deltaTime;
             rb.velocity = Quaternion.Euler(0, 0, angle) * rb.velocity;
             yield return null;
@@ -251,7 +317,12 @@ public class Bullet : MonoBehaviour
 
     private IEnumerator OrbitCoroutine(SpellModuleSO module)
     {
-        // 进入轨道模式
+        if (rb == null)
+        {
+            Debug.LogError("OrbitCoroutine: rb 为 null，无法进入轨道模式");
+            yield break;
+        }
+
         isOrbiting = true;
         orbitCenter = transform.position;
         orbitRadius = module.orbitRadius;
@@ -287,6 +358,12 @@ public class Bullet : MonoBehaviour
     // 停止轨道运动，恢复物理飞行
     private void StopOrbit()
     {
+        if (rb == null)
+        {
+            Debug.LogWarning("StopOrbit: rb 为 null，无法恢复运动");
+            return;
+        }
+
         isOrbiting = false;
 
         // 计算当前切线速度（方向为圆周切线，大小等于原速度大小）
@@ -306,16 +383,24 @@ public class Bullet : MonoBehaviour
     }
 
     // ----------------------------------------------------------------------
-    // 一次性效果：分裂
+    // 分裂逻辑（添加日志便于调试）
     // ----------------------------------------------------------------------
 
     private void Split(SpellModuleSO corrector)
     {
+        if (rb == null)
+        {
+            Debug.LogWarning("Split: rb 为 null，无法分裂");
+            return;
+        }
+
         int count = corrector.splitCount;
         float totalAngle = corrector.splitAngle;
         Vector2 baseDir = rb.velocity.normalized;
 
         if (count <= 0) return;
+
+        Debug.Log($"分裂开始，目标数量: {count}");  // 调试用
 
         if (count == 1)
         {
@@ -335,18 +420,50 @@ public class Bullet : MonoBehaviour
 
     private void SpawnChildBullet(Vector2 dir, SpellModuleSO corrector)
     {
-        // 子子弹不继承修正类，仅基础属性
-        // 使用父子弹的预制体（即 sourcePrefab）获取新子弹
-        GameObject child = BulletPool.Instance.GetBullet(sourcePrefab);
-        child.transform.position = transform.position;
-        child.transform.rotation = Quaternion.identity;
+        if (sourcePrefab == null)
+        {
+            Debug.LogError("SpawnChildBullet: sourcePrefab 为 null，无法生成子子弹");
+            return;
+        }
 
-        Bullet childBullet = child.GetComponent<Bullet>();
-        childBullet.Initialize(dir, owner, speed, damage, transform.position, new List<SpellModuleSO>(), sourcePrefab);
+        GameObject childObj = BulletPool.Instance.GetBullet(sourcePrefab);
+        childObj.transform.position = transform.position;
+        childObj.transform.rotation = Quaternion.identity;
+
+        Bullet childBullet = childObj.GetComponent<Bullet>();
+        if (childBullet == null)
+        {
+            Debug.LogError("子子弹预制体没有 Bullet 组件");
+            BulletPool.Instance.ReturnBullet(childObj, sourcePrefab);
+            return;
+        }
+
+        childBullet.CloneFrom(this);
+
+        if (childBullet.rb != null)
+        {
+            childBullet.rb.velocity = dir.normalized * speed;
+        }
+
+        if (childBullet.rb != null && childBullet.rb.velocity != Vector2.zero)
+        {
+            float angle = Mathf.Atan2(childBullet.rb.velocity.y, childBullet.rb.velocity.x) * Mathf.Rad2Deg;
+            Vector3 angles = childBullet.transform.localEulerAngles;
+            angles.z = angle;
+            childBullet.transform.localEulerAngles = angles;
+        }
+
+        Debug.Log($"生成子子弹，方向: {dir}");  // 调试用
     }
 
     // ----------------------------------------------------------------------
-    // 辅助方法
+    // 辅助属性
+    // ----------------------------------------------------------------------
+    public float ElapsedTime => Time.time - startTime;
+    public float RemainingLife => totalLifeTime - ElapsedTime;
+
+    // ----------------------------------------------------------------------
+    // 辅助方法：寻找敌人
     // ----------------------------------------------------------------------
 
     private Transform FindNearestEnemy()
@@ -381,7 +498,6 @@ public class Bullet : MonoBehaviour
     // ----------------------------------------------------------------------
     // 对象池相关
     // ----------------------------------------------------------------------
-
     private IEnumerator AutoReturnToPool(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -415,18 +531,15 @@ public class Bullet : MonoBehaviour
 
     public void ResetToPool()
     {
-        // 停用当前激活的持续效果
         if (currentActiveTiming != null && IsContinuousEffect(currentActiveTiming.module))
         {
             StopContinuousEffect(currentActiveTiming);
         }
 
-        // 停止所有协程
         StopAllCoroutines();
         if (lifeCoroutine != null)
             StopCoroutine(lifeCoroutine);
 
-        // 重置物理
         if (rb != null)
         {
             rb.velocity = Vector2.zero;
@@ -434,15 +547,12 @@ public class Bullet : MonoBehaviour
             rb.isKinematic = false;
         }
 
-        // 重置标志
         isOrbiting = false;
         isInitialized = false;
 
-        // 清空时序数据
         timings.Clear();
         currentActiveTiming = null;
 
-        // 清空其他列表（原代码兼容）
         if (correctors != null)
             correctors.Clear();
         if (correctorTimers != null)

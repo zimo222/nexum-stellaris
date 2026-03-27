@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e4a0bcac50fd954092a1c8d99bd6843, type: 3}
-  m_Name: Modifier_Split_2X
+  m_Name: Modifier_Multishot_4X
   m_EditorClassIdentifier: 
-  id: Modifier_Split_2X
-  moduleName: "\u5206\u88C2"
+  id: Modifier_Multishot_4X
+  moduleName: "\u6EE1\u819B\xB7\u8086"
   moduleType: 1
   delay: 0
   bulletDefine: {fileID: 0}
@@ -21,12 +21,12 @@ MonoBehaviour:
   damageMultiplier: 1
   homingStrength: 0
   rotateSpeed: 0
-  splitCount: 2
-  splitAngle: 30
+  splitCount: 4
+  splitAngle: 0
   burstCount: 0
   burstDelay: 0
   multicastCount: 0
   orbitRadius: 0
   orbitSpeed: 0
   fieldAngle: 0
-  icon: {fileID: 21300000, guid: ed7cdc1a7288d724e876e7196d237ac5, type: 3}
+  icon: {fileID: 21300000, guid: 99f2ee31f2c8d614388ff0a414b886af, type: 3}
