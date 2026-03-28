@@ -19,7 +19,6 @@ public class Player : Entity
     [Header("Dash info")]
     public float dashSpeed;
     public float dashDuration;
-    public Vector2 dashDirection { get; private set; } = new Vector2 ( 0, -1 ); // 新增：八向冲刺方向
 
     public float jumpStartY { get; set; } // 记录起跳时的 y 坐标
     public bool isJumping { get; set; }

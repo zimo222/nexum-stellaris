@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class Enemy : Entity
 {
@@ -124,6 +125,7 @@ public class Enemy : Entity
     {
         Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
         SetVelocity(direction.x * moveSpeed, direction.y * moveSpeed);
+        dashDirection = direction.normalized;
     }
 
     // 巡逻逻辑：在起始点周围随机移动（可被状态调用）

@@ -16,4 +16,4 @@ MonoBehaviour:
   speed: 200
   damage: 2
   prefab: {fileID: 3305386069859194172, guid: 53830be08944f8145b549524dcd3abaa, type: 3}
-  lifetime: 10
+  lifetime: 5

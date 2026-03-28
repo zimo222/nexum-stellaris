@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class Entity : MonoBehaviour
 {    
@@ -26,10 +27,13 @@ public class Entity : MonoBehaviour
     [SerializeField] protected float wallCheckDistance;
     [SerializeField] protected LayerMask whatIsGround;
 
+
+
     public int facingxDir { get; private set; } = 1;
     protected bool facingRight = true;
     public int facingyDir { get; private set; } = -1;
     protected bool facingUp = false;
+    public Vector2 dashDirection { get; protected set; } = new Vector2(0, -1); // 新增：八向冲刺方向
 
     protected virtual void Awake()
     {
@@ -87,6 +91,11 @@ public class Entity : MonoBehaviour
 
         rb.velocity = new Vector2(_xVelocity, _yVelocity);
         FlipController(_xVelocity, _yVelocity);
+
+        if (_xVelocity != 0 || _yVelocity != 0)
+        {
+            dashDirection = new Vector2(_xVelocity, _yVelocity).normalized;
+        }
     }
     #endregion
     #region Collision

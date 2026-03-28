@@ -30,6 +30,8 @@ public class EnemyState
         triggerCalled = false;
         rb = enemyBase.rb;
         enemyBase.anim.SetBool(animBoolName, true);
+        enemyBase.anim.SetFloat("xDir", enemyBase.dashDirection.x);
+        enemyBase.anim.SetFloat("yDir", enemyBase.dashDirection.y);
     }
 
     public virtual void Exit()

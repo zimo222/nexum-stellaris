@@ -14,6 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: CombatTest_Quest
   questName: "\u6218\u6597\u6D4B\u8BD5\u4EFB\u52A1"
+  questNum: 
+  chapterName: 
+  chapterNum: 
+  lastQuestId: 
   category: 1
   contentType: 1
   nextQuestIds: []
@@ -23,9 +27,13 @@ MonoBehaviour:
   waves:
   - waveName: 
     enemies:
-    - enemyPrefab: {fileID: 220537008825880356, guid: d543a5588c39db8419b36a4b17fa89da, type: 3}
+    - enemyPrefab: {fileID: 220537008825880356, guid: 8813d5ae6fb6a2e43bc65afaded4465e, type: 3}
       count: 2
   - waveName: 
     enemies:
-    - enemyPrefab: {fileID: 220537008825880356, guid: d543a5588c39db8419b36a4b17fa89da, type: 3}
-      count: 3
+    - enemyPrefab: {fileID: 220537008825880356, guid: d58b3c2281ad1974fae4450263bd5989, type: 3}
+      count: 2
+  - waveName: 
+    enemies:
+    - enemyPrefab: {fileID: 220537008825880356, guid: d32223e736f03494b85483eb2cdc750c, type: 3}
+      count: 2

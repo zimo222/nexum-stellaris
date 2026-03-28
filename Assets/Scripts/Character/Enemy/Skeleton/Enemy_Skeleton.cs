@@ -10,6 +10,7 @@ public class Enemy_Skeleton : Enemy
     public SkeletonStunnedState stunnedState { get; private set; }
     #endregion
 
+
     protected override void Awake()
     {
         base.Awake();

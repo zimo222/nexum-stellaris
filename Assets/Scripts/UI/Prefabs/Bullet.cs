@@ -13,7 +13,7 @@ public class Bullet : MonoBehaviour
     private Rigidbody2D rb;
     private bool isInitialized = false;
     private float startTime;
-    private float totalLifeTime = 5f;
+    private float totalLifeTime = 15f;
 
     private class CorrectorTiming
     {
@@ -78,7 +78,7 @@ public class Bullet : MonoBehaviour
 
     public void Initialize(Vector2 direction, GameObject owner, float speed, int damage,
                           Vector2 spawnPos, List<SpellModuleSO> correctors, GameObject sourcePrefab,
-                          float lifeTime = 5f)
+                          float lifeTime = 15f)
     {
         ResetToPool();
 
@@ -126,7 +126,7 @@ public class Bullet : MonoBehaviour
     // ----------------------------------------------------------------------
     // 克隆方法（修复生命周期复制）
     // ----------------------------------------------------------------------
-
+    
     public void CloneFrom(Bullet source)
     {
         if (rb == null)
@@ -161,6 +161,21 @@ public class Bullet : MonoBehaviour
             });
         }
 
+        /*
+        // ★ 过滤掉已经过期的一次性效果（避免子子弹重复触发）
+        float elapsed = Time.time - startTime;
+        this.timings.RemoveAll(t =>
+        {
+            // 一次性效果（endTime 为无穷大）且开始时间已过 → 移除
+            if (float.IsPositiveInfinity(t.endTime) && t.startTime <= elapsed)
+                return true;
+            // 持续性效果如果已过结束时间（理论上不会，但安全起见也移除）
+            if (!float.IsPositiveInfinity(t.endTime) && t.endTime <= elapsed)
+                return true;
+            return false;
+        });
+
+        */
         this.currentActiveTiming = null;
         if (source.currentActiveTiming != null)
         {
@@ -191,11 +206,13 @@ public class Bullet : MonoBehaviour
         if (remaining < 0) remaining = 0;
         lifeCoroutine = StartCoroutine(AutoReturnToPool(remaining));
     }
+    
+
 
     // ----------------------------------------------------------------------
     // 修正类切换逻辑
     // ----------------------------------------------------------------------
-
+    
     private void UpdateActiveCorrector()
     {
         float elapsed = Time.time - startTime;
@@ -235,6 +252,8 @@ public class Bullet : MonoBehaviour
             }
         }
     }
+    
+
 
     // 判断模块是否为持续效果
     private bool IsContinuousEffect(SpellModuleSO module)
