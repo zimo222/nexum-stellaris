@@ -59,7 +59,7 @@ public class CharacterPanel : BPanel
     private void UpdateCharacterInfo()
     {
         if(nameText != null) nameText.text = currentPlayerData.PlayerName;
-        if(levelText != null) levelText.text = $"Lv.{currentPlayerData.Level}";
+        if(levelText != null) levelText.text = $"{currentPlayerData.Level}";
         if(expText != null) expText.text = $"EXP: {currentPlayerData.Experience}";
 
         var stats = currentPlayerData.BaseStats;

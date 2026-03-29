@@ -28,9 +28,8 @@ public class PlayerData
     public int skillNum;
     public SkillData[] Skills;
     // 装备索引（指向EquipmentBag的下标）
-    // 新增：每个武器类别当前装备的武器 ID（null 表示未装备）
+    // 每个武器类别当前装备的武器 ID（null 表示未装备）
     public string[] EquippedExotextIds = new string[7];
-    //public int EquippedExotextIndex = -1;             // 绎语索引
     public int EquippedCogniThreadIndex = -1;         // 思缕索引
     public int EquippedTangibleNexusIndex = -1;       // 触络索引
     public int EquippedAbyssalHeartIndex = -1;        // 装心索引
@@ -39,7 +38,11 @@ public class PlayerData
     public List<ExotextData> ExotextBag = new List<ExotextData>();
     public List<NexusVestureData> NexusVestureBag = new List<NexusVestureData>();
     public List<MaterialData> MaterialBag = new List<MaterialData>();
+
+    // ========== 修改点：将单个模块列表扩展为7个武器的模块列表 ==========
+    public List<string>[] equippedModuleIdsForWeapons = new List<string>[7];
     public List<string> equippedModuleIds; // 当前装备的模块ID列表
+    //public List<string>[] equippedModuleIds = new List<string>[7];
 
     // ====================   任务角色与装备系统   ====================
     public List<PlayerQuestProgress> activeQuests;       // 进行中的任务列表
@@ -76,6 +79,12 @@ public class PlayerData
         // 任务系统初始化为空，第一个任务通常由剧情触发
         activeQuests = new List<PlayerQuestProgress>();
         completedQuestIds = new List<string>();
+
+        // 初始化7个武器的模块列表
+        for (int i = 0; i < 7; i++)
+        {
+            equippedModuleIdsForWeapons[i] = new List<string>();
+        }
 
         InitializeDefaultNexumIdem();
         InitializeDefaultMaterial();

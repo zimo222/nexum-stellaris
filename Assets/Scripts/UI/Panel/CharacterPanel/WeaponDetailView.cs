@@ -41,14 +41,14 @@ public class WeaponDetailView : MonoBehaviour
         if (weaponNameText) weaponNameText.text = LocalizationManager.Instance.GetText("Exotext_Name", weapon.Id + "_Name") ?? "";
         if (weaponTypeText) weaponTypeText.text = weapon.Type.ToString();
         if (starsText) starsText.text = $"¡ï{weapon.Stats.Stars}";
-        if (attackText) attackText.text = $"¹¥»÷ {weapon.Stats.Attack}";
-        if (healthText) healthText.text = $"ÉúÃü {weapon.Stats.Health}";
-        if (defenceText) defenceText.text = $"·ÀÓù {weapon.Stats.Defence}";
-        if (critRateText) critRateText.text = $"±©»÷ÂÊ {weapon.Stats.CritRate * 100:F0}%";
-        if (critDamageText) critDamageText.text = $"±©»÷ÉËº¦ {weapon.Stats.CritDamage * 100:F0}%";
-        if (elementBonusText) elementBonusText.text = $"ÔªËØ¼Ó³É {weapon.Stats.ElementBonus * 100:F0}%";
+        if (attackText) attackText.text = $"{weapon.Stats.Attack}";
+        if (healthText) healthText.text = $"{weapon.Stats.Health}";
+        if (defenceText) defenceText.text = $"{weapon.Stats.Defence}";
+        if (critRateText) critRateText.text = $"{weapon.Stats.CritRate * 100:F0}%";
+        if (critDamageText) critDamageText.text = $"{weapon.Stats.CritDamage * 100:F0}%";
+        if (elementBonusText) elementBonusText.text = $"{weapon.Stats.ElementBonus * 100:F0}%";
         if (introductionText) introductionText.text = LocalizationManager.Instance.GetText("Exotext_Introduction", weapon.Id) ?? "";
-        if (descriptionText) descriptionText.text = currentExotext.description ?? "";
+        if (descriptionText) descriptionText.text = LocalizationManager.Instance.GetText("Exotext_Description", weapon.Id) ?? "";
 
         gameObject.SetActive(true);
     }

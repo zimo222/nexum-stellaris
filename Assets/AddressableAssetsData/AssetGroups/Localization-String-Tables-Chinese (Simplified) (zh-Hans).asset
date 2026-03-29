@@ -29,6 +29,18 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-zh-Hans
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6c8088b0ef3dd6f43acd4e1aef2168f0
+    m_Address: CharacterPanel_PbText_zh-Hans
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-zh-Hans
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a53cec9088c7e2c4bb557d7fb6150b00
+    m_Address: Exotext_Description_zh-Hans
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-zh-Hans
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c8ac6954881014249a065dc80d5a2efa
     m_Address: LoadingPanel_zh-Hans
     m_ReadOnly: 1

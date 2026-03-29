@@ -27,6 +27,17 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3efa27c3d1124fe4ba509ef8e58a1647
+    m_Address: Assets/Resources/Language/Exotext/Exotext_Description Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 54b1796751c8f0b448ced519c00f1e28
+    m_Address: Assets/Resources/Language/CharacterPanel/CharacterPanel_PbText Shared
+      Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 75fcc26bbb82a2e4f86c15a95e781df7
     m_Address: Assets/Resources/Language/0_MainMenu Shared Data.asset
     m_ReadOnly: 1

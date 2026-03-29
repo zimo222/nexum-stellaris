@@ -12,6 +12,7 @@ public class PanelMenuSection
     public Button[] smallButtons;
     public GameObject[] smallPanel;
 }
+
 public class CharacterPanelController : BPanel
 {
     [Header("View引用")]
@@ -21,36 +22,32 @@ public class CharacterPanelController : BPanel
     [SerializeField] private PanelMenuSection[] menuSections;
     private int largeIndex = -1, smallIndex = -1;
 
-
     [Header("颜色方案")]
     [SerializeField] private Color largeSelectedColor = Color.white;
     [SerializeField] private Color largeNormalColor = Color.gray;
     [SerializeField] private Color smallSelectedColor = Color.yellow;
     [SerializeField] private Color smallNormalColor = Color.white;
 
+    // ========== 新增：模块设计面板引用 ==========
+    [Header("模块设计")]
+    [SerializeField] private SpellCraftingPanel spellCraftingPanel;
+
     private PlayerData playerData;
     private GameObject currentPanel;
+    private Button[] weaponButtons;          // 缓存武器按钮数组
 
-    // Start is called before the first frame update
     void Start()
     {
         Initialize();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    // 初始化
     void Initialize()
     {
         LoadData();
         InitializeUI();
+        BindWeaponButtons();   // 绑定武器按钮事件
     }
 
-    // 加载玩家数据
     void LoadData()
     {
         if (PlayerDataManager.Instance != null)
@@ -59,7 +56,6 @@ public class CharacterPanelController : BPanel
             playerData = new PlayerData("测试玩家");
     }
 
-    // 初始化UI
     void InitializeUI()
     {
         for (int i = 0; i < menuSections.Length; i++)
@@ -77,29 +73,68 @@ public class CharacterPanelController : BPanel
         if (menuSections.Length > 0)
         {
             OnLargeButtonClick(0);
-            /*
-            if (menuSections[0].smallButtonPools != null && menuSections[0].smallButtonPools.Length > 0)
-            {
-                var firstPool = menuSections[0].smallButtonPools[0];
-            }
-            */
         }
-        /*
-        // 绑定详情面板关闭按钮（仅用于材料）
-        if (closeDetailButton != null)
-            closeDetailButton.onClick.AddListener(HideDetailPanel);
 
-        // 初始化详情面板为隐藏
-        if (detailPanel != null)
-            detailPanel.SetActive(false);
-
-        */
         view.UpdateUI(playerData);
+    }
+
+    // ========== 绑定武器选择按钮（使用 menuSections[2].smallButtons） ==========
+    private void BindWeaponButtons()
+    {
+        // 确保存在第3个菜单栏（索引2），且其 smallButtons 长度至少为7
+        if (menuSections.Length <= 2)
+        {
+            Debug.LogError("menuSections 中没有索引为2的菜单栏，无法获取武器按钮");
+            return;
+        }
+
+        weaponButtons = menuSections[2].smallButtons;
+        if (weaponButtons == null || weaponButtons.Length < 7)
+        {
+            Debug.LogError("武器按钮数量不足7个，请检查 menuSections[2].smallButtons 配置");
+            return;
+        }
+
+        for (int i = 0; i < weaponButtons.Length; i++)
+        {
+            int weaponIndex = i;
+            weaponButtons[i].onClick.AddListener(() => OnWeaponButtonClicked(weaponIndex));
+        }
+
+        // 默认选中第一个武器按钮的高亮（可选）
+        HighlightWeaponButton(0);
+    }
+
+    // 武器按钮点击回调
+    private void OnWeaponButtonClicked(int weaponIndex)
+    {
+        if (spellCraftingPanel == null)
+        {
+            Debug.LogError("未引用 SpellCraftingPanel");
+            return;
+        }
+        spellCraftingPanel.SetCurrentWeaponIndex(weaponIndex);
+        HighlightWeaponButton(weaponIndex);
+        Debug.Log($"切换到武器 {weaponIndex} 的模块配置");
+    }
+
+    // 高亮当前选中的武器按钮（复用 small 高亮颜色）
+    private void HighlightWeaponButton(int selectedIndex)
+    {
+        if (weaponButtons == null) return;
+        for (int i = 0; i < weaponButtons.Length; i++)
+        {
+            Button btn = weaponButtons[i];
+            if (btn != null && btn.targetGraphic != null)
+            {
+                btn.targetGraphic.color = (i == selectedIndex) ? smallSelectedColor : smallNormalColor;
+            }
+        }
     }
 
     private void OnLargeButtonClick(int LargeIndex)
     {
-        if (largeIndex == LargeIndex) return;//点的是当前的
+        if (largeIndex == LargeIndex) return;
         largeIndex = LargeIndex;
         smallIndex = -1;
 
@@ -110,11 +145,11 @@ public class CharacterPanelController : BPanel
             SetSmallButtonsActive(i, isCurrent);
         }
 
-        if (menuSections[largeIndex].smallButtons.Length > 0)//有小面板
+        if (menuSections[largeIndex].smallButtons.Length > 0)
         {
             OnSmallButtonClick(largeIndex, 0);
         }
-        else//没小面板
+        else
         {
             if (currentPanel != null) currentPanel.gameObject.SetActive(false);
             currentPanel = menuSections[largeIndex].largePanel;
@@ -124,9 +159,8 @@ public class CharacterPanelController : BPanel
 
     private void OnSmallButtonClick(int largeIdx, int smallIdx)
     {
-
         if (smallIndex == smallIdx) return;
-        currentPanel.gameObject.SetActive(false);
+        if (currentPanel != null) currentPanel.gameObject.SetActive(false);
         smallIndex = smallIdx;
         SetSmallButtonHighlight(largeIdx, smallIdx);
 
@@ -143,6 +177,29 @@ public class CharacterPanelController : BPanel
         }
         currentPanel = menuSections[largeIdx].smallPanel[smallIdx];
         currentPanel.gameObject.SetActive(true);
+
+        // ========== 如果切换到的是模块设计面板，刷新当前武器的显示 ==========
+        // 假设模块设计面板对应的 largeIdx=2，且它的某个 smallPanel 就是 SpellCraftingPanel 所在的面板。
+        // 为了确保显示正确的武器数据，可以主动调用一次设置当前武器索引（保持当前选中的武器）
+        if (largeIdx == 2 && spellCraftingPanel != null)
+        {
+            // 获取当前选中的武器索引（默认0，或者从高亮按钮中获取）
+            int currentWeapon = GetCurrentWeaponIndex();
+            spellCraftingPanel.SetCurrentWeaponIndex(currentWeapon);
+            HighlightWeaponButton(currentWeapon);
+        }
+    }
+
+    // 辅助方法：获取当前选中的武器索引（根据高亮按钮颜色判断）
+    private int GetCurrentWeaponIndex()
+    {
+        if (weaponButtons == null) return 0;
+        for (int i = 0; i < weaponButtons.Length; i++)
+        {
+            if (weaponButtons[i].targetGraphic != null && weaponButtons[i].targetGraphic.color == smallSelectedColor)
+                return i;
+        }
+        return 0; // 默认第一个
     }
 
     private void SetLargeButtonAppearance(int largeIdx, bool isSelected)
@@ -151,7 +208,6 @@ public class CharacterPanelController : BPanel
         if (btn.targetGraphic != null)
         {
             btn.targetGraphic.color = isSelected ? largeSelectedColor : largeNormalColor;
-
         }
     }
 
@@ -173,5 +229,4 @@ public class CharacterPanelController : BPanel
             }
         }
     }
-
 }

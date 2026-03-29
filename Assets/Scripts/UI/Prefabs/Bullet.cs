@@ -78,7 +78,7 @@ public class Bullet : MonoBehaviour
 
     public void Initialize(Vector2 direction, GameObject owner, float speed, int damage,
                           Vector2 spawnPos, List<SpellModuleSO> correctors, GameObject sourcePrefab,
-                          float lifeTime = 15f)
+                          float lifeTime = 5f)
     {
         ResetToPool();
 

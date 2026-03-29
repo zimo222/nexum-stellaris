@@ -744,4 +744,31 @@ public class PlayerDataManager : MonoBehaviour
     }
 
     #endregion
+
+    // ==================== 模块配置存取辅助方法 ====================
+    #region 模块配置存取
+    /// <summary> 获取指定武器的模块ID列表 </summary>
+    public List<string> GetWeaponModuleList(int weaponIndex)
+    {
+        if (CurrentPlayerData == null || weaponIndex < 0 || weaponIndex >= 7)
+            return null;
+        return CurrentPlayerData.equippedModuleIdsForWeapons[weaponIndex];
+    }
+
+    /// <summary> 设置指定武器的模块ID列表 </summary>
+    public void SetWeaponModuleList(int weaponIndex, List<string> moduleIds)
+    {
+        if (CurrentPlayerData == null || weaponIndex < 0 || weaponIndex >= 7)
+            return;
+        CurrentPlayerData.equippedModuleIdsForWeapons[weaponIndex] = moduleIds ?? new List<string>();
+        SaveCurrentPlayerData();
+        OnPlayerDataChanged?.Invoke(CurrentPlayerData);
+    }
+
+    /// <summary> 保存单个武器的模块配置（由SpellCraftingPanel调用）</summary>
+    public void SaveWeaponModules(int weaponIndex, List<string> moduleIds)
+    {
+        SetWeaponModuleList(weaponIndex, moduleIds);
+    }
+    #endregion
 }

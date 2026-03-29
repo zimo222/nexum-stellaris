@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: CharacterPanel_PbText Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: CharacterPanel_PbText
+  m_TableCollectionNameGuidString: 54b1796751c8f0b448ced519c00f1e28
+  m_Entries:
+  - m_Id: 26320003072
+    m_Key: Level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 96079667200
+    m_Key: Health
+    m_Metadata:
+      m_Items: []
+  - m_Id: 179571482624
+    m_Key: Attack
+    m_Metadata:
+      m_Items: []
+  - m_Id: 236316221440
+    m_Key: Defence
+    m_Metadata:
+      m_Items: []
+  - m_Id: 296319934464
+    m_Key: CritRate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 531918184448
+    m_Key: CritDamage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 587090059264
+    m_Key: Element
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 1156908975612755975
+  references:
+    version: 2
+    RefIds:
+    - rid: 1156908975612755975
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1774701722726
