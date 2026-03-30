@@ -677,9 +677,7 @@ public class PlayerDataManager : MonoBehaviour
             energy: def.baseEnergy,
             critRate: def.baseCritRate,
             critDamage: def.baseCritDamage,
-            elementBonus: def.baseElementBonus,
-            introduction: def.introduction,
-            description: def.description
+            elementBonus: def.baseElementBonus
         );
         CurrentPlayerData.ExotextBag.Add(weapon);
         CurrentPlayerData.SortedBag(); // ±£≥÷≈≈–Ú

@@ -167,8 +167,7 @@ public class PlayerData
             element: def.element,
             stars: def.baseStars, maxstars: def.maxStars,
             health: def.baseHealth, attack: def.baseAttack, defence: def.baseDefence,
-            energy: def.baseEnergy, critRate: def.baseCritRate, critDamage: def.baseCritDamage, elementBonus: def.baseElementBonus,
-            introduction: def.introduction, description: def.description
+            energy: def.baseEnergy, critRate: def.baseCritRate, critDamage: def.baseCritDamage, elementBonus: def.baseElementBonus
         );
         ExotextBag.Add(weapon);
     }
@@ -182,8 +181,7 @@ public class PlayerData
             element: def.element,
             stars: def.baseStars, maxstars: def.maxStars,
             health: def.baseHealth, attack: def.baseAttack, defence: def.baseDefence,
-            energy: def.baseEnergy, critRate: def.baseCritRate, critDamage: def.baseCritDamage, elementBonus: def.baseElementBonus,
-            introduction: def.introduction, description: def.description
+            energy: def.baseEnergy, critRate: def.baseCritRate, critDamage: def.baseCritDamage, elementBonus: def.baseElementBonus
         );
         NexusVestureBag.Add(stigmata);
     }

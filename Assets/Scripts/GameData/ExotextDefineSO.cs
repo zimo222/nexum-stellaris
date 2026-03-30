@@ -27,10 +27,10 @@ public class ExotextDefineSO : ScriptableObject
     public float baseElementBonus;
 
     public Sprite icon;
-
+    /*
     [TextArea] public string introduction;
     [TextArea] public string description;
-
+    */
 
     /*
     [System.Serializable]
