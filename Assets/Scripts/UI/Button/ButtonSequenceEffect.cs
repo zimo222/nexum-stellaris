@@ -261,13 +261,3 @@ public class ButtonSequenceEffect : MonoBehaviour
         return btn.targetGraphic;
     }
 }
-
-/// <summary>
-/// 动画播放模式枚举
-/// </summary>
-public enum AnimationPlayMode
-{
-    Always,          // 每次激活都播放
-    Once,            // 每个实例生命周期内仅首次播放（对象不销毁则持续）
-    OnceGlobally      // 全局仅首次播放（基于唯一ID，跨实例持久，直到游戏关闭）
-}

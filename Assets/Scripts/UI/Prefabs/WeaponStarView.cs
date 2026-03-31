@@ -11,7 +11,7 @@ public class WeaponStarView : MonoBehaviour
     public TextMeshProUGUI starNameText;   // 可选：显示武器名
 
     [Header("状态颜色")]
-    public Color lockedColor = new Color(0.3f, 0.3f, 0.3f, 1f);       // 未解锁
+    public Color lockedColor = new Color(0.2f, 0.2f, 0.2f, 1f);       // 未解锁
     public Color unlockedNotEquippedColor = new Color(0.8f, 0.6f, 0.2f, 1f); // 暗黄
     public Color equippedColor = new Color(1, 1, 0, 1);   // 亮金
 
