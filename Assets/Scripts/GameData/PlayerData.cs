@@ -40,7 +40,9 @@ public class PlayerData
     public List<MaterialData> MaterialBag = new List<MaterialData>();
 
     // ========== 修改点：将单个模块列表扩展为7个武器的模块列表 ==========
-    public List<string>[] equippedModuleIdsForWeapons = new List<string>[7];
+
+    // 替换原来的定义
+    public WeaponModuleList[] equippedModuleIdsForWeapons = new WeaponModuleList[7];
     public List<string> equippedModuleIds; // 当前装备的模块ID列表
     //public List<string>[] equippedModuleIds = new List<string>[7];
 
@@ -83,7 +85,7 @@ public class PlayerData
         // 初始化7个武器的模块列表
         for (int i = 0; i < 7; i++)
         {
-            equippedModuleIdsForWeapons[i] = new List<string>();
+            equippedModuleIdsForWeapons[i] = new WeaponModuleList();
         }
 
         InitializeDefaultNexumIdem();
@@ -319,6 +321,11 @@ public class NexusVestureData: NexumIdemData
     {
         Position = position;
     }
+}
+[System.Serializable]
+public class WeaponModuleList
+{
+    public List<string> moduleIds = new List<string>();
 }
 // ==================== 材料数据类 ====================
 [System.Serializable]

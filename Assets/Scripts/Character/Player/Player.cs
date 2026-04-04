@@ -111,7 +111,7 @@ public class Player : Entity
     public void SpawnBullet()
     {
         // 获取玩家装备的法术模块ID列表（从 PlayerData 中）
-        List<string> moduleIds = playerData.equippedModuleIdsForWeapons[0]; // 假设有此字段
+        List<string> moduleIds = PlayerDataManager.Instance.GetWeaponModuleList(0); // 假设有此字段
                                                                // 构建法术序列
         SpellSequence sequence = SpellSequenceBuilder.BuildSequence(moduleIds);
 

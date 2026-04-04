@@ -66,6 +66,7 @@ public class SpellCraftingPanel : MonoBehaviour
     // 从玩家数据加载当前武器的模块列表到槽位
     private void LoadPlayerConfiguration()
     {
+        // 假设 GetWeaponModuleList 返回的是 WeaponModuleList 类型
         List<string> moduleIds = PlayerDataManager.Instance.GetWeaponModuleList(currentWeaponIndex);
         if (moduleIds == null) return;
 
