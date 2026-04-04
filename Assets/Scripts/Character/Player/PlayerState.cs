@@ -40,6 +40,7 @@ public class PlayerState
         player.anim.SetFloat("yVelocity", rb.velocity.y);
         player.anim.SetFloat("xDir", player.dashDirection.x);
         player.anim.SetFloat("yDir", player.dashDirection.y);
+        CheckSpellSlotInput();
     }
 
     public virtual void Exit()
@@ -50,5 +51,16 @@ public class PlayerState
     public virtual void AnimationFinishTrigger()
     {
         triggerCalled = true;
+    }
+
+    private void CheckSpellSlotInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1)) player.selectedSpellIndex = 0;
+        else if (Input.GetKeyDown(KeyCode.Alpha2)) player.selectedSpellIndex = 1;
+        else if (Input.GetKeyDown(KeyCode.Alpha3)) player.selectedSpellIndex = 2;
+        else if (Input.GetKeyDown(KeyCode.Alpha4)) player.selectedSpellIndex = 3;
+        else if (Input.GetKeyDown(KeyCode.Alpha5)) player.selectedSpellIndex = 4;
+        else if (Input.GetKeyDown(KeyCode.Alpha6)) player.selectedSpellIndex = 5;
+        else if (Input.GetKeyDown(KeyCode.Alpha7)) player.selectedSpellIndex = 6;
     }
 }

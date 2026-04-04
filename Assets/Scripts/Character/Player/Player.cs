@@ -37,6 +37,10 @@ public class Player : Entity
 
     private PlayerData playerData;
 
+
+    [Header("Spell selection")]
+    public int selectedSpellIndex = 0;
+
     protected override void Awake()
     {
         base.Awake();
@@ -111,7 +115,7 @@ public class Player : Entity
     public void SpawnBullet()
     {
         // 获取玩家装备的法术模块ID列表（从 PlayerData 中）
-        List<string> moduleIds = PlayerDataManager.Instance.GetWeaponModuleList(0); // 假设有此字段
+        List<string> moduleIds = PlayerDataManager.Instance.GetWeaponModuleList(selectedSpellIndex); // 假设有此字段
                                                                // 构建法术序列
         SpellSequence sequence = SpellSequenceBuilder.BuildSequence(moduleIds);
 
