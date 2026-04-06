@@ -3,20 +3,22 @@ using UnityEngine.UI;
 using TMPro;
 
 [RequireComponent(typeof(Button))]
-public class WeaponStarView : MonoBehaviour
+public class NexumIdemStarView : MonoBehaviour
 {
     [Header("配置")]
-    public string weaponDefineId;          // 对应武器的 ID
-    public Image starImage;                // 星辰图片（用于变色）
-    public TextMeshProUGUI starNameText;   // 可选：显示武器名
+    public string ItemDefineId;              // 装备ID（武器或防具）
+    public Image starImage;
+    public TextMeshProUGUI starNameText;
 
     [Header("状态颜色")]
-    public Color lockedColor = new Color(0.2f, 0.2f, 0.2f, 1f);       // 未解锁
-    public Color unlockedNotEquippedColor = new Color(0.8f, 0.6f, 0.2f, 1f); // 暗黄
-    public Color equippedColor = new Color(1, 1, 0, 1);   // 亮金
+    public Color lockedColor = new Color(0.2f, 0.2f, 0.2f, 1f);
+    public Color unlockedNotEquippedColor = new Color(0.8f, 0.6f, 0.2f, 1f);
+    public Color equippedColor = new Color(1, 1, 0, 1);
+
+    public NexumIdemStarPanelController.NexumIdemMode Mode { get; private set; }
 
     private Button button;
-    private WeaponStarPanelController controller;
+    private NexumIdemStarPanelController controller;
 
     void Awake()
     {
@@ -24,12 +26,12 @@ public class WeaponStarView : MonoBehaviour
         button.onClick.AddListener(OnClick);
     }
 
-    public void Initialize(WeaponStarPanelController ctrl)
+    public void Initialize(NexumIdemStarPanelController ctrl, NexumIdemStarPanelController.NexumIdemMode mode)
     {
         controller = ctrl;
+        Mode = mode;
     }
 
-    /// <summary> 根据武器状态更新颜色 </summary>
     public void UpdateState(bool unlocked, bool isEquipped)
     {
         if (starImage == null) return;

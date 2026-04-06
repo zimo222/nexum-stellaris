@@ -743,6 +743,110 @@ public class PlayerDataManager : MonoBehaviour
 
     #endregion
 
+
+    // ==================== 防具系统业务逻辑 ====================
+    #region 防具系统业务逻辑
+
+    public List<NexusVestureData> GetAllNexusVestures()
+    {
+        return CurrentPlayerData?.NexusVestureBag ?? new List<NexusVestureData>();
+    }
+
+    public NexusVestureData GetNexusVestureByDefineId(string defineId)
+    {
+        return CurrentPlayerData?.NexusVestureBag.Find(a => a.Id == defineId);
+    }
+
+    public bool IsNexusVestureUnlocked(string defineId)
+    {
+        return GetNexusVestureByDefineId(defineId) != null;
+    }
+
+    public bool AddNexusVesture(string defineId)
+    {
+        if (CurrentPlayerData == null) return false;
+        if (IsNexusVestureUnlocked(defineId)) return false;
+
+        if (!GameDataManager.Instance.NexusVestureDict.TryGetValue(defineId, out var def))
+        {
+            Debug.LogError($"未找到防具定义: {defineId}");
+            return false;
+        }
+
+        var vesture = new NexusVestureData(
+            id: def.id,
+            position: def.Position,
+            element: def.element,
+            stars: def.baseStars,
+            maxstars: def.maxStars,
+            health: def.baseHealth,
+            attack: def.baseAttack,
+            defence: def.baseDefence,
+            energy: def.baseEnergy,
+            critRate: def.baseCritRate,
+            critDamage: def.baseCritDamage,
+            elementBonus: def.baseElementBonus
+        );
+        CurrentPlayerData.NexusVestureBag.Add(vesture);
+        CurrentPlayerData.SortedBag();
+        SaveCurrentPlayerData();
+        OnPlayerDataChanged?.Invoke(CurrentPlayerData);
+        return true;
+    }
+
+    public string GetEquippedNexusVestureId(NexusVesturePosition pos)
+    {
+        if (CurrentPlayerData == null) return null;
+        int idx = (int)pos;
+        if (idx < 0 || idx >= CurrentPlayerData.EquippedNexusVestureIds.Length) return null;
+        return CurrentPlayerData.EquippedNexusVestureIds[idx];
+    }
+
+    public NexusVestureData GetEquippedNexusVesture(NexusVesturePosition pos)
+    {
+        string id = GetEquippedNexusVestureId(pos);
+        if (string.IsNullOrEmpty(id)) return null;
+        return GetNexusVestureByDefineId(id);
+    }
+
+    public bool EquipNexusVesture(string defineId)
+    {
+        if (CurrentPlayerData == null) return false;
+        var vesture = GetNexusVestureByDefineId(defineId);
+        if (vesture == null)
+        {
+            Debug.LogError($"未获得防具: {defineId}");
+            return false;
+        }
+
+        int posIdx = (int)vesture.Position;
+        if (posIdx < 0 || posIdx >= CurrentPlayerData.EquippedNexusVestureIds.Length) return false;
+
+        if (CurrentPlayerData.EquippedNexusVestureIds[posIdx] == defineId)
+            return true;
+
+        CurrentPlayerData.EquippedNexusVestureIds[posIdx] = defineId;
+        SaveCurrentPlayerData();
+        OnPlayerDataChanged?.Invoke(CurrentPlayerData);
+        return true;
+    }
+
+    public bool UnequipNexusVesture(NexusVesturePosition pos)
+    {
+        if (CurrentPlayerData == null) return false;
+        int idx = (int)pos;
+        if (idx < 0 || idx >= CurrentPlayerData.EquippedNexusVestureIds.Length) return false;
+        if (CurrentPlayerData.EquippedNexusVestureIds[idx] == null) return false;
+
+        CurrentPlayerData.EquippedNexusVestureIds[idx] = null;
+        SaveCurrentPlayerData();
+        OnPlayerDataChanged?.Invoke(CurrentPlayerData);
+        return true;
+    }
+
+    #endregion
+
+
     // ==================== 模块配置存取辅助方法 ====================
     #region 模块配置存取
     // 获取指定武器的模块ID列表（返回 List<string>）

@@ -2111,7 +2111,7 @@ GameObject:
   - component: {fileID: 76307175}
   - component: {fileID: 76307174}
   m_Layer: 5
-  m_Name: Exotext_005_MnemonicTool
+  m_Name: NexusVesture_005_VolitionVein
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2148,10 +2148,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_MnemonicTool
+  ItemDefineId: NexusVesture_005_VolitionVein
   starImage: {fileID: 76307176}
   starNameText: {fileID: 0}
-  lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   unlockedNotEquippedColor: {r: 0.8, g: 0.6, b: 0.2, a: 1}
   equippedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &76307175
@@ -2287,7 +2287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_003_StellarScribe
+  ItemDefineId: Exotext_003_StellarScribe
   starImage: {fileID: 80648400}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -2647,48 +2647,47 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100389741}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 02c4791f103a9ed408e60c726ac4b9ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  starViews:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  mode: 1
+  exotextStarViews: []
+  nexusVestureStarViews:
+  - {fileID: 1055181361}
+  - {fileID: 1354521108}
+  - {fileID: 1552525049}
+  - {fileID: 612408105}
+  - {fileID: 1582701576}
+  - {fileID: 1825316540}
+  - {fileID: 669366598}
+  - {fileID: 936210770}
+  - {fileID: 1366313698}
+  - {fileID: 1423511523}
+  - {fileID: 1976348317}
+  - {fileID: 76307174}
+  - {fileID: 704344845}
+  - {fileID: 165908743}
+  - {fileID: 2087326288}
+  - {fileID: 1162386041}
+  - {fileID: 941822827}
+  - {fileID: 1006223544}
+  - {fileID: 2040255216}
+  - {fileID: 816981553}
+  - {fileID: 1528998793}
+  - {fileID: 1613949669}
+  - {fileID: 1555216967}
+  - {fileID: 1549202867}
   - {fileID: 540428869}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1567372184}
+  - {fileID: 125757663}
+  - {fileID: 2133050568}
+  - {fileID: 2040989367}
+  - {fileID: 1393634105}
   detailView: {fileID: 2023832841}
+  switchModeButton: {fileID: 0}
+  modeText: {fileID: 0}
 --- !u!114 &100389744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2846,7 +2845,7 @@ GameObject:
   - component: {fileID: 125757664}
   - component: {fileID: 125757663}
   m_Layer: 5
-  m_Name: Exotext_002_MnemonicTool
+  m_Name: NexusVesture_002_CogniThread
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2883,10 +2882,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_MnemonicTool
+  ItemDefineId: NexusVesture_002_CogniThread
   starImage: {fileID: 125757665}
   starNameText: {fileID: 0}
-  lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   unlockedNotEquippedColor: {r: 0.8, g: 0.6, b: 0.2, a: 1}
   equippedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &125757664
@@ -3697,7 +3696,7 @@ GameObject:
   - component: {fileID: 165908744}
   - component: {fileID: 165908743}
   m_Layer: 5
-  m_Name: Exotext_001_MnemonicTool
+  m_Name: NexusVesture_001_AbyssalHeart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3734,10 +3733,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_MnemonicTool
+  ItemDefineId: NexusVesture_001_AbyssalHeart
   starImage: {fileID: 165908745}
   starNameText: {fileID: 0}
-  lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   unlockedNotEquippedColor: {r: 0.8, g: 0.6, b: 0.2, a: 1}
   equippedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &165908744
@@ -3999,7 +3998,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_EdgeText
+  ItemDefineId: Exotext_005_EdgeText
   starImage: {fileID: 183734513}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -12794,7 +12793,7 @@ GameObject:
   - component: {fileID: 235490001}
   - component: {fileID: 235490000}
   m_Layer: 5
-  m_Name: MnemonicTool (1)
+  m_Name: TangibleNexus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28631,7 +28630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_MnemonicTool
+  ItemDefineId: Exotext_005_MnemonicTool
   starImage: {fileID: 282705571}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -30017,7 +30016,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_VotiveEmber
+  ItemDefineId: Exotext_005_VotiveEmber
   starImage: {fileID: 403140087}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -30512,7 +30511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_004_MnemonicTool
+  ItemDefineId: Exotext_004_MnemonicTool
   starImage: {fileID: 433619316}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -30974,7 +30973,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_003_EdgeText
+  ItemDefineId: Exotext_003_EdgeText
   starImage: {fileID: 473448943}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -31113,7 +31112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_003_MnemonicTool
+  ItemDefineId: Exotext_003_MnemonicTool
   starImage: {fileID: 473980191}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -31441,7 +31440,7 @@ GameObject:
   - component: {fileID: 505227129}
   - component: {fileID: 505227131}
   m_Layer: 5
-  m_Name: MnemonicTool (4)
+  m_Name: ImprintStep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31762,7 +31761,7 @@ GameObject:
   - component: {fileID: 540428870}
   - component: {fileID: 540428869}
   m_Layer: 5
-  m_Name: Exotext_000_MnemonicTool
+  m_Name: NexusVesture_000_CogniThread
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31799,10 +31798,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_MnemonicTool
+  ItemDefineId: NexusVesture_000_CogniThread
   starImage: {fileID: 540428871}
   starNameText: {fileID: 0}
-  lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   unlockedNotEquippedColor: {r: 0.8, g: 0.6, b: 0.2, a: 1}
   equippedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &540428870
@@ -31938,7 +31937,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_002_ThoughtChime
+  ItemDefineId: Exotext_002_ThoughtChime
   starImage: {fileID: 542970078}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -32472,7 +32471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_002_StellarScribe
+  ItemDefineId: Exotext_002_StellarScribe
   starImage: {fileID: 573462920}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -32611,7 +32610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_003_VotiveEmber
+  ItemDefineId: Exotext_003_VotiveEmber
   starImage: {fileID: 579368619}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -33103,7 +33102,7 @@ GameObject:
   - component: {fileID: 612408106}
   - component: {fileID: 612408105}
   m_Layer: 5
-  m_Name: Exotext_003_MnemonicTool
+  m_Name: NexusVesture_003_ImprintStep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33140,7 +33139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_MnemonicTool
+  ItemDefineId: NexusVesture_003_ImprintStep
   starImage: {fileID: 612408107}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -33413,7 +33412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_004_DuoVoice
+  ItemDefineId: Exotext_004_DuoVoice
   starImage: {fileID: 628896559}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -33552,7 +33551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_003_DuoVoice
+  ItemDefineId: Exotext_003_DuoVoice
   starImage: {fileID: 631474294}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -38645,7 +38644,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_001_DuoVoice
+  ItemDefineId: Exotext_001_DuoVoice
   starImage: {fileID: 668544369}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -38747,7 +38746,7 @@ GameObject:
   - component: {fileID: 669366599}
   - component: {fileID: 669366598}
   m_Layer: 5
-  m_Name: Exotext_000_MnemonicTool
+  m_Name: NexusVesture_000_VolitionVein
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38784,10 +38783,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_MnemonicTool
+  ItemDefineId: NexusVesture_000_VolitionVein
   starImage: {fileID: 669366600}
   starNameText: {fileID: 0}
-  lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   unlockedNotEquippedColor: {r: 0.8, g: 0.6, b: 0.2, a: 1}
   equippedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &669366599
@@ -39181,7 +39180,7 @@ GameObject:
   - component: {fileID: 685891427}
   - component: {fileID: 685891429}
   m_Layer: 5
-  m_Name: MnemonicTool (2)
+  m_Name: AbyssalHeart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39675,7 +39674,7 @@ GameObject:
   - component: {fileID: 704344846}
   - component: {fileID: 704344845}
   m_Layer: 5
-  m_Name: Exotext_000_MnemonicTool
+  m_Name: NexusVesture_000_AbyssalHeart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39712,10 +39711,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_MnemonicTool
+  ItemDefineId: NexusVesture_000_AbyssalHeart
   starImage: {fileID: 704344847}
   starNameText: {fileID: 0}
-  lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   unlockedNotEquippedColor: {r: 0.8, g: 0.6, b: 0.2, a: 1}
   equippedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &704344846
@@ -39890,7 +39889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_004_ThoughtChime
+  ItemDefineId: Exotext_004_ThoughtChime
   starImage: {fileID: 737511351}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -78520,7 +78519,7 @@ GameObject:
   - component: {fileID: 816981554}
   - component: {fileID: 816981553}
   m_Layer: 5
-  m_Name: Exotext_001_MnemonicTool
+  m_Name: NexusVesture_001_TangibleNexus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78557,10 +78556,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_MnemonicTool
+  ItemDefineId: NexusVesture_001_TangibleNexus
   starImage: {fileID: 816981555}
   starNameText: {fileID: 0}
-  lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   unlockedNotEquippedColor: {r: 0.8, g: 0.6, b: 0.2, a: 1}
   equippedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &816981554
@@ -99294,7 +99293,7 @@ GameObject:
   - component: {fileID: 936210771}
   - component: {fileID: 936210770}
   m_Layer: 5
-  m_Name: Exotext_001_MnemonicTool
+  m_Name: NexusVesture_001_VolitionVein
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99331,10 +99330,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_MnemonicTool
+  ItemDefineId: NexusVesture_001_VolitionVein
   starImage: {fileID: 936210772}
   starNameText: {fileID: 0}
-  lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   unlockedNotEquippedColor: {r: 0.8, g: 0.6, b: 0.2, a: 1}
   equippedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &936210771
@@ -99559,7 +99558,7 @@ GameObject:
   - component: {fileID: 941822828}
   - component: {fileID: 941822827}
   m_Layer: 5
-  m_Name: Exotext_004_MnemonicTool
+  m_Name: NexusVesture_004_AbyssalHeart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99581,7 +99580,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -194.85, y: 112.5}
+  m_AnchoredPosition: {x: -194.85, y: -112.5}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &941822827
@@ -99596,10 +99595,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_MnemonicTool
+  ItemDefineId: NexusVesture_004_AbyssalHeart
   starImage: {fileID: 941822829}
   starNameText: {fileID: 0}
-  lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   unlockedNotEquippedColor: {r: 0.8, g: 0.6, b: 0.2, a: 1}
   equippedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &941822828
@@ -99735,7 +99734,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_002_ThreadShot
+  ItemDefineId: Exotext_002_ThreadShot
   starImage: {fileID: 945844866}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -100614,7 +100613,7 @@ GameObject:
   - component: {fileID: 996084832}
   - component: {fileID: 996084834}
   m_Layer: 5
-  m_Name: MnemonicTool (3)
+  m_Name: VolitionVein
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100975,7 +100974,7 @@ GameObject:
   - component: {fileID: 1006223545}
   - component: {fileID: 1006223544}
   m_Layer: 5
-  m_Name: Exotext_005_MnemonicTool
+  m_Name: NexusVesture_005_AbyssalHeart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101012,10 +101011,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_MnemonicTool
+  ItemDefineId: NexusVesture_005_AbyssalHeart
   starImage: {fileID: 1006223546}
   starNameText: {fileID: 0}
-  lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   unlockedNotEquippedColor: {r: 0.8, g: 0.6, b: 0.2, a: 1}
   equippedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1006223545
@@ -101786,7 +101785,7 @@ GameObject:
   - component: {fileID: 1055181362}
   - component: {fileID: 1055181361}
   m_Layer: 5
-  m_Name: Exotext_000_MnemonicTool
+  m_Name: NexusVesture_000_ImprintStep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101823,7 +101822,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_MnemonicTool
+  ItemDefineId: NexusVesture_000_ImprintStep
   starImage: {fileID: 1055181363}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -124191,7 +124190,7 @@ GameObject:
   - component: {fileID: 1162386042}
   - component: {fileID: 1162386041}
   m_Layer: 5
-  m_Name: Exotext_003_MnemonicTool
+  m_Name: NexusVesture_003_AbyssalHeart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124228,10 +124227,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_MnemonicTool
+  ItemDefineId: NexusVesture_003_AbyssalHeart
   starImage: {fileID: 1162386043}
   starNameText: {fileID: 0}
-  lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   unlockedNotEquippedColor: {r: 0.8, g: 0.6, b: 0.2, a: 1}
   equippedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1162386042
@@ -124963,7 +124962,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_002_EdgeText
+  ItemDefineId: Exotext_002_EdgeText
   starImage: {fileID: 1210026050}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -127607,7 +127606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_001_EdgeText
+  ItemDefineId: Exotext_001_EdgeText
   starImage: {fileID: 1351748559}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -127709,7 +127708,7 @@ GameObject:
   - component: {fileID: 1354521109}
   - component: {fileID: 1354521108}
   m_Layer: 5
-  m_Name: Exotext_001_MnemonicTool
+  m_Name: NexusVesture_001_ImprintStep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -127746,7 +127745,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_MnemonicTool
+  ItemDefineId: NexusVesture_001_ImprintStep
   starImage: {fileID: 1354521110}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -127923,7 +127922,7 @@ GameObject:
   - component: {fileID: 1366313699}
   - component: {fileID: 1366313698}
   m_Layer: 5
-  m_Name: Exotext_002_MnemonicTool
+  m_Name: NexusVesture_002_VolitionVein
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -127960,10 +127959,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_MnemonicTool
+  ItemDefineId: NexusVesture_002_VolitionVein
   starImage: {fileID: 1366313700}
   starNameText: {fileID: 0}
-  lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   unlockedNotEquippedColor: {r: 0.8, g: 0.6, b: 0.2, a: 1}
   equippedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1366313699
@@ -128535,7 +128534,7 @@ GameObject:
   - component: {fileID: 1393634106}
   - component: {fileID: 1393634105}
   m_Layer: 5
-  m_Name: Exotext_005_MnemonicTool
+  m_Name: NexusVesture_005_CogniThread
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128572,10 +128571,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_MnemonicTool
+  ItemDefineId: NexusVesture_005_CogniThread
   starImage: {fileID: 1393634107}
   starNameText: {fileID: 0}
-  lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   unlockedNotEquippedColor: {r: 0.8, g: 0.6, b: 0.2, a: 1}
   equippedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1393634106
@@ -128915,7 +128914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_003_ThoughtChime
+  ItemDefineId: Exotext_003_ThoughtChime
   starImage: {fileID: 1418030201}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -129017,7 +129016,7 @@ GameObject:
   - component: {fileID: 1423511524}
   - component: {fileID: 1423511523}
   m_Layer: 5
-  m_Name: Exotext_003_MnemonicTool
+  m_Name: NexusVesture_003_VolitionVein
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129054,10 +129053,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_MnemonicTool
+  ItemDefineId: NexusVesture_003_VolitionVein
   starImage: {fileID: 1423511525}
   starNameText: {fileID: 0}
-  lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   unlockedNotEquippedColor: {r: 0.8, g: 0.6, b: 0.2, a: 1}
   equippedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1423511524
@@ -129193,7 +129192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_004_VotiveEmber
+  ItemDefineId: Exotext_004_VotiveEmber
   starImage: {fileID: 1432486084}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -130011,7 +130010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_DuoVoice
+  ItemDefineId: Exotext_005_DuoVoice
   starImage: {fileID: 1512234895}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -130284,7 +130283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_StellarScribe
+  ItemDefineId: Exotext_005_StellarScribe
   starImage: {fileID: 1520522199}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -130520,7 +130519,7 @@ GameObject:
   - component: {fileID: 1528998794}
   - component: {fileID: 1528998793}
   m_Layer: 5
-  m_Name: Exotext_002_MnemonicTool
+  m_Name: NexusVesture_002_TangibleNexus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -130557,10 +130556,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_MnemonicTool
+  ItemDefineId: NexusVesture_002_TangibleNexus
   starImage: {fileID: 1528998795}
   starNameText: {fileID: 0}
-  lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   unlockedNotEquippedColor: {r: 0.8, g: 0.6, b: 0.2, a: 1}
   equippedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1528998794
@@ -130867,7 +130866,7 @@ GameObject:
   - component: {fileID: 1546908596}
   - component: {fileID: 1546908594}
   m_Layer: 5
-  m_Name: MnemonicTool
+  m_Name: CogniThread
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -131191,7 +131190,7 @@ GameObject:
   - component: {fileID: 1549202868}
   - component: {fileID: 1549202867}
   m_Layer: 5
-  m_Name: Exotext_005_MnemonicTool
+  m_Name: NexusVesture_005_TangibleNexus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -131228,10 +131227,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_MnemonicTool
+  ItemDefineId: NexusVesture_005_TangibleNexus
   starImage: {fileID: 1549202869}
   starNameText: {fileID: 0}
-  lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   unlockedNotEquippedColor: {r: 0.8, g: 0.6, b: 0.2, a: 1}
   equippedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1549202868
@@ -131367,7 +131366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_004_ThreadShot
+  ItemDefineId: Exotext_004_ThreadShot
   starImage: {fileID: 1550947303}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -131602,7 +131601,7 @@ GameObject:
   - component: {fileID: 1552525050}
   - component: {fileID: 1552525049}
   m_Layer: 5
-  m_Name: Exotext_002_MnemonicTool
+  m_Name: NexusVesture_002_ImprintStep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -131639,7 +131638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_MnemonicTool
+  ItemDefineId: NexusVesture_002_ImprintStep
   starImage: {fileID: 1552525051}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -131741,7 +131740,7 @@ GameObject:
   - component: {fileID: 1555216968}
   - component: {fileID: 1555216967}
   m_Layer: 5
-  m_Name: Exotext_004_MnemonicTool
+  m_Name: NexusVesture_004_TangibleNexus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -131778,10 +131777,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_MnemonicTool
+  ItemDefineId: NexusVesture_004_TangibleNexus
   starImage: {fileID: 1555216969}
   starNameText: {fileID: 0}
-  lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   unlockedNotEquippedColor: {r: 0.8, g: 0.6, b: 0.2, a: 1}
   equippedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1555216968
@@ -131917,7 +131916,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_002_VotiveEmber
+  ItemDefineId: Exotext_002_VotiveEmber
   starImage: {fileID: 1561613990}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -132102,7 +132101,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02c4791f103a9ed408e60c726ac4b9ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  starViews:
+  mode: 0
+  exotextStarViews:
   - {fileID: 1833409319}
   - {fileID: 2100904130}
   - {fileID: 473980189}
@@ -132138,7 +132138,10 @@ MonoBehaviour:
   - {fileID: 579368617}
   - {fileID: 1432486082}
   - {fileID: 403140085}
+  nexusVestureStarViews: []
   detailView: {fileID: 2023832841}
+  switchModeButton: {fileID: 0}
+  modeText: {fileID: 0}
 --- !u!114 &1561836936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132186,7 +132189,7 @@ GameObject:
   - component: {fileID: 1567372185}
   - component: {fileID: 1567372184}
   m_Layer: 5
-  m_Name: Exotext_001_MnemonicTool
+  m_Name: NexusVesture_001_CogniThread
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -132223,10 +132226,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_MnemonicTool
+  ItemDefineId: NexusVesture_001_CogniThread
   starImage: {fileID: 1567372186}
   starNameText: {fileID: 0}
-  lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   unlockedNotEquippedColor: {r: 0.8, g: 0.6, b: 0.2, a: 1}
   equippedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1567372185
@@ -132619,7 +132622,7 @@ GameObject:
   - component: {fileID: 1582701577}
   - component: {fileID: 1582701576}
   m_Layer: 5
-  m_Name: Exotext_004_MnemonicTool
+  m_Name: NexusVesture_004_ImprintStep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -132656,7 +132659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_MnemonicTool
+  ItemDefineId: NexusVesture_004_ImprintStep
   starImage: {fileID: 1582701578}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -134378,7 +134381,7 @@ GameObject:
   - component: {fileID: 1613949670}
   - component: {fileID: 1613949669}
   m_Layer: 5
-  m_Name: Exotext_003_MnemonicTool
+  m_Name: NexusVesture_003_TangibleNexus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -134415,10 +134418,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_MnemonicTool
+  ItemDefineId: NexusVesture_003_TangibleNexus
   starImage: {fileID: 1613949671}
   starNameText: {fileID: 0}
-  lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   unlockedNotEquippedColor: {r: 0.8, g: 0.6, b: 0.2, a: 1}
   equippedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1613949670
@@ -150377,7 +150380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_001_ThoughtChime
+  ItemDefineId: Exotext_001_ThoughtChime
   starImage: {fileID: 1673587160}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -151379,7 +151382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_004_StellarScribe
+  ItemDefineId: Exotext_004_StellarScribe
   starImage: {fileID: 1779589802}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -152360,7 +152363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_002_DuoVoice
+  ItemDefineId: Exotext_002_DuoVoice
   starImage: {fileID: 1800104204}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -303429,7 +303432,7 @@ GameObject:
   - component: {fileID: 1825316541}
   - component: {fileID: 1825316540}
   m_Layer: 5
-  m_Name: Exotext_005_MnemonicTool
+  m_Name: NexusVesture_005_ImprintStep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -303466,7 +303469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_MnemonicTool
+  ItemDefineId: NexusVesture_005_ImprintStep
   starImage: {fileID: 1825316542}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -332583,7 +332586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_001_MnemonicTool
+  ItemDefineId: Exotext_001_MnemonicTool
   starImage: {fileID: 1833409317}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -333264,7 +333267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_001_StellarScribe
+  ItemDefineId: Exotext_001_StellarScribe
   starImage: {fileID: 1925294557}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -334069,7 +334072,7 @@ GameObject:
   - component: {fileID: 1976348318}
   - component: {fileID: 1976348317}
   m_Layer: 5
-  m_Name: Exotext_004_MnemonicTool
+  m_Name: NexusVesture_004_VolitionVein
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -334106,10 +334109,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_MnemonicTool
+  ItemDefineId: NexusVesture_004_VolitionVein
   starImage: {fileID: 1976348319}
   starNameText: {fileID: 0}
-  lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   unlockedNotEquippedColor: {r: 0.8, g: 0.6, b: 0.2, a: 1}
   equippedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1976348318
@@ -335633,7 +335636,7 @@ GameObject:
   - component: {fileID: 2023832842}
   - component: {fileID: 2023832841}
   m_Layer: 5
-  m_Name: ExotextDetailContent
+  m_Name: NexumIdemDetailContent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -335676,8 +335679,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2f20fc882fc7744b1f8f0822b9d9a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponNameText: {fileID: 966262335}
-  weaponTypeText: {fileID: 0}
+  nameText: {fileID: 0}
+  typeOrPositionText: {fileID: 0}
   starsText: {fileID: 0}
   attackText: {fileID: 1194355269}
   healthText: {fileID: 791397134}
@@ -335741,7 +335744,7 @@ GameObject:
   - component: {fileID: 2040255217}
   - component: {fileID: 2040255216}
   m_Layer: 5
-  m_Name: Exotext_000_MnemonicTool
+  m_Name: NexusVesture_000_TangibleNexus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -335778,10 +335781,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_MnemonicTool
+  ItemDefineId: NexusVesture_000_TangibleNexus
   starImage: {fileID: 2040255218}
   starNameText: {fileID: 0}
-  lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   unlockedNotEquippedColor: {r: 0.8, g: 0.6, b: 0.2, a: 1}
   equippedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &2040255217
@@ -335880,7 +335883,7 @@ GameObject:
   - component: {fileID: 2040989368}
   - component: {fileID: 2040989367}
   m_Layer: 5
-  m_Name: Exotext_004_MnemonicTool
+  m_Name: NexusVesture_004_CogniThread
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -335917,10 +335920,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_MnemonicTool
+  ItemDefineId: NexusVesture_004_CogniThread
   starImage: {fileID: 2040989369}
   starNameText: {fileID: 0}
-  lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   unlockedNotEquippedColor: {r: 0.8, g: 0.6, b: 0.2, a: 1}
   equippedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &2040989368
@@ -336466,7 +336469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_003_ThreadShot
+  ItemDefineId: Exotext_003_ThreadShot
   starImage: {fileID: 2066191860}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -336605,7 +336608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_ThoughtChime
+  ItemDefineId: Exotext_005_ThoughtChime
   starImage: {fileID: 2068255530}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -336965,7 +336968,7 @@ GameObject:
   - component: {fileID: 2087326289}
   - component: {fileID: 2087326288}
   m_Layer: 5
-  m_Name: Exotext_002_MnemonicTool
+  m_Name: NexusVesture_002_AbyssalHeart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -336987,7 +336990,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 194.85, y: 112.5}
+  m_AnchoredPosition: {x: 194.85, y: -112.5}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2087326288
@@ -337002,10 +337005,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_MnemonicTool
+  ItemDefineId: NexusVesture_002_AbyssalHeart
   starImage: {fileID: 2087326290}
   starNameText: {fileID: 0}
-  lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   unlockedNotEquippedColor: {r: 0.8, g: 0.6, b: 0.2, a: 1}
   equippedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &2087326289
@@ -337240,7 +337243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_ThreadShot
+  ItemDefineId: Exotext_005_ThreadShot
   starImage: {fileID: 2088194219}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -337634,7 +337637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_002_MnemonicTool
+  ItemDefineId: Exotext_002_MnemonicTool
   starImage: {fileID: 2100904132}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -337899,7 +337902,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_001_VotiveEmber
+  ItemDefineId: Exotext_001_VotiveEmber
   starImage: {fileID: 2120204298}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -338159,7 +338162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_001_ThreadShot
+  ItemDefineId: Exotext_001_ThreadShot
   starImage: {fileID: 2127888321}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -338261,7 +338264,7 @@ GameObject:
   - component: {fileID: 2133050569}
   - component: {fileID: 2133050568}
   m_Layer: 5
-  m_Name: Exotext_003_MnemonicTool
+  m_Name: NexusVesture_003_CogniThread
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -338298,10 +338301,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_005_MnemonicTool
+  ItemDefineId: NexusVesture_003_CogniThread
   starImage: {fileID: 2133050570}
   starNameText: {fileID: 0}
-  lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   unlockedNotEquippedColor: {r: 0.8, g: 0.6, b: 0.2, a: 1}
   equippedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &2133050569
@@ -338571,7 +338574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd414480fe9e948b85dac646193ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefineId: Exotext_004_EdgeText
+  ItemDefineId: Exotext_004_EdgeText
   starImage: {fileID: 2141995866}
   starNameText: {fileID: 0}
   lockedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}

@@ -30,11 +30,14 @@ public class PlayerData
     // 装备索引（指向EquipmentBag的下标）
     // 每个武器类别当前装备的武器 ID（null 表示未装备）
     public string[] EquippedExotextIds = new string[7];
+    public string[] EquippedNexusVestureIds = new string[5];
+    /*
     public int EquippedCogniThreadIndex = -1;         // 思缕索引
     public int EquippedTangibleNexusIndex = -1;       // 触络索引
     public int EquippedAbyssalHeartIndex = -1;        // 装心索引
     public int EquippedVolitionVeinIndex = -1;        // 志脉索引
     public int EquippedImprintStepIndex = -1;         // 迹印索引
+    */
     public List<ExotextData> ExotextBag = new List<ExotextData>();
     public List<NexusVestureData> NexusVestureBag = new List<NexusVestureData>();
     public List<MaterialData> MaterialBag = new List<MaterialData>();
@@ -96,6 +99,9 @@ public class PlayerData
         // 初始化装备数组为空
         for (int i = 0; i < EquippedExotextIds.Length; i++)
             EquippedExotextIds[i] = null;
+        for (int i = 0; i < EquippedNexusVestureIds.Length; i++)
+            EquippedNexusVestureIds[i] = null;
+        
     }
 
     public void SortedBag()
@@ -148,7 +154,7 @@ public class PlayerData
             AddDefaultNExotext("Exotext_00" + i + "_DuoVoice");
             AddDefaultNExotext("Exotext_00" + i + "_MnemonicTool");
         }
-        /*
+        
         for (int i = 1; i <= 2; i++)
         {
             AddDefaultNexusvesture("NexusVesture_00" + i + "_CogniThread");
@@ -157,7 +163,7 @@ public class PlayerData
             AddDefaultNexusvesture("NexusVesture_00" + i + "_VolitionVein");
             AddDefaultNexusvesture("NexusVesture_00" + i + "_ImprintStep");
         }
-        */
+        
     }
 
     private void AddDefaultNExotext(string defineId)
