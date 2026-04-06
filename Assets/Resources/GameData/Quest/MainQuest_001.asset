@@ -22,7 +22,7 @@ MonoBehaviour:
   contentType: 0
   nextQuestIds:
   - MainQuest_002
-  description: 
+  description: "\u9EC4\u660F\u5C06\u8327\u63E1\u6210\u4E0D\u80AF\u706D\u7684\u706F\u3002"
   dialogueEntries:
   - background: {fileID: 0}
     speakerId: 

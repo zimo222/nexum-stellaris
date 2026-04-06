@@ -236,7 +236,7 @@ public class PlayerData
     {
         var def = GameDataManager.Instance.QuestDict[defineId];
         var quest = new PlayerQuestProgress(
-            qid: def.id
+            questId: def.id
         );
         activeQuests.Add(quest);
     }
@@ -399,13 +399,13 @@ public class ObjectiveProgress
 {
     public string objectiveId;
     public int currentAmount;
-    public int requiredAmount;   // 新增字段
+    public int requiredAmount;
     public bool isCompleted;
 
-    public ObjectiveProgress(string objId, int amount = 0, int required = 0, bool completed = false)
+    public ObjectiveProgress(string id, int current, int required, bool completed)
     {
-        objectiveId = objId;
-        currentAmount = amount;
+        objectiveId = id;
+        currentAmount = current;
         requiredAmount = required;
         isCompleted = completed;
     }
@@ -415,19 +415,15 @@ public class ObjectiveProgress
 [System.Serializable]
 public class PlayerQuestProgress
 {
-    public string questId;                      // 任务ID
-    public QuestState state;                     // 任务状态
-    public List<ObjectiveProgress> objectives;   // 所有目标的进度
-    public float startTime;                       // 开始时间（可选，用于计时任务）
-    public float completeTime;                    // 完成时间（可选）
+    public string questId;
+    public QuestProgressState state;          // 持久化状态
+    public List<ObjectiveProgress> objectives; // 战斗任务目标进度
 
-    public PlayerQuestProgress(string qid)
+    public PlayerQuestProgress(string questId)
     {
-        questId = qid;
-        state = QuestState.NotStarted;
-        objectives = new List<ObjectiveProgress>();
-        startTime = 0;
-        completeTime = 0;
+        this.questId = questId;
+        this.state = QuestProgressState.Locked;
+        this.objectives = new List<ObjectiveProgress>();
     }
 }
 
@@ -523,12 +519,12 @@ public enum NexusVesturePosition
     ImprintStep     // 迹印
 }
 // 任务状态枚举
-public enum QuestState
+// 任务运行时状态（持久化到 activeQuests 中的状态）
+public enum QuestProgressState
 {
-    NotStarted,     // 未开始
-    InProgress,     // 进行中
-    Completed,      // 已完成
-    RewardTaken     // 奖励已领取
+    Locked,     // 未激活（前置任务未完成）
+    Available,  // 激活但未开始（前置任务已完成，可交互）
+    Completed   // 已完成
 }
 // 任务目标类型枚举（可根据游戏需要扩展）
 public enum QuestObjectiveType

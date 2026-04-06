@@ -457,30 +457,51 @@ public class PlayerDataManager : MonoBehaviour
     // ==================== 任务数据操作方法 ====================
     #region 任务数据操作方法
     /// <summary>
-    /// 激活一个新任务（添加到 activeQuests 列表）
+    /// 将任务设为可用（前置任务完成时调用）
     /// </summary>
-    public bool AddActiveQuest(string questId)
+    public bool UnlockQuest(string questId)
     {
         if (CurrentPlayerData == null) return false;
 
-        // 检查任务是否已存在（进行中或已完成）
-        if (CurrentPlayerData.activeQuests.Exists(q => q.questId == questId) ||
-            CurrentPlayerData.completedQuestIds.Contains(questId))
+        // 如果已经完成，不再重复解锁
+        if (CurrentPlayerData.completedQuestIds.Contains(questId))
+            return false;
+
+        var existing = CurrentPlayerData.activeQuests.Find(q => q.questId == questId);
+        if (existing != null)
         {
-            Debug.LogWarning($"任务 {questId} 已存在或已完成");
+            // 如果状态是 Locked，升级为 Available
+            if (existing.state == QuestProgressState.Locked)
+            {
+                existing.state = QuestProgressState.Available;
+                SaveCurrentPlayerData();
+                OnQuestAdded?.Invoke(questId);
+                OnPlayerDataChanged?.Invoke(CurrentPlayerData);
+                return true;
+            }
             return false;
         }
 
-        // 从静态数据获取任务定义（需要 GameDataManager，但这里不直接依赖，只创建进度对象）
-        // 注意：这里只负责数据创建，不依赖外部，进度对象由调用方提供完整信息？但为了解耦，我们只创建空进度，由调用方设置目标？
-        // 更好的做法：调用方在激活时已经知道任务类型，可以设置 objectives。我们提供一个接收初始化目标的方法。
-        // 简单起见，我们只创建基本进度，目标列表由调用方后续添加。或者我们在这里传入已初始化的 PlayerQuestProgress 对象。
-        // 为了灵活性，我们允许传入已构造好的进度对象。
+        // 新建任务进度，初始为 Available
         var progress = new PlayerQuestProgress(questId);
-        progress.state = QuestState.InProgress;
-        // 目标列表由调用方后续通过 UpdateObjective 逐步添加？但目标需要先存在才能更新。
-        // 因此，调用方应在激活后立即初始化所有目标（通过调用 InitializeQuestObjectives 之类的方法）。
-        // 我们在这里提供一个重载：AddActiveQuest(PlayerQuestProgress progress)
+        progress.state = QuestProgressState.Available;
+        // 如果是战斗任务，需要从静态数据中初始化目标列表
+        if (GameDataManager.Instance.QuestDict.TryGetValue(questId, out var questData) &&
+            questData.contentType == QuestContentType.Combat &&
+            questData.objectives != null)
+        {
+            foreach (var objDefine in questData.objectives)
+            {
+                var objProgress = new ObjectiveProgress(
+                    objDefine.objectiveId,
+                    0,
+                    objDefine.requiredAmount,
+                    false
+                );
+                progress.objectives.Add(objProgress);
+            }
+        }
+
         CurrentPlayerData.activeQuests.Add(progress);
         SaveCurrentPlayerData();
         OnQuestAdded?.Invoke(questId);
@@ -489,22 +510,80 @@ public class PlayerDataManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 重载：直接添加已初始化好目标的进度对象
+    /// 战斗失败时重置任务进度，并保持 Available 状态
     /// </summary>
-    public bool AddActiveQuest(PlayerQuestProgress progress)
+    public bool ResetQuestToAvailable(string questId)
     {
         if (CurrentPlayerData == null) return false;
-        if (CurrentPlayerData.activeQuests.Exists(q => q.questId == progress.questId) ||
-            CurrentPlayerData.completedQuestIds.Contains(progress.questId))
+        var progress = CurrentPlayerData.activeQuests.Find(q => q.questId == questId);
+        if (progress == null) return false;
+
+        // 重置目标进度
+        if (GameDataManager.Instance.QuestDict.TryGetValue(questId, out var questData) &&
+            questData.contentType == QuestContentType.Combat &&
+            questData.objectives != null)
         {
-            Debug.LogWarning($"任务 {progress.questId} 已存在或已完成");
-            return false;
+            foreach (var objDefine in questData.objectives)
+            {
+                var obj = progress.objectives.Find(o => o.objectiveId == objDefine.objectiveId);
+                if (obj != null)
+                {
+                    obj.currentAmount = 0;
+                    obj.isCompleted = false;
+                }
+                else
+                {
+                    // 如果缺失则补充
+                    progress.objectives.Add(new ObjectiveProgress(objDefine.objectiveId, 0, objDefine.requiredAmount, false));
+                }
+            }
         }
-        CurrentPlayerData.activeQuests.Add(progress);
+
+        progress.state = QuestProgressState.Available;
         SaveCurrentPlayerData();
-        OnQuestAdded?.Invoke(progress.questId);
+        OnQuestProgressUpdated?.Invoke(questId);
         OnPlayerDataChanged?.Invoke(CurrentPlayerData);
         return true;
+    }
+
+    /// <summary>
+    /// 完成任务：从 activeQuests 移除，添加到 completedQuestIds
+    /// </summary>
+    public bool CompleteQuest(string questId)
+    {
+        if (CurrentPlayerData == null) return false;
+        var progress = CurrentPlayerData.activeQuests.Find(q => q.questId == questId);
+        if (progress == null)
+        {
+            Debug.LogWarning($"任务 {questId} 不在进行中，无法完成");
+            return false;
+        }
+
+        CurrentPlayerData.activeQuests.Remove(progress);
+        if (!CurrentPlayerData.completedQuestIds.Contains(questId))
+            CurrentPlayerData.completedQuestIds.Add(questId);
+
+        SaveCurrentPlayerData();
+        OnQuestCompleted?.Invoke(questId);
+        OnPlayerDataChanged?.Invoke(CurrentPlayerData);
+        return true;
+    }
+
+    /// <summary>
+    /// 获取所有 Available 状态的任务（激活但未开始）
+    /// </summary>
+    public List<PlayerQuestProgress> GetAvailableQuests()
+    {
+        if (CurrentPlayerData == null) return new List<PlayerQuestProgress>();
+        return CurrentPlayerData.activeQuests.FindAll(q => q.state == QuestProgressState.Available);
+    }
+
+    /// <summary>
+    /// 获取指定任务的进度（如果存在）
+    /// </summary>
+    public PlayerQuestProgress GetQuestProgress(string questId)
+    {
+        return CurrentPlayerData?.activeQuests.Find(q => q.questId == questId);
     }
 
     /// <summary>
@@ -569,29 +648,6 @@ public class PlayerDataManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 完成任务：从 activeQuests 移除，添加到 completedQuestIds
-    /// </summary>
-    public bool CompleteQuest(string questId)
-    {
-        if (CurrentPlayerData == null) return false;
-        var progress = CurrentPlayerData.activeQuests.Find(q => q.questId == questId);
-        if (progress == null)
-        {
-            Debug.LogWarning($"任务 {questId} 不在进行中，无法完成");
-            return false;
-        }
-
-        CurrentPlayerData.activeQuests.Remove(progress);
-        if (!CurrentPlayerData.completedQuestIds.Contains(questId))
-            CurrentPlayerData.completedQuestIds.Add(questId);
-
-        SaveCurrentPlayerData();
-        OnQuestCompleted?.Invoke(questId);
-        OnPlayerDataChanged?.Invoke(CurrentPlayerData);
-        return true;
-    }
-
-    /// <summary>
     /// 获取进行中的任务列表（返回副本以防外部修改）
     /// </summary>
     public List<PlayerQuestProgress> GetActiveQuests()
@@ -606,26 +662,6 @@ public class PlayerDataManager : MonoBehaviour
     public bool HasCompletedQuest(string questId)
     {
         return CurrentPlayerData != null && CurrentPlayerData.completedQuestIds.Contains(questId);
-    }
-
-    /// <summary>
-    /// 获取指定任务的进度（进行中）
-    /// </summary>
-    public PlayerQuestProgress GetQuestProgress(string questId)
-    {
-        return CurrentPlayerData?.activeQuests.Find(q => q.questId == questId);
-    }
-
-    public bool RemoveActiveQuest(string questId)
-    {
-        var progress = CurrentPlayerData.activeQuests.Find(q => q.questId == questId);
-        if (progress != null)
-        {
-            CurrentPlayerData.activeQuests.Remove(progress);
-            SaveCurrentPlayerData();
-            return true;
-        }
-        return false;
     }
     #endregion
 

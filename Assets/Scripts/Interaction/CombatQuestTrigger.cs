@@ -2,9 +2,8 @@ using UnityEngine;
 
 public class CombatQuestTrigger : MonoBehaviour
 {
-    [Header("任务设置")]
-    public string questId;               // 要触发的战斗任务ID
-    public Transform spawnCenter;         // 敌人生成中心点（通常就是触发器本身位置，也可指定）
+    public string questId;
+    public Transform spawnCenter;
 
     private bool playerInZone = false;
 
@@ -13,7 +12,7 @@ public class CombatQuestTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInZone = true;
-            // 可选：显示提示UI "按F开始战斗"
+            // 可显示 UI 提示
         }
     }
 
@@ -22,7 +21,6 @@ public class CombatQuestTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInZone = false;
-            // 隐藏提示
         }
     }
 
@@ -36,22 +34,19 @@ public class CombatQuestTrigger : MonoBehaviour
 
     private void TryStartCombat()
     {
-        // 检查任务是否已完成或正在进行
-        var questProgress = PlayerDataManager.Instance?.GetQuestProgress(questId);
-        if (questProgress != null)
+        var progress = PlayerDataManager.Instance?.GetQuestProgress(questId);
+        if (progress == null || progress.state != QuestProgressState.Available)
         {
-            // 任务已在进行中，不允许重复触发
-            Debug.Log("任务已在进行中");
+            Debug.Log($"任务 {questId} 状态不是 Available，无法开始战斗");
             return;
         }
 
         if (PlayerDataManager.Instance.HasCompletedQuest(questId))
         {
-            Debug.Log("任务已完成，无法再次触发");
+            Debug.Log("任务已完成");
             return;
         }
 
-        // 调用任务管理器开始战斗任务
         QuestManager.Instance.StartCombatQuest(questId, spawnCenter.position);
     }
 }

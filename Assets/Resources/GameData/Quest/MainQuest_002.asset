@@ -24,7 +24,7 @@ MonoBehaviour:
   - MainQuest_003
   - WorldQuest_001
   - WorldQuest_002
-  description: 
+  description: "\u70EB\u4ECE\u6307\u5C16\u722C\u8FDB\u4E86\u7AE5\u5E74\u7684\u68A6\u3002"
   dialogueEntries:
   - background: {fileID: 0}
     speakerId: 

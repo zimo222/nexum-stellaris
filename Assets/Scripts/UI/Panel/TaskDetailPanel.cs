@@ -45,7 +45,7 @@ public class TaskDetailPanel : BPanel
             if (activeQuests != null && activeQuests.Count > 0)
             {
                 // 只取进行中的任务
-                var firstActive = activeQuests.FirstOrDefault(q => q.state == QuestState.InProgress);
+                var firstActive = activeQuests.FirstOrDefault(q => q.state == QuestProgressState.Available);
                 selectedQuestId = firstActive?.questId;
             }
         }
@@ -81,7 +81,7 @@ public class TaskDetailPanel : BPanel
         foreach (var progress in activeQuests)
         {
             // 只显示进行中的任务（避免显示未开始或已完成）
-            if (progress.state != QuestState.InProgress) continue;
+            if (progress.state != QuestProgressState.Available) continue;
 
             // 获取任务静态数据
             if (!GameDataManager.Instance.QuestDict.TryGetValue(progress.questId, out var questData))
@@ -201,7 +201,7 @@ public class TaskDetailPanel : BPanel
     {
         var active = PlayerDataManager.Instance?.CurrentPlayerData?.activeQuests;
         if (active == null) return false;
-        return active.Exists(q => q.questId == questId && q.state == QuestState.InProgress);
+        return active.Exists(q => q.questId == questId && q.state == QuestProgressState.Available);
     }
 
     /// <summary>
