@@ -43,3 +43,5 @@ MonoBehaviour:
     content: "\u5B83\u6CA1\u6709\u4EFB\u4F55\u529B\u91CF\u3002\u53EA\u5728\u6700\u5B64\u72EC\u7684\u65F6\u5019\uFF0C\u63D0\u9192\u6211\uFF1A\u4F60\u66FE\u88AB\u8FD9\u6837\u63E1\u7D27\u8FC7\u3002"
   objectives: []
   waves: []
+  Reward:
+  - Exotext_001_VotiveEmber

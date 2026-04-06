@@ -281,6 +281,21 @@ public class QuestManager : MonoBehaviour
                         }
                     }
                 }
+                if(questData.Reward != null)
+                {
+                    foreach(string rewardId in questData.Reward)
+                    {
+                        if (rewardId[0] == 'E')
+                        {
+                            PlayerDataManager.Instance.AddExotext(rewardId);
+                        }
+                        else
+                        {
+                            PlayerDataManager.Instance.AddNexusVesture(rewardId);
+                        }
+                        
+                    }
+                }
             }
             RefreshQuestUI();
             if (questId == TrackedQuestId)

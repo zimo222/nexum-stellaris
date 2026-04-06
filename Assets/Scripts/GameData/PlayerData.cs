@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Collections;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
@@ -144,6 +145,7 @@ public class PlayerData
     // 初始化默认装备
     private void InitializeDefaultNexumIdem()
     {
+        /*
         for (int i = 1; i <= 3; i++)
         {
             AddDefaultNExotext("Exotext_00" + i + "_VotiveEmber");
@@ -163,7 +165,7 @@ public class PlayerData
             AddDefaultNexusvesture("NexusVesture_00" + i + "_VolitionVein");
             AddDefaultNexusvesture("NexusVesture_00" + i + "_ImprintStep");
         }
-        
+        */
     }
 
     private void AddDefaultNExotext(string defineId)
@@ -239,6 +241,35 @@ public class PlayerData
         activeQuests.Add(quest);
     }
     #endregion
+
+
+    public int TotalHealth => BaseStats.Health +
+        EquippedExotextIds.Where(id => !string.IsNullOrEmpty(id)).Sum(id => ExotextBag.Find(e => e.Id == id)?.Stats.Health ?? 0) +
+        EquippedNexusVestureIds.Where(id => !string.IsNullOrEmpty(id)).Sum(id => NexusVestureBag.Find(n => n.Id == id)?.Stats.Health ?? 0);
+
+    public int TotalAttack => BaseStats.Attack +
+        EquippedExotextIds.Where(id => !string.IsNullOrEmpty(id)).Sum(id => ExotextBag.Find(e => e.Id == id)?.Stats.Attack ?? 0) +
+        EquippedNexusVestureIds.Where(id => !string.IsNullOrEmpty(id)).Sum(id => NexusVestureBag.Find(n => n.Id == id)?.Stats.Attack ?? 0);
+
+    public int TotalDefence => BaseStats.Defence +
+        EquippedExotextIds.Where(id => !string.IsNullOrEmpty(id)).Sum(id => ExotextBag.Find(e => e.Id == id)?.Stats.Defence ?? 0) +
+        EquippedNexusVestureIds.Where(id => !string.IsNullOrEmpty(id)).Sum(id => NexusVestureBag.Find(n => n.Id == id)?.Stats.Defence ?? 0);
+
+    public int TotalEnergy => BaseStats.Energy +
+        EquippedExotextIds.Where(id => !string.IsNullOrEmpty(id)).Sum(id => ExotextBag.Find(e => e.Id == id)?.Stats.Energy ?? 0) +
+        EquippedNexusVestureIds.Where(id => !string.IsNullOrEmpty(id)).Sum(id => NexusVestureBag.Find(n => n.Id == id)?.Stats.Energy ?? 0);
+
+    public float TotalCritRate => Mathf.Clamp01(BaseStats.CritRate +
+        EquippedExotextIds.Where(id => !string.IsNullOrEmpty(id)).Sum(id => ExotextBag.Find(e => e.Id == id)?.Stats.CritRate ?? 0) +
+        EquippedNexusVestureIds.Where(id => !string.IsNullOrEmpty(id)).Sum(id => NexusVestureBag.Find(n => n.Id == id)?.Stats.CritRate ?? 0));
+
+    public float TotalCritDamage => BaseStats.CritDamage +
+        EquippedExotextIds.Where(id => !string.IsNullOrEmpty(id)).Sum(id => ExotextBag.Find(e => e.Id == id)?.Stats.CritDamage ?? 0) +
+        EquippedNexusVestureIds.Where(id => !string.IsNullOrEmpty(id)).Sum(id => NexusVestureBag.Find(n => n.Id == id)?.Stats.CritDamage ?? 0);
+
+    public float TotalElementBonus => BaseStats.ElementBonus +
+        EquippedExotextIds.Where(id => !string.IsNullOrEmpty(id)).Sum(id => ExotextBag.Find(e => e.Id == id)?.Stats.ElementBonus ?? 0) +
+        EquippedNexusVestureIds.Where(id => !string.IsNullOrEmpty(id)).Sum(id => NexusVestureBag.Find(n => n.Id == id)?.Stats.ElementBonus ?? 0);
 }
 
 // ==================== 角色数据类 ====================

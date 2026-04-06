@@ -32,6 +32,29 @@ public class CharacterPanelView : MonoBehaviour
         
     }
 
+    private void OnEnable()
+    {
+        if (PlayerDataManager.Instance != null)
+        {
+            PlayerDataManager.Instance.OnPlayerDataChanged += OnPlayerDataChanged;
+            // 立即刷新一次
+            OnPlayerDataChanged(PlayerDataManager.Instance.CurrentPlayerData);
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (PlayerDataManager.Instance != null)
+        {
+            PlayerDataManager.Instance.OnPlayerDataChanged -= OnPlayerDataChanged;
+        }
+    }
+
+    private void OnPlayerDataChanged(PlayerData newData)
+    {
+        UpdateUI(newData);
+    }
+
     public void UpdateUI(PlayerData currentPlayerData)
     {
 
@@ -40,11 +63,11 @@ public class CharacterPanelView : MonoBehaviour
         if (expText != null) expText.text = $"EXP: {currentPlayerData.Experience}";
 
         var stats = currentPlayerData.BaseStats;
-        if (healthText != null) healthText.text = $"{stats.Health}";
-        if (attackText != null) attackText.text = $"{stats.Attack}";
-        if (defenceText != null) defenceText.text = $"{stats.Defence}";
-        if (critRateText != null) critRateText.text = $"{stats.CritRate * 100}%";
-        if (critDamageText != null) critDamageText.text = $"{stats.CritDamage * 100}%";
-        if (energyText != null) energyText.text = $"{stats.Energy}%";
+        if (healthText != null) healthText.text = $"{currentPlayerData.TotalHealth}";
+        if (attackText != null) attackText.text = $"{currentPlayerData.TotalAttack}";
+        if (defenceText != null) defenceText.text = $"{currentPlayerData.TotalDefence}";
+        if (critRateText != null) critRateText.text = $"{currentPlayerData.TotalCritRate * 100}%";
+        if (critDamageText != null) critDamageText.text = $"{currentPlayerData.TotalCritDamage * 100}%";
+        if (energyText != null) energyText.text = $"{currentPlayerData.TotalEnergy}%";
     }
 }

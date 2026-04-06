@@ -53,4 +53,7 @@ public class QuestDefineSO : ScriptableObject
 
     [Header("战斗型任务配置")]
     public List<WaveDefine> waves;   // 战斗波次
+
+    [Header("任务奖励")]
+    public List<string> Reward;
 }

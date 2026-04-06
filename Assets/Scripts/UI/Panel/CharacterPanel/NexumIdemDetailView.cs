@@ -48,7 +48,7 @@ public class NexumIdemDetailView : MonoBehaviour
         if (critDamageText) critDamageText.text = $"{weapon.Stats.CritDamage * 100:F0}%";
         if (elementBonusText) elementBonusText.text = $"{weapon.Stats.ElementBonus * 100:F0}%";
         if (introductionText) introductionText.text = LocalizationManager.Instance.GetText("Exotext_Introduction", weapon.Id) ?? "";
-        if (descriptionText) descriptionText.text = LocalizationManager.Instance.GetText("Exotext_Description", weapon.Id) ?? "";
+        //if (descriptionText) descriptionText.text = LocalizationManager.Instance.GetText("Exotext_Description", weapon.Id) ?? "";
 
         gameObject.SetActive(true);
     }
@@ -69,7 +69,7 @@ public class NexumIdemDetailView : MonoBehaviour
         if (critDamageText) critDamageText.text = $"{vesture.Stats.CritDamage * 100:F0}%";
         if (elementBonusText) elementBonusText.text = $"{vesture.Stats.ElementBonus * 100:F0}%";
         if (introductionText) introductionText.text = LocalizationManager.Instance.GetText("NexusVesture_Introduction", vesture.Id) ?? "";
-        if (descriptionText) descriptionText.text = LocalizationManager.Instance.GetText("NexusVesture_Description", vesture.Id) ?? "";
+        //if (descriptionText) descriptionText.text = LocalizationManager.Instance.GetText("NexusVesture_Description", vesture.Id) ?? "";
 
         gameObject.SetActive(true);
     }

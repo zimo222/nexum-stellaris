@@ -17,6 +17,12 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: c17642ad71793214782ef72f4ea04c1e
   m_SerializeEntries:
+  - m_GUID: 0a8dd0e8f4b9c5643bee1f69e8928ead
+    m_Address: NexusVesture_Name_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6613afb2b037e184bb5a7e10f18c20a5
     m_Address: 0_MainMenu_en
     m_ReadOnly: 1
