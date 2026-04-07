@@ -47,8 +47,9 @@ public class QuestArrowGuide : MonoBehaviour
             return;
         }
 
-        QuestTriggerZone[] allZones = FindObjectsOfType<QuestTriggerZone>();
-        foreach (QuestTriggerZone zone in allZones)
+        // 先查找 QuestTriggerZone
+        QuestTriggerZone[] questZones = FindObjectsOfType<QuestTriggerZone>();
+        foreach (QuestTriggerZone zone in questZones)
         {
             if (zone.questId == questId)
             {
@@ -57,9 +58,23 @@ public class QuestArrowGuide : MonoBehaviour
             }
         }
 
+        // 如果没找到，再查找 CombatQuestTrigger
         if (targetTransform == null)
         {
-            Debug.LogWarning($"未找到任务 {questId} 对应的触发器");
+            CombatQuestTrigger[] combatZones = FindObjectsOfType<CombatQuestTrigger>();
+            foreach (CombatQuestTrigger zone in combatZones)
+            {
+                if (zone.questId == questId)
+                {
+                    targetTransform = zone.transform;
+                    break;
+                }
+            }
+        }
+
+        if (targetTransform == null)
+        {
+            Debug.LogWarning($"未找到任务 {questId} 对应的触发器 (QuestTriggerZone 或 CombatQuestTrigger)");
             arrowImage.gameObject.SetActive(false);
         }
         else

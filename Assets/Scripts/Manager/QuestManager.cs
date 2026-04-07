@@ -40,7 +40,7 @@ public class QuestManager : MonoBehaviour
     private Player playerController;
     private string currentInteractiveQuestId;
     private bool waitingForInteraction = false;
-    private bool isQuestActive = false;        // 标记当前是否处于启动状态（对话或战斗）
+    private bool isQuestActive = false;
 
     // 任务追踪相关
     public string TrackedQuestId { get; private set; }
@@ -89,15 +89,12 @@ public class QuestManager : MonoBehaviour
     {
         FindPlayer();
 
-        // 修复旧存档数据：将 NotStarted/InProgress 统一转换为 Available
         var playerData = PlayerDataManager.Instance?.CurrentPlayerData;
         if (playerData != null)
         {
             bool dataChanged = false;
             foreach (var progress in playerData.activeQuests)
             {
-                // 旧枚举值转换（假设旧值为 QuestState.NotStarted 或 QuestState.InProgress）
-                // 为了兼容，我们通过反射或直接字段判断，这里简化：如果 state 不是 Available 也不是 Completed，就设为 Available
                 if (progress.state != QuestProgressState.Available && progress.state != QuestProgressState.Completed)
                 {
                     progress.state = QuestProgressState.Available;
@@ -105,7 +102,6 @@ public class QuestManager : MonoBehaviour
                     Debug.Log($"修复任务状态: {progress.questId} -> Available");
                 }
 
-                // 确保战斗任务的目标列表完整
                 if (GameDataManager.Instance.QuestDict.TryGetValue(progress.questId, out var questData) &&
                     questData.contentType == QuestContentType.Combat &&
                     questData.objectives != null)
@@ -133,7 +129,7 @@ public class QuestManager : MonoBehaviour
 
     void Update()
     {
-        // 对话空格处理（启动状态下的交互）
+        // 对话空格处理
         if (isDialoguePlaying && Input.GetKeyDown(KeyCode.Space))
         {
             if (typingCoroutine != null)
@@ -157,7 +153,7 @@ public class QuestManager : MonoBehaviour
             }
         }
 
-        // 等待玩家按F键开始任务（进入启动状态）
+        // 按F启动任务（原有逻辑，修改了对话部分）
         if (waitingForInteraction && Input.GetKeyDown(KeyCode.F))
         {
             if (playerController != null && !playerController.isIdle)
@@ -174,39 +170,75 @@ public class QuestManager : MonoBehaviour
                 {
                     if (questData.contentType == QuestContentType.Dialogue)
                     {
+                        // 查找对应的触发器并禁用按钮
+                        QuestTriggerZone[] zones = FindObjectsOfType<QuestTriggerZone>();
+                        foreach (var zone in zones)
+                        {
+                            if (zone.questId == currentInteractiveQuestId)
+                            {
+                                zone.DisableButton();
+                                break;
+                            }
+                        }
+
                         waitingForInteraction = false;
-                        isQuestActive = true;   // 标记启动状态
+                        isQuestActive = true;
                         StartDialogue(questData.dialogueEntries, currentInteractiveQuestId);
                     }
                     else if (questData.contentType == QuestContentType.Combat)
                     {
                         waitingForInteraction = false;
                         isQuestActive = true;
-                        // 启动战斗，由 CombatQuestTrigger 调用 StartCombatQuest，此处不再重复
-                        // 注意：StartCombatQuest 中会调用 CombatManager.StartCombat，需要将任务标记为启动
-                        // 我们会在 StartCombatQuest 中设置 isQuestActive
+                        // 战斗由 CombatQuestTrigger 启动，这里不处理
                     }
                 }
             }
         }
     }
 
-    /// <summary>
-    /// 解锁任务（前置任务完成后调用）
-    /// </summary>
+    // ========== 新增：供UI按钮调用的公共方法 ==========
+    public void StartCurrentQuest()
+    {
+        if (!waitingForInteraction || string.IsNullOrEmpty(currentInteractiveQuestId))
+            return;
+
+        if (playerController != null && !playerController.isIdle)
+        {
+            Debug.Log("移动中不能开始任务");
+            return;
+        }
+
+        var progress = PlayerDataManager.Instance?.GetQuestProgress(currentInteractiveQuestId);
+        if (progress == null || progress.state != QuestProgressState.Available)
+            return;
+
+        if (!GameDataManager.Instance.QuestDict.TryGetValue(currentInteractiveQuestId, out var questData))
+            return;
+
+        waitingForInteraction = false;
+
+        if (questData.contentType == QuestContentType.Dialogue)
+        {
+            isQuestActive = true;
+            StartDialogue(questData.dialogueEntries, currentInteractiveQuestId);
+        }
+        else if (questData.contentType == QuestContentType.Combat)
+        {
+            // 战斗任务不应该通过此方法启动，但为了安全，不做任何事
+            Debug.LogWarning("StartCurrentQuest 不应启动战斗任务");
+        }
+    }
+
+    // ========== 原有方法（未修改） ==========
     public void UnlockQuest(string questId)
     {
         if (PlayerDataManager.Instance.UnlockQuest(questId))
         {
             RefreshQuestUI();
             AutoSetTrackedQuest();
-            // 可选：显示提示 "新任务已解锁"
         }
     }
 
-    /// <summary>
-    /// 完成一个任务，并自动解锁后续任务
-    /// </summary>
     public void CompleteQuest(string questId)
     {
         if (PlayerDataManager.Instance.CompleteQuest(questId))
@@ -215,7 +247,6 @@ public class QuestManager : MonoBehaviour
             {
                 ShowPanel(questData.questName, "完成");
 
-                // 解锁后续任务
                 if (questData.nextQuestIds != null)
                 {
                     foreach (string nextId in questData.nextQuestIds)
@@ -227,7 +258,6 @@ public class QuestManager : MonoBehaviour
                     }
                 }
 
-                // 发放奖励
                 if (questData.Reward != null)
                 {
                     foreach (string rewardId in questData.Reward)
@@ -246,7 +276,6 @@ public class QuestManager : MonoBehaviour
             if (questId == "MainQuest_003")
                 SceneDataManager.Instance.LoadScene("2_TheArgentCorridor");
 
-            // 如果当前对话任务完成，结束启动状态
             if (isQuestActive && currentInteractiveQuestId == questId)
             {
                 isQuestActive = false;
@@ -255,9 +284,6 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 战斗失败时回退任务状态
-    /// </summary>
     public void OnCombatFailed(string questId)
     {
         if (PlayerDataManager.Instance.ResetQuestToAvailable(questId))
@@ -271,9 +297,6 @@ public class QuestManager : MonoBehaviour
         waitingForInteraction = false;
     }
 
-    /// <summary>
-    /// 开始战斗任务（由触发器调用，此时任务状态必须为 Available）
-    /// </summary>
     public void StartCombatQuest(string questId, Vector2 spawnCenter)
     {
         var progress = PlayerDataManager.Instance.GetQuestProgress(questId);
@@ -289,15 +312,11 @@ public class QuestManager : MonoBehaviour
             return;
         }
 
-        // 标记启动状态（运行时）
         isQuestActive = true;
         currentInteractiveQuestId = questId;
-
-        // 调用战斗管理器开始战斗
         CombatManager.Instance.StartCombat(questData, spawnCenter);
     }
 
-    // ----- 对话任务内部逻辑 -----
     private void StartDialogue(List<DialogueEntry> dialogueList, string questId)
     {
         if (dialogueList == null || dialogueList.Count == 0)
@@ -376,13 +395,11 @@ public class QuestManager : MonoBehaviour
         waitingForInteraction = false;
     }
 
-    // ----- 区域触发逻辑 -----
-    public void OnPlayerEnterQuestArea(string questId)
+    public void OnPlayerEnterQuestArea(string questId, Vector2? spawnCenter = null)
     {
         var progress = PlayerDataManager.Instance?.GetQuestProgress(questId);
         if (progress == null)
         {
-            // 任务未激活，检查前置任务是否完成，若完成则解锁
             if (GameDataManager.Instance.QuestDict.TryGetValue(questId, out var questData))
             {
                 if (!string.IsNullOrEmpty(questData.lastQuestId) &&
@@ -393,7 +410,7 @@ public class QuestManager : MonoBehaviour
                 }
                 else
                 {
-                    return; // 未解锁，无提示
+                    return;
                 }
             }
         }
@@ -402,7 +419,7 @@ public class QuestManager : MonoBehaviour
         {
             currentInteractiveQuestId = questId;
             waitingForInteraction = true;
-            Debug.Log("按F开始任务");
+            Debug.Log("按F或点击按钮开始任务");
         }
     }
 
@@ -415,13 +432,11 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    // ----- UI 刷新与追踪 -----
     private void RefreshQuestUI()
     {
         var availableQuests = PlayerDataManager.Instance?.GetAvailableQuests();
         if (availableQuests == null) return;
 
-        // 显示第一个主线任务作为追踪
         var mainQuest = availableQuests.Find(q =>
         {
             if (GameDataManager.Instance.QuestDict.TryGetValue(q.questId, out var qd))
@@ -510,7 +525,6 @@ public class QuestManager : MonoBehaviour
         panelCoroutine = null;
     }
 
-    // 保留 OnEnemyKilled 用于战斗任务的目标计数（如果需要）
     public void OnEnemyKilled(string enemyId)
     {
         var availableQuests = PlayerDataManager.Instance?.GetAvailableQuests();

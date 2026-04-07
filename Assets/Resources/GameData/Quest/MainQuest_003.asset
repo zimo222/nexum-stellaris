@@ -47,3 +47,5 @@ MonoBehaviour:
     content: "\u6211\u4FA7\u8EAB\u6324\u4E86\u8FDB\u53BB\u3002"
   objectives: []
   waves: []
+  Reward:
+  - Exotext_003_VotiveEmber
