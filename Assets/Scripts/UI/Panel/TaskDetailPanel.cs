@@ -4,6 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 /// <summary>
 /// 任务详情面板
@@ -18,10 +19,16 @@ public class TaskDetailPanel : BPanel
     [Header("右侧详情区域")]
     public TMP_Text taskNameText;                // 任务名称
     public TMP_Text taskDetailText;              // 任务详情（描述 + 目标进度）
-    public TMP_Text taskRewardText;              // 任务奖励描述
+
+    [Header("奖励区域")]
+    public Transform rewardContainer;            // 奖励图标的父物体（建议使用 HorizontalLayoutGroup 或 GridLayoutGroup）
+    public GameObject rewardIconPrefab;          // 奖励图标预制体（需包含 Button、Image，可选数量文本）
 
     [Header("追踪按钮")]
-    public Button trackButton;                    // 切换追踪的按钮
+    public Button trackButton;                   // 切换追踪的按钮
+
+    // 奖励按钮点击事件（参数：物品ID）
+    public UnityEvent<string> OnRewardClicked;
 
     // 当前选中的任务ID
     private string selectedQuestId;
@@ -90,21 +97,7 @@ public class TaskDetailPanel : BPanel
             // 实例化按钮
             GameObject btnObj = Instantiate(taskButtonPrefab, leftContent);
             questButtons.Add(btnObj);
-            /*
-            // 设置按钮上的文本（假设预制体结构：CategoryText / ChapterText / NameText）
-            TMP_Text categoryText = btnObj.transform.Find("CategoryText")?.GetComponent<TMP_Text>();
-            TMP_Text chapterText = btnObj.transform.Find("ChapterText")?.GetComponent<TMP_Text>();
-            TMP_Text nameText = btnObj.transform.Find("NameText")?.GetComponent<TMP_Text>();
 
-            if (categoryText != null)
-                categoryText.text = questData.category == QuestCategory.Main ? "主线" : "世界";
-
-            if (chapterText != null)
-                chapterText.text = ExtractChapterFromId(questData.id);   // 从ID中提取章节
-
-            if (nameText != null)
-                nameText.text = questData.questName;
-            */
             QuestItemView itemView = btnObj.gameObject.GetComponent<QuestItemView>();
             itemView.UpdateUI(questData);
 
@@ -144,7 +137,7 @@ public class TaskDetailPanel : BPanel
         {
             taskNameText.text = "未选择任务";
             taskDetailText.text = "";
-            taskRewardText.text = "";
+            ClearRewardIcons();
             return;
         }
 
@@ -152,6 +145,8 @@ public class TaskDetailPanel : BPanel
         if (!GameDataManager.Instance.QuestDict.TryGetValue(selectedQuestId, out var questData))
         {
             taskNameText.text = "任务数据缺失";
+            taskDetailText.text = "";
+            ClearRewardIcons();
             return;
         }
 
@@ -176,8 +171,102 @@ public class TaskDetailPanel : BPanel
         }
         taskDetailText.text = detail;
 
-        // 奖励描述
-        taskRewardText.text = "";
+        // 生成奖励图标（替换原来的文本奖励描述）
+        GenerateRewardIcons(questData);
+    }
+
+    /// <summary>
+    /// 清除所有奖励图标
+    /// </summary>
+    private void ClearRewardIcons()
+    {
+        if (rewardContainer == null) return;
+        foreach (Transform child in rewardContainer)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
+    /// <summary>
+    /// 根据任务数据生成奖励图标列表
+    /// </summary>
+    private void GenerateRewardIcons(QuestDefineSO questData)
+    {
+        ClearRewardIcons();
+
+        if (questData.Reward == null || questData.Reward.Count == 0) return;
+        if (rewardContainer == null || rewardIconPrefab == null)
+        {
+            Debug.LogWarning("奖励容器或奖励预制体未指定！");
+            return;
+        }
+
+        foreach (string rewardStr in questData.Reward)
+        {
+            // 解析奖励字符串，格式支持 "itemId" 或 "itemId:amount"
+            string itemId = rewardStr;
+            int amount = 1;
+            if (rewardStr.Contains(":"))
+            {
+                var parts = rewardStr.Split(':');
+                if (parts.Length == 2)
+                {
+                    itemId = parts[0];
+                    int.TryParse(parts[1], out amount);
+                }
+            }
+
+            // 获取物品图标（从各字典中查找）
+            Sprite itemIcon = GetItemIcon(itemId);
+            if (itemIcon == null)
+            {
+                Debug.LogWarning($"未找到物品图标: {itemId}");
+                //continue;
+            }
+
+            // 实例化奖励图标
+            GameObject iconObj = Instantiate(rewardIconPrefab, rewardContainer);
+
+            // 设置图标
+            Image iconImage = iconObj.GetComponent<Image>();
+            if (iconImage != null)
+                iconImage.sprite = itemIcon;
+
+            // 设置数量文本（如果预制体有 TMP_Text 组件）
+            TMP_Text amountText = iconObj.GetComponentInChildren<TMP_Text>();
+            if (amountText != null)
+            {
+                amountText.text = amount > 1 ? amount.ToString() : "";
+            }
+
+            // 绑定点击事件
+            Button btn = iconObj.GetComponent<Button>();
+            if (btn != null)
+            {
+                string capturedId = itemId; // 避免闭包问题
+                btn.onClick.AddListener(() => OnRewardClicked?.Invoke(capturedId));
+            }
+        }
+    }
+
+    /// <summary>
+    /// 根据物品 ID 获取对应的图标 Sprite
+    /// </summary>
+    private Sprite GetItemIcon(string itemId)
+    {
+        // 优先查找武器
+        if (GameDataManager.Instance.ExotextDict.TryGetValue(itemId, out var exotext))
+            return exotext.icon;
+
+        // 查找圣痕
+        if (GameDataManager.Instance.NexusVestureDict.TryGetValue(itemId, out var nexus))
+            return nexus.icon;
+
+        // 查找材料（假设 MaterialDefineSO 也有 icon 字段，需根据实际调整）
+        // if (GameDataManager.Instance.MaterialDict.TryGetValue(itemId, out var material))
+        //     return material.icon;
+
+        return null;
     }
 
     /// <summary>
