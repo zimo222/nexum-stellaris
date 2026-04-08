@@ -23,6 +23,18 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-zh-Hans
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 42a4b1dbdb9410c42bf5a2b503f8010d
+    m_Address: NexusVesture_Description_zh-Hans
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-zh-Hans
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 43a57c241c27a4749861227cb3fdeb75
+    m_Address: NexusVesture_Introduction_zh-Hans
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-zh-Hans
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4990b74b2e0235447b8f9257710d0847
     m_Address: 0_MainMenu_zh-Hans
     m_ReadOnly: 1

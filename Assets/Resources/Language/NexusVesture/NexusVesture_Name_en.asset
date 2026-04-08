@@ -17,7 +17,107 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: a9fabc2c40addc244a0dbee25a60d458, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 250778181632
+    m_Localized: "Abyssal Heart \xB7 The Argent Heartguard"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 259607191552
+    m_Localized: "Cogni-Thread \xB7 The Argent Thought"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 263226875904
+    m_Localized: "Imprint Step \xB7 The Argent Footprints"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 268792717312
+    m_Localized: "Tangible Nexus \xB7 The Argent Grasp"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 270873092096
+    m_Localized: "Volition Vein \xB7 The Argent Stride"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 340162994176
+    m_Localized: "Abyssal Heart \xB7 Votive Cuirass"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 343551991808
+    m_Localized: "Cogni-Thread \xB7 Primitex Crown"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 345565257728
+    m_Localized: "Imprint Step \xB7 Texere Sabatons"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 347947622400
+    m_Localized: "Tangible Nexus \xB7 Nexus Gauntlets"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 349830864896
+    m_Localized: "Volition Vein \xB7 Votive Greaves"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 351873490944
+    m_Localized: "Abyssal Heart \xB7 Nexus Heartweave"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 357447720960
+    m_Localized: "Cogni-Thread \xB7 Mnemonic Veil"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 361067405312
+    m_Localized: "Imprint Step \xB7 Stardust Shoes"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 363151974400
+    m_Localized: "Tangible Nexus \xB7 Stardust Gloves"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 366503223296
+    m_Localized: "Volition Vein \xB7 Stellar Track Legguards"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 368180944896
+    m_Localized: "Abyssal Heart \xB7 Resonant Plastron"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 370731081728
+    m_Localized: "Cogni-Thread \xB7 Astro-Nexus Hairpin"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 372983422976
+    m_Localized: "Imprint Step \xB7 Nexus Trail Boots"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 375000883200
+    m_Localized: "Tangible Nexus \xB7 Vinculum Rings"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 378146611200
+    m_Localized: "Volition Vein \xB7 Nexus Legwraps"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 379761418240
+    m_Localized: "Abyssal Heart \xB7 Mnemonic Pectoral"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 381804044288
+    m_Localized: "Cogni-Thread \xB7 Resonant Diadem"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 384018636800
+    m_Localized: "Imprint Step \xB7 Resonant Sollerets"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 386275172352
+    m_Localized: "Tangible Nexus \xB7 Resonant Bracers"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 388380712960
+    m_Localized: "Volition Vein \xB7 Resonant Poleyns"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

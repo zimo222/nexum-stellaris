@@ -23,6 +23,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-en
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2bc65fbb054777148be4539589a9f385
+    m_Address: NexusVesture_Introduction_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6613afb2b037e184bb5a7e10f18c20a5
     m_Address: 0_MainMenu_en
     m_ReadOnly: 1
@@ -43,6 +49,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e04b2b1fb9cf99849b52d790ad0a0a24
     m_Address: Exotext_Introduction_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e0d9455078c4d044ba790dc913c373fd
+    m_Address: NexusVesture_Description_en
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en

@@ -10,139 +10,139 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
-  m_Name: NexusVesture_Name Shared Data
+  m_Name: NexusVesture_Description Shared Data
   m_EditorClassIdentifier: 
-  m_TableCollectionName: NexusVesture_Name
-  m_TableCollectionNameGuidString: a9fabc2c40addc244a0dbee25a60d458
+  m_TableCollectionName: NexusVesture_Description
+  m_TableCollectionNameGuidString: 933bc1a433eed224b95baeb813f29a9c
   m_Entries:
-  - m_Id: 239340314624
+  - m_Id: 54153404416
     m_Key: NexusVesture_000_AbyssalHeart
     m_Metadata:
       m_Items: []
-  - m_Id: 241311637504
+  - m_Id: 55889846272
     m_Key: NexusVesture_000_CogniThread
     m_Metadata:
       m_Items: []
-  - m_Id: 244067295232
+  - m_Id: 60683935744
     m_Key: NexusVesture_000_ImprintStep
     m_Metadata:
       m_Items: []
-  - m_Id: 246344802304
+  - m_Id: 74609025024
     m_Key: NexusVesture_000_TangibleNexus
     m_Metadata:
       m_Items: []
-  - m_Id: 248433565696
+  - m_Id: 79176622080
     m_Key: NexusVesture_000_VolitionVein
     m_Metadata:
       m_Items: []
-  - m_Id: 250778181632
+  - m_Id: 84016848896
     m_Key: NexusVesture_001_AbyssalHeart
     m_Metadata:
       m_Items: []
-  - m_Id: 259607191552
+  - m_Id: 85887508480
     m_Key: NexusVesture_001_CogniThread
     m_Metadata:
       m_Items: []
-  - m_Id: 263226875904
+  - m_Id: 87565230080
     m_Key: NexusVesture_001_ImprintStep
     m_Metadata:
       m_Items: []
-  - m_Id: 268792717312
+  - m_Id: 89242951680
     m_Key: NexusVesture_001_TangibleNexus
     m_Metadata:
       m_Items: []
-  - m_Id: 270873092096
+  - m_Id: 90987782144
     m_Key: NexusVesture_001_VolitionVein
     m_Metadata:
       m_Items: []
-  - m_Id: 340162994176
+  - m_Id: 93001048064
     m_Key: NexusVesture_002_AbyssalHeart
     m_Metadata:
       m_Items: []
-  - m_Id: 343551991808
+  - m_Id: 94510997504
     m_Key: NexusVesture_002_CogniThread
     m_Metadata:
       m_Items: []
-  - m_Id: 345565257728
+  - m_Id: 96260022272
     m_Key: NexusVesture_002_ImprintStep
     m_Metadata:
       m_Items: []
-  - m_Id: 347947622400
+  - m_Id: 97899995136
     m_Key: NexusVesture_002_TangibleNexus
     m_Metadata:
       m_Items: []
-  - m_Id: 349830864896
+  - m_Id: 100982808576
     m_Key: NexusVesture_002_VolitionVein
     m_Metadata:
       m_Items: []
-  - m_Id: 351873490944
+  - m_Id: 105550405632
     m_Key: NexusVesture_003_AbyssalHeart
     m_Metadata:
       m_Items: []
-  - m_Id: 357447720960
+  - m_Id: 107731443712
     m_Key: NexusVesture_003_CogniThread
     m_Metadata:
       m_Items: []
-  - m_Id: 361067405312
+  - m_Id: 109610491904
     m_Key: NexusVesture_003_ImprintStep
     m_Metadata:
       m_Items: []
-  - m_Id: 363151974400
+  - m_Id: 111086886912
     m_Key: NexusVesture_003_TangibleNexus
     m_Metadata:
       m_Items: []
-  - m_Id: 366503223296
+  - m_Id: 115046309888
     m_Key: NexusVesture_003_VolitionVein
     m_Metadata:
       m_Items: []
-  - m_Id: 368180944896
+  - m_Id: 118166872064
     m_Key: NexusVesture_004_AbyssalHeart
     m_Metadata:
       m_Items: []
-  - m_Id: 370731081728
+  - m_Id: 120045920256
     m_Key: NexusVesture_004_CogniThread
     m_Metadata:
       m_Items: []
-  - m_Id: 372983422976
+  - m_Id: 122361176064
     m_Key: NexusVesture_004_ImprintStep
     m_Metadata:
       m_Items: []
-  - m_Id: 375000883200
+  - m_Id: 123837571072
     m_Key: NexusVesture_004_TangibleNexus
     m_Metadata:
       m_Items: []
-  - m_Id: 378146611200
+  - m_Id: 125716619264
     m_Key: NexusVesture_004_VolitionVein
     m_Metadata:
       m_Items: []
-  - m_Id: 379761418240
+  - m_Id: 127763439616
     m_Key: NexusVesture_005_AbyssalHeart
     m_Metadata:
       m_Items: []
-  - m_Id: 381804044288
+  - m_Id: 129504075776
     m_Key: NexusVesture_005_CogniThread
     m_Metadata:
       m_Items: []
-  - m_Id: 384018636800
+  - m_Id: 131047579648
     m_Key: NexusVesture_005_ImprintStep
     m_Metadata:
       m_Items: []
-  - m_Id: 386275172352
+  - m_Id: 133165703168
     m_Key: NexusVesture_005_TangibleNexus
     m_Metadata:
       m_Items: []
-  - m_Id: 388380712960
+  - m_Id: 135812308992
     m_Key: NexusVesture_005_VolitionVein
     m_Metadata:
       m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
-    rid: 2609419414421110786
+    rid: 2609419457658093569
   references:
     version: 2
     RefIds:
-    - rid: 2609419414421110786
+    - rid: 2609419457658093569
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
       data:
-        m_CustomEpoch: 1775470161541
+        m_CustomEpoch: 1775635933782

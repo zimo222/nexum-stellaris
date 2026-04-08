@@ -32,6 +32,12 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 402ac5a0bc64cca498c0da0729a4c6ba
+    m_Address: Assets/Resources/Language/NexusVesture/NexusVesture_Introduction Shared
+      Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 54b1796751c8f0b448ced519c00f1e28
     m_Address: Assets/Resources/Language/CharacterPanel/CharacterPanel_PbText Shared
       Data.asset
@@ -45,6 +51,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7bec11777633f064fb11a023a24103dc
     m_Address: Assets/Resources/Language/LoadingPanel Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 933bc1a433eed224b95baeb813f29a9c
+    m_Address: Assets/Resources/Language/NexusVesture/NexusVesture_Description Shared
+      Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
