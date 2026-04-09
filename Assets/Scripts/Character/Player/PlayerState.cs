@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 
 public class PlayerState
@@ -62,5 +63,15 @@ public class PlayerState
         else if (Input.GetKeyDown(KeyCode.Alpha5)) player.selectedSpellIndex = 4;
         else if (Input.GetKeyDown(KeyCode.Alpha6)) player.selectedSpellIndex = 5;
         else if (Input.GetKeyDown(KeyCode.Alpha7)) player.selectedSpellIndex = 6;
+
+
+        if (player.selectedSpellIndex != -1)
+        {
+            player.selectedSpellIndex = player.selectedSpellIndex;
+
+            // 通知 UI 更新
+            if (player.weaponSlotsUI != null)
+                player.weaponSlotsUI.SelectSlot(player.selectedSpellIndex);
+        }
     }
 }

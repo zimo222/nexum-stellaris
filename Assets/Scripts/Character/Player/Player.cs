@@ -41,6 +41,8 @@ public class Player : Entity
     [Header("Spell selection")]
     public int selectedSpellIndex = 0;
 
+    public WeaponSlotsUI weaponSlotsUI;
+
     protected override void Awake()
     {
         base.Awake();
