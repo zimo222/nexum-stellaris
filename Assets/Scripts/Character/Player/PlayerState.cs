@@ -67,8 +67,6 @@ public class PlayerState
 
         if (player.selectedSpellIndex != -1)
         {
-            player.selectedSpellIndex = player.selectedSpellIndex;
-
             // 通知 UI 更新
             if (player.weaponSlotsUI != null)
                 player.weaponSlotsUI.SelectSlot(player.selectedSpellIndex);

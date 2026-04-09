@@ -19,6 +19,7 @@ public class Player : Entity
     [Header("Dash info")]
     public float dashSpeed;
     public float dashDuration;
+    public int attackType;
 
     public float jumpStartY { get; set; } // 记录起跳时的 y 坐标
     public bool isJumping { get; set; }

@@ -2,6 +2,7 @@ using System.Buffers;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Build.Pipeline;
 using UnityEngine;
 
 /// <summary>
@@ -129,9 +130,26 @@ public class SpellExecutor : MonoBehaviour
 
         // 计算发射方向（可根据玩家面向调整）
         Vector2 direction = owner.transform.right; // 假设玩家面朝右
-        direction = player.dashDirection;
+        direction = player.attackType == 0 ? player.dashDirection : GetDashDirection(player.attackType);
         // 可扩展：根据鼠标方向或输入方向
 
         BulletFactory.CreateBullet(spellPackage, firePoint.position, direction, owner);
+    }
+
+    private Vector2 GetDashDirection(int attackType)
+    {
+        switch(attackType)
+        {
+            case 1:
+                return new Vector2(0, 1);
+            case 2:
+                return new Vector2(0, -1);
+            case 3:
+                return new Vector2(-1, 0);
+            case 4:
+                return new Vector2(1, 0);
+            default:
+                return new Vector2(0, 0);
+        }
     }
 }

@@ -28,8 +28,19 @@ public class PlayerGroundedState : PlayerState
             stateMachine.ChangeState(player.counterAttack);
         }
         */
-        if (Input.GetKey(KeyCode.J))
+        if (Input.GetKey(KeyCode.J) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
         {
+            // 根据具体按下的键设置 attackType
+            if (Input.GetKey(KeyCode.J))
+                player.attackType = 0;          // 例如：普通攻击
+            else if (Input.GetKey(KeyCode.UpArrow))
+                player.attackType = 1;          // 上方向攻击
+            else if (Input.GetKey(KeyCode.DownArrow))
+                player.attackType = 2;          // 下方向攻击
+            else if (Input.GetKey(KeyCode.LeftArrow))
+                player.attackType = 3;          // 左方向攻击
+            else if (Input.GetKey(KeyCode.RightArrow))
+                player.attackType = 4;          // 右方向攻击
             stateMachine.ChangeState(player.primaryAttack);
         }
 
