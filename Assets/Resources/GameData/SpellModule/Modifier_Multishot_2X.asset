@@ -29,4 +29,5 @@ MonoBehaviour:
   orbitRadius: 0
   orbitSpeed: 0
   fieldAngle: 0
+  introduction: "\u521D\u59CB\u5B50\u5F39\u6570\u91CF\u4E582"
   icon: {fileID: 21300000, guid: ed7cdc1a7288d724e876e7196d237ac5, type: 3}

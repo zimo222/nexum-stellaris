@@ -59,7 +59,7 @@ public class NexumIdemDetailView : MonoBehaviour
         currentItemDefineId = vesture.Id;
         currentMode = NexumIdemStarPanelController.NexumIdemMode.NexusVesture;
 
-        if (nameText) nameText.text = LocalizationManager.Instance.GetText("NexusVesture_Name", vesture.Id + "_Name") ?? "";
+        if (nameText) nameText.text = LocalizationManager.Instance.GetText("NexusVesture_Name", vesture.Id) ?? "";
         if (typeOrPositionText) typeOrPositionText.text = vesture.Position.ToString();
         if (starsText) starsText.text = $"бя{vesture.Stats.Stars}";
         if (attackText) attackText.text = $"{vesture.Stats.Attack}";

@@ -41,5 +41,8 @@ public class SpellModuleSO : ScriptableObject
     public float orbitSpeed = 0f;              // 轨道旋转速度
 
     public int fieldAngle = 0;
+
+    public string introduction;
+
     public Sprite icon;
 }

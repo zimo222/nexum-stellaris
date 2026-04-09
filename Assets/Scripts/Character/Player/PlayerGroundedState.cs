@@ -22,12 +22,12 @@ public class PlayerGroundedState : PlayerState
     public override void Update()
     {
         base.Update();
-
+        /*
         if (Input.GetKey(KeyCode.Q))
         {
             stateMachine.ChangeState(player.counterAttack);
         }
-
+        */
         if (Input.GetKey(KeyCode.J))
         {
             stateMachine.ChangeState(player.primaryAttack);

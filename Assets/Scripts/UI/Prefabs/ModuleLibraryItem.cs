@@ -5,10 +5,17 @@ using TMPro;
 
 public class ModuleLibraryItem : MonoBehaviour, IPointerClickHandler
 {
-    public SpellModuleSO module;                 // 关联的模块数据
+    public SpellModuleSO module;
     public Image iconImage;
     public TMP_Text moduleNameText;
-    public SpellCraftingPanel craftingPanel;   // 新增：引用管理面板
+    public SpellCraftingPanel craftingPanel;
+
+    private Vector3 originalScale;   // 记录原始缩放
+
+    private void Awake()
+    {
+        originalScale = transform.localScale;
+    }
 
     public void Init(SpellModuleSO moduleData)
     {
@@ -19,8 +26,16 @@ public class ModuleLibraryItem : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        // 通过引用来调用实例方法
         if (craftingPanel != null)
             craftingPanel.OnLibraryItemClicked(this);
+    }
+
+    // 设置高亮状态（缩放变化）
+    public void SetHighlight(bool highlight)
+    {
+        if (highlight)
+            transform.localScale = originalScale * 1.2f;   // 放大1.2倍
+        else
+            transform.localScale = originalScale;
     }
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Projectile_FireBall_002
   m_EditorClassIdentifier: 
   id: Projectile_FireBall_002
-  moduleName: "\u53D1\u5C04\u4E00\u4E2A\u5C0F\u706B\u7403"
+  moduleName: "\u6697"
   moduleType: 0
   delay: 0
   bulletDefine: {fileID: 11400000, guid: cab3d4abf3e17a94dab7e6754e0dae01, type: 2}
@@ -29,4 +29,5 @@ MonoBehaviour:
   orbitRadius: 0
   orbitSpeed: 0
   fieldAngle: 0
+  introduction: "\u53D1\u5C04\u4E00\u4E2A\u6697\u9B54\u6CD5\u7403"
   icon: {fileID: 21300000, guid: c54db09db34bc4c44bd08b70fe9876a1, type: 3}
