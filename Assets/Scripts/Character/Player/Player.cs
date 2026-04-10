@@ -21,6 +21,11 @@ public class Player : Entity
     public float dashDuration;
     public int attackType;
 
+    [Header("Energy Regen")]
+    public int energyRegenRate = 2;          // 每秒恢复量
+    private float energyRegenTimer = 0f;
+
+
     public float jumpStartY { get; set; } // 记录起跳时的 y 坐标
     public bool isJumping { get; set; }
 
@@ -79,6 +84,7 @@ public class Player : Entity
         base.Update();
         stateMachine.currentState.Update();
         CheckForDashInput();
+        HandleEnergyRegen();   // 新增能量回复
     }
 
     public IEnumerator BusyFor(float _seconds)
@@ -117,6 +123,10 @@ public class Player : Entity
     /// </summary>
     public void SpawnBullet()
     {
+        if (playerData.CurrentEnergy < 10) return;
+
+        CombatManager.Instance.CostEnergy(this.gameObject, 10);
+
         // 获取玩家装备的法术模块ID列表（从 PlayerData 中）
         List<string> moduleIds = PlayerDataManager.Instance.GetWeaponModuleList(selectedSpellIndex); // 假设有此字段
                                                                // 构建法术序列
@@ -131,6 +141,32 @@ public class Player : Entity
         else
         {
             Debug.LogError("玩家身上没有 SpellExecutor 组件");
+        }
+    }
+
+
+    // 新增方法：处理能量回复
+    private void HandleEnergyRegen()
+    {
+        if (playerData == null) return;
+
+        // 如果当前能量未满，则计时回复
+        if (playerData.CurrentEnergy < playerData.BaseStats.Energy)
+        {
+            energyRegenTimer += Time.deltaTime;
+            if (energyRegenTimer >= 0.1f)
+            {
+                // 每秒恢复固定值，但不超过上限
+                int newEnergy = Mathf.Min(playerData.CurrentEnergy + energyRegenRate, playerData.BaseStats.Energy);
+                //playerData.CurrentEnergy = newEnergy;
+                energyRegenTimer -= 0.1f; // 保留多余时间，避免累积误差
+                CombatManager.Instance.CostEnergy(this.gameObject, playerData.CurrentEnergy - newEnergy);
+            }
+        }
+        else
+        {
+            // 能量已满时重置计时器
+            energyRegenTimer = 0f;
         }
     }
 }

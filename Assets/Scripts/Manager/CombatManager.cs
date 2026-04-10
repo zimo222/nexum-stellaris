@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 using UnityEngine.UI; // 添加 UI 命名空间
 
@@ -19,8 +20,11 @@ public class CombatManager : MonoBehaviour
     private GameObject currentEnemy;
 
     [Header("UI References")]
-    [SerializeField] private Slider healthSlider; // 血条 Slider，可在 Inspector 中拖拽，或自动从子物体获取
+    [SerializeField] private Slider healthSliderA; // 血条 Slider，可在 Inspector 中拖拽，或自动从子物体获取
+    [SerializeField] private Slider healthSliderB; // 血条 Slider，可在 Inspector 中拖拽，或自动从子物体获取
+    [SerializeField] private Slider energySlider; // 血条 Slider，可在 Inspector 中拖拽，或自动从子物体获取
     [SerializeField] private TMP_Text healthText;
+    [SerializeField] private TMP_Text energyText;
 
     // 战斗任务状态
     private QuestDefineSO currentCombatQuest;   // 当前进行的战斗任务数据
@@ -41,10 +45,10 @@ public class CombatManager : MonoBehaviour
         }
 
         // 如果没有手动赋值，则尝试从子物体获取 Slider
-        if (healthSlider == null)
+        if (healthSliderA == null)
         {
-            healthSlider = GetComponentInChildren<Slider>();
-            if (healthSlider == null)
+            healthSliderA = GetComponentInChildren<Slider>();
+            if (healthSliderA == null)
             {
                 Debug.LogWarning("CombatManager: 未找到子物体 Slider，血条将无法显示。");
             }
@@ -58,6 +62,7 @@ public class CombatManager : MonoBehaviour
     {
         Player = playerObj;
         UpdateHealthSlider(); // 注册玩家时同步血量显示
+        UpdateEnergySlider(); // 注册玩家时同步血量显示
     }
 
     /// <summary>
@@ -113,21 +118,53 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+    public void CostEnergy(GameObject target, int amount)
+    {
+        // 处理玩家受伤
+        Player playerComp = target.GetComponent<Player>();
+        if (playerComp != null)
+        {
+            PlayerData playerData = PlayerDataManager.Instance.CurrentPlayerData;
+            playerData.CurrentEnergy -= amount;
+            UpdateEnergySlider();
+            return;
+        }
+    }
+
     /// <summary>
     /// 更新血条显示（根据玩家当前血量）
     /// </summary>
     private void UpdateHealthSlider()
     {
-        if (healthSlider == null) return;
+        if (healthSliderA == null) return;
         if (Player == null) return;
 
         PlayerData playerData = PlayerDataManager.Instance.CurrentPlayerData;
         if (playerData == null) return;
 
         // 设置 Slider 的最大值和当前值
-        healthSlider.maxValue = playerData.BaseStats.Health;
-        healthSlider.value = playerData.CurrentHealth;
+        healthSliderA.maxValue = playerData.BaseStats.Health;
+        healthSliderA.value = playerData.CurrentHealth;
+        healthSliderB.maxValue = playerData.BaseStats.Health;
+        healthSliderB.value = playerData.CurrentHealth;
         healthText.text = playerData.CurrentHealth.ToString() + "/" + playerData.BaseStats.Health.ToString();
+    }
+
+    /// <summary>
+    /// 更新能条显示（根据玩家当前能量）
+    /// </summary>
+    private void UpdateEnergySlider()
+    {
+        if (energySlider == null) return;
+        if (Player == null) return;
+
+        PlayerData playerData = PlayerDataManager.Instance.CurrentPlayerData;
+        if (playerData == null) return;
+
+        // 设置 Slider 的最大值和当前值
+        energySlider.maxValue = playerData.BaseStats.Energy;
+        energySlider.value = playerData.CurrentEnergy;
+        energyText.text = playerData.CurrentEnergy.ToString() + "/" + playerData.BaseStats.Energy.ToString();
     }
 
     private void PlayerDefeated()

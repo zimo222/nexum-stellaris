@@ -26,6 +26,7 @@ public class PlayerData
     // ====================     角色与装备系统     ====================
     public CharacterStats BaseStats;                 // 基础属性
     public int CurrentHealth;   // 当前生命值
+    public int CurrentEnergy;   // 当前能量值
     public int skillNum;
     public SkillData[] Skills;
     // 装备索引（指向EquipmentBag的下标）
