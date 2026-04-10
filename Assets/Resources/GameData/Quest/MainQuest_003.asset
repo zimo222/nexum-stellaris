@@ -22,7 +22,7 @@ MonoBehaviour:
   contentType: 0
   nextQuestIds:
   - MainQuest_004
-  description: 
+  description: "\u95E8\u7F1D\u91CC\u7684\u767D\u6D8C\u6765\uFF0C\u50CF\u7B2C\u4E00\u6B21\u7741\u773C\u3002"
   dialogueEntries:
   - background: {fileID: 0}
     speakerId: "Kianna\xB7Argent"
