@@ -309,15 +309,52 @@ public class Bullet : MonoBehaviour
     // 持续效果协程（可被 StopCoroutine 中断）
     // ----------------------------------------------------------------------
 
+    // 放在类里的任意位置（或者单独的工具类）
+    private Vector2 RotateTowards(Vector2 current, Vector2 target, float maxRadiansDelta)
+    {
+        float currentAngle = Mathf.Atan2(current.y, current.x);
+        float targetAngle = Mathf.Atan2(target.y, target.x);
+        float delta = Mathf.DeltaAngle(currentAngle * Mathf.Rad2Deg, targetAngle * Mathf.Rad2Deg) * Mathf.Deg2Rad;
+        float newAngle = currentAngle + Mathf.Clamp(delta, -maxRadiansDelta, maxRadiansDelta);
+        return new Vector2(Mathf.Cos(newAngle), Mathf.Sin(newAngle));
+    }
+
     private IEnumerator HomingCoroutine(float strength)
     {
         while (true)
         {
             Transform target = FindNearestEnemy();
-            if (target != null && rb != null)
+            if (target != null && rb != null && rb.velocity.magnitude > 0.01f)
             {
-                Vector2 dirToTarget = (target.position - transform.position).normalized;
-                rb.velocity = Vector2.Lerp(rb.velocity, dirToTarget * speed, strength * Time.deltaTime);
+                float distance = Vector2.Distance(transform.position, target.position);
+
+                // 超出追踪范围：不追踪
+                if (distance >= 300f)
+                {
+                    yield return null;
+                    continue;
+                }
+
+                // 距离系数：距离越近转向越快（0～1），距离 300 时为 0，距离 0 时为 1
+                float distanceFactor = 1f - Mathf.Clamp01(distance / 300f);
+
+                // 计算目标方向
+                Vector2 dirToTarget = ((Vector2)target.position - (Vector2)transform.position).normalized;
+                Vector2 currentDir = rb.velocity.normalized;
+
+                // 关键参数：最大转角（弧度/秒）
+                // strength 建议范围 0.5～3，值越大转向越快
+                // 如果觉得转向太慢，可以乘以一个系数，比如 2f
+                float maxTurnRadiansPerSec = strength * distanceFactor * 2f;   // 这里的 2f 是全局灵敏度，可调
+
+                // 每帧最大转角
+                float maxTurnThisFrame = maxTurnRadiansPerSec * Time.deltaTime;
+
+                // 计算新方向
+                Vector2 newDir = RotateTowards(currentDir, dirToTarget, maxTurnThisFrame);
+
+                // 保持速度大小不变，只改变方向
+                rb.velocity = newDir * rb.velocity.magnitude;
             }
             yield return null;
         }

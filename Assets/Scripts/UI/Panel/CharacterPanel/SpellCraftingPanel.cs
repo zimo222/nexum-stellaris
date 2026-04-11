@@ -50,22 +50,24 @@ public class SpellCraftingPanel : MonoBehaviour
 
     void Start()
     {
-        SetCurrentWeaponIndex(0);
+        SetCurrentWeaponIndex(0, false);
         // 初始时详情面板不可见
         if (detailPanel != null) detailPanel.SetActive(false);
     }
 
-    public void SetCurrentWeaponIndex(int index)
+    public void SetCurrentWeaponIndex(int index, bool saveCurrent = true)
     {
         if (index < 0 || index >= 7)
         {
             Debug.LogError($"无效的武器索引: {index}");
             return;
         }
-        SaveCurrentConfiguration();
+
+        if (saveCurrent)
+            SaveCurrentConfiguration();
+
         currentWeaponIndex = index;
         LoadPlayerConfiguration();
-        // 切换武器时清除当前选中的模块
         ClearModuleSelection();
     }
 

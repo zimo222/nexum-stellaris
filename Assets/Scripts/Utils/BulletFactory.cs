@@ -18,7 +18,7 @@ public static class BulletFactory
         float speed = spellPackage.projectile.speed;
         int damage = (int)spellPackage.projectile.damage; // 基础伤害，后续可叠加角色攻击力
         int num = 1;
-        int fieldAngle = 30;
+        int fieldAngle = 0;
 
         // 应用修饰类（修改子弹属性）
         foreach (var modifier in spellPackage.modifiers)
@@ -64,7 +64,7 @@ public static class BulletFactory
         if (modifier.speedMultiplier != 0) speed *= modifier.speedMultiplier;
         if (modifier.damageMultiplier != 0) damage = (int)(damage * modifier.damageMultiplier);
         if (modifier.splitCount != 0) num *= modifier.splitCount;
-        if (modifier.fieldAngle != 0) fieldAngle = modifier.splitCount;
+        if (modifier.fieldAngle != 0) fieldAngle = modifier.fieldAngle;
         // 这里可以添加更多修饰效果，例如改变子弹颜色、添加粒子等
         // 注意：修饰类不立即执行特殊行为（如分裂），分裂等行为属于修正类，在子弹飞行中执行
     }

@@ -11,6 +11,7 @@ public class TipButton : MonoBehaviour
     [SerializeField] private Button triggerButton;
 
     [Tooltip("用于显示图片的Image组件")]
+    [SerializeField] private GameObject Tip;
     [SerializeField] private Image displayImage;
 
     [Header("图片序列")]
@@ -86,6 +87,7 @@ public class TipButton : MonoBehaviour
 
         // 显示第一张图片
         displayImage.sprite = imageSequence[currentIndex];
+        Tip.gameObject.SetActive(true);
         displayImage.gameObject.SetActive(true);
 
         // 禁用按钮，防止重复触发
@@ -117,6 +119,7 @@ public class TipButton : MonoBehaviour
     private void EndShowing()
     {
         isShowing = false;
+        Tip.gameObject.SetActive(false);
         displayImage.gameObject.SetActive(false);
 
         if (triggerButton != null)

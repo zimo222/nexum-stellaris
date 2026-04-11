@@ -185,7 +185,7 @@ public class CharacterPanelController : BPanel
         {
             // 获取当前选中的武器索引（默认0，或者从高亮按钮中获取）
             int currentWeapon = GetCurrentWeaponIndex();
-            spellCraftingPanel.SetCurrentWeaponIndex(currentWeapon);
+            spellCraftingPanel.SetCurrentWeaponIndex(currentWeapon, false);
             HighlightWeaponButton(currentWeapon);
         }
     }
