@@ -1052,6 +1052,8 @@ MonoBehaviour:
   triggerType: 0
   questId: MainQuest_006
   targetSceneName: 
+  xposition: 0
+  yposition: 0
   trackingIndicator: {fileID: 813435656}
   interactButton: {fileID: 0}
   buttonName: InterationButton
@@ -18785,6 +18787,8 @@ MonoBehaviour:
   triggerType: 0
   questId: MainQuest_007
   targetSceneName: 
+  xposition: 0
+  yposition: 0
   trackingIndicator: {fileID: 1553437750}
   interactButton: {fileID: 0}
   buttonName: InterationButton
@@ -18949,6 +18953,8 @@ MonoBehaviour:
   triggerType: 0
   questId: Quest_001
   targetSceneName: 
+  xposition: 0
+  yposition: 0
   trackingIndicator: {fileID: 0}
   interactButton: {fileID: 0}
   buttonName: InterationButton
@@ -21139,6 +21145,8 @@ MonoBehaviour:
   triggerType: 0
   questId: MainQuest_005
   targetSceneName: 
+  xposition: 0
+  yposition: 0
   trackingIndicator: {fileID: 1253010877}
   interactButton: {fileID: 0}
   buttonName: InterationButton
@@ -28043,7 +28051,7 @@ GameObject:
   - component: {fileID: 844018091}
   - component: {fileID: 844018090}
   m_Layer: 0
-  m_Name: To1
+  m_Name: To2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28066,7 +28074,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 10, y: 100}
+  m_AnchoredPosition: {x: 0, y: 340}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &844018090
@@ -28083,7 +28091,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerType: 1
   questId: 123
-  targetSceneName: 1_TheNestOfWarmLight
+  targetSceneName: 2_TheArgentCorridor
+  xposition: 2140
+  yposition: 0
   trackingIndicator: {fileID: 676380164}
   interactButton: {fileID: 0}
   buttonName: InterationButton
@@ -28159,7 +28169,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 80, y: 150}
+  m_Size: {x: 150, y: 50}
   m_EdgeRadius: 0
 --- !u!222 &844018093
 CanvasRenderer:
@@ -75638,6 +75648,8 @@ MonoBehaviour:
   triggerType: 0
   questId: MainQuest_004
   targetSceneName: 
+  xposition: 0
+  yposition: 0
   trackingIndicator: {fileID: 339569994}
   interactButton: {fileID: 0}
   buttonName: InterationButton

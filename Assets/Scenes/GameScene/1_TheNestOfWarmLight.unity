@@ -43859,6 +43859,8 @@ MonoBehaviour:
   triggerType: 0
   questId: MainQuest_001
   targetSceneName: 
+  xposition: 0
+  yposition: 0
   trackingIndicator: {fileID: 1077509914}
   interactButton: {fileID: 1817072175}
   buttonName: InterationButton
@@ -83489,6 +83491,8 @@ MonoBehaviour:
   triggerType: 0
   questId: MainQuest_003
   targetSceneName: 
+  xposition: 0
+  yposition: 0
   trackingIndicator: {fileID: 1252577283}
   interactButton: {fileID: 1817072175}
   buttonName: InterationButton
@@ -148814,6 +148818,8 @@ MonoBehaviour:
   triggerType: 0
   questId: Quest_001
   targetSceneName: 
+  xposition: 0
+  yposition: 0
   trackingIndicator: {fileID: 0}
   interactButton: {fileID: 0}
   buttonName: InterationButton
@@ -149143,6 +149149,8 @@ MonoBehaviour:
   triggerType: 1
   questId: 0
   targetSceneName: 2_TheArgentCorridor
+  xposition: 10
+  yposition: 0
   trackingIndicator: {fileID: 1042966861}
   interactButton: {fileID: 1817072175}
   buttonName: InterationButton
@@ -356117,6 +356125,8 @@ MonoBehaviour:
   triggerType: 0
   questId: MainQuest_002
   targetSceneName: 
+  xposition: 0
+  yposition: 0
   trackingIndicator: {fileID: 1964867664}
   interactButton: {fileID: 1817072175}
   buttonName: InterationButton

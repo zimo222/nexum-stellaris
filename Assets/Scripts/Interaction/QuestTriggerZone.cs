@@ -9,6 +9,7 @@ public class QuestTriggerZone : MonoBehaviour
     public TriggerType triggerType;
     public string questId;
     public string targetSceneName;
+    public int xposition, yposition;
     public GameObject trackingIndicator;
     public GameObject interactButton;
 
@@ -204,7 +205,7 @@ public class QuestTriggerZone : MonoBehaviour
 
         if (triggerType == TriggerType.Scene && playerInZone && Input.GetKeyDown(KeyCode.F))
         {
-            SceneDataManager.Instance.LoadScene(targetSceneName);
+            SceneDataManager.Instance.LoadScene(targetSceneName, xposition, yposition);
         }
     }
 

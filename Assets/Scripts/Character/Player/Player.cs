@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Player : Entity
 {
+
+    // 单例实例
+    public static Player Instance { get; private set; }
+
     [Header("Attack details")]
     public Vector2[] attackMovement;
     public float counterAttackDuration = .2f;
@@ -51,6 +55,14 @@ public class Player : Entity
 
     protected override void Awake()
     {
+        // 单例检查：如果已存在实例且不是自己，则销毁当前对象
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);   // 确保单例在场景切换时不被销毁
         base.Awake();
         stateMachine = new PlayerStateMachine();
 
@@ -61,9 +73,6 @@ public class Player : Entity
         dashState = new PlayerDashState(this, stateMachine, "Dash");
         primaryAttack = new PlayerPrimaryAttackState(this, stateMachine, "Attack");
         counterAttack = new PlayerCounterAttackState(this, stateMachine, "CounterAttack");
-
-        DontDestroyOnLoad(gameObject);
-        // 不再初始化 wallSlide, wallJump
     }
 
     protected override void Start()

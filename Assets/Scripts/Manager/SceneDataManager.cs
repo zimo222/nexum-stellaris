@@ -43,13 +43,13 @@ public class SceneDataManager : Singleton<SceneDataManager>
         }
     }
 
-    public void LoadScene(string sceneName)
+    public void LoadScene(string sceneName, int xposition = 0, int yposition = 0)
     {
         if (isLoading) return;
-        StartCoroutine(LoadSceneAsync(sceneName));
+        StartCoroutine(LoadSceneAsync(sceneName, xposition, yposition));
     }
 
-    private IEnumerator LoadSceneAsync(string targetScene)
+    private IEnumerator LoadSceneAsync(string targetScene, int xposition, int yposition)
     {
         string logPath = Application.persistentDataPath + "/load_log.txt";
         StringBuilder sb = new StringBuilder();
@@ -175,7 +175,7 @@ public class SceneDataManager : Singleton<SceneDataManager>
         }
         else
         {
-            RestoreGameStateForScene(); // 恢复玩家位置等
+            RestoreGameStateForScene(xposition, yposition); // 恢复玩家位置等
         }
 
         File.WriteAllText(logPath, sb.ToString());
@@ -203,7 +203,7 @@ public class SceneDataManager : Singleton<SceneDataManager>
     // 保留原有占位方法
     private void SaveCurrentGameState() { }
 
-    private void RestoreGameStateForScene()
+    private void RestoreGameStateForScene(int xposition, int yposition)
     {
         GameObject player = null;
         while(player == null)
@@ -211,10 +211,10 @@ public class SceneDataManager : Singleton<SceneDataManager>
         if (player != null)
         {
             Vector3 position = player.transform.position;
-            position.x = 0f;
-            position.y = 0f;
+            position.x = xposition;
+            position.y = yposition;
             player.transform.position = position;
-            Debug.Log("已将 Player 的位置重置为 (0, 0, " + position.z + ")");
+            Debug.Log("已将 Player 的位置重置为 (" + xposition + ", " + yposition + ", )");
         }
         else
         {
