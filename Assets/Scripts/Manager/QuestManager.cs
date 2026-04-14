@@ -367,7 +367,7 @@ public class QuestManager : MonoBehaviour
         isTextFullyDisplayed = true;
     }
 
-    private string GetSpeakerName(string speakerId) => speakerId;
+    private string GetSpeakerName(string speakerId) => speakerId == "Player" ? PlayerDataManager.Instance.GetCurrentUsername() : speakerId;
 
     private void EndDialogue()
     {

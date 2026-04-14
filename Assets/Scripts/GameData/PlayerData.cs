@@ -146,7 +146,7 @@ public class PlayerData
     // 初始化默认装备
     private void InitializeDefaultNexumIdem()
     {
-        /*
+        
         for (int i = 1; i <= 3; i++)
         {
             AddDefaultNExotext("Exotext_00" + i + "_VotiveEmber");
@@ -166,7 +166,7 @@ public class PlayerData
             AddDefaultNexusvesture("NexusVesture_00" + i + "_VolitionVein");
             AddDefaultNexusvesture("NexusVesture_00" + i + "_ImprintStep");
         }
-        */
+        
     }
 
     private void AddDefaultNExotext(string defineId)
