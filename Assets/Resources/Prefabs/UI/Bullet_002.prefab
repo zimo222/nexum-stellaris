@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9045113696173340822}
   - component: {fileID: 4350751787894721001}
   - component: {fileID: 3913462519470728078}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Bullet_002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,3 +169,4 @@ MonoBehaviour:
   speed: 0
   damage: 0
   owner: {fileID: 0}
+  sourcePrefab: {fileID: 0}
