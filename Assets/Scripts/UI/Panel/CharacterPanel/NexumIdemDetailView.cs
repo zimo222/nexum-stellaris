@@ -38,7 +38,7 @@ public class NexumIdemDetailView : MonoBehaviour
         currentMode = NexumIdemStarPanelController.NexumIdemMode.Exotext;
 
         // Ìî³äÎäÆ÷Êý¾Ý
-        if (nameText) nameText.text = LocalizationManager.Instance.GetText("Exotext_Name", weapon.Id + "_Name") ?? "";
+        if (nameText) nameText.text = LocalizationManager.Instance.GetText("Exotext_Name", weapon.Id) ?? "";
         if (typeOrPositionText) typeOrPositionText.text = weapon.Type.ToString();
         if (starsText) starsText.text = $"¡ï{weapon.Stats.Stars}";
         if (attackText) attackText.text = $"{weapon.Stats.Attack}";

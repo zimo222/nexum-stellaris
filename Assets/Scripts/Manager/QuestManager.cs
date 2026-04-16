@@ -260,13 +260,18 @@ public class QuestManager : MonoBehaviour
 
                 if (questData.Reward != null)
                 {
+                    List<string> rewardIds = new List<string>();
                     foreach (string rewardId in questData.Reward)
                     {
+                        rewardIds.Add(rewardId);
                         if (rewardId[0] == 'E')
                             PlayerDataManager.Instance.AddExotext(rewardId);
                         else
                             PlayerDataManager.Instance.AddNexusVesture(rewardId);
                     }
+                    // 调用功能UI组件
+                    if (ItemObtainDisplayUI.Instance != null)
+                        ItemObtainDisplayUI.Instance.ShowItemRewards(rewardIds);
                 }
             }
             RefreshQuestUI();

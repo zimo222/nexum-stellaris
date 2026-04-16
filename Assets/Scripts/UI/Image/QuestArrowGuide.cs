@@ -4,9 +4,8 @@ public class QuestArrowGuide : MonoBehaviour
 {
     [Header("箭头UI")]
     public RectTransform arrowImage;          // 箭头的 RectTransform
-    public float radius = 100f;                 // 箭头旋转半径（像素）
+    public float radius = 150f;               // 箭头旋转半径（像素）
 
-    [Header("追踪目标")]
     private Transform targetTransform;
     private Transform playerTransform;
 
@@ -20,6 +19,9 @@ public class QuestArrowGuide : MonoBehaviour
         }
 
         arrowImage.gameObject.SetActive(false);
+
+        // 动态计算半径：取屏幕较短边的 1/3，保证箭头在屏幕边缘内
+        radius = Mathf.Min(Screen.width, Screen.height) * 0.3f;
 
         if (QuestManager.Instance != null)
             QuestManager.Instance.OnTrackedQuestChanged += OnTrackedQuestChanged;
@@ -47,7 +49,7 @@ public class QuestArrowGuide : MonoBehaviour
             return;
         }
 
-        // 先查找 QuestTriggerZone
+        // 查找 QuestTriggerZone
         QuestTriggerZone[] questZones = FindObjectsOfType<QuestTriggerZone>();
         foreach (QuestTriggerZone zone in questZones)
         {
@@ -74,7 +76,7 @@ public class QuestArrowGuide : MonoBehaviour
 
         if (targetTransform == null)
         {
-            Debug.LogWarning($"未找到任务 {questId} 对应的触发器 (QuestTriggerZone 或 CombatQuestTrigger)");
+            Debug.LogWarning($"未找到任务 {questId} 对应的触发器");
             arrowImage.gameObject.SetActive(false);
         }
         else
@@ -87,40 +89,36 @@ public class QuestArrowGuide : MonoBehaviour
     {
         if (targetTransform == null || playerTransform == null) return;
 
-        // 计算从玩家指向目标的向量（忽略 Z 轴，假设是 2D 平面）
-        Vector3 direction = targetTransform.position - playerTransform.position;
-        direction.z = 0;
+        // 计算指向目标的方向向量（忽略 Z 轴）
+        Vector3 dir3 = targetTransform.position - playerTransform.position;
+        dir3.z = 0;
+        if (dir3 == Vector3.zero) return;
 
-        if (direction == Vector3.zero) return;
+        Vector2 direction = new Vector2(dir3.x, dir3.y).normalized;
 
-        Vector2 dir = new Vector2(direction.x, direction.y).normalized;
+        // 计算角度（弧度 → 度数）
+        float angleRad = Mathf.Atan2(direction.y, direction.x);
+        float angleDeg = angleRad * Mathf.Rad2Deg;
+
+        // 圆形边界上的偏移（像素）
+        Vector2 circleOffset = new Vector2(Mathf.Cos(angleRad), Mathf.Sin(angleRad)) * radius;
 
         // 屏幕中心
-        Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
+        Vector2 screenCenter = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
 
-        // 箭头在屏幕上的像素位置：屏幕中心 + 半径 * 方向
-        Vector2 screenPos = screenCenter + dir * radius;
+        // 箭头在屏幕上的像素位置
+        Vector2 targetScreenPos = screenCenter + circleOffset;
 
-        // 将屏幕坐标转换为 Canvas 本地坐标
-        Canvas canvas = arrowImage.GetComponentInParent<Canvas>();
-        if (canvas != null)
-        {
-            Camera uiCamera = (canvas.renderMode == RenderMode.ScreenSpaceCamera) ? canvas.worldCamera : null;
-            Vector2 localPos;
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                canvas.GetComponent<RectTransform>(),
-                screenPos,
-                uiCamera,
-                out localPos);
-            arrowImage.anchoredPosition = localPos;
-        }
-        else
-        {
-            arrowImage.anchoredPosition = screenPos; // 备用
-        }
+        // 边界裁剪：确保箭头不超出屏幕
+        targetScreenPos.x = Mathf.Clamp(targetScreenPos.x, 0, Screen.width);
+        targetScreenPos.y = Mathf.Clamp(targetScreenPos.y, 0, Screen.height);
 
-        // 箭头旋转：默认指向正下方 (Vector2.down)，旋转到目标方向
-        float angleDeg = Vector2.SignedAngle(Vector2.down, dir);
-        arrowImage.rotation = Quaternion.Euler(0, 0, angleDeg);
+        // 将屏幕坐标转换为 UI 局部坐标（因为 Canvas 是 Overlay 且锚点居中）
+        Vector2 localPos = targetScreenPos - screenCenter;
+        arrowImage.anchoredPosition = localPos;
+
+        // 旋转箭头：让箭头指向目标方向
+        // 如果你的箭头图片默认朝右（→），使用 angleDeg；默认朝下（↓）则减90°
+        arrowImage.rotation = Quaternion.Euler(0, 0, angleDeg + 90f);
     }
 }
