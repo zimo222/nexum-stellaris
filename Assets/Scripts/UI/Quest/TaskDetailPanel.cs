@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
@@ -15,6 +14,7 @@ public class TaskDetailPanel : BPanel
     [Header("左侧任务列表")]
     public Transform leftContent;               // 任务按钮的父物体（通常为 ScrollView 的 Content）
     public GameObject taskButtonPrefab;         // 任务按钮预制体（需包含 Button 组件及三个 TextMeshPro 文本）
+    public GameObject categoryTitlePrefab;      // 分类标题预制体（需包含 TMP_Text 组件）
 
     [Header("右侧详情区域")]
     public TMP_Text taskNameText;                // 任务名称
@@ -32,8 +32,6 @@ public class TaskDetailPanel : BPanel
 
     // 当前选中的任务ID
     private string selectedQuestId;
-    // 动态生成的按钮列表（用于清理）
-    private List<GameObject> questButtons = new List<GameObject>();
 
     private void OnEnable()
     {
@@ -51,9 +49,18 @@ public class TaskDetailPanel : BPanel
             var activeQuests = PlayerDataManager.Instance?.CurrentPlayerData?.activeQuests;
             if (activeQuests != null && activeQuests.Count > 0)
             {
-                // 只取进行中的任务
-                var firstActive = activeQuests.FirstOrDefault(q => q.state == QuestProgressState.Available);
-                selectedQuestId = firstActive?.questId;
+                // 只取进行中的任务，优先主线第一个，其次世界第一个
+                var mainQuest = activeQuests.FirstOrDefault(q =>
+                    q.state == QuestProgressState.Available &&
+                    GameDataManager.Instance.QuestDict.TryGetValue(q.questId, out var def) &&
+                    def.category == QuestCategory.Main);
+                if (mainQuest != null)
+                    selectedQuestId = mainQuest.questId;
+                else
+                {
+                    var worldQuest = activeQuests.FirstOrDefault(q => q.state == QuestProgressState.Available);
+                    selectedQuestId = worldQuest?.questId;
+                }
             }
         }
 
@@ -70,20 +77,23 @@ public class TaskDetailPanel : BPanel
     }
 
     /// <summary>
-    /// 刷新左侧任务按钮列表
+    /// 刷新左侧任务按钮列表（分组显示：主线标题 + 主线任务按钮，世界标题 + 世界任务按钮）
     /// </summary>
     private void RefreshLeftList()
     {
-        // 清除旧按钮
-        foreach (var btn in questButtons)
+        // 清除所有子物体（包括之前生成的标题和按钮）
+        foreach (Transform child in leftContent)
         {
-            Destroy(btn);
+            Destroy(child.gameObject);
         }
-        questButtons.Clear();
 
         // 获取玩家进行中的任务
         var activeQuests = PlayerDataManager.Instance?.CurrentPlayerData?.activeQuests;
         if (activeQuests == null || activeQuests.Count == 0) return;
+
+        // 按任务类别分组
+        var mainQuests = new List<PlayerQuestProgress>();
+        var worldQuests = new List<PlayerQuestProgress>();
 
         foreach (var progress in activeQuests)
         {
@@ -94,18 +104,63 @@ public class TaskDetailPanel : BPanel
             if (!GameDataManager.Instance.QuestDict.TryGetValue(progress.questId, out var questData))
                 continue;
 
-            // 实例化按钮
-            GameObject btnObj = Instantiate(taskButtonPrefab, leftContent);
-            questButtons.Add(btnObj);
+            if (questData.category == QuestCategory.Main)
+                mainQuests.Add(progress);
+            else if (questData.category == QuestCategory.World)
+                worldQuests.Add(progress);
+        }
 
-            QuestItemView itemView = btnObj.gameObject.GetComponent<QuestItemView>();
+        // 生成主线分组
+        if (mainQuests.Count > 0)
+        {
+            CreateCategoryTitle("主线任务");
+            foreach (var progress in mainQuests)
+            {
+                CreateQuestButton(progress);
+            }
+        }
+
+        // 生成世界分组
+        if (worldQuests.Count > 0)
+        {
+            CreateCategoryTitle("世界任务");
+            foreach (var progress in worldQuests)
+            {
+                CreateQuestButton(progress);
+            }
+        }
+    }
+
+    /// <summary>
+    /// 创建一个分类标题
+    /// </summary>
+    private void CreateCategoryTitle(string title)
+    {
+        GameObject titleObj = Instantiate(categoryTitlePrefab, leftContent);
+        TMP_Text titleText = titleObj.GetComponentInChildren<TMP_Text>();
+        if (titleText != null)
+            titleText.text = title;
+    }
+
+    /// <summary>
+    /// 创建一个任务按钮并绑定点击事件
+    /// </summary>
+    private void CreateQuestButton(PlayerQuestProgress progress)
+    {
+        // 获取任务静态数据
+        if (!GameDataManager.Instance.QuestDict.TryGetValue(progress.questId, out var questData))
+            return;
+
+        // 实例化按钮
+        GameObject btnObj = Instantiate(taskButtonPrefab, leftContent);
+        QuestItemView itemView = btnObj.GetComponent<QuestItemView>();
+        if (itemView != null)
             itemView.UpdateUI(questData);
 
-            // 绑定点击事件
-            Button btn = btnObj.GetComponent<Button>();
-            string capturedId = progress.questId;   // 避免闭包问题
-            btn.onClick.AddListener(() => OnTaskButtonClicked(capturedId));
-        }
+        // 绑定点击事件
+        Button btn = btnObj.GetComponent<Button>();
+        string capturedId = progress.questId;
+        btn.onClick.AddListener(() => OnTaskButtonClicked(capturedId));
     }
 
     /// <summary>
@@ -171,7 +226,7 @@ public class TaskDetailPanel : BPanel
         }
         taskDetailText.text = detail;
 
-        // 生成奖励图标（替换原来的文本奖励描述）
+        // 生成奖励图标
         GenerateRewardIcons(questData);
     }
 
@@ -216,7 +271,7 @@ public class TaskDetailPanel : BPanel
                 }
             }
 
-            // 获取物品图标（从各字典中查找）
+            // 获取物品图标
             Sprite itemIcon = GetItemIcon(itemId);
             if (itemIcon == null)
             {
@@ -243,7 +298,7 @@ public class TaskDetailPanel : BPanel
             Button btn = iconObj.GetComponent<Button>();
             if (btn != null)
             {
-                string capturedId = itemId; // 避免闭包问题
+                string capturedId = itemId;
                 btn.onClick.AddListener(() => OnRewardClicked?.Invoke(capturedId));
             }
         }
@@ -262,10 +317,7 @@ public class TaskDetailPanel : BPanel
         if (GameDataManager.Instance.NexusVestureDict.TryGetValue(itemId, out var nexus))
             return nexus.icon;
 
-        // 查找材料（假设 MaterialDefineSO 也有 icon 字段，需根据实际调整）
-        // if (GameDataManager.Instance.MaterialDict.TryGetValue(itemId, out var material))
-        //     return material.icon;
-
+        // 可以继续添加其他字典，如材料等
         return null;
     }
 
@@ -280,7 +332,7 @@ public class TaskDetailPanel : BPanel
             if (objDefine != null && !string.IsNullOrEmpty(objDefine.description))
                 return objDefine.description;
         }
-        return objectiveId;   // 回退显示ID
+        return objectiveId;
     }
 
     /// <summary>
@@ -291,19 +343,6 @@ public class TaskDetailPanel : BPanel
         var active = PlayerDataManager.Instance?.CurrentPlayerData?.activeQuests;
         if (active == null) return false;
         return active.Exists(q => q.questId == questId && q.state == QuestProgressState.Available);
-    }
-
-    /// <summary>
-    /// 从任务ID中提取章节信息（例如 "MainQuest_001" -> "第一章"）
-    /// </summary>
-    private string ExtractChapterFromId(string id)
-    {
-        var match = System.Text.RegularExpressions.Regex.Match(id, @"\d+");
-        if (match.Success && int.TryParse(match.Value, out int chapterNum))
-        {
-            return $"第{chapterNum}章";
-        }
-        return "未知章节";
     }
 
     /// <summary>
