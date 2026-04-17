@@ -230,7 +230,7 @@ public class PlayerData
     // 初始化默认材料
     private void InitializeDefaultQuest()
     {
-        AddDefaultQuest("MainQuest_001");
+        AddDefaultQuest("MainQuest_001001");
     }
 
     public void AddDefaultQuest(string defineId)

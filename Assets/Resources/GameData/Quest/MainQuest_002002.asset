@@ -10,18 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d476a2b0564d52b4882c53d711eeea11, type: 3}
-  m_Name: MainQuest_004
+  m_Name: MainQuest_002002
   m_EditorClassIdentifier: 
-  id: MainQuest_004
+  id: MainQuest_002002
   questName: "\u521D\u89C1"
   questNum: "\u4E8C"
   chapterName: "\u7A7A\u5ECA"
   chapterNum: "\u4E8C"
-  lastQuestId: MainQuest_003
+  place: "\u7EAF\u767D\u56DE\u5ECA"
+  lastQuestId: MainQuest_002001
   category: 0
   contentType: 0
   nextQuestIds:
-  - MainQuest_005
+  - MainQuest_002003
   description: "\u98CE\u94C3\u5728\u7B2C\u4E09\u6839\u5ECA\u67F1\u65C1\u505C\u8FC7\u3002"
   dialogueEntries:
   - background: {fileID: 0}

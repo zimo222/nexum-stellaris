@@ -209,6 +209,7 @@ public class TaskDetailPanel : BPanel
 
         // 任务名称
         taskNameText.text = questData.questName;
+        PlaceText.text = questData.place;
 
         // 构建详情文本（描述 + 目标进度）
         string detail = string.IsNullOrEmpty(questData.description) ? "暂无描述" : questData.description;

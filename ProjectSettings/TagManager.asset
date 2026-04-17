@@ -16,7 +16,7 @@ TagManager:
   - Tag
   - Bullet
   - Enemy
-  - 
+  - TagLight
   - 
   - 
   - 
@@ -65,4 +65,7 @@ TagManager:
     locked: 0
   - name: Tag
     uniqueID: 872086643
+    locked: 0
+  - name: TagLight
+    uniqueID: 602846981
     locked: 0

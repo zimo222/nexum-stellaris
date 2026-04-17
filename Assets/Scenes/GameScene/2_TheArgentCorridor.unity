@@ -4286,7 +4286,7 @@ GameObject:
   - component: {fileID: 142672615}
   - component: {fileID: 142672614}
   m_Layer: 0
-  m_Name: MainQuest_005
+  m_Name: MainQuest_002003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4326,7 +4326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerType: 0
-  questId: MainQuest_005
+  questId: MainQuest_002003
   targetSceneName: 
   xposition: 0
   yposition: 0
@@ -5570,7 +5570,7 @@ GameObject:
   - component: {fileID: 252834154}
   - component: {fileID: 252834153}
   m_Layer: 0
-  m_Name: MainQuest_007
+  m_Name: MainQuest_002005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5610,7 +5610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerType: 0
-  questId: MainQuest_007
+  questId: MainQuest_002005
   targetSceneName: 
   xposition: 0
   yposition: 0
@@ -10636,7 +10636,7 @@ GameObject:
   - component: {fileID: 576188885}
   - component: {fileID: 576188884}
   m_Layer: 0
-  m_Name: MainQuest_006
+  m_Name: MainQuest_002004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10676,7 +10676,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerType: 0
-  questId: MainQuest_006
+  questId: MainQuest_002004
   targetSceneName: 
   xposition: 0
   yposition: 0
@@ -193589,7 +193589,7 @@ GameObject:
   - component: {fileID: 1485964708}
   - component: {fileID: 1485964707}
   m_Layer: 0
-  m_Name: MainQuest_004
+  m_Name: MainQuest_002002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -193613,7 +193613,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 150, y: 30}
+  m_AnchoredPosition: {x: 300, y: -20}
   m_SizeDelta: {x: 202.2, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1485964707
@@ -193629,7 +193629,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerType: 0
-  questId: MainQuest_004
+  questId: MainQuest_002002
   targetSceneName: 
   xposition: 0
   yposition: 0

@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d476a2b0564d52b4882c53d711eeea11, type: 3}
-  m_Name: WorldQuest_002
+  m_Name: WorldQuest_001002
   m_EditorClassIdentifier: 
-  id: WorldQuest_002
-  questName: "\u6E05\u626B"
-  questNum: 
-  chapterName: 
+  id: WorldQuest_001002
+  questName: "\u795B\u9664\xB7\u4E8C"
+  questNum: "\u4E8C"
+  chapterName: "\u64AD\u79CD\u4E4B\u7AE0"
   chapterNum: 
-  lastQuestId: MainQuest_002
+  place: "\u6696\u5149\u4E4B\u5DE2"
+  lastQuestId: WorldQuest_001001
   category: 1
   contentType: 1
   nextQuestIds: []

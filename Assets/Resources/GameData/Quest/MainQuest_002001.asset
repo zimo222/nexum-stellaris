@@ -10,24 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d476a2b0564d52b4882c53d711eeea11, type: 3}
-  m_Name: MainQuest_003
+  m_Name: MainQuest_002001
   m_EditorClassIdentifier: 
-  id: MainQuest_003
+  id: MainQuest_002001
   questName: "\u5F7C\u7AEF"
   questNum: "\u4E00"
   chapterName: "\u7A7A\u5ECA"
   chapterNum: "\u4E8C"
-  lastQuestId: MainQuest_002
+  place: "\u6696\u5149\u4E4B\u5DE2"
+  lastQuestId: MainQuest_001002
   category: 0
   contentType: 0
   nextQuestIds:
-  - MainQuest_004
+  - MainQuest_002002
   description: "\u95E8\u7F1D\u91CC\u7684\u767D\u6D8C\u6765\uFF0C\u50CF\u7B2C\u4E00\u6B21\u7741\u773C\u3002"
   dialogueEntries:
-  - background: {fileID: 0}
-    speakerId: "Kianna\xB7Argent"
-    content: "\u6211\u5728\u6696\u5149\u4E4B\u5DE2\u8D70\u4E86\u5F88\u4E45\u3002"
-  - background: {fileID: 0}
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
+    speakerId: 
+    content: "\u5728\u6696\u5149\u4E4B\u5DE2\u8D70\u4E86\u5F88\u4E45\u3002"
+  - background: {fileID: 21300000, guid: 82d4d513effcfb748a40240c3d0b92bf, type: 3}
     speakerId: 
     content: "\u90A3\u4E9B\u719F\u6089\u7684\u666F\u7269\u6E10\u6E10\u6A21\u7CCA\u2014\u2014\u95E8\u69DB\u3001\u9662\u5B50\u3001\u5288\u67F4\u7684\u58F0\u54CD\uFF0C\u90FD\u53D8\u6210\u4E86\u8FDC\u5904\u6A21\u7CCA\u7684\u5149\u70B9\u3002\u811A\u4E0B\u7684\u8DEF\u8D8A\u6765\u8D8A\u7A84\uFF0C\u4E24\u8FB9\u7684\u5899\u8D8A\u6765\u8D8A\u9AD8\u3002"
   - background: {fileID: 0}
@@ -44,7 +45,7 @@ MonoBehaviour:
     content: "\u7528\u4E86\u5168\u8EAB\u7684\u529B\u6C14\uFF0C\u95E8\u624D\u5F00\u4E86\u4E00\u6761\u7F1D\u3002\u5149\u4ECE\u7F1D\u9699\u91CC\u6D8C\u51FA\u6765\uFF0C\u523A\u5F97\u6211\u7741\u4E0D\u5F00\u773C\u3002"
   - background: {fileID: 0}
     speakerId: 
-    content: "\u6211\u4FA7\u8EAB\u6324\u4E86\u8FDB\u53BB\u3002"
+    content: "\u4FA7\u8EAB\u6324\u4E86\u8FDB\u53BB\u3002"
   objectives: []
   waves: []
   Reward:

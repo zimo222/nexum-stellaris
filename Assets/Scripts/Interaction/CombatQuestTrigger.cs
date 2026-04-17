@@ -4,14 +4,22 @@ using UnityEngine.UI;
 public class CombatQuestTrigger : MonoBehaviour
 {
     public string questId;
+    public GameObject trackingIndicator;
     public Transform spawnCenter;
     public GameObject interactButton;
 
     private bool playerInZone = false;
     private bool taskStarted = false;  // 任务是否已经开始
 
+    private void OnEnable()
+    {
+        TrySubscribe();
+    }
+
     private void Start()
     {
+        TrySubscribe();
+
         if (interactButton != null)
         {
             interactButton.SetActive(false);
@@ -36,6 +44,20 @@ public class CombatQuestTrigger : MonoBehaviour
             TryStartCombat();
         }
     }
+
+    private void OnDestroy()
+    {
+        if (QuestManager.Instance != null)
+            QuestManager.Instance.OnTrackedQuestChanged -= OnTrackedQuestChanged;
+
+        if (interactButton != null)
+        {
+            Button btn = interactButton.GetComponent<Button>();
+            if (btn != null)
+                btn.onClick.RemoveListener(TryStartCombat);
+        }
+    }
+
 
     private bool IsQuestAvailable()
     {
@@ -77,5 +99,22 @@ public class CombatQuestTrigger : MonoBehaviour
         if (interactButton != null) interactButton.SetActive(false);
 
         QuestManager.Instance.StartCombatQuest(questId, spawnCenter.position);
+    }
+
+    // ========== 其余原有方法（保持不变） ==========
+    private void TrySubscribe()
+    {
+        if (QuestManager.Instance != null)
+        {
+            QuestManager.Instance.OnTrackedQuestChanged -= OnTrackedQuestChanged;
+            QuestManager.Instance.OnTrackedQuestChanged += OnTrackedQuestChanged;
+            OnTrackedQuestChanged(QuestManager.Instance.TrackedQuestId);
+        }
+    }
+
+    private void OnTrackedQuestChanged(string trackedQuestId)
+    {
+        if (trackingIndicator != null)
+            trackingIndicator.SetActive(trackedQuestId == questId);
     }
 }

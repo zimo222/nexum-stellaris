@@ -35,6 +35,8 @@ public class QuestDefineSO : ScriptableObject
     public string chapterName;
     public string chapterNum;
 
+    public string place;
+
     public string lastQuestId;                 // 前置任务名称
     public QuestCategory category;                // 主线/世界
     public QuestContentType contentType;          // 对话/战斗

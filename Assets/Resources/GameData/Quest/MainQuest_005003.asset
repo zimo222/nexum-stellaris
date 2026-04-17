@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d476a2b0564d52b4882c53d711eeea11, type: 3}
+  m_Name: MainQuest_005003
+  m_EditorClassIdentifier: 
+  id: MainQuest_005003
+  questName: "\u6D88\u878D"
+  questNum: "\u4E09"
+  chapterName: "\u5FC3\u6E0A"
+  chapterNum: "\u4E94"
+  place: "\u5171\u9E23\u5927\u5385"
+  lastQuestId: MainQuest_005002
+  category: 0
+  contentType: 0
+  nextQuestIds:
+  - MainQuest_005004
+  description: "\u51C9\u7684\u788E\u5C51\u50CF\u6668\u96FE\uFF0C\u6563\u5F97\u6CA1\u6709\u58F0\u97F3\u3002"
+  dialogueEntries: []
+  objectives: []
+  waves: []
+  Reward: []
