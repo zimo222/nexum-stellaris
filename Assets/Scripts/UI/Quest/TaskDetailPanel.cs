@@ -18,6 +18,8 @@ public class TaskDetailPanel : BPanel
 
     [Header("右侧详情区域")]
     public TMP_Text taskNameText;                // 任务名称
+    public TMP_Text PlaceText;
+    public TMP_Text taskNumText;
     public TMP_Text taskDetailText;              // 任务详情（描述 + 目标进度）
 
     [Header("奖励区域")]

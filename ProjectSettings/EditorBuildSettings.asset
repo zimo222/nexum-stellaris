@@ -15,6 +15,15 @@ EditorBuildSettings:
     path: Assets/Scenes/GameScene/2_TheArgentCorridor.unity
     guid: c6a8ff2b5cc9d8941987fc149f8d7b80
   - enabled: 1
+    path: Assets/Scenes/GameScene/3_TheVerdantMeadow.unity
+    guid: 1b201af7958463547b0f2d66ff049494
+  - enabled: 1
+    path: Assets/Scenes/GameScene/4_TheWorkshopOfPassion.unity
+    guid: 97aad4341ef317f4eb695363bc63147a
+  - enabled: 1
+    path: Assets/Scenes/GameScene/5_TheHallOfUniversalConcord.unity
+    guid: 5562b6cce83dbd149ad14d3c87c083a0
+  - enabled: 1
     path: Assets/Scenes/GameScene/6_TheStellarWish.unity
     guid: 0d164e978bcbf3d44bee84a8b0cbf260
   m_configObjects:
