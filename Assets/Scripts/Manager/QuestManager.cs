@@ -278,7 +278,7 @@ public class QuestManager : MonoBehaviour
             if (questId == TrackedQuestId)
                 AutoSetTrackedQuest();
 
-            if (questId == "MainQuest_003")
+            if (questId == "MainQuest_002001")
                 SceneDataManager.Instance.LoadScene("2_TheArgentCorridor");
 
             if (isQuestActive && currentInteractiveQuestId == questId)

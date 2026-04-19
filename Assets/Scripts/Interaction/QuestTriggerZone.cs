@@ -219,7 +219,17 @@ public class QuestTriggerZone : MonoBehaviour
     private void OnTrackedQuestChanged(string trackedQuestId)
     {
         if (trackingIndicator != null)
-            trackingIndicator.SetActive(trackedQuestId == questId);
+        {
+            //如果是任务碰撞器根据追踪的是否是当前任务来判断是否显示
+            if(triggerType == TriggerType.Plot)
+                trackingIndicator.SetActive(trackedQuestId == questId);
+            else//如果是场景碰撞器根据前置任务是否完成来判断是否显示
+            {
+                //trackingIndicator.SetActive(PlayerDataManager.Instance.HasCompletedQuest(questId));
+                trackingIndicator.SetActive(true);
+            }
+        }
+            
     }
 
     private void Update()
@@ -239,7 +249,14 @@ public class QuestTriggerZone : MonoBehaviour
 
         if (triggerType == TriggerType.Scene && playerInZone && Input.GetKeyDown(KeyCode.F))
         {
-            LoadTargetScene();
+            if (PlayerDataManager.Instance.HasCompletedQuest(questId))
+            {
+                LoadTargetScene();
+            }
+            else
+            {
+                PromptTextManager.Instance.ShowMessage("前面的区域，以后再探索吧！\n" + "(完成主线剧情   第" + questId[12] + "章第" + questId[15] +  "幕  " + GameDataManager.Instance.QuestDict[questId].questName + "   解锁)");
+            }       
         }
     }
 
@@ -266,9 +283,17 @@ public class QuestTriggerZone : MonoBehaviour
         }
         else if (triggerType == TriggerType.Scene)
         {
-            taskStarted = true;
-            if (IsReferenceValid(interactButton)) interactButton.SetActive(false);
-            LoadTargetScene();
+
+            if (PlayerDataManager.Instance.HasCompletedQuest(questId))
+            {
+                taskStarted = true;
+                if (IsReferenceValid(interactButton)) interactButton.SetActive(false);
+                LoadTargetScene();
+            }
+            else
+            {
+                PromptTextManager.Instance.ShowMessage("前面的区域，以后再探索吧！\n" + "(完成主线剧情   第" + questId[12] + "章第" + questId[15] + "幕  " + GameDataManager.Instance.QuestDict[questId].questName + "   解锁)");
+            }
         }
     }
 
