@@ -23,12 +23,38 @@ public class QuestTriggerZone : MonoBehaviour
     public float retryInterval = 0.2f;
 
     private bool playerInZone;
-    private bool taskStarted = false;
+    private bool taskStarted;
     private bool isHotReferencingDone = false;
+    private Coroutine findButtonCoroutine;  // 新增：用于管理协程
+
+    // 新增：检测 Unity 对象是否真实有效（不被销毁）
+    private bool IsReferenceValid(Object obj)
+    {
+        return (object)obj != null && obj != null;
+    }
 
     private void OnEnable()
     {
         TrySubscribe();
+
+        // 关键修复：检查现有引用是否真实有效，无效则置空并重置标记
+        if (!IsReferenceValid(interactButton))
+        {
+            interactButton = null;
+            isHotReferencingDone = false;
+        }
+
+        // 如果按钮无效且未完成热引用，启动查找协程
+        if (interactButton == null && !isHotReferencingDone && !string.IsNullOrEmpty(buttonName))
+        {
+            if (findButtonCoroutine != null)
+                StopCoroutine(findButtonCoroutine);
+            findButtonCoroutine = StartCoroutine(DelayedHotReferenceWithRetry());
+        }
+        else if (interactButton != null)
+        {
+            ConfigureButton();
+        }
     }
 
     private void Start()
@@ -37,16 +63,16 @@ public class QuestTriggerZone : MonoBehaviour
         if (QuestManager.Instance != null)
             OnTrackedQuestChanged(QuestManager.Instance.TrackedQuestId);
 
-        if (triggerType == TriggerType.Plot)
+        // 如果 OnEnable 中已经处理好了，这里做二次保障
+        if (interactButton == null && !isHotReferencingDone && !string.IsNullOrEmpty(buttonName))
         {
-            if (interactButton == null && !isHotReferencingDone)
-            {
-                StartCoroutine(DelayedHotReferenceWithRetry());
-            }
-            else if (interactButton != null)
-            {
-                ConfigureButton();
-            }
+            if (findButtonCoroutine != null)
+                StopCoroutine(findButtonCoroutine);
+            findButtonCoroutine = StartCoroutine(DelayedHotReferenceWithRetry());
+        }
+        else if (interactButton != null)
+        {
+            ConfigureButton();
         }
     }
 
@@ -57,7 +83,8 @@ public class QuestTriggerZone : MonoBehaviour
         {
             yield return new WaitForSeconds(retryInterval);
 
-            if (interactButton == null && !string.IsNullOrEmpty(buttonName))
+            // 同样使用有效性检查
+            if (!IsReferenceValid(interactButton) && !string.IsNullOrEmpty(buttonName))
             {
                 interactButton = FindInactiveGameObjectByName(buttonName);
                 if (interactButton != null)
@@ -67,7 +94,7 @@ public class QuestTriggerZone : MonoBehaviour
                 }
                 else
                 {
-                    if (retry == 0) // 只在第一次失败时输出所有根物体信息，避免刷屏
+                    if (retry == 0)
                         Debug.Log($"未找到名为 '{buttonName}' 的按钮。当前场景所有根物体：{string.Join(", ", GetAllRootNames())}");
                     else
                         Debug.Log($"未找到按钮（第{retry + 1}/{maxRetryCount}次尝试）...");
@@ -76,7 +103,7 @@ public class QuestTriggerZone : MonoBehaviour
             retry++;
         }
 
-        if (interactButton == null)
+        if (!IsReferenceValid(interactButton))
         {
             Debug.LogError($"经过 {maxRetryCount} 次尝试后仍未找到名称为 '{buttonName}' 的按钮。请检查：\n" +
                            "1. 按钮的实际名称（包括大小写、空格）\n" +
@@ -84,31 +111,32 @@ public class QuestTriggerZone : MonoBehaviour
                            "3. 尝试在 Inspector 中手动拖拽引用");
         }
 
-        if (interactButton != null)
+        if (IsReferenceValid(interactButton))
             ConfigureButton();
         else
-            Debug.LogError("QuestTriggerZone: 无法获得交互按钮引用，将无法触发对话");
+            Debug.LogError("QuestTriggerZone: 无法获得交互按钮引用，将无法触发交互");
 
         isHotReferencingDone = true;
+        findButtonCoroutine = null;
     }
 
-    // 使用 Resources.FindObjectsOfTypeAll 查找未激活的 GameObject
+    // 其余方法保持不变（FindInactiveGameObjectByName, GetGameObjectPath, GetAllRootNames, ConfigureButton, OnDestroy, 等）
+    // 注意：在 OnDestroy 和 ConfigureButton 中也建议使用 IsReferenceValid 检查，但原代码大部分已使用 null 检查，
+    // 为了统一，我将原代码中的 interactButton != null 替换为 IsReferenceValid(interactButton)
+
+    // 以下是原代码中未修改的方法，但为了保险，将 null 检查改为 IsReferenceValid
     private GameObject FindInactiveGameObjectByName(string name)
     {
         var allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
         foreach (var obj in allObjects)
         {
-            // 过滤掉预制体、资源文件等（只保留场景中的实例）
             if (obj.scene == null || !obj.scene.IsValid()) continue;
             if (obj.name == name)
-            {
                 return obj;
-            }
         }
         return null;
     }
 
-    // 辅助方法：获取 GameObject 的完整路径（用于调试）
     private string GetGameObjectPath(GameObject obj)
     {
         string path = obj.name;
@@ -121,7 +149,6 @@ public class QuestTriggerZone : MonoBehaviour
         return path;
     }
 
-    // 获取当前所有根物体的名称（用于调试）
     private string[] GetAllRootNames()
     {
         var roots = GetAllRootGameObjects();
@@ -133,14 +160,14 @@ public class QuestTriggerZone : MonoBehaviour
 
     private void ConfigureButton()
     {
-        if (interactButton == null) return;
+        if (!IsReferenceValid(interactButton)) return;
 
         interactButton.SetActive(false);
         Button btn = interactButton.GetComponent<Button>();
         if (btn != null)
         {
-            btn.onClick.RemoveListener(TryStartDialogue);
-            btn.onClick.AddListener(TryStartDialogue);
+            btn.onClick.RemoveListener(OnInteractButtonClicked);
+            btn.onClick.AddListener(OnInteractButtonClicked);
         }
         else
         {
@@ -153,15 +180,17 @@ public class QuestTriggerZone : MonoBehaviour
         if (QuestManager.Instance != null)
             QuestManager.Instance.OnTrackedQuestChanged -= OnTrackedQuestChanged;
 
-        if (interactButton != null)
+        if (IsReferenceValid(interactButton))
         {
             Button btn = interactButton.GetComponent<Button>();
             if (btn != null)
-                btn.onClick.RemoveListener(TryStartDialogue);
+                btn.onClick.RemoveListener(OnInteractButtonClicked);
         }
+
+        if (findButtonCoroutine != null)
+            StopCoroutine(findButtonCoroutine);
     }
 
-    // ========== 获取所有根物体（包括 DontDestroyOnLoad） ==========
     private GameObject[] GetAllRootGameObjects()
     {
         var activeSceneRoots = SceneManager.GetActiveScene().GetRootGameObjects();
@@ -177,7 +206,6 @@ public class QuestTriggerZone : MonoBehaviour
         return activeSceneRoots;
     }
 
-    // ========== 其余原有方法（保持不变） ==========
     private void TrySubscribe()
     {
         if (QuestManager.Instance != null)
@@ -196,16 +224,22 @@ public class QuestTriggerZone : MonoBehaviour
 
     private void Update()
     {
-        if (triggerType == TriggerType.Plot && !taskStarted && playerInZone && interactButton != null)
+        if (triggerType == TriggerType.Plot && !taskStarted && playerInZone && IsReferenceValid(interactButton))
         {
             bool shouldShow = IsQuestAvailable();
             if (interactButton.activeSelf != shouldShow)
                 interactButton.SetActive(shouldShow);
         }
 
+        if (triggerType == TriggerType.Scene && !taskStarted && playerInZone && IsReferenceValid(interactButton))
+        {
+            if (!interactButton.activeSelf)
+                interactButton.SetActive(true);
+        }
+
         if (triggerType == TriggerType.Scene && playerInZone && Input.GetKeyDown(KeyCode.F))
         {
-            SceneDataManager.Instance.LoadScene(targetSceneName, xposition, yposition);
+            LoadTargetScene();
         }
     }
 
@@ -216,6 +250,34 @@ public class QuestTriggerZone : MonoBehaviour
         if (progress.state != QuestProgressState.Available) return false;
         if (PlayerDataManager.Instance.HasCompletedQuest(questId)) return false;
         return true;
+    }
+
+    private void OnInteractButtonClicked()
+    {
+        if (!playerInZone) return;  // 关键：只有当前区域内才响应
+        if (taskStarted) return;
+
+        if (triggerType == TriggerType.Plot)
+        {
+            if (!IsQuestAvailable()) return;
+            taskStarted = true;
+            if (IsReferenceValid(interactButton)) interactButton.SetActive(false);
+            QuestManager.Instance?.StartCurrentQuest();
+        }
+        else if (triggerType == TriggerType.Scene)
+        {
+            taskStarted = true;
+            if (IsReferenceValid(interactButton)) interactButton.SetActive(false);
+            LoadTargetScene();
+        }
+    }
+
+    private void LoadTargetScene()
+    {
+        if (SceneDataManager.Instance != null)
+            SceneDataManager.Instance.LoadScene(targetSceneName, xposition, yposition);
+        else
+            Debug.LogError("SceneDataManager.Instance 为空，无法切换场景");
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -231,6 +293,7 @@ public class QuestTriggerZone : MonoBehaviour
         else if (triggerType == TriggerType.Scene)
         {
             playerInZone = true;
+            taskStarted = false;
         }
     }
 
@@ -241,30 +304,37 @@ public class QuestTriggerZone : MonoBehaviour
         if (triggerType == TriggerType.Scene)
         {
             playerInZone = false;
+            if (IsReferenceValid(interactButton)) interactButton.SetActive(false);
+            taskStarted = false;
         }
         else if (triggerType == TriggerType.Plot)
         {
             playerInZone = false;
             taskStarted = false;
-            if (interactButton != null) interactButton.SetActive(false);
+            if (IsReferenceValid(interactButton)) interactButton.SetActive(false);
             QuestManager.Instance?.OnPlayerExitQuestArea(questId);
         }
     }
 
-    private void TryStartDialogue()
-    {
-        if (taskStarted) return;
-        if (!IsQuestAvailable()) return;
-
-        taskStarted = true;
-        if (interactButton != null) interactButton.SetActive(false);
-        QuestManager.Instance?.StartCurrentQuest();
-    }
-
     public void DisableButton()
     {
-        if (interactButton != null)
+        if (IsReferenceValid(interactButton))
             interactButton.SetActive(false);
         taskStarted = true;
+    }
+
+    // 在 QuestTriggerZone 类中添加这个公共方法
+    public void RefreshButtonReference()
+    {
+        // 停止正在进行的查找协程（如果有）
+        if (findButtonCoroutine != null)
+            StopCoroutine(findButtonCoroutine);
+
+        // 重置状态，强制重新查找
+        interactButton = null;
+        isHotReferencingDone = false;
+
+        // 启动查找协程
+        findButtonCoroutine = StartCoroutine(DelayedHotReferenceWithRetry());
     }
 }

@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Wall1_Ao_0
+      name: Wall_Ao_0
       rect:
         serializedVersion: 2
         x: 0
@@ -111,14 +111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc31da2f941055642805b44e52ba6f17
-      internalID: -1929845678
+      spriteID: 8bf0d31f6fa5ae84ea59036db097c972
+      internalID: -62495469
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wall1_Ao_1
+      name: Wall_Ao_1
       rect:
         serializedVersion: 2
         x: 16
@@ -132,14 +132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d8f7e6e87346d714183d13c770e9e1e4
-      internalID: -497301412
+      spriteID: e5dba6b8de7a69e4e92ad66c0c48c4b9
+      internalID: -1243052995
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wall1_Ao_2
+      name: Wall_Ao_2
       rect:
         serializedVersion: 2
         x: 32
@@ -153,14 +153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f9337a9b2216734191a25393ff76998
-      internalID: 1378126361
+      spriteID: 5a6d489bfef9fb94391a0d9f53a388e8
+      internalID: 939300180
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wall1_Ao_3
+      name: Wall_Ao_3
       rect:
         serializedVersion: 2
         x: 0
@@ -174,14 +174,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8b3e00869f8f7164b9ba336a432334c8
-      internalID: 1440005002
+      spriteID: 58a3dacd215659d41bc416dd10fa111c
+      internalID: 1393130831
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wall1_Ao_4
+      name: Wall_Ao_4
       rect:
         serializedVersion: 2
         x: 32
@@ -195,14 +195,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec1249ab7b11f444c9d67ac6aaa26915
-      internalID: 619656119
+      spriteID: 3471fb3847d71cb418715751610601e1
+      internalID: -699304984
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wall1_Ao_5
+      name: Wall_Ao_5
       rect:
         serializedVersion: 2
         x: 0
@@ -216,14 +216,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d2895baff63ef6e4c94d9aabd6d4f131
-      internalID: 486171431
+      spriteID: f7a21ec6ddb104142ad04a9342a555f3
+      internalID: 1697290560
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wall1_Ao_6
+      name: Wall_Ao_6
       rect:
         serializedVersion: 2
         x: 16
@@ -237,14 +237,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cbc69336bb8182149b7f3f8a51654c97
-      internalID: -679951265
+      spriteID: f85c662d98dee174eac4a0af732c4dfa
+      internalID: -1732416949
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wall1_Ao_7
+      name: Wall_Ao_7
       rect:
         serializedVersion: 2
         x: 32
@@ -258,8 +258,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 83fdb051701c86f44b5a38ac083c5e03
-      internalID: 1792774203
+      spriteID: 5bcffbbbc02552a4c8a8e8716188829d
+      internalID: 941798407
       vertices: []
       indices: 
       edges: []
@@ -275,14 +275,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Wall1_Ao_0: -1929845678
-      Wall1_Ao_1: -497301412
-      Wall1_Ao_2: 1378126361
-      Wall1_Ao_3: 1440005002
-      Wall1_Ao_4: 619656119
-      Wall1_Ao_5: 486171431
-      Wall1_Ao_6: -679951265
-      Wall1_Ao_7: 1792774203
+      Wall_Ao_0: -62495469
+      Wall_Ao_1: -1243052995
+      Wall_Ao_2: 939300180
+      Wall_Ao_3: 1393130831
+      Wall_Ao_4: -699304984
+      Wall_Ao_5: 1697290560
+      Wall_Ao_6: -1732416949
+      Wall_Ao_7: 941798407
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

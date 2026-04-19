@@ -176,6 +176,12 @@ public class SceneDataManager : Singleton<SceneDataManager>
         else
         {
             RestoreGameStateForScene(xposition, yposition); // 恢复玩家位置等
+
+            // 添加：刷新所有 QuestTriggerZone 的按钮引用
+            if (HotReferenceManager.Instance != null)
+                HotReferenceManager.Instance.RefreshAllQuestTriggerZones();
+            else
+                Debug.LogWarning("HotReferenceManager 不存在，无法刷新按钮引用");
         }
 
         File.WriteAllText(logPath, sb.ToString());
