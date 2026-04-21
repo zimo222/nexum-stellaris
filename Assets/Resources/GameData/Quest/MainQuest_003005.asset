@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d476a2b0564d52b4882c53d711eeea11, type: 3}
+  m_Name: MainQuest_003005
+  m_EditorClassIdentifier: 
+  id: MainQuest_003005
+  questName: "\u671B\u661F"
+  questNum: "\u4E94"
+  chapterName: "\u521D\u840C\u539F\u91CE"
+  chapterNum: "\u4E09"
+  place: "\u539F\u91CE"
+  lastQuestId: MainQuest_003004
+  category: 0
+  contentType: 0
+  nextQuestIds:
+  - MainQuest_004001
+  description: "\u6C34\u6D3C\u91CC\u6D6E\u7740\u4E09\u8F6E\u660E\u6708\uFF0C\u4E0D\u6562\u6570\u3002"
+  dialogueEntries:
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
+    speakerId: 
+    content: 
+  - background: {fileID: 21300000, guid: 2b185ff8c0bf8d742ad5a63e7f709e8d, type: 3}
+    speakerId: 
+    content: 
+  - background: {fileID: 21300000, guid: 2b185ff8c0bf8d742ad5a63e7f709e8d, type: 3}
+    speakerId: 
+    content: "\u5FFD\u7136\u60F3\u627E\u7EAF\u767D\u3002\u4E00\u56DE\u5934\uFF0C\u53D1\u73B0\u5979\u4E0D\u5728\u3002\u6211\u52AA\u529B\u56DE\u60F3\u2014\u2014\u4E0A\u6B21\u770B\u89C1\u5979\u662F\u4EC0\u4E48\u65F6\u5019\uFF1F\u60F3\u4E0D\u8D77\u6765\u3002"
+  - background: {fileID: 21300000, guid: 608c1b40ea014824aa9a20f47cc4b81e, type: 3}
+    speakerId: Player
+    content: "\u201C\u7EAF\u767D\uFF1F\u201D"
+  - background: {fileID: 21300000, guid: 608c1b40ea014824aa9a20f47cc4b81e, type: 3}
+    speakerId: 
+    content: ......
+  - background: {fileID: 21300000, guid: d3f59ba16f065644ca9bc2f80d18ab87, type: 3}
+    speakerId: 
+    content: "\"\u7EAF\u767D\uFF01\""
+  - background: {fileID: 21300000, guid: 6888e285f79dc7c4eb873f9aeaf26c9b, type: 3}
+    speakerId: "Kianna\xB7Argent"
+    content: "\u201C\u6211\u5728\u3002\u201D"
+  - background: {fileID: 21300000, guid: 6888e285f79dc7c4eb873f9aeaf26c9b, type: 3}
+    speakerId: Player
+    content: "\u201C\u4F60\u53BB\u54EA\u4E86\uFF1F\u201D"
+  - background: {fileID: 21300000, guid: 6888e285f79dc7c4eb873f9aeaf26c9b, type: 3}
+    speakerId: "Kianna\xB7Argent"
+    content: "\u201C\u4E00\u76F4\u5728\u3002\u201D"
+  - background: {fileID: 21300000, guid: 6888e285f79dc7c4eb873f9aeaf26c9b, type: 3}
+    speakerId: "Kianna\xB7Argent"
+    content: "\"\u522B\u6015\u3002\""
+  - background: {fileID: 21300000, guid: 5f414e5b174d9ce44a42c759895d4fee, type: 3}
+    speakerId: 
+    content: 
+  - background: {fileID: 21300000, guid: 5f414e5b174d9ce44a42c759895d4fee, type: 3}
+    speakerId: 
+    content: "\u6211\u770B\u7740\u5979\u3002\u671D\u9633\u7684\u7B2C\u4E00\u7F15\u5149\u7167\u5728\u5979\u8138\u4E0A\uFF0C\u628A\u94F6\u767D\u8272\u7684\u5934\u53D1\u67D3\u6210\u6DE1\u6DE1\u7684\u91D1\u8272\u3002\u201D\u6211\u811A\u4E0B\u7684\u5149\u70B9\uFF0C\u6697\u4E86\u4E00\u77AC\u3002"
+  objectives: []
+  waves: []
+  Reward: []
