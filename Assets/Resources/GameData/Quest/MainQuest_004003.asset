@@ -24,7 +24,58 @@ MonoBehaviour:
   nextQuestIds:
   - MainQuest_004004
   description: "\u753B\u91CC\u7684\u4EBA\u8F6C\u8FC7\u8EAB\uFF0C\u4E0D\u80AF\u9762\u5BF9\u3002"
-  dialogueEntries: []
+  dialogueEntries:
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
+    speakerId: 
+    content: "\u4F46\u5F88\u5FEB\uFF0C\u6211\u753B\u4E0D\u52A8\u4E86\u3002"
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
+    speakerId: 
+    content: "\u4E0D\u662F\u8EAB\u4F53\u7D2F\uFF0C\u662F\u624B\u8DDF\u4E0D\u4E0A\u5FC3\u3002\u6211\u60F3\u753B\u5979\u773C\u775B\u91CC\u7684\u5149\uFF0C\u753B\u51FA\u6765\u5374\u662F\u6B7B\u6C34\u3002\u6211\u60F3\u753B\u5979\u5FAE\u7B11\u65F6\u7684\u5F27\u5EA6\uFF0C\u753B\u51FA\u6765\u5374\u662F\u50F5\u786C\u7684\u7EBF\u6761\u3002"
+  - background: {fileID: 21300000, guid: 8991c38d5181c8a40a3d29ef7f787d34, type: 3}
+    speakerId: 
+    content: "\u753B\u4E86\u4E00\u5F20\uFF0C\u6495\u6389\u3002\u53C8\u753B\u4E00\u5F20\uFF0C\u53C8\u6495\u6389\u3002\u5730\u4E0A\u7684\u7EB8\u56E2\u8D8A\u5806\u8D8A\u9AD8\uFF0C\u50CF\u4E00\u5EA7\u5C0F\u5C0F\u7684\u575F\u3002"
+  - background: {fileID: 21300000, guid: 891d98c5ba3f7664581cd1e70dbaafb8, type: 3}
+    speakerId: 
+    content: 
+  - background: {fileID: 21300000, guid: 891d98c5ba3f7664581cd1e70dbaafb8, type: 3}
+    speakerId: Player
+    content: "\u201C\u6211\u662F\u4E0D\u662F\u5F88\u6CA1\u7528\uFF1F\u201D"
+  - background: {fileID: 21300000, guid: 891d98c5ba3f7664581cd1e70dbaafb8, type: 3}
+    speakerId: "Kianna\xB7Argent"
+    content: "\u201C\u4E0D\u662F\u3002\u201D"
+  - background: {fileID: 21300000, guid: 891d98c5ba3f7664581cd1e70dbaafb8, type: 3}
+    speakerId: Player
+    content: "\u201C\u53EF\u6211\u753B\u4E0D\u51FA\u4F60\u3002\u201D"
+  - background: {fileID: 21300000, guid: 891d98c5ba3f7664581cd1e70dbaafb8, type: 3}
+    speakerId: "Kianna\xB7Argent"
+    content: '"......"'
+  - background: {fileID: 21300000, guid: 891d98c5ba3f7664581cd1e70dbaafb8, type: 3}
+    speakerId: "Kianna\xB7Argent"
+    content: "\u201C\u2026\u2026\u662F\u6211\u592A\u96BE\u753B\u4E86\u5417\uFF1F\u201D"
+  - background: {fileID: 21300000, guid: 891d98c5ba3f7664581cd1e70dbaafb8, type: 3}
+    speakerId: "Kianna\xB7Argent"
+    content: "\u201C\u2026\u2026\u662F\u6211\u592A\u96BE\u753B\u4E86\u5417\uFF1F\u201D"
+  - background: {fileID: 21300000, guid: 891d98c5ba3f7664581cd1e70dbaafb8, type: 3}
+    speakerId: "Kianna\xB7Argent"
+    content: "\u201C\u2026\u2026\u662F\u6211\u592A\u96BE\u753B\u4E86\u5417\uFF1F\u201D"
+  - background: {fileID: 21300000, guid: 891d98c5ba3f7664581cd1e70dbaafb8, type: 3}
+    speakerId: Player
+    content: '"......"'
+  - background: {fileID: 21300000, guid: 891d98c5ba3f7664581cd1e70dbaafb8, type: 3}
+    speakerId: "Kianna\xB7Argent"
+    content: "\u201C\u4F60\u753B\u5F97\u8FD9\u822C\u7528\u529B\u2026\u2026\u6211\u770B\u7740\uFF0C\u5FC3\u91CC\u90FD\u8DDF\u7740\u7D27\u4E86\u3002\u201D"
+  - background: {fileID: 21300000, guid: 891d98c5ba3f7664581cd1e70dbaafb8, type: 3}
+    speakerId: 
+    content: 
+  - background: {fileID: 21300000, guid: 0d03ec156f34eb946b1a5d478e3f47b0, type: 3}
+    speakerId: 
+    content: "\u90A3\u5929\u665A\u4E0A\uFF0C\u6211\u4E00\u4E2A\u4EBA\u5750\u5728\u5DE5\u574A\u91CC\uFF0C\u5BF9\u7740\u7A7A\u767D\u7684\u753B\u5E03\u53D1\u5446\u3002\u684C\u4E0A\u90A3\u652F\u753B\u7B14\u9759\u9759\u5730\u8EBA\u7740\uFF0C\u7B14\u5C16\u7684\u989C\u6599\u5DF2\u7ECF\u5E72\u88C2\u3002"
+  - background: {fileID: 21300000, guid: 0d03ec156f34eb946b1a5d478e3f47b0, type: 3}
+    speakerId: 
+    content: "\u6211\u5FFD\u7136\u60F3\u8D77\u4E94\u5C81\u90A3\u5E74\uFF0C\u7AD9\u5728\u96FE\u91CC\u627E\u4E0D\u5230\u8DEF\u7684\u611F\u89C9\u3002\u4E00\u6A21\u4E00\u6837\u3002"
+  - background: {fileID: 21300000, guid: 0d03ec156f34eb946b1a5d478e3f47b0, type: 3}
+    speakerId: 
+    content: "\u539F\u6765\u753B\u753B\u4E5F\u4F1A\u8FF7\u8DEF\u3002"
   objectives: []
   waves: []
   Reward: []

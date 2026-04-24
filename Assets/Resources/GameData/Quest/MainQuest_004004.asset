@@ -24,7 +24,43 @@ MonoBehaviour:
   nextQuestIds:
   - MainQuest_004005
   description: "\u65AD\u6389\u7684\u7B14\u5212\u5F00\u53E6\u4E00\u7247\u5929\u7A7A\u3002"
-  dialogueEntries: []
+  dialogueEntries:
+  - background: {fileID: 21300000, guid: 27bafd3acddef2f47870700c61a2ddb5, type: 3}
+    speakerId: 
+    content: "\u6211\u5728\u5DE5\u574A\u7684\u89D2\u843D\u91CC\u627E\u5230\u4E00\u672C\u65E7\u753B\u518C\u3002\u7FFB\u5F00\uFF0C\u91CC\u9762\u4E0D\u662F\u753B\uFF0C\u662F\u5B57\u3002"
+  - background: {fileID: 21300000, guid: 27bafd3acddef2f47870700c61a2ddb5, type: 3}
+    speakerId: 
+    content: 
+  - background: {fileID: 21300000, guid: 27bafd3acddef2f47870700c61a2ddb5, type: 3}
+    speakerId: Player
+    content: '"......"'
+  - background: {fileID: 21300000, guid: ea408287411d9f54e8564ac0ebc19e26, type: 3}
+    speakerId: 
+    content: "\u6211\u62FF\u8D77\u753B\u7B14\uFF0C\u8638\u4E86\u989C\u6599\uFF0C\u6CA1\u6709\u601D\u8003\uFF0C\u6CA1\u6709\u72B9\u8C6B\uFF0C\u76F4\u63A5\u843D\u5728\u753B\u5E03\u4E0A\u3002"
+  - background: {fileID: 21300000, guid: ea408287411d9f54e8564ac0ebc19e26, type: 3}
+    speakerId: 
+    content: "\u4E0D\u662F\u5979\u7684\u8138\u3002\u662F\u7B2C\u4E09\u6839\u5ECA\u67F1\u3002\u662F\u98CE\u5439\u8D77\u5979\u5934\u53D1\u7684\u5F27\u5EA6\u3002\u662F\u5979\u7B2C\u4E00\u6B21\u8BF4\u201C\u522B\u6015\u201D\u65F6\uFF0C\u6211\u6307\u5C16\u90A3\u7F15\u5149\u3002"
+  - background: {fileID: 21300000, guid: ea408287411d9f54e8564ac0ebc19e26, type: 3}
+    speakerId: 
+    content: "\u6211\u753B\u4E86\u5F88\u4E45\u3002\u4E45\u5230\u989C\u6599\u5E72\u4E86\u4E00\u5C42\u53C8\u8986\u4E0A\u4E00\u5C42\u3002\u4E45\u5230\u7A97\u5916\u9ED1\u4E86\u53C8\u4EAE\uFF0C\u4EAE\u4E86\u53C8\u9ED1\u3002"
+  - background: {fileID: 21300000, guid: ea408287411d9f54e8564ac0ebc19e26, type: 3}
+    speakerId: 
+    content: "\u6700\u540E\u6211\u653E\u4E0B\u7B14\u3002"
+  - background: {fileID: 21300000, guid: ea408287411d9f54e8564ac0ebc19e26, type: 3}
+    speakerId: 
+    content: "\u753B\u5E03\u4E0A\uFF0C\u6CA1\u6709\u8138\uFF0C\u6CA1\u6709\u773C\u775B\uFF0C\u6CA1\u6709\u94F6\u767D\u8272\u7684\u5934\u53D1\u3002\u53EA\u6709\u4E00\u4E2A\u6A21\u7CCA\u7684\u5F71\u5B50\uFF0C\u7AD9\u5728\u7B2C\u4E09\u6839\u5ECA\u67F1\u65C1\u3002\u4F46\u90A3\u4E2A\u5F71\u5B50\u5728\u53D1\u5149\u3002"
+  - background: {fileID: 21300000, guid: ea408287411d9f54e8564ac0ebc19e26, type: 3}
+    speakerId: 
+    content: "\u4E0D\u662F\u753B\u51FA\u6765\u7684\u5149\u3002\u662F\u989C\u6599\u81EA\u5DF1\u4EAE\u8D77\u6765\u7684\u3002"
+  - background: {fileID: 21300000, guid: 051a7ed63edd3f045aeaa580291229bc, type: 3}
+    speakerId: 
+    content: 
+  - background: {fileID: 21300000, guid: 051a7ed63edd3f045aeaa580291229bc, type: 3}
+    speakerId: 
+    content: "\u7EAF\u767D\u8D70\u8FC7\u6765\uFF0C\u770B\u7740\u90A3\u5E45\u753B\u3002\u5979\u7B11\u4E86\u2014\u2014\u4E0D\u662F\u5E73\u65F6\u90A3\u79CD\u6DE1\u6DE1\u7684\u5FAE\u7B11\uFF0C\u662F\u771F\u6B63\u7684\u3001\u773C\u7736\u53D1\u7EA2\u7684\u7B11\u3002"
+  - background: {fileID: 21300000, guid: 051a7ed63edd3f045aeaa580291229bc, type: 3}
+    speakerId: "Kianna\xB7Argent"
+    content: "\u201C\u5C31\u662F\u5B83\u4E86\u3002\u201D"
   objectives: []
   waves: []
   Reward: []
