@@ -24,7 +24,46 @@ MonoBehaviour:
   nextQuestIds:
   - MainQuest_005004
   description: "\u51C9\u7684\u788E\u5C51\u50CF\u6668\u96FE\uFF0C\u6563\u5F97\u6CA1\u6709\u58F0\u97F3\u3002"
-  dialogueEntries: []
+  dialogueEntries:
+  - background: {fileID: 21300000, guid: e4bf44c8433ea414db6cb8dda7579853, type: 3}
+    speakerId: 
+    content: 
+  - background: {fileID: 21300000, guid: e4bf44c8433ea414db6cb8dda7579853, type: 3}
+    speakerId: Player
+    content: "\u201C\u4F60\u8981\u8D70\u4E86\uFF0C\u5BF9\u5417\uFF1F\u201D"
+  - background: {fileID: 21300000, guid: a49423b5b7f105c47b9c5980e3269dfd, type: 3}
+    speakerId: "Kianna\xB7Argent"
+    content: '"......"'
+  - background: {fileID: 21300000, guid: a49423b5b7f105c47b9c5980e3269dfd, type: 3}
+    speakerId: "Kianna\xB7Argent"
+    content: "\"\u62B1\u6B49\u3002\u4ECE\u4E00\u5F00\u59CB\uFF0C\u6211\u5C31\u4E0D\u8BE5\u5728\u8FD9\u91CC\u3002\""
+  - background: {fileID: 21300000, guid: c5949ad3a9bc39741a05c14c0a1e9504, type: 3}
+    speakerId: 
+    content: "\u6211\u63E1\u7D27\u5979\u7684\u624B\u3002\u5979\u7684\u624B\u5728\u4E00\u70B9\u4E00\u70B9\u5730\u6D88\u5931\uFF0C\u6307\u5C16\u5DF2\u7ECF\u900F\u660E\u4E86\u3002"
+  - background: {fileID: 21300000, guid: c5949ad3a9bc39741a05c14c0a1e9504, type: 3}
+    speakerId: Player
+    content: "\u201C\u4E0D\u662F\u7684\u2014\u2014\u201D"
+  - background: {fileID: 21300000, guid: c5949ad3a9bc39741a05c14c0a1e9504, type: 3}
+    speakerId: "Kianna\xB7Argent"
+    content: "\u201C\u522B\u6015\u3002\u201D"
+  - background: {fileID: 21300000, guid: 12a4402ed03edde4ebf2c145f675f7ae, type: 3}
+    speakerId: "Kianna\xB7Argent"
+    content: ......
+  - background: {fileID: 21300000, guid: 0314c081745d9534daff054362f7c8e7, type: 3}
+    speakerId: "Kianna\xB7Argent"
+    content: ......
+  - background: {fileID: 21300000, guid: 3ae49ac3c7aef0c4e96c9ac1df967a2c, type: 3}
+    speakerId: 
+    content: 
+  - background: {fileID: 21300000, guid: d6ca518f45e48df4d8ff09a55976f06b, type: 3}
+    speakerId: 
+    content: 
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
+    speakerId: 
+    content: "\u9ED1\u5F71\u4ECE\u865A\u7A7A\u4E2D\u6D8C\u51FA\uFF0C\u6C47\u805A\uFF0C\u51DD\u7ED3\u3002"
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
+    speakerId: 
+    content: "\u60D8\uFF0C\u6210\u5F62\u4E86\u3002"
   objectives: []
   waves: []
   Reward: []
