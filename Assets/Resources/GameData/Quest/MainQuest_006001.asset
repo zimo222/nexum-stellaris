@@ -24,7 +24,31 @@ MonoBehaviour:
   nextQuestIds:
   - MainQuest_006002
   description: "\u56DE\u5ECA\u5C3D\u5934\u7AD9\u7740\u6765\u65F6\u7684\u90A3\u4E2A\u5F71\u5B50\u3002"
-  dialogueEntries: []
+  dialogueEntries:
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
+    speakerId: 
+    content: 
+  - background: {fileID: 21300000, guid: 5a2a3d078673ff24a9db4c6f9519d65a, type: 3}
+    speakerId: 
+    content: 
+  - background: {fileID: 21300000, guid: 5a2a3d078673ff24a9db4c6f9519d65a, type: 3}
+    speakerId: 
+    content: "\u6211\u5F00\u59CB\u5F80\u56DE\u8D70\u3002\u8D70\u8FC7\u4E07\u7269\u5171\u9E23\u4E4B\u5385\uFF0C\u8D70\u8FC7\u75F4\u8FF7\u5DE5\u574A\uFF0C\u8D70\u8FC7\u521D\u840C\u539F\u91CE\uFF0C\u8D70\u8FC7\u7EAF\u767D\u56DE\u5ECA\u3002\u6BCF\u8D70\u4E00\u6B65\uFF0C\u8EAB\u540E\u7684\u8DEF\u5C31\u88AB\u70B9\u4EAE\u4E00\u70B9\u3002"
+  - background: {fileID: 21300000, guid: 5a2a3d078673ff24a9db4c6f9519d65a, type: 3}
+    speakerId: 
+    content: 
+  - background: {fileID: 21300000, guid: 5a2a3d078673ff24a9db4c6f9519d65a, type: 3}
+    speakerId: 
+    content: "\u8D70\u5230\u7EAF\u767D\u56DE\u5ECA\u65F6\uFF0C\u6211\u505C\u4E0B\u6765\u3002"
+  - background: {fileID: 21300000, guid: 0927b3a28d5cc124cb7f1e9e9c2facdc, type: 3}
+    speakerId: 
+    content: 
+  - background: {fileID: 21300000, guid: 0927b3a28d5cc124cb7f1e9e9c2facdc, type: 3}
+    speakerId: Player
+    content: "\u201C\u4F60\u600E\u4E48\u5728\u8FD9\u91CC\uFF1F\u201D"
+  - background: {fileID: 21300000, guid: 0927b3a28d5cc124cb7f1e9e9c2facdc, type: 3}
+    speakerId: "\u5C0F\u539F"
+    content: "\u201C\u7B49\u4F60\u3002\u201D"
   objectives: []
   waves: []
   Reward: []

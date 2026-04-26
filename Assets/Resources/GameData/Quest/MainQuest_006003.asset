@@ -23,7 +23,52 @@ MonoBehaviour:
   contentType: 0
   nextQuestIds: []
   description: "\u7136\u540E\uFF0C\u5411\u7740\u660E\u5929\u3002"
-  dialogueEntries: []
+  dialogueEntries:
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
+    speakerId: 
+    content: "\u5F88\u591A\u5E74\u540E\u3002\u6211\u53C8\u4E00\u6B21\u51FA\u53D1\u4E86\u3002\u8D70\u8FC7\u5F88\u591A\u65B0\u7684\u5730\u65B9\uFF0C\u9047\u89C1\u8FC7\u5F88\u591A\u4EBA\uFF0C\u4E5F\u544A\u522B\u8FC7\u5F88\u591A\u4EBA\u3002"
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
+    speakerId: 
+    content: "\u6709\u4E00\u5929\uFF0C\u6211\u8D70\u5230\u4E00\u4E2A\u5730\u65B9\u2014\u2014\u4E00\u4E2A\u4ECE\u672A\u89C1\u8FC7\u7684\u5730\u65B9\u3002"
+  - background: {fileID: 21300000, guid: d4023737ad5d13c45850690b791d908c, type: 3}
+    speakerId: 
+    content: 
+  - background: {fileID: 21300000, guid: 0eed601a5209db341a805b45143f05c3, type: 3}
+    speakerId: 
+    content: 
+  - background: {fileID: 21300000, guid: 63cb05aa02ce5784bb7b085bb570d4e8, type: 3}
+    speakerId: 
+    content: 
+  - background: {fileID: 21300000, guid: 8f37b383bc4128a45a40008dc11e3487, type: 3}
+    speakerId: 
+    content: 
+  - background: {fileID: 21300000, guid: 8f37b383bc4128a45a40008dc11e3487, type: 3}
+    speakerId: "Kianna\xB7Argent"
+    content: "\u201C\u4F60\u6765\u4E86\u3002\u201D"
+  - background: {fileID: 21300000, guid: 8f37b383bc4128a45a40008dc11e3487, type: 3}
+    speakerId: Player
+    content: "\u201C\u6211\u6765\u4E86\u3002\u201D"
+  - background: {fileID: 21300000, guid: a967a66d4ca42124a8f11f2a432c8514, type: 3}
+    speakerId: 
+    content: 
+  - background: {fileID: 21300000, guid: a967a66d4ca42124a8f11f2a432c8514, type: 3}
+    speakerId: "Kianna\xB7Argent"
+    content: "\u201C\u8D70\u5427\u3002\u201D"
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
+    speakerId: Player
+    content: "\"\u55EF\u3002\""
+  - background: {fileID: 21300000, guid: a967a66d4ca42124a8f11f2a432c8514, type: 3}
+    speakerId: Player
+    content: "\"\u55EF\u3002\""
+  - background: {fileID: 21300000, guid: 1f1ecce284f0b5447b408539e0b98c99, type: 3}
+    speakerId: 
+    content: 
+  - background: {fileID: 21300000, guid: a967a66d4ca42124a8f11f2a432c8514, type: 3}
+    speakerId: 
+    content: 
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
+    speakerId: 
+    content: "\u7136\u540E\uFF0C\u5411\u7740\u660E\u5929\u3002"
   objectives: []
   waves: []
   Reward: []
