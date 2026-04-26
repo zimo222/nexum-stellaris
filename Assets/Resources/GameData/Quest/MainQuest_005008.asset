@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: MainQuest_005008
   m_EditorClassIdentifier: 
   id: MainQuest_005008
-  questName: "\u5F52\u5C18"
+  questName: "\u518D\u6218\uFF01"
   questNum: "\u516B"
   chapterName: "\u5FC3\u6E0A"
   chapterNum: "\u4E94"
   place: "\u5171\u9E23\u5927\u5385"
   lastQuestId: MainQuest_005007
   category: 0
-  contentType: 0
+  contentType: 1
   nextQuestIds:
-  - MainQuest_006001
-  description: "\u96FE\u5E95\u4E0B\u6709\u547C\u5438\u6C89\u8FDB\u6CE5\u571F\uFF0C\u7EC8\u4E8E\u3002"
+  - MainQuest_005009
+  description: 
   dialogueEntries: []
   objectives: []
   waves: []
