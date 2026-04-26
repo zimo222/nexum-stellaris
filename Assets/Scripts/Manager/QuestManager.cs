@@ -277,9 +277,12 @@ public class QuestManager : MonoBehaviour
             RefreshQuestUI();
             if (questId == TrackedQuestId)
                 AutoSetTrackedQuest();
-
+            /*
             if (questId == "MainQuest_002001")
                 SceneDataManager.Instance.LoadScene("2_TheArgentCorridor");
+            */
+            if (GameDataManager.Instance.QuestDict[questId].isSceneTrans == YesNo.Yes)
+                SceneDataManager.Instance.LoadScene(GameDataManager.Instance.QuestDict[questId].targetSceneName, GameDataManager.Instance.QuestDict[questId].targetX, GameDataManager.Instance.QuestDict[questId].targetY);
 
             if (isQuestActive && currentInteractiveQuestId == questId)
             {

@@ -58,4 +58,15 @@ public class QuestDefineSO : ScriptableObject
 
     [Header("任务奖励")]
     public List<string> Reward;
+
+
+    public YesNo isSceneTrans = YesNo.No;
+
+    public string targetSceneName;
+    public int targetX, targetY;
+}
+public enum YesNo
+{
+    No = 0,   // 默认值
+    Yes = 1
 }

@@ -31,22 +31,26 @@ MonoBehaviour:
   - background: {fileID: 21300000, guid: 82d4d513effcfb748a40240c3d0b92bf, type: 3}
     speakerId: 
     content: "\u90A3\u4E9B\u719F\u6089\u7684\u666F\u7269\u6E10\u6E10\u6A21\u7CCA\u2014\u2014\u95E8\u69DB\u3001\u9662\u5B50\u3001\u5288\u67F4\u7684\u58F0\u54CD\uFF0C\u90FD\u53D8\u6210\u4E86\u8FDC\u5904\u6A21\u7CCA\u7684\u5149\u70B9\u3002\u811A\u4E0B\u7684\u8DEF\u8D8A\u6765\u8D8A\u7A84\uFF0C\u4E24\u8FB9\u7684\u5899\u8D8A\u6765\u8D8A\u9AD8\u3002"
-  - background: {fileID: 0}
+  - background: {fileID: 21300000, guid: 5f9a6002ca63e55498a55899cc09ce0f, type: 3}
     speakerId: 
     content: "\u8DEF\u7684\u5C3D\u5934\uFF0C\u662F\u4E00\u6247\u95E8\u3002"
-  - background: {fileID: 0}
+  - background: {fileID: 21300000, guid: 5f9a6002ca63e55498a55899cc09ce0f, type: 3}
     speakerId: 
     content: "\u95E8\u5F88\u65E7\u4E86\uFF0C\u6728\u5934\u7684\u7EB9\u7406\u88AB\u5C81\u6708\u78E8\u5E73\uFF0C\u628A\u624B\u662F\u94DC\u7684\uFF0C\u751F\u4E86\u7EFF\u9508\u3002\u95E8\u7F1D\u91CC\u900F\u51FA\u5149\uFF0C\u4E0D\u662F\u6696\u5149\u4E4B\u5DE2\u90A3\u79CD\u9EC4\u660F\u7684\u91D1\u8272\uFF0C\u662F\u767D\u7684\uFF0C\u5F88\u4EAE\u7684\u767D\u3002"
-  - background: {fileID: 0}
+  - background: {fileID: 21300000, guid: ea9f249d0ab37304a8fd92b4c0e614a9, type: 3}
     speakerId: 
     content: "\u4F38\u624B\u63A8\u95E8\u3002"
-  - background: {fileID: 0}
+  - background: {fileID: 21300000, guid: cd5ad5365ae594342a5c02477b9dcd52, type: 3}
     speakerId: 
     content: "\u7528\u4E86\u5168\u8EAB\u7684\u529B\u6C14\uFF0C\u95E8\u624D\u5F00\u4E86\u4E00\u6761\u7F1D\u3002\u5149\u4ECE\u7F1D\u9699\u91CC\u6D8C\u51FA\u6765\uFF0C\u523A\u5F97\u6211\u7741\u4E0D\u5F00\u773C\u3002"
-  - background: {fileID: 0}
+  - background: {fileID: 21300000, guid: cd5ad5365ae594342a5c02477b9dcd52, type: 3}
     speakerId: 
     content: "\u4FA7\u8EAB\u6324\u4E86\u8FDB\u53BB\u3002"
   objectives: []
   waves: []
   Reward:
   - Exotext_003_VotiveEmber
+  isSceneTrans: 1
+  targetSceneName: 2_TheArgentCorridor
+  targetX: 0
+  targetY: 0

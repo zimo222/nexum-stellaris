@@ -52,3 +52,7 @@ MonoBehaviour:
   objectives: []
   waves: []
   Reward: []
+  isSceneTrans: 1
+  targetSceneName: 1_TheNestOfWarmLight
+  targetX: 1550
+  targetY: -250

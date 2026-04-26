@@ -72,3 +72,7 @@ MonoBehaviour:
   objectives: []
   waves: []
   Reward: []
+  isSceneTrans: 1
+  targetSceneName: 6_TheStellarWish
+  targetX: 0
+  targetY: 700
