@@ -18,7 +18,7 @@ public class PlayerData
     public DateTime LastLoginTime;                  // 上次登录时间
 
     // ====================     游戏进度与资源     ====================
-    public int Level = 88;
+    public int Level = 1;
     public int Experience;
     public int Crystals;                            // 水晶
     public int Coins;                               // 金币

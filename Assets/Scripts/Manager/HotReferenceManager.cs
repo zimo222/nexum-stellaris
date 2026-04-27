@@ -37,4 +37,28 @@ public class HotReferenceManager : Singleton<HotReferenceManager>
             zone.RefreshButtonReference();
         }
     }
+
+    /// <summary>
+    /// 将当前场景中找到的 WeaponSlotsUI 重新赋值给 Player 实例
+    /// </summary>
+    public void RefreshPlayerWeaponSlotsUI()
+    {
+        if (Player.Instance == null)
+        {
+            Debug.LogWarning("HotReferenceManager: Player.Instance 为空，无法刷新 WeaponSlotsUI");
+            return;
+        }
+
+        // 查找场景中的 WeaponSlotsUI（包括未激活的物体）
+        WeaponSlotsUI slotsUI = FindObjectOfType<WeaponSlotsUI>(true);
+        if (slotsUI != null)
+        {
+            Player.Instance.weaponSlotsUI = slotsUI;
+            Debug.Log("HotReferenceManager: 已刷新 Player 的 WeaponSlotsUI 引用");
+        }
+        else
+        {
+            Debug.LogWarning("HotReferenceManager: 未在当前场景中找到 WeaponSlotsUI");
+        }
+    }
 }
