@@ -18,7 +18,7 @@ MonoBehaviour:
   chapterName: "\u5F52\u5DE2"
   chapterNum: "\u516D"
   place: "\u6696\u5149\u4E4B\u5DE2"
-  lastQuestId: MainQuest_005008
+  lastQuestId: MainQuest_005010
   category: 0
   contentType: 0
   nextQuestIds:
