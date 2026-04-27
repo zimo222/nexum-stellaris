@@ -36,3 +36,4 @@ MonoBehaviour:
   targetSceneName: 
   targetX: 0
   targetY: 0
+  autoStartNextQuest: 1

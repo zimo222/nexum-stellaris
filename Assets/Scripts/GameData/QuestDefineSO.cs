@@ -23,7 +23,10 @@ public class DialogueEntry
     public string speakerId;
     [TextArea(1, 3)]
     public string content;
-}
+
+    [Header("对话框架模式")]
+    public YesNo useCGMode = YesNo.Yes;      // Yes = 传统CG对话, No = 使用 dialogueFrame
+ }
 
 [CreateAssetMenu(fileName = "NewQuest", menuName = "GameData/QuestDefine")]
 public class QuestDefineSO : ScriptableObject
@@ -64,6 +67,11 @@ public class QuestDefineSO : ScriptableObject
 
     public string targetSceneName;
     public int targetX, targetY;
+
+
+    // 新增：是否自动开始下一个任务
+    [Header("自动开始下一幕")]
+    public YesNo autoStartNextQuest = YesNo.No;   // 默认 No
 }
 public enum YesNo
 {

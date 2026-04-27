@@ -11,12 +11,12 @@ public class QuestManager : MonoBehaviour
     [Header("常驻UI")]
     public TMP_Text guestText;
 
-    [Header("弹出面板")]
+    [Header("任务面板")]
     public GameObject questPanel;
     public TMP_Text panelTaskNameText;
     public TMP_Text panelStatusText;
 
-    [Header("对话UI")]
+    [Header("对话UI（传统CG模式）")]
     public GameObject dialoguePanel;
     public Image backgroundImage;
     public TMP_Text speakerText;
@@ -42,7 +42,9 @@ public class QuestManager : MonoBehaviour
     private bool waitingForInteraction = false;
     private bool isQuestActive = false;
 
-    // 任务追踪相关
+    private TMP_Text currentDialogueText;
+    private GameObject currentDialogueFrame;
+
     public string TrackedQuestId { get; private set; }
     public event System.Action<string> OnTrackedQuestChanged;
 
@@ -99,7 +101,7 @@ public class QuestManager : MonoBehaviour
                 {
                     progress.state = QuestProgressState.Available;
                     dataChanged = true;
-                    Debug.Log($"修复任务状态: {progress.questId} -> Available");
+                    Debug.Log($"修正任务状态: {progress.questId} -> Available");
                 }
 
                 if (GameDataManager.Instance.QuestDict.TryGetValue(progress.questId, out var questData) &&
@@ -129,14 +131,13 @@ public class QuestManager : MonoBehaviour
 
     void Update()
     {
-        // 对话空格处理
         if (isDialoguePlaying && Input.GetKeyDown(KeyCode.Space))
         {
             if (typingCoroutine != null)
             {
                 StopCoroutine(typingCoroutine);
                 typingCoroutine = null;
-                dialogueContentText.text = currentDialogue[currentDialogueIndex].content;
+                currentDialogueText.text = currentDialogue[currentDialogueIndex].content;
                 isTextFullyDisplayed = true;
             }
             else if (isTextFullyDisplayed)
@@ -153,7 +154,6 @@ public class QuestManager : MonoBehaviour
             }
         }
 
-        // 按F启动任务（原有逻辑，修改了对话部分）
         if (waitingForInteraction && Input.GetKeyDown(KeyCode.F))
         {
             if (playerController != null && !playerController.isIdle)
@@ -170,7 +170,6 @@ public class QuestManager : MonoBehaviour
                 {
                     if (questData.contentType == QuestContentType.Dialogue)
                     {
-                        // 查找对应的触发器并禁用按钮
                         QuestTriggerZone[] zones = FindObjectsOfType<QuestTriggerZone>();
                         foreach (var zone in zones)
                         {
@@ -180,7 +179,6 @@ public class QuestManager : MonoBehaviour
                                 break;
                             }
                         }
-
                         waitingForInteraction = false;
                         isQuestActive = true;
                         StartDialogue(questData.dialogueEntries, currentInteractiveQuestId);
@@ -189,14 +187,12 @@ public class QuestManager : MonoBehaviour
                     {
                         waitingForInteraction = false;
                         isQuestActive = true;
-                        // 战斗由 CombatQuestTrigger 启动，这里不处理
                     }
                 }
             }
         }
     }
 
-    // ========== 新增：供UI按钮调用的公共方法 ==========
     public void StartCurrentQuest()
     {
         if (!waitingForInteraction || string.IsNullOrEmpty(currentInteractiveQuestId))
@@ -224,12 +220,10 @@ public class QuestManager : MonoBehaviour
         }
         else if (questData.contentType == QuestContentType.Combat)
         {
-            // 战斗任务不应该通过此方法启动，但为了安全，不做任何事
-            Debug.LogWarning("StartCurrentQuest 不应启动战斗任务");
+            Debug.LogWarning("StartCurrentQuest 不应用于战斗任务");
         }
     }
 
-    // ========== 原有方法（未修改） ==========
     public void UnlockQuest(string questId)
     {
         if (PlayerDataManager.Instance.UnlockQuest(questId))
@@ -269,26 +263,92 @@ public class QuestManager : MonoBehaviour
                         else
                             PlayerDataManager.Instance.AddNexusVesture(rewardId);
                     }
-                    // 调用功能UI组件
                     if (ItemObtainDisplayUI.Instance != null)
                         ItemObtainDisplayUI.Instance.ShowItemRewards(rewardIds);
                 }
             }
+
             RefreshQuestUI();
             if (questId == TrackedQuestId)
                 AutoSetTrackedQuest();
-            /*
-            if (questId == "MainQuest_002001")
-                SceneDataManager.Instance.LoadScene("2_TheArgentCorridor");
-            */
-            if (GameDataManager.Instance.QuestDict[questId].isSceneTrans == YesNo.Yes)
-                SceneDataManager.Instance.LoadScene(GameDataManager.Instance.QuestDict[questId].targetSceneName, GameDataManager.Instance.QuestDict[questId].targetX, GameDataManager.Instance.QuestDict[questId].targetY);
 
+            if (GameDataManager.Instance.QuestDict[questId].isSceneTrans == YesNo.Yes)
+            {
+                SceneDataManager.Instance.LoadScene(
+                    GameDataManager.Instance.QuestDict[questId].targetSceneName,
+                    GameDataManager.Instance.QuestDict[questId].targetX,
+                    GameDataManager.Instance.QuestDict[questId].targetY);
+            }
+
+            // 清理当前任务标记
             if (isQuestActive && currentInteractiveQuestId == questId)
             {
                 isQuestActive = false;
                 currentInteractiveQuestId = null;
             }
+
+            // 自动开始下一个任务
+            if (GameDataManager.Instance.QuestDict.TryGetValue(questId, out var finishedQuestData) &&
+                finishedQuestData.autoStartNextQuest == YesNo.Yes)
+            {
+                AutoStartNextQuest(finishedQuestData);
+            }
+        }
+    }
+
+    private void AutoStartNextQuest(QuestDefineSO finishedQuestData)
+    {
+        if (finishedQuestData.nextQuestIds == null || finishedQuestData.nextQuestIds.Count == 0)
+            return;
+
+        string nextQuestId = null;
+        foreach (string nextId in finishedQuestData.nextQuestIds)
+        {
+            var progress = PlayerDataManager.Instance.GetQuestProgress(nextId);
+            if (progress != null && progress.state == QuestProgressState.Available)
+            {
+                nextQuestId = nextId;
+                break;
+            }
+        }
+
+        if (string.IsNullOrEmpty(nextQuestId))
+        {
+            Debug.LogWarning($"自动开始失败：没有可用的后续任务 (questId={finishedQuestData.id})");
+            return;
+        }
+
+        if (!GameDataManager.Instance.QuestDict.TryGetValue(nextQuestId, out var nextQuestData))
+            return;
+
+        Debug.Log($"自动开始下一个任务: {nextQuestId} ({nextQuestData.questName})");
+
+        // 清理可能残留的等待交互状态
+        waitingForInteraction = false;
+
+        StartCoroutine(AutoStartCoroutine(nextQuestId, nextQuestData));
+    }
+
+    private IEnumerator AutoStartCoroutine(string questId, QuestDefineSO questData)
+    {
+        yield return null;
+
+        switch (questData.contentType)
+        {
+            case QuestContentType.Dialogue:
+                isQuestActive = true;
+                StartDialogue(questData.dialogueEntries, questId);
+                break;
+
+            case QuestContentType.Combat:
+                Vector2 spawnCenter = Vector2.zero;
+                if (playerController != null)
+                    spawnCenter = playerController.transform.position;
+                else
+                    Debug.LogWarning("自动开始战斗时找不到玩家，出生点使用 (0,0)");
+
+                StartCombatQuest(questId, spawnCenter);
+                break;
         }
     }
 
@@ -316,21 +376,31 @@ public class QuestManager : MonoBehaviour
 
         if (!GameDataManager.Instance.QuestDict.TryGetValue(questId, out var questData))
         {
-            Debug.LogError($"任务 {questId} 不存在");
+            Debug.LogError($"任务 {questId} 数据不存在");
             return;
         }
 
         isQuestActive = true;
-        currentInteractiveQuestId = questId;
+        currentInteractiveQuestId = questId;   // // 战斗任务保留此赋值
         CombatManager.Instance.StartCombat(questData, spawnCenter);
     }
 
+    // ========== 对话系统 ==========
     private void StartDialogue(List<DialogueEntry> dialogueList, string questId)
     {
         if (dialogueList == null || dialogueList.Count == 0)
         {
             CompleteQuest(questId);
             return;
+        }
+
+        // 关键修复：赋值当前任务ID，以便结束时能触发 CompleteQuest
+        currentInteractiveQuestId = questId;
+
+        if (currentDialogueFrame != null)
+        {
+            currentDialogueFrame.SetActive(false);
+            currentDialogueFrame = null;
         }
 
         if (backgroundImage != null)
@@ -342,33 +412,127 @@ public class QuestManager : MonoBehaviour
         currentDialogue = dialogueList;
         currentDialogueIndex = 0;
         isDialoguePlaying = true;
-        dialoguePanel.SetActive(true);
+
         ShowDialogueEntry(currentDialogue[0]);
     }
 
     private void ShowDialogueEntry(DialogueEntry entry)
     {
-        if (backgroundImage != null)
+        if (currentDialogueFrame != null)
         {
-            backgroundImage.gameObject.SetActive(entry.background != null);
-            if (entry.background != null)
-                backgroundImage.sprite = entry.background;
+            currentDialogueFrame.SetActive(false);
+            currentDialogueFrame = null;
         }
 
-        speakerText.text = GetSpeakerName(entry.speakerId);
-        dialogueContentText.text = "";
-        isTextFullyDisplayed = false;
+        if (entry.useCGMode == YesNo.Yes)
+        {
+            if (dialoguePanel != null)
+                dialoguePanel.SetActive(true);
 
-        if (typingCoroutine != null)
-            StopCoroutine(typingCoroutine);
-        typingCoroutine = StartCoroutine(TypeText(entry.content));
+            if (backgroundImage != null)
+            {
+                backgroundImage.gameObject.SetActive(entry.background != null);
+                if (entry.background != null)
+                    backgroundImage.sprite = entry.background;
+            }
+
+            speakerText.text = GetSpeakerName(entry.speakerId);
+            dialogueContentText.text = "";
+            currentDialogueText = dialogueContentText;
+            isTextFullyDisplayed = false;
+
+            if (typingCoroutine != null)
+                StopCoroutine(typingCoroutine);
+            typingCoroutine = StartCoroutine(TypeText(entry.content));
+        }
+        else
+        {
+            if (dialoguePanel != null)
+                dialoguePanel.SetActive(false);
+
+            if (backgroundImage != null)
+                backgroundImage.gameObject.SetActive(false);
+
+            Transform npcTransform = FindNPCDialogueRoot(entry.speakerId);
+            if (npcTransform == null)
+            {
+                Debug.LogError($"未找到说话者: {entry.speakerId}");
+                EndDialogue();
+                return;
+            }
+
+            Transform frameTrans = npcTransform.Find("dialogueFrame");
+            if (frameTrans == null)
+            {
+                Debug.LogError($"在 {entry.speakerId} 下未找到 dialogueFrame 子物体");
+                EndDialogue();
+                return;
+            }
+
+            Transform nameTextTrans = frameTrans.Find("NameText");
+            Transform dialogueTextTrans = frameTrans.Find("DialogueText");
+            if (nameTextTrans == null || dialogueTextTrans == null)
+            {
+                Debug.LogError("dialogueFrame 下未找到 NameText 或 DialogueText");
+                EndDialogue();
+                return;
+            }
+
+            TMP_Text nameText = nameTextTrans.GetComponent<TMP_Text>();
+            TMP_Text dialogText = dialogueTextTrans.GetComponent<TMP_Text>();
+            if (nameText == null || dialogText == null)
+            {
+                Debug.LogError("NameText 或 DialogueText 上没有 TMP_Text 组件");
+                EndDialogue();
+                return;
+            }
+
+            frameTrans.gameObject.SetActive(true);
+            currentDialogueFrame = frameTrans.gameObject;
+            nameText.text = GetSpeakerName(entry.speakerId);
+            dialogText.text = "";
+            currentDialogueText = dialogText;
+
+            isTextFullyDisplayed = false;
+            if (typingCoroutine != null)
+                StopCoroutine(typingCoroutine);
+            typingCoroutine = StartCoroutine(TypeText(entry.content));
+        }
+    }
+
+    private Transform FindNPCDialogueRoot(string speakerId)
+    {
+        if (string.IsNullOrEmpty(speakerId)) return null;
+
+        if (speakerId == "Player")
+        {
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            return playerObj?.transform;
+        }
+
+        NPCIdentifier[] npcs = FindObjectsOfType<NPCIdentifier>();
+        foreach (var npc in npcs)
+        {
+            if (npc.speakerId == speakerId)
+                return npc.transform;
+        }
+        return null;
     }
 
     private IEnumerator TypeText(string fullText)
     {
+        if (currentDialogueText == null)
+        {
+            Debug.LogError("currentDialogueText 为空");
+            typingCoroutine = null;
+            isTextFullyDisplayed = true;
+            yield break;
+        }
+
+        currentDialogueText.text = "";
         foreach (char c in fullText)
         {
-            dialogueContentText.text += c;
+            currentDialogueText.text += c;
             yield return new WaitForSeconds(typingSpeed);
         }
         typingCoroutine = null;
@@ -380,7 +544,9 @@ public class QuestManager : MonoBehaviour
     private void EndDialogue()
     {
         isDialoguePlaying = false;
-        dialoguePanel.SetActive(false);
+
+        if (dialoguePanel != null)
+            dialoguePanel.SetActive(false);
 
         if (typingCoroutine != null)
         {
@@ -388,21 +554,32 @@ public class QuestManager : MonoBehaviour
             typingCoroutine = null;
         }
 
+        if (currentDialogueFrame != null)
+        {
+            currentDialogueFrame.SetActive(false);
+            currentDialogueFrame = null;
+        }
+
         if (backgroundImage != null)
             backgroundImage.gameObject.SetActive(false);
+
+        currentDialogueText = null;
 
         if (playerController != null)
             playerController.enabled = true;
 
         if (!string.IsNullOrEmpty(currentInteractiveQuestId))
         {
-            CompleteQuest(currentInteractiveQuestId);
-            currentInteractiveQuestId = null;
+            string completedId = currentInteractiveQuestId;
+            currentInteractiveQuestId = null; // 提前清空，防止递归重入
+            CompleteQuest(completedId);
         }
+
         isQuestActive = false;
         waitingForInteraction = false;
     }
 
+    // ========== 触发区域交互 ==========
     public void OnPlayerEnterQuestArea(string questId, Vector2? spawnCenter = null)
     {
         var progress = PlayerDataManager.Instance?.GetQuestProgress(questId);
@@ -440,6 +617,7 @@ public class QuestManager : MonoBehaviour
         }
     }
 
+    // ========== UI刷新 ==========
     private void RefreshQuestUI()
     {
         var availableQuests = PlayerDataManager.Instance?.GetAvailableQuests();
@@ -493,7 +671,7 @@ public class QuestManager : MonoBehaviour
         if (!enablePanelAnimation) return;
         if (questPanel == null || panelTaskNameText == null || panelStatusText == null)
         {
-            Debug.LogWarning("面板UI未设置");
+            Debug.LogWarning("任务UI未配置");
             return;
         }
 

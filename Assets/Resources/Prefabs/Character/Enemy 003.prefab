@@ -294,7 +294,7 @@ Animator:
   m_GameObject: {fileID: 1830327757739358123}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7b40746c11cc8e44e89c7f8dc3238553, type: 2}
+  m_Controller: {fileID: 9100000, guid: aeaeb2add25efb248aecf1d969b388f8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -346,7 +346,7 @@ SpriteRenderer:
   m_SortingLayerID: -1039283083
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 737690283, guid: 9611b24130473874b81345c653c2f535, type: 3}
+  m_Sprite: {fileID: -477517767, guid: 3b25a31b41cabc0469ae8e0a463c44b1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -699,8 +699,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 25}
-  m_SizeDelta: {x: 50, y: 10}
+  m_AnchoredPosition: {x: 0, y: 70}
+  m_SizeDelta: {x: 100, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3082885153660524806
 MonoBehaviour:

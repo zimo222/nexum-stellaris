@@ -116969,6 +116969,7 @@ GameObject:
   - component: {fileID: 1054977167}
   - component: {fileID: 1054977169}
   - component: {fileID: 1054977170}
+  - component: {fileID: 1054977171}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -117165,6 +117166,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stepInterval: 0.1
   firePoint: {fileID: 1054977162}
+--- !u!114 &1054977171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1054977158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d86e8a8173f0e874da638cf71a2d5fd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speakerId: Player
 --- !u!1 &1055181359
 GameObject:
   m_ObjectHideFlags: 0
@@ -140351,7 +140365,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 1, g: 0.92918277, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -147943,8 +147957,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 8
-  m_fontSizeBase: 8
+  m_fontSize: 6
+  m_fontSizeBase: 6
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -187754,6 +187768,7 @@ GameObject:
   - component: {fileID: 1772099914}
   - component: {fileID: 1772099916}
   - component: {fileID: 1772099915}
+  - component: {fileID: 1772099917}
   m_Layer: 3
   m_Name: DialogueFrame
   m_TagString: Untagged
@@ -187795,7 +187810,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.8627451}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -187820,6 +187835,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1772099913}
   m_CullTransparentMesh: 1
+--- !u!223 &1772099917
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1772099913}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 1493905729
+  m_SortingOrder: 999
+  m_TargetDisplay: 0
 --- !u!1 &1773588290
 GameObject:
   m_ObjectHideFlags: 0
