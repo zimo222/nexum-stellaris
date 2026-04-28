@@ -286,7 +286,7 @@ public class TaskDetailPanel : BPanel
             GameObject iconObj = Instantiate(rewardIconPrefab, rewardContainer);
 
             // 设置图标
-            Image iconImage = iconObj.GetComponent<Image>();
+            Image iconImage = iconObj.transform.Find("IconImage").GetComponent<Image>();
             if (iconImage != null)
                 iconImage.sprite = itemIcon;
 
