@@ -461,7 +461,7 @@ public class QuestManager : MonoBehaviour
                 return;
             }
 
-            Transform frameTrans = npcTransform.Find("dialogueFrame");
+            Transform frameTrans = npcTransform.Find("DialogueFrame");
             if (frameTrans == null)
             {
                 Debug.LogError($"在 {entry.speakerId} 下未找到 dialogueFrame 子物体");

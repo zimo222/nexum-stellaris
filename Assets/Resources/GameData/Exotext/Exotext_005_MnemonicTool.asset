@@ -25,4 +25,4 @@ MonoBehaviour:
   baseCritRate: 0
   baseCritDamage: 0
   baseElementBonus: 0
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: d07dba1127f52ad47a34b1a4f9baad32, type: 3}

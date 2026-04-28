@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class NexumIdemDetailView : MonoBehaviour
 {
     [Header("通用UI")]
+    public Image iconImage;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI typeOrPositionText;   // 武器类型或防具部位
     public TextMeshProUGUI starsText;
@@ -38,6 +40,7 @@ public class NexumIdemDetailView : MonoBehaviour
         currentMode = NexumIdemStarPanelController.NexumIdemMode.Exotext;
 
         // 填充武器数据
+        if (iconImage) iconImage.sprite = GameDataManager.Instance.ExotextDict[weapon.Id].icon;
         if (nameText) nameText.text = LocalizationManager.Instance.GetText("Exotext_Name", weapon.Id) ?? "";
         if (typeOrPositionText) typeOrPositionText.text = weapon.Type.ToString();
         if (starsText) starsText.text = $"★{weapon.Stats.Stars}";
@@ -59,6 +62,7 @@ public class NexumIdemDetailView : MonoBehaviour
         currentItemDefineId = vesture.Id;
         currentMode = NexumIdemStarPanelController.NexumIdemMode.NexusVesture;
 
+        if (iconImage) iconImage.sprite = GameDataManager.Instance.NexusVestureDict[vesture.Id].icon;
         if (nameText) nameText.text = LocalizationManager.Instance.GetText("NexusVesture_Name", vesture.Id) ?? "";
         if (typeOrPositionText) typeOrPositionText.text = vesture.Position.ToString();
         if (starsText) starsText.text = $"★{vesture.Stats.Stars}";
