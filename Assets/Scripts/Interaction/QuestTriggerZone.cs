@@ -27,6 +27,9 @@ public class QuestTriggerZone : MonoBehaviour
     private bool isHotReferencingDone = false;
     private Coroutine findButtonCoroutine;  // 新增：用于管理协程
 
+    // 在类的成员变量区域添加：
+    private bool isRegistered = false;
+
     // 新增：检测 Unity 对象是否真实有效（不被销毁）
     private bool IsReferenceValid(Object obj)
     {
@@ -74,6 +77,8 @@ public class QuestTriggerZone : MonoBehaviour
         {
             ConfigureButton();
         }
+
+        RegisterWithSceneGraph();
     }
 
     private IEnumerator DelayedHotReferenceWithRetry()
@@ -189,6 +194,8 @@ public class QuestTriggerZone : MonoBehaviour
 
         if (findButtonCoroutine != null)
             StopCoroutine(findButtonCoroutine);
+
+        UnregisterFromSceneGraph();
     }
 
     private GameObject[] GetAllRootGameObjects()
@@ -361,5 +368,27 @@ public class QuestTriggerZone : MonoBehaviour
 
         // 启动查找协程
         findButtonCoroutine = StartCoroutine(DelayedHotReferenceWithRetry());
+    }
+
+    // 在 Start() 方法末尾（或 OnEnable 中合适位置）调用注册
+    private void RegisterWithSceneGraph()
+    {
+        if (triggerType == TriggerType.Scene && SceneGraphManager.Instance != null)
+        {
+            string currentScene = SceneManager.GetActiveScene().name;
+            SceneGraphManager.Instance.RegisterPortal(currentScene, targetSceneName, transform.position, questId);
+            isRegistered = true;
+        }
+    }
+
+    // 在 OnDestroy() 中注销
+    private void UnregisterFromSceneGraph()
+    {
+        if (triggerType == TriggerType.Scene && SceneGraphManager.Instance != null && isRegistered)
+        {
+            string currentScene = SceneManager.GetActiveScene().name;
+            SceneGraphManager.Instance.UnregisterPortal(currentScene, transform.position);
+            isRegistered = false;
+        }
     }
 }

@@ -28,21 +28,33 @@ MonoBehaviour:
   - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
     content: 
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 9ce72431acffe1042bb19ebc569283b1, type: 3}
     speakerId: 
     content: "\u60D8\u4E4B\u517D\u6D88\u6563\u7684\u5730\u65B9\uFF0C\u53EA\u5269\u4E0B\u6DE1\u6DE1\u7684\u7070\u96FE\u3002\u6211\u7AD9\u5728\u539F\u5730\uFF0C\u770B\u7740\u90A3\u4E9B\u96FE\u6E10\u6E10\u53D8\u6DE1\u3002"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 9ce72431acffe1042bb19ebc569283b1, type: 3}
     speakerId: 
     content: "\u6700\u540E\u4E00\u7F15\u96FE\u6D88\u5931\u7684\u65F6\u5019\uFF0C\u6211\u542C\u89C1\u4E00\u4E2A\u58F0\u97F3\u2014\u2014\u5F88\u8F7B\uFF0C\u5F88\u75B2\u60EB\uFF1A\r\n"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 9ce72431acffe1042bb19ebc569283b1, type: 3}
     speakerId: 
     content: "\u201C\u7EC8\u4E8E\u2026\u2026\u53EF\u4EE5\u4F11\u606F\u4E86\u3002\u201D"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 6d8cb8bcf2801e143bd67ae5b5c08c89, type: 3}
     speakerId: 
     content: "\u96FE\u5F7B\u5E95\u6563\u4E86\u3002"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 6d8cb8bcf2801e143bd67ae5b5c08c89, type: 3}
     speakerId: 
     content: "\u98CE\u4ECE\u5927\u5385\u6DF1\u5904\u5439\u6765\uFF0C\u5E26\u7740\u6240\u6709\u8BB0\u5FC6\u7684\u6E29\u5EA6\u3002"
+    useCGMode: 1
   objectives: []
   waves: []
   Reward: []
+  isSceneTrans: 0
+  targetSceneName: 
+  targetX: 0
+  targetY: 0
+  autoStartNextQuest: 0
+  questSceneName: 5_TheHallOfUniversalConcord

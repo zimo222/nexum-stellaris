@@ -28,69 +28,97 @@ MonoBehaviour:
   - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
     content: "\u63A5\u4E0B\u6765\u7684\u65E5\u5B50\uFF0C\u6211\u548C\u5979\u4E00\u8D77\u5728\u539F\u91CE\u4E0A\u8D70\u3002"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 99bbcf07d67710e4a8131d293f67b484, type: 3}
     speakerId: 
     content: "\u5979\u8D70\u5F97\u5F88\u5FEB\uFF0C\u603B\u662F\u5728\u524D\u9762\u7B49\u6211\u3002\u6211\u8FFD\u4E0A\u53BB\u7684\u65F6\u5019\uFF0C\u5979\u5DF2\u7ECF\u5728\u4E0B\u4E00\u4E2A\u5C71\u5761\u4E0A\u8EBA\u7740\u4E86\u3002"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 5226301faaa4aa4498ff78e9bbe93ba6, type: 3}
     speakerId: Player
     content: "\u201C\u4F60\u8D70\u8FD9\u4E48\u5FEB\u5E72\u561B\uFF1F\u201D"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 5226301faaa4aa4498ff78e9bbe93ba6, type: 3}
     speakerId: "\u5C0F\u539F"
     content: "\u201C\u56E0\u4E3A\u524D\u9762\u53EF\u80FD\u6709\u6CA1\u53BB\u8FC7\u7684\u5730\u65B9\u554A\u3002\u201D"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 5226301faaa4aa4498ff78e9bbe93ba6, type: 3}
     speakerId: "\u5C0F\u539F"
     content: "\u201C\u4F60\u4E0D\u89C9\u5F97\u5417\uFF1F\u6BCF\u8D70\u4E00\u6B65\uFF0C\u4E16\u754C\u5C31\u5927\u4E00\u70B9\u3002\u201D"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 5226301faaa4aa4498ff78e9bbe93ba6, type: 3}
     speakerId: Player
     content: "\u201C\u90A3\u4F60\u4E3A\u4EC0\u4E48\u505C\u4E0B\u6765\u7B49\u6211\uFF1F\u201D"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 5226301faaa4aa4498ff78e9bbe93ba6, type: 3}
     speakerId: "\u5C0F\u539F"
     content: "\u201C\u56E0\u4E3A\u4E00\u4E2A\u4EBA\u770B\u6CA1\u610F\u601D\u3002\u201D"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 89943d3fe2c6f444f88c8da9fbdc5312, type: 3}
     speakerId: 
     content: "\u5979\u5E26\u6211\u53BB\u6CB3\u8FB9\u6293\u9C7C\u3002\u5979\u5149\u7740\u811A\u7AD9\u5728\u6C34\u91CC\uFF0C\u76EF\u7740\u6C34\u9762\u4E00\u52A8\u4E0D\u52A8\uFF0C\u7136\u540E\u624B\u7A81\u7136\u4F38\u4E0B\u53BB\u2014\u2014\u4E00\u6761\u9C7C\u5C31\u98DE\u51FA\u6765\u4E86\u3002\u6211\u4E00\u6761\u90FD\u6CA1\u6293\u5230\u3002\u5979\u7B11\u6211\uFF0C\u7136\u540E\u63E1\u4F4F\u6211\u7684\u624B\u6309\u5728\u6C34\u5E95\u7684\u77F3\u5934\u4E0A\uFF0C\u6559\u6211\u770B\u6C34\u7684\u7EB9\u8DEF\u3002\u4E00\u6761\u9C7C\u4ECE\u6211\u4EEC\u624B\u8FB9\u6E38\u8FC7\u3002"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
     content: "\uFF08\u508D\u665A\uFF09"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 1138ad61de86b8e4f9d9bffc7fc2c2ba, type: 3}
     speakerId: 
     content: 
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 1138ad61de86b8e4f9d9bffc7fc2c2ba, type: 3}
     speakerId: Player
     content: "\"\u672A\u6765\uFF0C\u4F60\u60F3\u505A\u4EC0\u4E48\u3002\""
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 1138ad61de86b8e4f9d9bffc7fc2c2ba, type: 3}
     speakerId: "\u5C0F\u539F"
     content: "\u201C\u4E0D\u77E5\u9053\u3002\u201D"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 1138ad61de86b8e4f9d9bffc7fc2c2ba, type: 3}
     speakerId: "\u5C0F\u539F"
     content: "\u201C\u53EF\u80FD\u4E00\u76F4\u8D70\u3002\u8D70\u5230\u8D70\u4E0D\u52A8\u4E3A\u6B62\u3002\u201D"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 1138ad61de86b8e4f9d9bffc7fc2c2ba, type: 3}
     speakerId: Player
     content: "\u201C\u4E00\u76F4\u8D70\uFF1F\u201D"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 1138ad61de86b8e4f9d9bffc7fc2c2ba, type: 3}
     speakerId: "\u5C0F\u539F"
     content: "\u201C\u55EF\u3002\u8D70\u5230\u8D70\u4E0D\u52A8\u4E3A\u6B62\u3002\u201D"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 1138ad61de86b8e4f9d9bffc7fc2c2ba, type: 3}
     speakerId: 
     content: "\u4ED6\u770B\u7740\u6211\u3002"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 1138ad61de86b8e4f9d9bffc7fc2c2ba, type: 3}
     speakerId: "\u5C0F\u539F"
     content: "\u201C\u4F60\u5462\uFF1F\u201D"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 1138ad61de86b8e4f9d9bffc7fc2c2ba, type: 3}
     speakerId: Player
     content: ......
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 1138ad61de86b8e4f9d9bffc7fc2c2ba, type: 3}
     speakerId: Player
     content: "\u201C\u6211\u53EF\u80FD\u4E5F\u5728\u627E\u4EC0\u4E48\u3002\u201D"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 1138ad61de86b8e4f9d9bffc7fc2c2ba, type: 3}
     speakerId: "\u5C0F\u539F"
     content: "\u201C\u627E\u4EC0\u4E48\uFF1F\u201D"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 1138ad61de86b8e4f9d9bffc7fc2c2ba, type: 3}
     speakerId: Player
     content: "\u201C\u4E0D\u77E5\u9053\u3002\u627E\u5230\u4E86\u624D\u77E5\u9053\u3002\u201D"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 1138ad61de86b8e4f9d9bffc7fc2c2ba, type: 3}
     speakerId: "\u5C0F\u539F"
     content: "\u201C\u90A3\u6211\u4EEC\u5DEE\u4E0D\u591A\u3002\u201D"
+    useCGMode: 1
   objectives: []
   waves: []
   Reward: []
+  isSceneTrans: 0
+  targetSceneName: 
+  targetX: 0
+  targetY: 0
+  autoStartNextQuest: 0
+  questSceneName: 3_TheVerdantMeadow

@@ -72,6 +72,9 @@ public class QuestDefineSO : ScriptableObject
     // 新增：是否自动开始下一个任务
     [Header("自动开始下一幕")]
     public YesNo autoStartNextQuest = YesNo.No;   // 默认 No
+
+    [Header("任务所在地图")]
+    public string questSceneName;       // 例如 "Scene1", "Scene2"
 }
 public enum YesNo
 {

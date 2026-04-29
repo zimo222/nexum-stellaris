@@ -28,60 +28,85 @@ MonoBehaviour:
   - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
     content: "\u5927\u5385\u7684\u6700\u6DF1\u5904\uFF0C\u6240\u6709\u7684\u58F0\u97F3\u90FD\u6C89\u4E86\u4E0B\u53BB\u3002\u4E0D\u662F\u6D88\u5931\uFF0C\u662F\u6C89\u4E0B\u53BB\uFF0C\u50CF\u6F6E\u6C34\u9000\u53BB\uFF0C\u9732\u51FA\u6D77\u5E95\u7684\u7901\u77F3\u3002"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 44ae438aa581b4941847d4ac353125be, type: 3}
     speakerId: ???
     content: "\u201C\u4F60\u77E5\u9053\u5417\uFF1F\u201D"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: eee17c0eea605c746a42619ae3a19933, type: 3}
     speakerId: "???\u6211???"
     content: "\u201C\u4F60\u4E94\u5C81\u90A3\u5E74\u95EE\u5988\u5988\u2018\u4F1A\u4E0D\u4F1A\u4E00\u76F4\u5728\u2019\uFF0C\u5979\u6CA1\u56DE\u7B54\u3002\u4F60\u77E5\u9053\u4E3A\u4EC0\u4E48\u5417\uFF1F\u201D"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: eee17c0eea605c746a42619ae3a19933, type: 3}
     speakerId: 
     content: 
+    useCGMode: 1
   - background: {fileID: 21300000, guid: fb63d26ce38ce2949a7f0586a1af1ccf, type: 3}
     speakerId: "???Kianna\xB7Argent???"
     content: "\u201C\u8FD8\u6709\u5979\u3002\u201D"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: fb63d26ce38ce2949a7f0586a1af1ccf, type: 3}
     speakerId: "???Kianna\xB7Argent???"
     content: "\u201C\u4F60\u5728\u7EAF\u767D\u56DE\u5ECA\u7B2C\u4E00\u6B21\u604D\u60DA\u7684\u65F6\u5019\uFF0C\u5C31\u53D1\u73B0\u4E86\u5427\uFF1F\u5979\u7684\u8138\u8D8A\u6765\u8D8A\u6A21\u7CCA\u3002\u4F60\u62FC\u547D\u753B\u5979\uFF0C\u753B\u4E86\u4E00\u5F20\u53C8\u4E00\u5F20\u3002\u201D"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: fb63d26ce38ce2949a7f0586a1af1ccf, type: 3}
     speakerId: 
     content: 
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 9f2e042c03c8fe546855f6609dd5ae8d, type: 3}
     speakerId: "???\u5C0F\u539F???"
     content: "\u201C\u8FD8\u6709\u5C0F\u539F\u3002\u201D"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 9f2e042c03c8fe546855f6609dd5ae8d, type: 3}
     speakerId: "???\u5C0F\u539F???"
     content: "\u201C\u4ED6\u8D70\u7684\u65F6\u5019\u53EA\u7559\u4E0B\u4E00\u884C\u5B57\u3002\u4F60\u751A\u81F3\u4E0D\u77E5\u9053\u4ED6\u53BB\u4E86\u54EA\u91CC\u3002\u201D"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 9f2e042c03c8fe546855f6609dd5ae8d, type: 3}
     speakerId: 
     content: 
+    useCGMode: 1
   - background: {fileID: 21300000, guid: cfaafcd61ba36774ba1da87c60455cd9, type: 3}
     speakerId: ???
     content: "\u201C\u8FD8\u6709\u90A3\u4E2A\u58C1\u753B\u3002\u201D"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: cfaafcd61ba36774ba1da87c60455cd9, type: 3}
     speakerId: ???
     content: "\u201C\u90A3\u4E2A\u88AB\u9501\u94FE\u6346\u7740\u7684\u5973\u5B69\u3002\u4F60\u770B\u89C1\u5979\u7684\u65F6\u5019\uFF0C\u5FC3\u91CC\u60F3\u7684\u662F\u2014\u2014\u201D"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: cfaafcd61ba36774ba1da87c60455cd9, type: 3}
     speakerId: ???
     content: ......
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 4137fe8e2372adc4086a991e3b7408fc, type: 3}
     speakerId: ???
     content: "\u201C\u4F60\u5BB3\u6015\u5B64\u72EC\u3002\u4F60\u5BB3\u6015\u88AB\u5FD8\u8BB0\u3002\u4F60\u5BB3\u6015\u2014\u2014\u4F60\u4ECE\u6765\u90FD\u4E0D\u662F\u8C01\u91CD\u8981\u7684\u4EBA\u3002\u201D"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 4137fe8e2372adc4086a991e3b7408fc, type: 3}
     speakerId: Player
     content: ......
+    useCGMode: 1
   - background: {fileID: 21300000, guid: e22d5023dcc288e4581f14790a40e83c, type: 3}
     speakerId: 
     content: 
+    useCGMode: 1
   - background: {fileID: 21300000, guid: e22d5023dcc288e4581f14790a40e83c, type: 3}
     speakerId: 
     content: "\u5B83\u5F00\u59CB\u626D\u66F2\u3002\u4E0D\u662F\u6D88\u5931\uFF0C\u662F\u626D\u66F2\u3001\u81A8\u80C0\u3001\u51DD\u7ED3\u2014\u2014\u6574\u4E2A\u5927\u5385\u5F00\u59CB\u9707\u52A8\u3002\u90A3\u4E2A\u58F0\u97F3\u518D\u6B21\u54CD\u8D77\uFF0C\u4E0D\u518D\u662F\u8BF4\u8BDD\uFF0C\u662F\u5636\u543C\u3002\u65E0\u6570\u9053\u9ED1\u5F71\u4ECE\u865A\u7A7A\u4E2D\u6D8C\u51FA\u2014\u2014"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: b985db31e250f1f4f87858ac11ebc15c, type: 3}
     speakerId: 
     content: 
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 17c94646d3a7f3049912a262ba62cb2d, type: 3}
     speakerId: 
     content: 
+    useCGMode: 1
   objectives: []
   waves: []
   Reward: []
+  isSceneTrans: 0
+  targetSceneName: 
+  targetX: 0
+  targetY: 0
+  autoStartNextQuest: 0
+  questSceneName: 5_TheHallOfUniversalConcord

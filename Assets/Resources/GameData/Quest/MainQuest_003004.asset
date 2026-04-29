@@ -28,42 +28,61 @@ MonoBehaviour:
   - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
     content: "\uFF08\u6E05\u65E9\uFF09"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 1d6b57a6d41af2c4db90695d28060945, type: 3}
     speakerId: 
     content: 
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 083336bd2ff7cba4fb5cfda37d048730, type: 3}
     speakerId: Player
     content: "\u201C\u5C0F\u539F\uFF1F\u201D"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 083336bd2ff7cba4fb5cfda37d048730, type: 3}
     speakerId: 
     content: "\u539F\u91CE\u4E0A\u7A7A\u65F7\uFF0C\u53EA\u6709\u98CE\u5439\u8FC7\u8349\u5730\u7684\u58F0\u97F3\u3002"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 083336bd2ff7cba4fb5cfda37d048730, type: 3}
     speakerId: 
     content: "\u6211\u4EE5\u4E3A\u4ED6\u53BB\u6293\u9C7C\u4E86\u3002\u6211\u8D70\u5230\u6CB3\u8FB9\uFF0C\u4E0D\u5728\u3002\u8D70\u5230\u5927\u6811\u4E0B\uFF0C\u4E0D\u5728\u3002\u8D70\u5230\u6211\u4EEC\u5E38\u53BB\u7684\u5C71\u5761\uFF0C\u4E0D\u5728\u3002"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 3d99a641400d328409603c8c7e0465dc, type: 3}
     speakerId: Player
     content: "\u201C\u5C0F\u539F\u2014\u2014\uFF01\u201D"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 3d99a641400d328409603c8c7e0465dc, type: 3}
     speakerId: 
     content: ......
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 44c5e249a2fafa2479fe652870082050, type: 3}
     speakerId: 
     content: 
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 60e0f568ead531a4ca7db4a8027348f2, type: 3}
     speakerId: 
     content: 
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 60e0f568ead531a4ca7db4a8027348f2, type: 3}
     speakerId: 
     content: "\u98CE\u5439\u8FC7\u6765\uFF0C\u5B57\u8FF9\u4E00\u70B9\u4E00\u70B9\u6A21\u7CCA\u3002"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: f148e178bdef8d744ad937661c2fd60d, type: 3}
     speakerId: 
     content: 
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
     content: 
+    useCGMode: 1
   - background: {fileID: 21300000, guid: f0e24ca22b8f42e4b95d3cbdd410f9af, type: 3}
     speakerId: 
     content: 
+    useCGMode: 1
   objectives: []
   waves: []
   Reward: []
+  isSceneTrans: 0
+  targetSceneName: 
+  targetX: 0
+  targetY: 0
+  autoStartNextQuest: 0
+  questSceneName: 3_TheVerdantMeadow

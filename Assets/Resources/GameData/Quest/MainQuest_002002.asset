@@ -28,30 +28,39 @@ MonoBehaviour:
   - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
     content: "\u95E8\u5728\u8EAB\u540E\u5173\u4E0A\u4E86\u3002"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: f10228b30fe65d6449897e7a7618c0b8, type: 3}
     speakerId: 
     content: "\u773C\u524D\u662F\u4E00\u6761\u8D70\u5ECA\u3002\u7EAF\u767D\u8272\u7684\uFF0C\u6CA1\u6709\u5C3D\u5934\uFF0C\u4E24\u4FA7\u662F\u65E0\u5C3D\u7684\u5ECA\u67F1\u548C\u65E0\u5C3D\u7684\u5149\u3002\u6211\u56DE\u5934\uFF0C\u6765\u65F6\u7684\u95E8\u5DF2\u7ECF\u6D88\u5931\u3002"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: f10228b30fe65d6449897e7a7618c0b8, type: 3}
     speakerId: 
     content: "\u8D70\u5ECA\u91CC\u5F88\u5B89\u9759\u3002\u5B89\u9759\u5F97\u80FD\u542C\u89C1\u81EA\u5DF1\u7684\u5FC3\u8DF3\u3002"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: f10228b30fe65d6449897e7a7618c0b8, type: 3}
     speakerId: 
     content: "\u5F80\u524D\u8D70\u3002\u811A\u4E0B\u7684\u77F3\u677F\u5F88\u5149\u6ED1\uFF0C\u6620\u51FA\u6A21\u7CCA\u7684\u5012\u5F71\u3002\u5ECA\u67F1\u4E0A\u523B\u7740\u4E1C\u897F\uFF0C\u6709\u7684\u50CF\u6587\u5B57\uFF0C\u6709\u7684\u50CF\u753B\uFF0C\u4F46\u90FD\u592A\u65E7\u4E86\uFF0C\u770B\u4E0D\u6E05\u3002"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: f10228b30fe65d6449897e7a7618c0b8, type: 3}
     speakerId: 
     content: "\u8D70\u4E86\u5F88\u4E45\u3002"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: f10228b30fe65d6449897e7a7618c0b8, type: 3}
     speakerId: 
     content: "\u8D70\u5ECA\u6CA1\u6709\u5C3D\u5934\u3002\u505C\u4E0B\u6765\uFF0C\u56DB\u5904\u5F20\u671B\u3002\u6BCF\u4E00\u6839\u5ECA\u67F1\u90FD\u4E00\u6837\uFF0C\u6BCF\u4E00\u5BF8\u5149\u90FD\u4E00\u6837\u3002"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: a9820b3ba2b63f543a2b2dfa9d58ad7f, type: 3}
     speakerId: "\uFF1F\uFF1F\uFF1F"
     content: "\u201C\u4F60\u8FF7\u8DEF\u4E86\u5417\uFF1F\u201D"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: a9820b3ba2b63f543a2b2dfa9d58ad7f, type: 3}
     speakerId: 
     content: "\u4E00\u4E2A\u94F6\u767D\u957F\u53D1\u7684\u5C11\u5973\u7AD9\u5728\u5ECA\u67F1\u65C1\u3002\u6E5B\u84DD\u7684\u773C\u77B3\uFF0C\u94F6\u767D\u8272\u7684\u5934\u53D1\u88AB\u4E0D\u77E5\u4ECE\u54EA\u6765\u7684\u98CE\u5439\u8D77\u3002\u5979\u770B\u7740\u6211\uFF0C\u773C\u775B\u91CC\u6709\u5149\u3002"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: a9820b3ba2b63f543a2b2dfa9d58ad7f, type: 3}
     speakerId: "Kianna\xB7Argent"
     content: "\u201C\u8FD9\u91CC\u662F\u7EAF\u767D\u56DE\u5ECA\u3002\u6211\u662F\u8FD9\u91CC\u7684\u89C2\u6D4B\u8005\u3002\u4F60\u53EF\u4EE5\u53EB\u6211\u2014\u2014\u7EAF\u767D\u3002\u201D"
+    useCGMode: 1
   objectives: []
   waves: []
   Reward: []
@@ -59,3 +68,5 @@ MonoBehaviour:
   targetSceneName: 
   targetX: 0
   targetY: 0
+  autoStartNextQuest: 0
+  questSceneName: 2_TheArgentCorridor

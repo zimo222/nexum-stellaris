@@ -28,45 +28,59 @@ MonoBehaviour:
   - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
     content: "\u6211\u4EEC\u4E00\u8D77\u5F80\u56DE\u8D70\u3002\u8D70\u8FC7\u7EAF\u767D\u56DE\u5ECA\uFF0C\u8D70\u8FC7\u6696\u5149\u4E4B\u5DE2\u7684\u95E8\u3002"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 04d5f635dd5c4424b950a58e61c66f40, type: 3}
     speakerId: 
     content: "\u7236\u6BCD\u8FD8\u5728\u9662\u5B50\u91CC\u3002\u770B\u89C1\u6211\u56DE\u6765\uFF0C\u6BCD\u4EB2\u8DD1\u8FC7\u6765\uFF0C\u7D27\u7D27\u62B1\u4F4F\u6211\u3002"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 04d5f635dd5c4424b950a58e61c66f40, type: 3}
     speakerId: "\u5988\u5988"
     content: "\u201C\u56DE\u6765\u4E86\u5C31\u597D\uFF0C\u56DE\u6765\u4E86\u5C31\u597D\u2026\u2026\u201D"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 04d5f635dd5c4424b950a58e61c66f40, type: 3}
     speakerId: 
     content: 
+    useCGMode: 1
   - background: {fileID: 21300000, guid: e683e7a3a4d750141a819dbb7b1a6e33, type: 3}
     speakerId: Player
     content: "\u201C\u4F60\u4E0D\u8FDB\u6765\u5417\uFF1F\u201D"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: e683e7a3a4d750141a819dbb7b1a6e33, type: 3}
     speakerId: "\u5C0F\u539F"
     content: "\u201C\u4E0D\u4E86\u3002\u6211\u5F97\u56DE\u53BB\u4E86\u3002\u201D"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: e683e7a3a4d750141a819dbb7b1a6e33, type: 3}
     speakerId: Player
     content: "\u201C\u8FD8\u4F1A\u518D\u89C1\u5417\uFF1F\u201D"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: e683e7a3a4d750141a819dbb7b1a6e33, type: 3}
     speakerId: "\u5C0F\u539F"
     content: "\u201C\u4E5F\u8BB8\u4E0D\u4F1A\u3002\u4F46\u6CA1\u5173\u7CFB\u3002\u201D"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: e683e7a3a4d750141a819dbb7b1a6e33, type: 3}
     speakerId: 
     content: "\u5979\u4F38\u51FA\u624B\uFF0C\u6211\u63E1\u4F4F\u3002"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: e683e7a3a4d750141a819dbb7b1a6e33, type: 3}
     speakerId: 
     content: "\u201C\u8BB0\u5F97\u6211\u4EEC\u7684\u7EA6\u5B9A\u3002\u201D"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 5386cfe1957636442ad332261c4ea459, type: 3}
     speakerId: 
     content: 
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 5386cfe1957636442ad332261c4ea459, type: 3}
     speakerId: 
     content: "\u5979\u8F6C\u8EAB\u8D70\u4E86\u3002\u6211\u7AD9\u5728\u9662\u5B50\u91CC\uFF0C\u770B\u7740\u4ED6\u4E00\u6B65\u4E00\u6B65\u8D70\u8FDC\u3002"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 5386cfe1957636442ad332261c4ea459, type: 3}
     speakerId: 
     content: "\u4F4E\u5934\u770B\u811A\u4E0B\uFF0C\u4E24\u884C\u8DB3\u8FF9\u8FD8\u5728\u2014\u2014\u4E00\u884C\u662F\u6211\u7684\uFF0C\u4E00\u884C\u662F\u4ED6\u7684\u3002\u5B83\u4EEC\u4ECE\u5F88\u8FDC\u7684\u5730\u65B9\u6765\uFF0C\u5728\u8FD9\u91CC\u4EA4\u6C47\uFF0C\u7136\u540E\u5206\u5F00\uFF0C\u8D70\u5411\u4E0D\u540C\u7684\u65B9\u5411\u3002"
+    useCGMode: 1
   - background: {fileID: 21300000, guid: 5386cfe1957636442ad332261c4ea459, type: 3}
     speakerId: 
     content: "\u4F46\u8FD9\u4E00\u6B21\u6211\u77E5\u9053\uFF1A\u5206\u5F00\u4E5F\u6CA1\u5173\u7CFB\u3002\u56E0\u4E3A\u4EA4\u6C47\u8FC7\u3002"
+    useCGMode: 1
   objectives: []
   waves: []
   Reward: []
@@ -74,3 +88,5 @@ MonoBehaviour:
   targetSceneName: 1_TheNestOfWarmLight
   targetX: 0
   targetY: 0
+  autoStartNextQuest: 0
+  questSceneName: 1_TheNestOfWarmLight

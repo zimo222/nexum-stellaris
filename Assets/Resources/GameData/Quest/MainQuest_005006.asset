@@ -297,3 +297,4 @@ MonoBehaviour:
   targetX: 0
   targetY: 0
   autoStartNextQuest: 1
+  questSceneName: 5_TheHallOfUniversalConcord
