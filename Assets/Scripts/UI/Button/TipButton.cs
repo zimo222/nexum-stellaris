@@ -123,6 +123,12 @@ public class TipButton : MonoBehaviour
         displayImage.gameObject.SetActive(false);
 
         if (triggerButton != null)
+            Invoke(nameof(EnableButton), 1.0f);
+    }
+
+    private void EnableButton()
+    {
+        if (triggerButton != null)
             triggerButton.interactable = true;
     }
 }

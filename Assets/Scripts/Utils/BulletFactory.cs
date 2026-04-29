@@ -27,6 +27,18 @@ public static class BulletFactory
             ApplyModifier(modifier, ref speed, ref damage, ref num, ref fieldAngle);
         }
 
+        // 应用后坐力：对玩家施加与子弹速度方向相反的作用力
+        if (owner != null && owner.CompareTag("Player"))
+        {
+            Rigidbody2D playerRb = owner.GetComponent<Rigidbody2D>();
+            if (playerRb != null && spellPackage.projectile.recoilForce != 0f)
+            {
+                Vector2 recoil = -direction.normalized * 0.1f * spellPackage.projectile.recoilForce;
+                playerRb.AddForce(recoil, ForceMode2D.Impulse);
+            }
+        }
+
+
         for (int i = 0; i < num; i++)
         {
             // 计算最终方向：若 fieldAngle > 0，则在 [ -fieldAngle/2 , fieldAngle/2 ] 范围内随机旋转

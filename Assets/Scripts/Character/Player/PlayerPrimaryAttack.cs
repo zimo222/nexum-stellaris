@@ -51,7 +51,16 @@ public class PlayerPrimaryAttackState : PlayerState
         }
         */
 
-        player.SetVelocity(xInput * player.moveSpeed, yInput * player.moveSpeed);
+        // 删除或注释掉原来强制设置速度的代码
+        // player.SetVelocity(xInput * player.moveSpeed, yInput * player.moveSpeed);
+
+        // 如果需要攻击时也可以移动，使用 AddForce 而不是直接赋值
+        if (xInput != 0 || yInput != 0)
+        {
+            Vector2 moveDir = new Vector2(xInput, yInput).normalized;
+            // 使用 ForceMode2D.Force 持续施加力，不会覆盖现有速度
+            rb.AddForce(moveDir * player.moveSpeed * 0.0001f, ForceMode2D.Force);
+        }
 
         // 动画播放完毕（triggerCalled 由 AnimationFinishTrigger 事件设置）后回到 Idle
         if (triggerCalled)

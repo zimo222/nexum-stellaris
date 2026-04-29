@@ -8,5 +8,7 @@ public class BulletDefineSO : ScriptableObject
     public double damage = 10;          // 子弹基础伤害（实际伤害会叠加角色攻击力）
     public GameObject prefab;        // 子弹预制体
     public float lifetime = 2f;      // 子弹自动销毁时间
-    // 可扩展：击中特效、音效等
+                                     // 可扩展：击中特效、音效等
+
+    public float recoilForce = 0.01f;
 }
