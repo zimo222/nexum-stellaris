@@ -52,7 +52,10 @@ MonoBehaviour:
   objectives: []
   waves: []
   Reward:
-  - Exotext_001_VotiveEmber
+  - Exotext_002_VotiveEmber
+  - Exotext_003_VotiveEmber
+  - Exotext_004_VotiveEmber
+  - Exotext_005_VotiveEmber
   isSceneTrans: 0
   targetSceneName: 
   targetX: 0

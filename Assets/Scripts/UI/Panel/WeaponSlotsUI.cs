@@ -5,6 +5,7 @@ public class WeaponSlotsUI : MonoBehaviour
 {
     [Header("Weapon Slots")]
     [SerializeField] private Image[] backImages; // 在 Inspector 中按顺序拖入 7 个 BackImage
+    [SerializeField] private Image[] iconImages; // 在 Inspector 中按顺序拖入 7 个 BackImage
 
     [Header("Colors")]
     [SerializeField] private Color normalColor = Color.white;
@@ -14,8 +15,15 @@ public class WeaponSlotsUI : MonoBehaviour
 
     private void Start()
     {
+        PlayerDataManager.Instance.OnPlayerDataChanged += RefreshWeaponIcon;
         // 初始默认选中第一个（或根据玩家当前武器）
         SelectSlot(0);
+        RefreshWeaponIcon(PlayerDataManager.Instance.CurrentPlayerData);
+    }
+
+    private void OnDestroy()
+    {
+        PlayerDataManager.Instance.OnPlayerDataChanged -= RefreshWeaponIcon;
     }
 
     /// <summary>
@@ -42,6 +50,23 @@ public class WeaponSlotsUI : MonoBehaviour
         // 设置新选中的高亮颜色
         backImages[index].color = selectedColor;
         currentIndex = index;
+    }
+
+    public void RefreshWeaponIcon(PlayerData playerData)
+    {
+        int i = 0;
+        foreach(Image iconImage in iconImages)
+        {
+            if (GameDataManager.Instance.ExotextDict.TryGetValue(playerData.EquippedExotextIds[i], out var value))
+            {
+                iconImage.sprite = value.icon;
+            }
+            else
+            {
+                iconImage.color = new Color(1, 1, 1, 0);
+            }
+            i++;
+        }
     }
 
     /// <summary>

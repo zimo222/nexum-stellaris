@@ -19,21 +19,22 @@ public static class BulletFactory
         int damage = (int)spellPackage.projectile.damage; // 基础伤害，后续可叠加角色攻击力
         int num = 1;
         int fieldAngle = 0;
+        float recoilForce = spellPackage.projectile.recoilForce;
 
         // 应用修饰类（修改子弹属性）
         foreach (var modifier in spellPackage.modifiers)
         {
             Debug.Log(damage);
-            ApplyModifier(modifier, ref speed, ref damage, ref num, ref fieldAngle);
+            ApplyModifier(modifier, ref speed, ref damage, ref num, ref fieldAngle, ref recoilForce);
         }
 
         // 应用后坐力：对玩家施加与子弹速度方向相反的作用力
         if (owner != null && owner.CompareTag("Player"))
         {
             Rigidbody2D playerRb = owner.GetComponent<Rigidbody2D>();
-            if (playerRb != null && spellPackage.projectile.recoilForce != 0f)
+            if (playerRb != null && recoilForce != 0f)
             {
-                Vector2 recoil = -direction.normalized * 0.1f * spellPackage.projectile.recoilForce;
+                Vector2 recoil = -direction.normalized * 0.1f * recoilForce;
                 playerRb.AddForce(recoil, ForceMode2D.Impulse);
             }
         }
@@ -70,13 +71,14 @@ public static class BulletFactory
         return null;
     }
 
-    private static void ApplyModifier(SpellModuleSO modifier, ref float speed, ref int damage, ref int num, ref int fieldAngle)
+    private static void ApplyModifier(SpellModuleSO modifier, ref float speed, ref int damage, ref int num, ref int fieldAngle, ref float recoilForce)
     {
         // 根据修饰类参数修改属性
         if (modifier.speedMultiplier != 0) speed *= modifier.speedMultiplier;
         if (modifier.damageMultiplier != 0) damage = (int)(damage * modifier.damageMultiplier);
         if (modifier.splitCount != 0) num *= modifier.splitCount;
         if (modifier.fieldAngle != 0) fieldAngle = modifier.fieldAngle;
+        if (recoilForce != 0) recoilForce *= modifier.recoilForce;
         // 这里可以添加更多修饰效果，例如改变子弹颜色、添加粒子等
         // 注意：修饰类不立即执行特殊行为（如分裂），分裂等行为属于修正类，在子弹飞行中执行
     }

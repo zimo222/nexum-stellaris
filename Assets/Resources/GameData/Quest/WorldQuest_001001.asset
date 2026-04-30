@@ -33,3 +33,9 @@ MonoBehaviour:
   Reward:
   - NexusVesture_005_AbyssalHeart
   - NexusVesture_004_AbyssalHeart
+  isSceneTrans: 0
+  targetSceneName: 
+  targetX: 0
+  targetY: 0
+  autoStartNextQuest: 0
+  questSceneName: 1_TheNestOfWarmLight

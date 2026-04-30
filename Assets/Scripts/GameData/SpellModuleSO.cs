@@ -42,6 +42,9 @@ public class SpellModuleSO : ScriptableObject
 
     public int fieldAngle = 0;
 
+    //ºó×øÁ¦±¶ÂÊ
+    public float recoilForce = 0f;
+
     public string introduction;
 
     public Sprite icon;

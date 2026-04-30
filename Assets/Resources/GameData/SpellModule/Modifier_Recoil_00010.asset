@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e4a0bcac50fd954092a1c8d99bd6843, type: 3}
-  m_Name: Modifier_Accelerate_1.75X
+  m_Name: Modifier_Recoil_00010
   m_EditorClassIdentifier: 
-  id: Modifier_Accelerate_1.75X
-  moduleName: "\u8F7B\xB7\u5149"
+  id: Modifier_Recoil_00010
+  moduleName: "\u51B2\xB7\u8F7B\u7FBD"
   moduleType: 1
   delay: 0
   bulletDefine: {fileID: 0}
-  speedMultiplier: 1.75
-  damageMultiplier: 0.7
+  speedMultiplier: 1
+  damageMultiplier: 1
   homingStrength: 0
   rotateSpeed: 0
   splitCount: 0
@@ -29,5 +29,6 @@ MonoBehaviour:
   orbitRadius: 0
   orbitSpeed: 0
   fieldAngle: 0
-  introduction: "\u5B50\u5F39\u521D\u59CB\u901F\u5EA6*1.75\uFF0C\u4F24\u5BB3*0.7"
-  icon: {fileID: 21300000, guid: f0f8088bccd8894439600843be634c78, type: 3}
+  recoilForce: 0.1
+  introduction: "\u5B50\u5F39\u540E\u5750\u529B*0.1"
+  icon: {fileID: 21300000, guid: 207f6f21947e33c41a0d8f0a15815126, type: 3}
