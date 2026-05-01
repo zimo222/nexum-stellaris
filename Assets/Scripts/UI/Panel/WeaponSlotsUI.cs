@@ -57,9 +57,10 @@ public class WeaponSlotsUI : MonoBehaviour
         int i = 0;
         foreach(Image iconImage in iconImages)
         {
-            if (GameDataManager.Instance.ExotextDict.TryGetValue(playerData.EquippedExotextIds[i], out var value))
+            if (!string.IsNullOrEmpty(playerData.EquippedExotextIds[i]) && GameDataManager.Instance.ExotextDict.TryGetValue(playerData.EquippedExotextIds[i], out var value))
             {
                 iconImage.sprite = value.icon;
+                iconImage.color = new Color(1, 1, 1, 1);
             }
             else
             {
