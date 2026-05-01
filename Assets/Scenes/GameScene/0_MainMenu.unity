@@ -2742,6 +2742,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4506694bf400346438a399ab2b1f75ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiNamesToRefresh:
+  - AICanvas
+  - QuestManager
+  - CombatManager
 --- !u!4 &722205451
 Transform:
   m_ObjectHideFlags: 0

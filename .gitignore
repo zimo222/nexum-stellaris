@@ -12,6 +12,8 @@
 /[Uu]ser[Ss]ettings/
 *.log
 /Assets/Resources/Fonts/
+/Assets/StreamingAssets/
+/Assets/Resources/deepseek_key.txt
 
 # By default unity supports Blender asset imports, *.blend1 blender files do not need to be commited to version control.
 *.blend1

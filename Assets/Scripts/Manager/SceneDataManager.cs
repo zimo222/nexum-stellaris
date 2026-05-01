@@ -182,6 +182,7 @@ public class SceneDataManager : Singleton<SceneDataManager>
             {
                 HotReferenceManager.Instance.RefreshAllQuestTriggerZones();
                 HotReferenceManager.Instance.RefreshPlayerWeaponSlotsUI();   // 新增这行
+                HotReferenceManager.Instance.RefreshAllUIs();
             }
             else
             {
