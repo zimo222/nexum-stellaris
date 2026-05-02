@@ -1,12 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class QuestManager : MonoBehaviour
 {
     public static QuestManager Instance { get; private set; }
+
+    [Header("知识库")]
+    public VectorKnowledgeBase knowledgeBase;
 
     [Header("常驻UI")]
     public TMP_Text guestText;
@@ -266,6 +270,12 @@ public class QuestManager : MonoBehaviour
                     if (ItemObtainDisplayUI.Instance != null)
                         ItemObtainDisplayUI.Instance.ShowItemRewards(rewardIds);
                 }
+
+                if (questId[0] == 'M')
+                {
+                    ParseMainString(questId.AsSpan(), out int a, out int b);
+                    knowledgeBase.SetProgress(a, b);
+                }
             }
 
             RefreshQuestUI();
@@ -294,6 +304,21 @@ public class QuestManager : MonoBehaviour
                 AutoStartNextQuest(finishedQuestData);
             }
         }
+    }
+
+    public static void ParseMainString(ReadOnlySpan<char> input, out int first, out int second)
+    {
+        // 格式："MainQuest_012034"
+        // 索引: 0-9 "Main_", 10-12 第一个数字, 13-15 第二个数字
+        if (input.Length != 16 || !input.StartsWith("MainQuest_"))
+            throw new FormatException("输入格式不正确");
+
+        // 直接切片，无内存分配
+        var firstSpan = input.Slice(10, 3);
+        var secondSpan = input.Slice(13, 3);
+
+        first = int.Parse(firstSpan);
+        second = int.Parse(secondSpan);
     }
 
     private void AutoStartNextQuest(QuestDefineSO finishedQuestData)
