@@ -14,6 +14,7 @@ public class MainMenuPanel : BasePanel
         Debug.Log("开始游戏");
         // 可以加载游戏场景等
         SceneDataManager.Instance.LoadScene("1_TheNestOfWarmLight");
+        TutorialManager.Instance.StartTutorial("001", 3.0f);
     }
 
     public void OnClick(string name)
