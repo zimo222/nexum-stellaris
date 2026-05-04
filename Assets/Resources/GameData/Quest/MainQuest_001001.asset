@@ -56,7 +56,7 @@ MonoBehaviour:
   - Exotext_003_VotiveEmber
   - Exotext_004_VotiveEmber
   - Exotext_005_VotiveEmber
-  exp: 100
+  exp: 500
   isSceneTrans: 0
   targetSceneName: 
   targetX: 0

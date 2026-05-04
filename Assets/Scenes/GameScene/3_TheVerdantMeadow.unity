@@ -527803,8 +527803,8 @@ MonoBehaviour:
   triggerType: 1
   questId: MainQuest_003001
   targetSceneName: 1_TheNestOfWarmLight
-  xposition: 500
-  yposition: 500
+  xposition: 510
+  yposition: 425
   trackingIndicator: {fileID: 1782952528}
   interactButton: {fileID: 0}
   buttonName: InterationButton

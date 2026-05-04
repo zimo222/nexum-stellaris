@@ -96,6 +96,7 @@ MonoBehaviour:
   objectives: []
   waves: []
   Reward: []
+  exp: 9000
   isSceneTrans: 0
   targetSceneName: 
   targetX: 0

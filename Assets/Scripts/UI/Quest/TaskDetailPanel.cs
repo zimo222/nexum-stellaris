@@ -2,8 +2,8 @@
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 /// <summary>
 /// 任务详情面板
@@ -257,6 +257,16 @@ public class TaskDetailPanel : BPanel
         {
             Debug.LogWarning("奖励容器或奖励预制体未指定！");
             return;
+        }
+
+        if(questData.exp != 0)
+        {
+            GameObject iconObj = Instantiate(rewardIconPrefab, rewardContainer);
+            // 设置图标
+            Image iconImage = iconObj.transform.Find("IconImage").GetComponent<Image>();
+            iconImage.sprite = Resources.Load<Sprite>("Icon/exp");
+            TMP_Text amountText = iconObj.GetComponentInChildren<TMP_Text>();
+            amountText.text = questData.exp.ToString();
         }
 
         foreach (string rewardStr in questData.Reward)

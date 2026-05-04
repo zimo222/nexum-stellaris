@@ -14,10 +14,10 @@ using UnityEditor;
 public class VectorKnowledgeBase : MonoBehaviour
 {
     [Header("配置")]
-    public string knowledgeFolder = "Knowledge";              // StreamingAssets 下的知识库文件夹
-    public string cacheFileName = "knowledge_vectors.json";  // 向量缓存文件
-    public int topK = 3;                                     // 检索时返回的最相关条目数
-    public float similarityThreshold = 0.5f;                 // 相似度阈值
+    public string knowledgeFolder = "Knowledge";
+    public string cacheFileName = "knowledge_vectors.json";
+    public int topK = 3;
+    public float similarityThreshold = 0.5f;
 
     private List<KnowledgeEntry> entries = new List<KnowledgeEntry>();
     private List<float[]> entryVectors = new List<float[]>();
@@ -26,7 +26,6 @@ public class VectorKnowledgeBase : MonoBehaviour
     private int currentChapter = 0;
     private int currentAct = 0;
 
-    // 文件名匹配正则：Chapter三位数字_三位数字.txt
     private static readonly Regex FileNameRegex = new Regex(@"^Chapter(\d{3})_(\d{3})\.txt$", RegexOptions.Compiled);
 
     [System.Serializable]
@@ -51,23 +50,15 @@ public class VectorKnowledgeBase : MonoBehaviour
 
     IEnumerator Start()
     {
-        // 默认加载第0章第0幕（若没有对应文件，则加载所有章节号<=0的文件，通常只有序章）
         yield return StartCoroutine(SetProgressCoroutine(0, 0));
     }
 
-    // ------------------- 公开接口 -------------------
-    /// <summary>
-    /// 根据剧情进度加载知识库：章节 <= chapter，且当章节 == chapter 时幕数 <= act
-    /// </summary>
     public void SetProgress(int chapter, int act)
     {
         if (chapter == currentChapter && act == currentAct) return;
         StartCoroutine(SetProgressCoroutine(chapter, act));
     }
 
-    /// <summary>
-    /// 检索最相关的知识条目
-    /// </summary>
     public IEnumerator SearchRoutine(string query, Action<List<(KnowledgeEntry entry, float score)>> callback, int? customTopK = null)
     {
         if (entries.Count == 0 || entryVectors.Count == 0)
@@ -99,7 +90,6 @@ public class VectorKnowledgeBase : MonoBehaviour
         callback?.Invoke(results);
     }
 
-    // ------------------- 内部实现 -------------------
     private void LoadApiKey()
     {
         TextAsset keyAsset = Resources.Load<TextAsset>("bailian_key");
@@ -133,29 +123,15 @@ public class VectorKnowledgeBase : MonoBehaviour
             yield break;
         }
 
-        // 获取所有符合命名规则的文件
         var allFiles = Directory.GetFiles(folder, "*.txt")
             .Select(f => new { Path = f, Name = Path.GetFileName(f) })
             .Where(f => FileNameRegex.IsMatch(f.Name))
-            .Select(f => new
-            {
-                FilePath = f.Path,
-                Match = FileNameRegex.Match(f.Name)
-            })
-            .Select(m => new
-            {
-                m.FilePath,
-                Chapter = int.Parse(m.Match.Groups[1].Value),
-                Act = int.Parse(m.Match.Groups[2].Value)
-            })
+            .Select(f => new { FilePath = f.Path, Match = FileNameRegex.Match(f.Name) })
+            .Select(m => new { m.FilePath, Chapter = int.Parse(m.Match.Groups[1].Value), Act = int.Parse(m.Match.Groups[2].Value) })
             .OrderBy(f => f.Chapter).ThenBy(f => f.Act)
             .ToList();
 
-        // 筛选：章节 < currentChapter 的全部加载，章节 == currentChapter 且幕 <= currentAct 的加载
-        var filesToLoad = allFiles.Where(f =>
-            f.Chapter < currentChapter ||
-            (f.Chapter == currentChapter && f.Act <= currentAct)
-        ).ToList();
+        var filesToLoad = allFiles.Where(f => f.Chapter < currentChapter || (f.Chapter == currentChapter && f.Act <= currentAct)).ToList();
 
         if (filesToLoad.Count == 0)
         {
@@ -175,10 +151,8 @@ public class VectorKnowledgeBase : MonoBehaviour
             yield break;
         }
 
-        // 生成向量（自动缓存）
         yield return StartCoroutine(GenerateAllVectors());
         SaveCache();
-
         Debug.Log($"知识库已更新：共 {entries.Count} 条知识（章节≤{currentChapter}，章节={currentChapter}时幕≤{currentAct}）");
     }
 
@@ -232,7 +206,6 @@ public class VectorKnowledgeBase : MonoBehaviour
     {
         if (string.IsNullOrEmpty(apiKey))
         {
-            Debug.LogError("API Key 为空，无法调用 Embedding");
             callback?.Invoke(null);
             yield break;
         }
@@ -240,11 +213,7 @@ public class VectorKnowledgeBase : MonoBehaviour
         string url = "https://dashscope.aliyuncs.com/compatible-mode/v1/embeddings";
         using (UnityWebRequest request = new UnityWebRequest(url, "POST"))
         {
-            var payload = new
-            {
-                model = "text-embedding-v4",
-                input = text
-            };
+            var payload = new { model = "text-embedding-v4", input = text };
             string jsonBody = JsonConvert.SerializeObject(payload);
             byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonBody);
 
@@ -252,8 +221,6 @@ public class VectorKnowledgeBase : MonoBehaviour
             request.downloadHandler = new DownloadHandlerBuffer();
             request.SetRequestHeader("Content-Type", "application/json");
             request.SetRequestHeader("Authorization", $"Bearer {apiKey}");
-
-            // 开发阶段绕过 SSL
             request.certificateHandler = new BypassCertificate();
 
             yield return request.SendWebRequest();
