@@ -13,8 +13,15 @@ public class MainMenuPanel : BasePanel
         // 开始游戏按钮的逻辑
         Debug.Log("开始游戏");
         // 可以加载游戏场景等
-        SceneDataManager.Instance.LoadScene("1_TheNestOfWarmLight");
-        TutorialManager.Instance.StartTutorial("001", 3.0f);
+        if(PlayerDataManager.Instance.CurrentPlayerData.Level == 1)
+        {
+            SceneDataManager.Instance.LoadScene("A");
+            TutorialManager.Instance.StartTutorial("001", 5.0f);
+        }
+        else
+        {
+            SceneDataManager.Instance.LoadScene("1_TheNestOfWarmLight", -86, 105);
+        }
     }
 
     public void OnClick(string name)

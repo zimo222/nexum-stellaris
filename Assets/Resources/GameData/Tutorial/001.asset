@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 001
   m_EditorClassIdentifier: 
   sequenceName: 001
+  startDelay: 5
   steps:
   - tipImage: {fileID: 21300000, guid: 765fd14d9687627469d7796f12040f5f, type: 3}
     highlightTargetName: 

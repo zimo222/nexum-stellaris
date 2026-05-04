@@ -15,6 +15,7 @@ public class GameDataManager : MonoBehaviour
 
     void Awake()
     {
+        DeadlockDetector.Log($"[{GetType().Name}] Awake on {gameObject.name}");
         // 实现简单的单例
         if (Instance == null)
         {

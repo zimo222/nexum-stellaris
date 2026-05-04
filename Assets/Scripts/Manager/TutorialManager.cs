@@ -17,7 +17,7 @@ public class TutorialManager : MonoBehaviour
     private bool isTutorialRunning = false;
     private string activeSequenceName = "";
     private Coroutine currentStepCoroutine;
-    private Coroutine delayedStartCoroutine;  // 延迟启动协程引用
+    private Coroutine delayedStartCoroutine;
 
     // 高亮缓存
     private GameObject currentHighlight;
@@ -28,9 +28,9 @@ public class TutorialManager : MonoBehaviour
     private Button cachedButton;
     private bool conditionMetForCurrentStep = false;
 
-
     private void Awake()
     {
+        DeadlockDetector.Log($"[{GetType().Name}] Awake on {gameObject.name}");
         if (Instance == null)
         {
             Instance = this;
@@ -41,7 +41,6 @@ public class TutorialManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
     }
 
     void Start()
@@ -61,14 +60,8 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    // --- 公开的启动接口（支持延迟参数）---
     public void StartTutorial(string tutorialName) => StartTutorial(tutorialName, -1f);
 
-    /// <summary>
-    /// 启动教程
-    /// </summary>
-    /// <param name="tutorialName">教程名称</param>
-    /// <param name="delay">自定义延迟（秒），传入 -1 则使用教程定义中的 startDelay</param>
     public void StartTutorial(string tutorialName, float delay)
     {
         if (delayedStartCoroutine != null)
@@ -78,7 +71,6 @@ public class TutorialManager : MonoBehaviour
 
     private IEnumerator DelayedStart(string tutorialName, float delay)
     {
-        // 获取教程资源（用于读取定义中的 startDelay）
         if (GameDataManager.Instance == null)
         {
             Debug.LogError("GameDataManager 未找到");
@@ -90,12 +82,10 @@ public class TutorialManager : MonoBehaviour
             yield break;
         }
 
-        // 确定实际延迟时间
         float actualDelay = delay >= 0 ? delay : target.startDelay;
         if (actualDelay > 0)
             yield return new WaitForSecondsRealtime(actualDelay);
 
-        // 延迟结束，真正开始教程
         ActuallyStartTutorial(target);
         delayedStartCoroutine = null;
     }
@@ -166,15 +156,29 @@ public class TutorialManager : MonoBehaviour
     {
         float stepStartTime = Time.unscaledTime;
 
-        // 显示提示图片
+        // ------------------- 图片淡入（新增 1 秒淡入） -------------------
         if (tipImageUI != null)
         {
             tipImageUI.sprite = step.tipImage;
             tipImageUI.gameObject.SetActive(true);
+
+            // 确保有 CanvasGroup 组件，初始透明度为 0
             CanvasGroup cg = tipImageUI.GetComponent<CanvasGroup>();
             if (cg == null) cg = tipImageUI.gameObject.AddComponent<CanvasGroup>();
+            cg.alpha = 0f;
+
+            // 淡入动画，持续 1 秒
+            float fadeInDuration = 1f;
+            float fadeTimer = 0f;
+            while (fadeTimer < fadeInDuration)
+            {
+                fadeTimer += Time.unscaledDeltaTime;
+                cg.alpha = Mathf.Lerp(0f, 1f, fadeTimer / fadeInDuration);
+                yield return null;
+            }
             cg.alpha = 1f;
         }
+        // ----------------------------------------------------------------
 
         // 高亮
         if (!string.IsNullOrEmpty(step.highlightTargetName))
@@ -285,7 +289,6 @@ public class TutorialManager : MonoBehaviour
         return null;
     }
 
-    // ---------- 高亮 ----------
     private void ApplyHighlight(GameObject target)
     {
         currentHighlight = target;

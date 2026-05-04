@@ -17,6 +17,7 @@ public class UIManager : Singleton<UIManager>
 
     protected override void Awake()
     {
+        DeadlockDetector.Log($"[{GetType().Name}] Awake on {gameObject.name}");
         // µ¥Àý
         if (Instance == null)
         {

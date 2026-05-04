@@ -31,27 +31,61 @@ public class CombatManager : MonoBehaviour
     private List<GameObject> activeEnemies = new List<GameObject>(); // 当前存活的敌人列表
     private Vector2 combatSpawnCenter;
 
+    private bool isAwakeCalled = false;
+
     void Awake()
     {
-        if (Instance == null)
+        DeadlockDetector.Log("[CombatManager] Awake start");
+
+        if (isAwakeCalled)
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+            Debug.LogError("CombatManager.Awake 重复调用！");
+            return;
         }
-        else
+        isAwakeCalled = true;
+
+        DeadlockDetector.Log("[CombatManager] isAwakeCalled set");
+
+        // 非单例分支
+        if (GetComponent<NonSingletonMark>())
         {
-            Destroy(gameObject);
+            DeadlockDetector.Log("[CombatManager] Non-singleton detected");
+            InitSliderRefs();
+            DeadlockDetector.Log("[CombatManager] Non-singleton init done, exit");
+            return;
         }
 
-        // 如果没有手动赋值，则尝试从子物体获取 Slider
+        DeadlockDetector.Log("[CombatManager] Checking singleton instance");
+
+        if (Instance != null && Instance != this)
+        {
+            DeadlockDetector.Log("[CombatManager] Duplicate instance, destroying self");
+            Destroy(gameObject);
+            return;
+        }
+
+        DeadlockDetector.Log("[CombatManager] Setting singleton");
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+        DeadlockDetector.Log("[CombatManager] Singleton set, calling InitSliderRefs");
+        InitSliderRefs();
+        DeadlockDetector.Log("[CombatManager] Awake finished successfully");
+    }
+
+    void InitSliderRefs()
+    {
+        DeadlockDetector.Log("[CombatManager] InitSliderRefs start");
         if (healthSliderA == null)
         {
+            DeadlockDetector.Log("[CombatManager] healthSliderA is null, searching in children");
             healthSliderA = GetComponentInChildren<Slider>();
             if (healthSliderA == null)
             {
                 Debug.LogWarning("CombatManager: 未找到子物体 Slider，血条将无法显示。");
+                DeadlockDetector.Log("[CombatManager] healthSliderA not found");
             }
         }
+        DeadlockDetector.Log("[CombatManager] InitSliderRefs end");
     }
 
     /// <summary>
@@ -60,6 +94,7 @@ public class CombatManager : MonoBehaviour
     public void RegisterPlayer(GameObject playerObj)
     {
         Player = playerObj;
+        if (GetComponent<NonSingletonMark>()) return;
         UpdateHealthSlider(); // 注册玩家时同步血量显示
         UpdateEnergySlider(); // 注册玩家时同步血量显示
     }

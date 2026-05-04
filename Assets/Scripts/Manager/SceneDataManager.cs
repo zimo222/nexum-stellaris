@@ -17,6 +17,7 @@ public class SceneDataManager : Singleton<SceneDataManager>
 
     protected override void Awake()
     {
+        DeadlockDetector.Log($"[{GetType().Name}] Awake on {gameObject.name}");
         if (transform.parent != null)
         {
             transform.SetParent(null);
@@ -51,6 +52,7 @@ public class SceneDataManager : Singleton<SceneDataManager>
 
     private IEnumerator LoadSceneAsync(string targetScene, int xposition, int yposition)
     {
+
         string logPath = Application.persistentDataPath + "/load_log.txt";
         StringBuilder sb = new StringBuilder();
         sb.AppendLine($"=== Load Started at {System.DateTime.Now} ===");
@@ -134,11 +136,15 @@ public class SceneDataManager : Singleton<SceneDataManager>
 
         // 【关键修改】UI 进度完全基于时间，持续至少 minimumLoadTime 秒
         float targetEndTime = startTime + minimumLoadTime;
+        string llogPath = Application.persistentDataPath + "/deadlock_log.txt";
         while (Time.realtimeSinceStartup < targetEndTime)
         {
+
             float elapsed = Time.realtimeSinceStartup - startTime;
             float progress = Mathf.Clamp01(elapsed / minimumLoadTime);
+            System.IO.File.AppendAllText(logPath, $"Frame {Time.frameCount}: progress={progress}\n");
             loadingPanel.SetProgress(progress);
+            if (Mathf.Approximately(progress, 0.33f)) Debug.Break();
 
             // 根据进度更换提示文本
             string tipKey = progress < 0.3f ? "0" :
@@ -209,7 +215,8 @@ public class SceneDataManager : Singleton<SceneDataManager>
 
         loadingPanel.gameObject.SetActive(false);
         isLoading = false;
-        QuestManager.Instance.FindPlayer();
+
+        if (QuestManager.Instance != null) QuestManager.Instance.FindPlayer();
     }
 
     // 保留原有占位方法
@@ -218,8 +225,7 @@ public class SceneDataManager : Singleton<SceneDataManager>
     private void RestoreGameStateForScene(int xposition, int yposition)
     {
         GameObject player = null;
-        while(player == null)
-            player = GameObject.Find("Player");
+        while(player == null) player = GameObject.Find("Player");
         if (player != null)
         {
             Vector3 position = player.transform.position;

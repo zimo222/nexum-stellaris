@@ -10,6 +10,7 @@ public class HotReferenceManager : Singleton<HotReferenceManager>
 
     protected override void Awake()
     {
+        DeadlockDetector.Log($"[{GetType().Name}] Awake on {gameObject.name}");
         base.Awake();
         if (gameObject.scene.name != "DontDestroyOnLoad")
         {
@@ -241,6 +242,7 @@ public class HotReferenceManager : Singleton<HotReferenceManager>
 
     private void RefreshQuestManagerCanvas(GameObject questManagerObj)
     {
+        if (questManagerObj.GetComponent<NonSingletonMark>()) return;
         Canvas canvas = questManagerObj.GetComponent<Canvas>();
         if (canvas == null)
         {

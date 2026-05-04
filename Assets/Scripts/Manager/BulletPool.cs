@@ -16,6 +16,7 @@ public class BulletPool : MonoBehaviour
 
     private void Awake()
     {
+        DeadlockDetector.Log($"[{GetType().Name}] Awake on {gameObject.name}");
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);

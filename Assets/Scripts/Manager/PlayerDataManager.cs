@@ -41,6 +41,7 @@ public class PlayerDataManager : MonoBehaviour
     #region UnityÉúÃüÖÜÆÚ
     private void Awake()
     {
+        DeadlockDetector.Log($"[{GetType().Name}] Awake on {gameObject.name}");
         if (Instance == null)
         {
             Instance = this;

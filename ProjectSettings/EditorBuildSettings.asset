@@ -26,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameScene/6_TheStellarWish.unity
     guid: 0d164e978bcbf3d44bee84a8b0cbf260
+  - enabled: 1
+    path: Assets/Scenes/GameScene/A.unity
+    guid: 72e7e27dffbf1aa4a92911fc6072fb66
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 9a12e7df25f076b44827fe1b26bdd51d, type: 2}
     com.unity.localization.settings: {fileID: 11400000, guid: 783f1df97d1f8f447812ab9aa802d6f0, type: 2}

@@ -256,7 +256,7 @@ public class QuestTriggerZone : MonoBehaviour
 
         if (triggerType == TriggerType.Scene && playerInZone && Input.GetKeyDown(KeyCode.F))
         {
-            if (PlayerDataManager.Instance.HasCompletedQuest(questId))
+            if(string.IsNullOrEmpty(questId) || PlayerDataManager.Instance.HasCompletedQuest(questId))
             {
                 LoadTargetScene();
             }

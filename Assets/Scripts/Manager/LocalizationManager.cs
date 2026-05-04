@@ -26,6 +26,7 @@ public class LocalizationManager : MonoBehaviour
 
     private void Awake()
     {
+        DeadlockDetector.Log($"[{GetType().Name}] Awake on {gameObject.name}");
         if (_instance != null && _instance != this)
         {
             Destroy(gameObject);

@@ -23,6 +23,7 @@ public class ResolutionManager : MonoBehaviour
 
     private void Awake()
     {
+        DeadlockDetector.Log($"[{GetType().Name}] Awake on {gameObject.name}");
         // µ¥Àý³õÊ¼»¯
         if (Instance == null)
         {
