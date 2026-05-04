@@ -61,6 +61,7 @@ public class QuestDefineSO : ScriptableObject
 
     [Header("任务奖励")]
     public List<string> Reward;
+    public int exp;
 
 
     public YesNo isSceneTrans = YesNo.No;
@@ -75,6 +76,7 @@ public class QuestDefineSO : ScriptableObject
 
     [Header("任务所在地图")]
     public string questSceneName;       // 例如 "Scene1", "Scene2"
+
 }
 public enum YesNo
 {

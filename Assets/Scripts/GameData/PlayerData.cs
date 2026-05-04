@@ -541,3 +541,10 @@ public enum QuestObjectiveType
     BossFight,      // 击败BOSS
     Any             // 无条件（自动完成）
 }
+public static class ExperienceCurve
+{
+    public static int RequiredExp(int level)
+    {
+        return 50 * level * level + 150 * level + 200;
+    }
+}

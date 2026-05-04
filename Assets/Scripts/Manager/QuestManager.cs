@@ -245,7 +245,7 @@ public class QuestManager : MonoBehaviour
             if (GameDataManager.Instance.QuestDict.TryGetValue(questId, out var questData))
             {
                 ShowPanel(questData.questName, "完成");
-
+                //添加后续任务进入待激活列表
                 if (questData.nextQuestIds != null)
                 {
                     foreach (string nextId in questData.nextQuestIds)
@@ -256,7 +256,7 @@ public class QuestManager : MonoBehaviour
                         }
                     }
                 }
-
+                //奖励
                 if (questData.Reward != null)
                 {
                     List<string> rewardIds = new List<string>();
@@ -271,12 +271,13 @@ public class QuestManager : MonoBehaviour
                     if (ItemObtainDisplayUI.Instance != null)
                         ItemObtainDisplayUI.Instance.ShowItemRewards(rewardIds);
                 }
-
+                //更新知识库
                 if (questId[0] == 'M')
                 {
                     ParseMainString(questId.AsSpan(), out int a, out int b);
                     knowledgeBase.SetProgress(a, b);
                 }
+                PlayerDataManager.Instance.AddExperience(questData.exp);
             }
 
             RefreshQuestUI();

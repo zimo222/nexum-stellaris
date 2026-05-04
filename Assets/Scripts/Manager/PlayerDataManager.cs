@@ -13,6 +13,10 @@ public class PlayerDataManager : MonoBehaviour
 
     #region 事件系统
     public event Action<PlayerData> OnPlayerDataChanged;
+
+    public event Action<int, int, int, int> OnExperienceChanged;
+    public event Action<int> OnPlayerLevelUp;
+
     public event Action<int> OnCoinsChanged;
     public event Action<int> OnCrystalsChanged;
     public event Action<int> OnStaminaChanged;
@@ -20,6 +24,7 @@ public class PlayerDataManager : MonoBehaviour
     public event Action<string> OnQuestAdded;           // 任务被激活
     public event Action<string> OnQuestProgressUpdated; // 任务进度更新
     public event Action<string> OnQuestCompleted;       // 任务完成
+    
     #endregion
 
     #region 属性
@@ -454,8 +459,39 @@ public class PlayerDataManager : MonoBehaviour
     }
     #endregion
 
+    // ====================   玩家数据操作方法   ====================
+    #region 玩家数据操作方法
 
-    // ==================== 任务数据操作方法 ====================
+    /// <summary>
+    /// 给玩家增加经验
+    /// </summary>
+    public void AddExperience(int amount)
+    {
+        int oldLevel = CurrentPlayerData.Level;
+        int oldExp = CurrentPlayerData.Experience;
+
+        // 累加经验
+        CurrentPlayerData.Experience += amount;
+
+        // 循环升级，保留溢出经验
+        int newLevel = CurrentPlayerData.Level;
+        while (CurrentPlayerData.Experience >= ExperienceCurve.RequiredExp(newLevel))
+        {
+            CurrentPlayerData.Experience -= ExperienceCurve.RequiredExp(newLevel);
+            newLevel++;
+            OnPlayerLevelUp?.Invoke(newLevel); // 每升一级通知一次
+        }
+        CurrentPlayerData.Level = newLevel;
+
+        // 触发经验变化事件（仅当数据实际变化时）
+        if (oldLevel != newLevel || oldExp != CurrentPlayerData.Experience)
+        {
+            OnExperienceChanged?.Invoke(oldLevel, oldExp, newLevel, CurrentPlayerData.Experience);
+        }
+    }
+    #endregion
+
+    // ====================   任务数据操作方法   ====================
     #region 任务数据操作方法
     /// <summary>
     /// 将任务设为可用（前置任务完成时调用）
@@ -667,7 +703,7 @@ public class PlayerDataManager : MonoBehaviour
     #endregion
 
 
-    // ==================== 武器系统业务逻辑 ====================
+    // ====================   武器系统业务逻辑   ====================
     #region 武器系统业务逻辑
 
     /// <summary> 获取当前所有武器（绎语）</summary>
@@ -781,7 +817,7 @@ public class PlayerDataManager : MonoBehaviour
     #endregion
 
 
-    // ==================== 防具系统业务逻辑 ====================
+    // ====================   防具系统业务逻辑   ====================
     #region 防具系统业务逻辑
 
     public List<NexusVestureData> GetAllNexusVestures()
