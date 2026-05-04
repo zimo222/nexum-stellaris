@@ -97,6 +97,7 @@ public class CombatManager : MonoBehaviour
         if (GetComponent<NonSingletonMark>()) return;
         UpdateHealthSlider(); // 注册玩家时同步血量显示
         UpdateEnergySlider(); // 注册玩家时同步血量显示
+        PlayerDataManager.Instance.OnPlayerDataChanged += UpdateHealthSlider;
     }
 
     /// <summary>
@@ -168,9 +169,20 @@ public class CombatManager : MonoBehaviour
     /// <summary>
     /// 更新血条显示（根据玩家当前血量）
     /// </summary>
-    private void UpdateHealthSlider()
+    private void UpdateHealthSlider(PlayerData player = null)
     {
         if (healthSliderA == null) return;
+
+        if(player != null)
+        {
+            healthSliderA.maxValue = player.BaseStats.Health;
+            healthSliderA.value = player.CurrentHealth;
+            healthSliderB.maxValue = player.BaseStats.Health;
+            healthSliderB.value = player.CurrentHealth;
+            healthText.text = player.CurrentHealth.ToString() + "/" + player.BaseStats.Health.ToString();
+            return;
+        }
+
         if (Player == null) return;
 
         PlayerData playerData = PlayerDataManager.Instance.CurrentPlayerData;
@@ -187,9 +199,18 @@ public class CombatManager : MonoBehaviour
     /// <summary>
     /// 更新能条显示（根据玩家当前能量）
     /// </summary>
-    private void UpdateEnergySlider()
+    private void UpdateEnergySlider(PlayerData player = null)
     {
         if (energySlider == null) return;
+
+        if (player != null)
+        {
+            energySlider.maxValue = player.BaseStats.Energy;
+            energySlider.value = player.CurrentEnergy;
+            energyText.text = player.CurrentEnergy.ToString() + "/" + player.BaseStats.Energy.ToString();
+            return;
+        }
+
         if (Player == null) return;
 
         PlayerData playerData = PlayerDataManager.Instance.CurrentPlayerData;

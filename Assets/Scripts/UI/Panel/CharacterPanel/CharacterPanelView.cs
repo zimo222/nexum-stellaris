@@ -68,6 +68,6 @@ public class CharacterPanelView : MonoBehaviour
         if (defenceText != null) defenceText.text = $"{currentPlayerData.TotalDefence}";
         if (critRateText != null) critRateText.text = $"{currentPlayerData.TotalCritRate * 100}%";
         if (critDamageText != null) critDamageText.text = $"{currentPlayerData.TotalCritDamage * 100}%";
-        if (energyText != null) energyText.text = $"{currentPlayerData.TotalEnergy}%";
+        if (energyText != null) energyText.text = $"{currentPlayerData.TotalEnergy}";
     }
 }

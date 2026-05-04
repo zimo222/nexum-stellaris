@@ -68,12 +68,8 @@ public class PlayerData
 
     public PlayerData(string playerName)
     {
-        BaseStats = new CharacterStats()
-        {
-            Level = 1, Exp = 0,
-            Health = 100, Attack = 100, Defence = 100,
-            Energy = 100, CritRate = 0.05f, CritDamage = 0.50f, ElementBonus = 0f
-        };
+        // 基础属性先根据初始等级计算
+        UpdateBaseStatsByLevel();
         CurrentHealth = BaseStats.Health;   // 初始满血
         PlayerID = System.Guid.NewGuid().ToString();
         PlayerName = playerName;
@@ -104,6 +100,22 @@ public class PlayerData
         for (int i = 0; i < EquippedNexusVestureIds.Length; i++)
             EquippedNexusVestureIds[i] = null;
         
+    }
+
+    /// <summary>
+    /// 根据当前 Level 重新计算基础属性（生命、攻击、防御等）
+    /// 调用时机：角色等级发生变化时
+    /// </summary>
+    public void UpdateBaseStatsByLevel()
+    {
+        int lv = Level;
+        BaseStats.Health = 100 + 9 * lv;
+        BaseStats.Attack = 15 + 3 * lv;
+        BaseStats.Defence = Mathf.RoundToInt(10f + 0.9f * lv);   // 防御为整数，四舍五入
+        BaseStats.ElementBonus = 0f + 0.005f * lv;
+        BaseStats.CritRate = 0.05f + 0.0015f * lv;
+        BaseStats.CritDamage = 0.5f + 0.005f * lv;
+        BaseStats.Energy = 100;
     }
 
     public void SortedBag()

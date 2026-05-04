@@ -470,24 +470,37 @@ public class PlayerDataManager : MonoBehaviour
         int oldLevel = CurrentPlayerData.Level;
         int oldExp = CurrentPlayerData.Experience;
 
-        // 累加经验
         CurrentPlayerData.Experience += amount;
 
-        // 循环升级，保留溢出经验
-        int newLevel = CurrentPlayerData.Level;
+        int newLevel = oldLevel;
         while (CurrentPlayerData.Experience >= ExperienceCurve.RequiredExp(newLevel))
         {
             CurrentPlayerData.Experience -= ExperienceCurve.RequiredExp(newLevel);
             newLevel++;
-            OnPlayerLevelUp?.Invoke(newLevel); // 每升一级通知一次
         }
-        CurrentPlayerData.Level = newLevel;
 
-        // 触发经验变化事件（仅当数据实际变化时）
+        // 如果等级有变化，先计算旧最大生命值用于比例转换
+        if (newLevel != oldLevel)
+        {
+            float healthPercent = (float)CurrentPlayerData.CurrentHealth / CurrentPlayerData.BaseStats.Health;
+
+            CurrentPlayerData.Level = newLevel;
+            CurrentPlayerData.UpdateBaseStatsByLevel();                // 更新基础属性
+
+            // 保持当前生命值比例（至少为1，防止死亡时升级出现0）
+            CurrentPlayerData.CurrentHealth = Mathf.Max(1, Mathf.RoundToInt(CurrentPlayerData.BaseStats.Health * healthPercent));
+
+            OnPlayerLevelUp?.Invoke(newLevel);
+            OnPlayerDataChanged?.Invoke(CurrentPlayerData);
+        }
+
+        // 触发经验变化事件
         if (oldLevel != newLevel || oldExp != CurrentPlayerData.Experience)
         {
             OnExperienceChanged?.Invoke(oldLevel, oldExp, newLevel, CurrentPlayerData.Experience);
         }
+
+        SaveCurrentPlayerData();
     }
     #endregion
 
