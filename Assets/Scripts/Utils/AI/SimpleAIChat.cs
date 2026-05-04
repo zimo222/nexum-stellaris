@@ -105,8 +105,8 @@ public class SimpleAIChat : MonoBehaviour
 
         // 根据换行符数量动态调整高度
         int lineCount = text.Split('\n').Length;
-        float lineHeight = 50f;          // 可根据实际字体大小调整，或动态获取
-        float padding = 20f;             // 上下留白
+        float lineHeight = 70f;          // 可根据实际字体大小调整，或动态获取
+        float padding = 10f;             // 上下留白
         float totalHeight = lineCount * lineHeight + padding;
 
         RectTransform rect = msgObj.GetComponent<RectTransform>();

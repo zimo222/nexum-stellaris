@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4083983586471786237}
   - component: {fileID: 1033431646217433184}
   - component: {fileID: 997790051703687515}
+  - component: {fileID: 5181883882743031529}
   m_Layer: 8
   m_Name: Enemy 003
   m_TagString: Enemy
@@ -155,7 +156,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 220537008825880356}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 064e83d383fae5049b5f15ec96150064, type: 3}
   m_Name: 
@@ -202,6 +203,60 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashDuration: 0.2
   hitMat: {fileID: 2100000, guid: 9d7faeccf815dea40800da53af57718a, type: 2}
+--- !u!114 &5181883882743031529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 220537008825880356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf5e0cfc85cfdda42a5f93a5665167f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockbackDirection: {x: 0, y: 0}
+  knockbackDuration: 0
+  attackCheck: {fileID: 2669336660871895847}
+  attackCheckRadius: 5000
+  groundCheck: {fileID: 0}
+  groundCheckDistance: 0
+  wallCheck: {fileID: 0}
+  wallCheckDistance: 0
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 8
+  maxHealth: 10000
+  currentHealth: 10000
+  attackDamage: 50
+  stunDuration: 0
+  stunDirection: {x: 0, y: 0}
+  counterImage: {fileID: 6682031143710235560}
+  moveSpeed: 30
+  idleTime: 1
+  battleTime: 5
+  attackDistance: 50
+  attackCooldown: 1
+  lastTimeAttacked: 0
+  patrolRange: 1000
+  healthSlider: {fileID: 3082885153660524806}
+  bulletPrefabs:
+  - {fileID: 3305386069859194172, guid: 57fb41f5b3a3a384f8701b7cb8f05223, type: 3}
+  rangedAttackInterval: 5
+  rangedAttackDuration: 10
+  bulletDensity: 5
+  bulletSpeed: 50
+  bulletDamage: 10
+  burstCount: 3
+  burstInterval: 0.2
+  fireMode: 5
+  circleBulletCount: 12
+  sweepBulletCount: 12
+  sweepOffsetRange: 180
+  sweepStep: 10
 --- !u!1 &1382509294695887261
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,7 +304,7 @@ GameObject:
   - component: {fileID: 7160193476034889704}
   - component: {fileID: 4408117631968343087}
   - component: {fileID: 2172544529314752470}
-  - component: {fileID: 8920783860609074290}
+  - component: {fileID: 9221651210524332201}
   m_Layer: 8
   m_Name: EnemyImage
   m_TagString: Untagged
@@ -357,7 +412,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8920783860609074290
+--- !u!114 &9221651210524332201
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -366,7 +421,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1830327757739358123}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a6c29d8b3704b64b9f0ac2cda1554db, type: 3}
+  m_Script: {fileID: 11500000, guid: 8da5ad9567f1536469a83ee02cb295f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5199432629540058628
