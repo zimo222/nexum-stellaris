@@ -181,9 +181,9 @@ MonoBehaviour:
   stunDuration: 0
   stunDirection: {x: 0, y: 0}
   counterImage: {fileID: 6682031143710235560}
-  moveSpeed: 30
+  moveSpeed: 50
   idleTime: 1
-  battleTime: 5
+  battleTime: 9999
   attackDistance: 30
   attackCooldown: 1
   lastTimeAttacked: 0
@@ -239,17 +239,17 @@ MonoBehaviour:
   idleTime: 1
   battleTime: 5
   attackDistance: 50
-  attackCooldown: 1
+  attackCooldown: 2
   lastTimeAttacked: 0
   patrolRange: 1000
   healthSlider: {fileID: 3082885153660524806}
   bulletPrefabs:
   - {fileID: 3305386069859194172, guid: 57fb41f5b3a3a384f8701b7cb8f05223, type: 3}
   rangedAttackInterval: 5
-  rangedAttackDuration: 10
+  rangedAttackDuration: 5
   bulletDensity: 5
   bulletSpeed: 50
-  bulletDamage: 10
+  bulletDamage: 5
   burstCount: 3
   burstInterval: 0.2
   fireMode: 5

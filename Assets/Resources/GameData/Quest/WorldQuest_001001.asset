@@ -29,7 +29,7 @@ MonoBehaviour:
   waves:
   - waveName: 
     enemies:
-    - enemyPrefab: {fileID: 220537008825880356, guid: 8813d5ae6fb6a2e43bc65afaded4465e, type: 3}
+    - enemyPrefab: {fileID: 220537008825880356, guid: adae7a49ed3a48a43aa63afdf36dfd1b, type: 3}
       count: 1
   Reward:
   - NexusVesture_005_AbyssalHeart

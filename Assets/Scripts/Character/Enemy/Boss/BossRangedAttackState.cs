@@ -3,12 +3,18 @@ using System.Collections;
 
 public class BossRangedAttackState : EnemyState
 {
+    private enum Phase { Intro, Loop, Outro }
+    private Phase currentPhase;
+
     private Enemy_Boss boss;
-    private float stateDuration;
+    private float stateDuration;          // 仅在 Loop 阶段计时
     private Coroutine fireCoroutine;
-    private float spiralAngle;       // 螺旋模式专用
-    private float sweepOffset;       // SweepCircle当前偏移角度
-    private int sweepDirection = 1;  // 1: 增加, -1: 减少
+    private Transform playerTransform;
+
+    // 弹幕模式私有变量
+    private float spiralAngle;
+    private float sweepOffset;
+    private int sweepDirection = 1;
 
     public BossRangedAttackState(Enemy _enemyBase, EnemyStateMachine _stateMachine, string _animBoolName, Enemy_Boss _boss)
         : base(_enemyBase, _stateMachine, _animBoolName)
@@ -19,18 +25,22 @@ public class BossRangedAttackState : EnemyState
     public override void Enter()
     {
         base.Enter();
+        currentPhase = Phase.Intro;
         stateDuration = 0f;
-        // 远程攻击期间静止不动
+        playerTransform = CombatManager.Instance?.Player?.transform;
+
+        // 保证 Intro 期间不移动、不发射
         boss.SetZeroVelocity();
 
-        fireCoroutine = boss.StartBossCoroutine(FireRoutine());
+        // 注意：不要在这里启动 FireRoutine，等到 Intro 结束后再启动
+        // 动画参数 RangedAttack 已经在 base.Enter 中设为 true，动画控制器会自动播放 Intro
     }
 
     public override void Exit()
     {
         base.Exit();
-        if (fireCoroutine != null)
-            boss.StopBossCoroutine(fireCoroutine);
+        StopFire();
+        // 重置弹幕状态变量
         spiralAngle = 0f;
         sweepOffset = 0f;
         sweepDirection = 1;
@@ -39,13 +49,84 @@ public class BossRangedAttackState : EnemyState
     public override void Update()
     {
         base.Update();
-        stateDuration += Time.deltaTime;
-        if (stateDuration >= boss.rangedAttackDuration)
+
+        switch (currentPhase)
         {
-            stateMachine.ChangeState(boss.battleState);
+            case Phase.Intro:
+                // Intro 阶段什么都不做，等待动画事件触发 OnIntroFinished
+                break;
+
+            case Phase.Loop:
+                UpdateLoop();
+                break;
+
+            case Phase.Outro:
+                // Outro 阶段可以移动，但不发射弹幕（协程已停止）
+                UpdateMovement();
+                // 等待动画事件触发 OnOutroFinished
+                break;
         }
     }
 
+    private void UpdateLoop()
+    {
+        stateDuration += Time.deltaTime;
+
+        // 持续跟随玩家
+        UpdateMovement();
+
+        // 持续时间结束，退出到 Outro
+        if (stateDuration >= boss.rangedAttackDuration)
+        {
+            StartOutro();
+        }
+    }
+
+    private void UpdateMovement()
+    {
+        if (playerTransform != null)
+            boss.MoveToPosition(playerTransform.position);
+    }
+
+    private void StartOutro()
+    {
+        if (currentPhase == Phase.Outro) return;
+
+        currentPhase = Phase.Outro;
+        StopFire();               // 停止发射新弹幕
+        // 注意：不要立即调用 ChangeState，等待 Outro 动画完成
+        // 这里可以重置动画参数或播放 Outro 动画（动画控制器根据同一 bool 参数自动切换，需设计好过渡）
+        // 如果您的动画控制器需要单独的 Outro 触发，可以设置另一个 bool 参数，但为了简单，我们依赖动画事件
+        enemyBase.anim.SetBool("RangedAttack", false);
+    }
+
+    private void StopFire()
+    {
+        if (fireCoroutine != null)
+            boss.StopBossCoroutine(fireCoroutine);
+        fireCoroutine = null;
+    }
+
+    // 由动画事件调用：Intro 动画结束，进入 Loop 阶段
+    public void OnIntroFinished()
+    {
+        if (currentPhase != Phase.Intro) return;
+        currentPhase = Phase.Loop;
+        // 开始发射弹幕
+        fireCoroutine = boss.StartBossCoroutine(FireRoutine());
+    }
+
+    // 由动画事件调用：Outro 动画结束，真正切换状态
+    public void OnOutroFinished()
+    {
+        if (currentPhase != Phase.Outro) return;
+        Debug.Log("追击");
+        stateMachine.ChangeState(boss.battleState);
+    }
+
+    // --------------------------------------------------------------------
+    // 以下所有 FireXXX 方法保持不变，与之前完全一致
+    // --------------------------------------------------------------------
     private IEnumerator FireRoutine()
     {
         float interval = 1f / boss.bulletDensity;
@@ -66,7 +147,7 @@ public class BossRangedAttackState : EnemyState
                     break;
                 case Enemy_Boss.FireMode.Burst:
                     yield return boss.StartBossCoroutine(FireBurst());
-                    yield return wait; // 连发后额外等待
+                    yield return wait;
                     break;
                 case Enemy_Boss.FireMode.Circle360:
                     FireCircle360();
@@ -109,9 +190,6 @@ public class BossRangedAttackState : EnemyState
         }
     }
 
-    /// <summary>
-    /// 圆圈式：一次发射 circleBulletCount 颗子弹，均匀分布360°
-    /// </summary>
     private void FireCircle360()
     {
         int count = boss.circleBulletCount;
@@ -125,16 +203,11 @@ public class BossRangedAttackState : EnemyState
         }
     }
 
-    /// <summary>
-    /// 变化型：基于圆圈式，但整体偏移角度在 0~sweepOffsetRange 之间来回渐变
-    /// 每次发射 sweepBulletCount 颗子弹，偏移 sweepOffset 度
-    /// </summary>
     private void FireSweepCircle()
     {
         int count = boss.sweepBulletCount;
         if (count <= 0) return;
 
-        // 更新偏移角度（来回摆动）
         sweepOffset += sweepDirection * boss.sweepStep;
         if (sweepOffset >= boss.sweepOffsetRange)
         {

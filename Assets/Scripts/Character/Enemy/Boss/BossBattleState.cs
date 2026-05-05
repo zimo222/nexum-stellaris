@@ -4,7 +4,6 @@ public class BossBattleState : EnemyState
 {
     private Enemy_Boss boss;
     private Transform playerTransform;
-    private float battleTimer;
     private float timeSinceLastRangedAttack;
 
     public BossBattleState(Enemy _enemyBase, EnemyStateMachine _stateMachine, string _animBoolName)
@@ -17,7 +16,6 @@ public class BossBattleState : EnemyState
     {
         base.Enter();
         playerTransform = CombatManager.Instance?.Player?.transform;
-        battleTimer = boss.battleTime;
         timeSinceLastRangedAttack = 0f;
     }
 
@@ -31,17 +29,16 @@ public class BossBattleState : EnemyState
             return;
         }
 
-        battleTimer -= Time.deltaTime;
         timeSinceLastRangedAttack += Time.deltaTime;
 
-        // 1. 远程攻击判定（间隔到了就切换）
+        // 远程攻击判定（按间隔切换）
         if (timeSinceLastRangedAttack >= boss.rangedAttackInterval)
         {
             stateMachine.ChangeState(boss.rangedAttackState);
             return;
         }
 
-        // 2. 近战攻击判定
+        // 近战攻击判定
         if (boss.PlayerInAttackRange())
         {
             if (Time.time >= boss.lastTimeAttacked + boss.attackCooldown)
@@ -58,8 +55,8 @@ public class BossBattleState : EnemyState
             boss.MoveToPosition(playerTransform.position);
         }
 
-        // 3. 脱离战斗（超时或丢失玩家）
-        if (battleTimer <= 0 || !boss.PlayerDetected())
+        // ★ 关键改动：不再有 battleTimer 倒计时，仅当玩家彻底脱离检测范围才脱战
+        if (!boss.PlayerDetected())
         {
             stateMachine.ChangeState(boss.idleState);
         }

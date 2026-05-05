@@ -32,6 +32,7 @@ public class BossAttackState : EnemyState
         if (!hasAttacked && triggerCalled)
         {
             hasAttacked = true;
+            /*
             // 攻击判定（使用 enemy.attackCheck 区域）
             Collider2D[] colliders = Physics2D.OverlapCircleAll(boss.attackCheck.position, boss.attackCheckRadius);
             foreach (var hit in colliders)
@@ -42,6 +43,7 @@ public class BossAttackState : EnemyState
                     CombatManager.Instance.ApplyDamage(boss.gameObject, player.gameObject, boss.attackDamage);
                 }
             }
+            */
         }
 
         if (triggerCalled)
