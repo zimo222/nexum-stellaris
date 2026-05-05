@@ -105,6 +105,7 @@ public class Player : Entity
     {
         base.Update();
         stateMachine.currentState.Update();
+        if (GetComponent<NonSingletonMark>()) return;
         CheckForDashInput();
         HandleEnergyRegen();
     }

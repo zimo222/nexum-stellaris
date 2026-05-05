@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -32,6 +33,17 @@ public class CombatManager : MonoBehaviour
     private Vector2 combatSpawnCenter;
 
     private bool isAwakeCalled = false;
+
+    // 在 class CombatManager 顶部添加
+    [Header("Memory Protection")]
+    [SerializeField] private MemoryProtectionUI memoryUI;
+    private bool isMemoryProtectionEnabled = false;
+    private int remainingMemoryProtection = 0;
+
+    public string CurrentCombatQuestId { get; private set; }
+
+    // 在类中添加一个标志位
+    private bool isProcessingMemoryProtection = false;
 
     void Awake()
     {
@@ -131,7 +143,7 @@ public class CombatManager : MonoBehaviour
             UpdateHealthSlider();
 
             if (playerData.CurrentHealth <= 0)
-                PlayerDefeated();
+                HandleFatalDamage();/*PlayerDefeated();*/
             return;
         }
 
@@ -241,7 +253,7 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    private void EnemyDefeated(GameObject enemy)
+    public void EnemyDefeated(GameObject enemy)
     {
         Debug.Log("Enemy defeated!");
         OnPlayerVictory?.Invoke(); // 这个事件可能不合适，需要区分玩家胜利还是敌人死亡？OnPlayerVictory 应是整个战斗胜利。建议改为 OnEnemyDefeated 事件。
@@ -254,6 +266,7 @@ public class CombatManager : MonoBehaviour
     /// </summary>
     public void StartBattle(GameObject enemy)
     {
+
         RegisterEnemy(enemy);
         // 重置玩家血量到满血（从最大血量同步）
         PlayerData playerData = PlayerDataManager.Instance.CurrentPlayerData;
@@ -274,12 +287,19 @@ public class CombatManager : MonoBehaviour
             return;
         }
 
+        CurrentCombatQuestId = questData.id;
         currentCombatQuest = questData;
         currentWaveIndex = 0;
         activeEnemies.Clear();
 
         // 生成第一波敌人
         //SpawnWave(currentWaveIndex, spawnCenter);
+        if(questData.id == "MainQuest_005008")
+        {
+            // 例如在 StartCombat 之前
+            int memoryCount = 5; // 自定义次数，也可以从 LongTermMemory 实例获取记忆条数作为初始值
+            CombatManager.Instance.EnableMemoryProtection(memoryCount);
+        }
 
         currentCombatQuest = questData;
         combatSpawnCenter = spawnCenter;
@@ -339,8 +359,9 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    private void CombatVictory()
+    public void CombatVictory()
     {
+        CurrentCombatQuestId = null;
         Debug.Log("战斗胜利！");
         // 通知任务管理器任务完成
         if (currentCombatQuest != null)
@@ -357,6 +378,7 @@ public class CombatManager : MonoBehaviour
     {
         if (currentCombatQuest == null) return;
 
+        CurrentCombatQuestId = null;
         Debug.Log("战斗失败，重置任务");
 
         // 销毁所有生成的敌人
@@ -379,5 +401,108 @@ public class CombatManager : MonoBehaviour
         // 清理战斗状态
         currentCombatQuest = null;
         currentWaveIndex = -1;
+    }
+
+    // 新增方法：由任务管理器在最终战开始时调用
+    public void EnableMemoryProtection(int initialCount)
+    {
+        isMemoryProtectionEnabled = true;
+        remainingMemoryProtection = initialCount;
+    }
+
+    // 修改 ForceFatalDamageToPlayer 方法（如果还没有则添加）
+    public void ForceFatalDamageToPlayer()
+    {
+        if (Player == null) return;
+        PlayerData playerData = PlayerDataManager.Instance.CurrentPlayerData;
+        playerData.CurrentHealth = 0;
+        UpdateHealthSlider();
+        HandleFatalDamage();
+    }
+
+    // 新的核心处理方法
+    // 在 CombatManager 类中添加这个协程（放在任何位置）
+    private IEnumerator ChangeTimeScaleGradually(float targetScale, float duration, System.Action onComplete = null)
+    {
+        float startScale = Time.timeScale;
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            float t = elapsed / duration;
+            Time.timeScale = Mathf.Lerp(startScale, targetScale, t);
+            yield return null;
+        }
+        Time.timeScale = targetScale;
+        onComplete?.Invoke();
+    }
+
+    // 修改你的 HandleFatalDamage 方法（之前应该是调用 PlayerDefeated 的地方改为这个）
+    private void HandleFatalDamage()
+    {
+        if (isMemoryProtectionEnabled && remainingMemoryProtection > 0)
+        {
+            // 防止多个协程同时运行
+            if (isProcessingMemoryProtection) return;
+            isProcessingMemoryProtection = true;
+
+            // 1. 时间渐变到0
+            StartCoroutine(ChangeTimeScaleGradually(0f, 2.0f, () =>
+            {
+                // 2. 时间归零后，显示纯白记忆UI
+                memoryUI.Show(() =>
+                {
+                    // 3. 玩家按空格后，先隐藏UI
+                    memoryUI.Hide();
+
+                    // 4. 恢复玩家血量 + 加经验
+                    PlayerData playerData = PlayerDataManager.Instance.CurrentPlayerData;
+                    playerData.CurrentHealth = playerData.BaseStats.Health;
+                    UpdateHealthSlider();
+                    int expToGive = ExperienceCurve.RequiredExp(playerData.Level) * 10;
+                    PlayerDataManager.Instance.AddExperience(expToGive);
+                    remainingMemoryProtection--;
+
+                    // 5. 时间渐变回1
+                    StartCoroutine(ChangeTimeScaleGradually(1f, 2.0f, () =>
+                    {
+                        isProcessingMemoryProtection = false;
+                        // 战斗继续（自然恢复）
+                    }));
+                });
+            }));
+        }
+        else
+        {
+            PlayerDefeated();
+        }
+    }
+
+
+    // 协程：将 timeScale 从当前值渐变到 target（duration 秒）
+    private IEnumerator GraduallyChangeTimeScale(float target, float duration)
+    {
+        float start = Time.timeScale;
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            elapsed += Time.unscaledDeltaTime; // 不受 timeScale 影响
+            float t = elapsed / duration;
+            Time.timeScale = Mathf.Lerp(start, target, t);
+            yield return null;
+        }
+        Time.timeScale = target;
+    }
+
+    // 调用此方法实现时间减缓到0（常配合记忆保护）
+    public void PauseGameGradually(float duration = 0.3f)
+    {
+        StartCoroutine(GraduallyChangeTimeScale(0f, duration));
+    }
+
+    // 恢复时间流速
+    public void ResumeGameGradually(float duration = 0.3f)
+    {
+        StartCoroutine(GraduallyChangeTimeScale(1f, duration));
     }
 }

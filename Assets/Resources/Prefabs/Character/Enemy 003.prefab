@@ -13,9 +13,8 @@ GameObject:
   - component: {fileID: 3682662269931611323}
   - component: {fileID: 532182604364924742}
   - component: {fileID: 4083983586471786237}
-  - component: {fileID: 1033431646217433184}
-  - component: {fileID: 997790051703687515}
   - component: {fileID: 5181883882743031529}
+  - component: {fileID: 997790051703687515}
   m_Layer: 8
   m_Name: Enemy 003
   m_TagString: Enemy
@@ -149,60 +148,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &1033431646217433184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 220537008825880356}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 064e83d383fae5049b5f15ec96150064, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  knockbackDirection: {x: 0, y: 0}
-  knockbackDuration: 0
-  attackCheck: {fileID: 2669336660871895847}
-  attackCheckRadius: 50
-  groundCheck: {fileID: 0}
-  groundCheckDistance: 0
-  wallCheck: {fileID: 0}
-  wallCheckDistance: 0
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 0
-  whatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 8
-  maxHealth: 500
-  currentHealth: 500
-  attackDamage: 3
-  stunDuration: 0
-  stunDirection: {x: 0, y: 0}
-  counterImage: {fileID: 6682031143710235560}
-  moveSpeed: 50
-  idleTime: 1
-  battleTime: 9999
-  attackDistance: 30
-  attackCooldown: 1
-  lastTimeAttacked: 0
-  patrolRange: 100
-  healthSlider: {fileID: 3082885153660524806}
---- !u!114 &997790051703687515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 220537008825880356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c08c8d540f7fc6458e177995dc9b5dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  flashDuration: 0.2
-  hitMat: {fileID: 2100000, guid: 9d7faeccf815dea40800da53af57718a, type: 2}
 --- !u!114 &5181883882743031529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,6 +202,20 @@ MonoBehaviour:
   sweepBulletCount: 12
   sweepOffsetRange: 180
   sweepStep: 10
+--- !u!114 &997790051703687515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 220537008825880356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c08c8d540f7fc6458e177995dc9b5dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashDuration: 0.2
+  hitMat: {fileID: 2100000, guid: 9d7faeccf815dea40800da53af57718a, type: 2}
 --- !u!1 &1382509294695887261
 GameObject:
   m_ObjectHideFlags: 0
