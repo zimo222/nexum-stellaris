@@ -34,7 +34,7 @@ public class Enemy_Boss : Enemy
 
     // 在 Enemy_Boss 类中添加
     private int currentPhase = 0;
-    private float[] phaseHealthThresholds = { 0.75f, 0.5f, 0.25f }; // 依次是75%、50%、25%血量
+    private float[] phaseHealthThresholds = { 0.8f, 0.6f, 0.4f, 0.2f, 0.1f, 0.05f }; // 依次是75%、50%、25%血量
 
     private int lastHealth;          // 上一帧的血量
     private Coroutine phaseCheckCoroutine;
