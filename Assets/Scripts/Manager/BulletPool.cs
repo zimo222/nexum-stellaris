@@ -1,36 +1,30 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BulletPool : MonoBehaviour
 {
     public static BulletPool Instance { get; private set; }
 
-    [Header("预制体配置 - 直接拖拽引用")]
-    [SerializeField] private List<BulletPrefabConfig> bulletPrefabs = new List<BulletPrefabConfig>();
-
     [Header("全局配置")]
     [SerializeField] private bool autoCreateOnEmpty = true;
-    [SerializeField] private int defaultInitialSize = 30;
+    [SerializeField] private int defaultInitialSize = 10;
 
-    [Serializable]
-    public class BulletPrefabConfig
+    [Header("预热配置 - 拖入子弹预制体并设置预热数量")]
+    [SerializeField] private List<WarmupConfig> warmupConfigs = new List<WarmupConfig>();
+
+    [System.Serializable]
+    public class WarmupConfig
     {
-        [Tooltip("子弹预制体")]
         public GameObject prefab;
-
-        [Tooltip("预创建数量（热身）")]
-        public int warmupCount = 50;
-
-        [Tooltip("最大池容量（超过此数量不再归还，直接销毁）")]
-        public int maxPoolSize = 200;
-
-        // 运行时数据
-        [NonSerialized] public Queue<GameObject> pool;
-        [NonSerialized] public int totalCreated;
+        public int warmupCount = 30;
     }
 
-    private Dictionary<GameObject, BulletPrefabConfig> configMap = new Dictionary<GameObject, BulletPrefabConfig>();
+    private Dictionary<GameObject, Queue<GameObject>> pools = new Dictionary<GameObject, Queue<GameObject>>();
+    private Dictionary<GameObject, int> totalCreated = new Dictionary<GameObject, int>();
+
+    // 存储预热创建的空容器（用于跨场景持久化）
+    private GameObject poolContainer;
 
     private void Awake()
     {
@@ -40,44 +34,124 @@ public class BulletPool : MonoBehaviour
             return;
         }
         Instance = this;
+
+        // 创建一个隐藏的父物体来存放所有预热子弹，并设为 DontDestroyOnLoad
+        poolContainer = new GameObject("BulletPoolContainer");
+        DontDestroyOnLoad(poolContainer);
+
         DontDestroyOnLoad(gameObject);
 
-        InitializePools();
+        // 预热
+        foreach (var config in warmupConfigs)
+        {
+            if (config.prefab == null) continue;
+            WarmupPool(config.prefab, config.warmupCount);
+        }
+
+        // 监听场景切换，清理场景中的残留子弹（可选）
+        SceneManager.activeSceneChanged += OnSceneChanged;
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.activeSceneChanged -= OnSceneChanged;
+    }
+
+    private void OnSceneChanged(Scene oldScene, Scene newScene)
+    {
+        // 场景切换时，清理池中所有未使用的子弹实例（可选，避免内存堆积）
+        // 注意：DontDestroyOnLoad 容器中的子弹不会被清理
+        // 如果不需要自动清理，可以删除这个方法
+        CleanupUnusedBullets();
     }
 
     /// <summary>
-    /// 初始化所有池，预热到指定数量
+    /// 清理所有池中未使用的子弹（不销毁 DontDestroyOnLoad 容器中的子弹）
     /// </summary>
-    private void InitializePools()
+    private void CleanupUnusedBullets()
     {
-        foreach (var config in bulletPrefabs)
+        foreach (var kvp in pools)
         {
-            if (config.prefab == null)
+            var queue = kvp.Value;
+            // 重新创建一个空的队列，原来的子弹销毁
+            var newQueue = new Queue<GameObject>();
+            while (queue.Count > 0)
             {
-                Debug.LogWarning("子弹预制体配置为空，已跳过");
-                continue;
+                var obj = queue.Dequeue();
+                if (obj != null)
+                    Destroy(obj);
             }
+            pools[kvp.Key] = newQueue;
+            totalCreated[kvp.Key] = 0;
+        }
 
-            config.pool = new Queue<GameObject>();
-
-            // 预热：创建指定数量的子弹
-            for (int i = 0; i < config.warmupCount; i++)
-            {
-                GameObject obj = CreateNewBullet(config.prefab);
-                obj.SetActive(false);
-                config.pool.Enqueue(obj);
-            }
-
-            config.totalCreated = config.warmupCount;
-            configMap[config.prefab] = config;
-
-            Debug.Log($"子弹池已预热: {config.prefab.name} | 预创建 {config.warmupCount} 颗 | 最大容量 {config.maxPoolSize}");
+        // 重新预热
+        foreach (var config in warmupConfigs)
+        {
+            if (config.prefab == null) continue;
+            WarmupPool(config.prefab, config.warmupCount);
         }
     }
 
     /// <summary>
-    /// 创建一颗新子弹（不激活）
+    /// 预热对象池（创建的子弹会放到 DontDestroyOnLoad 容器中）
     /// </summary>
+    private void WarmupPool(GameObject prefab, int count)
+    {
+        if (!pools.ContainsKey(prefab))
+        {
+            var queue = new Queue<GameObject>();
+            for (int i = 0; i < count; i++)
+            {
+                GameObject obj = CreateNewBullet(prefab);
+                obj.SetActive(false);
+                // 将预热子弹放到持久化容器中
+                obj.transform.SetParent(poolContainer.transform);
+                queue.Enqueue(obj);
+            }
+            pools[prefab] = queue;
+            totalCreated[prefab] = count;
+            Debug.Log($"预热子弹池: {prefab.name} 预创建 {count} 颗，已放入持久化容器");
+        }
+        else
+        {
+            Queue<GameObject> queue = pools[prefab];
+            int current = queue.Count;
+            for (int i = current; i < count; i++)
+            {
+                GameObject obj = CreateNewBullet(prefab);
+                obj.SetActive(false);
+                obj.transform.SetParent(poolContainer.transform);
+                queue.Enqueue(obj);
+            }
+            totalCreated[prefab] = count;
+        }
+    }
+
+    /// <summary>
+    /// 注册一种子弹类型，并预创建一定数量的实例
+    /// </summary>
+    public void RegisterBulletType(GameObject prefab, int initialSize = -1)
+    {
+        if (prefab == null) return;
+
+        if (!pools.ContainsKey(prefab))
+        {
+            int size = initialSize >= 0 ? initialSize : defaultInitialSize;
+            var queue = new Queue<GameObject>();
+            for (int i = 0; i < size; i++)
+            {
+                GameObject obj = CreateNewBullet(prefab);
+                obj.SetActive(false);
+                obj.transform.SetParent(poolContainer.transform);
+                queue.Enqueue(obj);
+            }
+            pools[prefab] = queue;
+            totalCreated[prefab] = size;
+            Debug.Log($"注册子弹类型 {prefab.name}，初始池大小 {size}");
+        }
+    }
+
     private GameObject CreateNewBullet(GameObject prefab)
     {
         GameObject obj = Instantiate(prefab);
@@ -85,9 +159,6 @@ public class BulletPool : MonoBehaviour
         return obj;
     }
 
-    /// <summary>
-    /// 从池中获取一颗子弹
-    /// </summary>
     public GameObject GetBullet(GameObject prefab)
     {
         if (prefab == null)
@@ -96,51 +167,27 @@ public class BulletPool : MonoBehaviour
             return null;
         }
 
-        // 获取配置
-        if (!configMap.TryGetValue(prefab, out var config))
+        if (!pools.ContainsKey(prefab))
         {
-            if (autoCreateOnEmpty)
-            {
-                // 动态创建临时配置（不推荐，建议在Inspector中配置）
-                config = new BulletPrefabConfig
-                {
-                    prefab = prefab,
-                    warmupCount = defaultInitialSize,
-                    maxPoolSize = 200,
-                    pool = new Queue<GameObject>(),
-                    totalCreated = 0
-                };
-                configMap[prefab] = config;
-
-                for (int i = 0; i < defaultInitialSize; i++)
-                {
-                    GameObject obj = CreateNewBullet(prefab);
-                    obj.SetActive(false);
-                    config.pool.Enqueue(obj);
-                }
-                config.totalCreated = defaultInitialSize;
-                Debug.LogWarning($"子弹类型 {prefab.name} 未在Inspector中配置，已动态创建池，大小 {defaultInitialSize}");
-            }
-            else
-            {
-                Debug.LogError($"子弹类型 {prefab.name} 未注册且不允许自动创建");
-                return null;
-            }
+            RegisterBulletType(prefab, defaultInitialSize);
         }
 
-        // 从池中取出
-        GameObject bulletObj;
-        if (config.pool.Count > 0)
+        Queue<GameObject> pool = pools[prefab];
+
+        GameObject obj;
+        if (pool.Count > 0)
         {
-            bulletObj = config.pool.Dequeue();
+            obj = pool.Dequeue();
+            // 从持久化容器中移出，放到场景根下（或保持原父物体，但需要确保激活后可见）
+            obj.transform.SetParent(null);
         }
         else
         {
             if (autoCreateOnEmpty)
             {
-                bulletObj = CreateNewBullet(prefab);
-                config.totalCreated++;
-                Debug.LogWarning($"子弹类型 {prefab.name} 池已空，动态创建新实例（总数 {config.totalCreated}）");
+                obj = CreateNewBullet(prefab);
+                totalCreated[prefab]++;
+                Debug.LogWarning($"子弹类型 {prefab.name} 池已空，动态创建新实例（总数 {totalCreated[prefab]}）");
             }
             else
             {
@@ -149,78 +196,41 @@ public class BulletPool : MonoBehaviour
             }
         }
 
-        bulletObj.SetActive(true);
-        return bulletObj;
+        obj.SetActive(true);
+        return obj;
     }
 
-    /// <summary>
-    /// 将子弹放回池中
-    /// </summary>
     public void ReturnBullet(GameObject bulletObj, GameObject prefab)
     {
         if (bulletObj == null || prefab == null) return;
 
-        if (!configMap.TryGetValue(prefab, out var config))
+        if (!pools.ContainsKey(prefab))
         {
-            Debug.LogWarning($"ReturnBullet: 未找到预制体 {prefab.name} 的配置，直接销毁");
+            Debug.LogWarning($"ReturnBullet: 未找到预制体 {prefab.name} 的池，将直接销毁子弹");
             Destroy(bulletObj);
             return;
         }
 
-        // 检查池容量限制
-        if (config.pool.Count >= config.maxPoolSize)
-        {
-            // 超过最大容量，直接销毁
-            Destroy(bulletObj);
-            return;
-        }
-
-        // 重置子弹状态
         Bullet bullet = bulletObj.GetComponent<Bullet>();
         if (bullet != null)
             bullet.ResetToPool();
 
         bulletObj.SetActive(false);
-        config.pool.Enqueue(bulletObj);
+        // 归还时也放回持久化容器
+        bulletObj.transform.SetParent(poolContainer.transform);
+        pools[prefab].Enqueue(bulletObj);
     }
 
-    /// <summary>
-    /// 获取池中某预制体的当前数量（调试用）
-    /// </summary>
-    public int GetPoolCount(GameObject prefab)
-    {
-        if (configMap.TryGetValue(prefab, out var config))
-            return config.pool.Count;
-        return 0;
-    }
-
-    /// <summary>
-    /// 获取某预制体总共创建的数量（调试用）
-    /// </summary>
-    public int GetTotalCreated(GameObject prefab)
-    {
-        if (configMap.TryGetValue(prefab, out var config))
-            return config.totalCreated;
-        return 0;
-    }
-
-    /// <summary>
-    /// 清空所有池（场景切换时调用）
-    /// </summary>
     public void ClearAllPools()
     {
-        foreach (var config in bulletPrefabs)
+        foreach (var kvp in pools)
         {
-            if (config.pool != null)
+            foreach (var obj in kvp.Value)
             {
-                while (config.pool.Count > 0)
-                {
-                    var obj = config.pool.Dequeue();
-                    if (obj != null) Destroy(obj);
-                }
+                if (obj != null) Destroy(obj);
             }
         }
-        configMap.Clear();
-        InitializePools(); // 重新初始化
+        pools.Clear();
+        totalCreated.Clear();
     }
 }

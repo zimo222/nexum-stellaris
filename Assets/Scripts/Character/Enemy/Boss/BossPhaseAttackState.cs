@@ -16,15 +16,25 @@ public class BossPhaseAttackState : EnemyState
     {
         base.Enter();
         hasDamaged = false;
-        // 播放阶段攻击动画（例如生成一个环形特效）
-        boss.anim.SetTrigger("PhaseAttack");
-        // 启动协程，等待动画的某个时刻造成伤害
+
+        // 第三阶段：使用普通攻击动画（Attack = true）
+        boss.anim.SetBool("Attack", true);
+
+        // 启动协程，等待动画的某个时刻造成伤害 + 生成黑环特效
         boss.StartCoroutine(PerformPhaseAttack());
     }
 
     private IEnumerator PerformPhaseAttack()
     {
-        yield return new WaitForSeconds(0.5f); // 等待动画关键帧
+        // 等待动画关键帧（0.3秒时生成黑环特效）
+        yield return new WaitForSeconds(0.3f);
+
+        // 生成黑色圆环特效（以boss为中心，迅速扩大）
+        SpawnBlackRing();
+
+        // 再等待0.2秒，到达伤害判定帧（总共0.5秒）
+        yield return new WaitForSeconds(0.2f);
+
         if (!hasDamaged)
         {
             hasDamaged = true;
@@ -50,9 +60,24 @@ public class BossPhaseAttackState : EnemyState
         stateMachine.ChangeState(boss.battleState);
     }
 
+    private void SpawnBlackRing()
+    {
+        // 尝试从boss获取黑环预制体引用（需要在Enemy_Boss中添加public字段）
+        if (boss.blackRingPrefab != null)
+        {
+            GameObject ring = Object.Instantiate(boss.blackRingPrefab, boss.transform.position, Quaternion.identity);
+            ring.transform.SetParent(null); // 不跟随boss移动
+        }
+        else
+        {
+            Debug.LogWarning("BossPhaseAttackState: blackRingPrefab is not assigned in Enemy_Boss!");
+        }
+    }
+
     public override void Exit()
     {
         base.Exit();
-        boss.anim.ResetTrigger("PhaseAttack");
+        // 退出时重置Attack参数（可选，如果其他状态需要不同动画）
+        boss.anim.SetBool("Attack", false);
     }
 }

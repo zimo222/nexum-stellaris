@@ -39,6 +39,8 @@ public class Enemy_Boss : Enemy
     private int lastHealth;          // 上一帧的血量
     private Coroutine phaseCheckCoroutine;
 
+    public GameObject blackRingPrefab;
+
     // 状态实例
     public BossIdleState idleState { get; private set; }
     public BossMoveState moveState { get; private set; }

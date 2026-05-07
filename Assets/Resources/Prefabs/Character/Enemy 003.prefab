@@ -202,6 +202,7 @@ MonoBehaviour:
   sweepBulletCount: 12
   sweepOffsetRange: 180
   sweepStep: 10
+  blackRingPrefab: {fileID: 4743581494518718900, guid: 8b4af4813e1093048ae93f715ad34394, type: 3}
 --- !u!114 &997790051703687515
 MonoBehaviour:
   m_ObjectHideFlags: 0

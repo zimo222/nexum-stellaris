@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI; // 添加 UI 命名空间
+using TMPro;
 
 public class CombatManager : MonoBehaviour
 {
@@ -37,13 +38,22 @@ public class CombatManager : MonoBehaviour
     // 在 class CombatManager 顶部添加
     [Header("Memory Protection")]
     [SerializeField] private MemoryProtectionUI memoryUI;
-    private bool isMemoryProtectionEnabled = false;
-    private int remainingMemoryProtection = 0;
 
     public string CurrentCombatQuestId { get; private set; }
 
     // 在类中添加一个标志位
-    private bool isProcessingMemoryProtection = false;
+    private bool isProcessingMemoryProtection = false; 
+    
+    [Header("Memory Protection")]
+    public bool enableTimeStopForMemory = true;   // 勾选则时停，不勾选则任何情况下都不改变 Time.timeScale
+
+    [Header("Memory Protection (No Time Stop)")]
+    [SerializeField] private PromptTextManager promptTextManager;  // 拖拽赋值
+    [SerializeField] private string[] memoryLines;                 // 纯白的台词数组（Inspector中填入15句）
+    private bool isMemoryProtectionEnabled = false;
+    private int remainingMemoryProtection = 0;
+    private bool isProcessingFatal = false;  // 防止连续触发
+
 
     void Awake()
     {
@@ -82,6 +92,16 @@ public class CombatManager : MonoBehaviour
         DeadlockDetector.Log("[CombatManager] Singleton set, calling InitSliderRefs");
         InitSliderRefs();
         DeadlockDetector.Log("[CombatManager] Awake finished successfully");
+
+        // 自动查找 PromptTextManager（不依赖手动拖拽）
+        if (promptTextManager == null)
+        {
+            promptTextManager = FindObjectOfType<PromptTextManager>();
+            if (promptTextManager == null)
+            {
+                Debug.LogWarning("CombatManager: 场景中未找到 PromptTextManager，纯白记忆台词将无法显示。");
+            }
+        }
     }
 
     void InitSliderRefs()
@@ -440,42 +460,83 @@ public class CombatManager : MonoBehaviour
     // 修改你的 HandleFatalDamage 方法（之前应该是调用 PlayerDefeated 的地方改为这个）
     private void HandleFatalDamage()
     {
-        if (isMemoryProtectionEnabled && remainingMemoryProtection > 0)
-        {
-            // 防止多个协程同时运行
-            if (isProcessingMemoryProtection) return;
-            isProcessingMemoryProtection = true;
-
-            // 1. 时间渐变到0
-            StartCoroutine(ChangeTimeScaleGradually(0f, 2.0f, () =>
-            {
-                // 2. 时间归零后，显示纯白记忆UI
-                memoryUI.Show(() =>
-                {
-                    // 3. 玩家按空格后，先隐藏UI
-                    memoryUI.Hide();
-
-                    // 4. 恢复玩家血量 + 加经验
-                    PlayerData playerData = PlayerDataManager.Instance.CurrentPlayerData;
-                    playerData.CurrentHealth = playerData.BaseStats.Health;
-                    UpdateHealthSlider();
-                    int expToGive = ExperienceCurve.RequiredExp(playerData.Level) * 10;
-                    PlayerDataManager.Instance.AddExperience(expToGive);
-                    remainingMemoryProtection--;
-
-                    // 5. 时间渐变回1
-                    StartCoroutine(ChangeTimeScaleGradually(1f, 2.0f, () =>
-                    {
-                        isProcessingMemoryProtection = false;
-                        // 战斗继续（自然恢复）
-                    }));
-                });
-            }));
-        }
-        else
+        if (!isMemoryProtectionEnabled || remainingMemoryProtection <= 0 || isProcessingFatal)
         {
             PlayerDefeated();
+            return;
         }
+
+        isProcessingFatal = true;
+
+        // 血条已经在 ApplyDamage 中归零（因为玩家血量变为0）
+        // 先停顿一下，让玩家看清血条空了
+        StartCoroutine(DelayedRegenWithMessage());
+
+        // 减少保护次数
+        remainingMemoryProtection--;
+        // 注意：isProcessingFatal 的恢复要放到回血完成之后，避免多次触发
+    }
+
+    private System.Collections.IEnumerator DelayedRegenWithMessage()
+    {
+        // 停顿 0.3~0.5 秒，让玩家看到“死亡”状态
+        yield return new WaitForSeconds(1.0f);
+
+        // 随机选一句纯白台词
+        string line = memoryLines[UnityEngine.Random.Range(0, memoryLines.Length)];
+        if (promptTextManager != null)
+            promptTextManager.ShowMessage(line, 2f);
+
+        // 开始金色回血（1秒）
+        if (healthRegenCoroutine != null)
+            StopCoroutine(healthRegenCoroutine);
+        healthRegenCoroutine = StartCoroutine(Co_RegenHealthGold(1f));
+
+        // 等待回血完成再解锁（防止回血过程中再次触发致命伤害）
+        while (healthRegenCoroutine != null)
+            yield return null;
+
+        isProcessingFatal = false;
+    }
+
+    private System.Collections.IEnumerator DelayedGoldRegen()
+    {
+        // 停顿0.5秒，期间血条保持为0
+        yield return new WaitForSeconds(0.5f);
+
+        // 开始金色回血（1秒）
+        if (healthRegenCoroutine != null)
+            StopCoroutine(healthRegenCoroutine);
+        healthRegenCoroutine = StartCoroutine(Co_RegenHealthGold(1f));
+    }
+
+
+    private System.Collections.IEnumerator DelayedRecover()
+    {
+        yield return new WaitForSeconds(0.1f);  // 短暂延迟，让玩家看到血条空了
+
+        // 回血
+        RecoverPlayer();
+
+        // 减少保护次数
+        remainingMemoryProtection--;
+        isProcessingFatal = false;
+    }
+
+    private void RecoverPlayer()
+    {
+        PlayerData playerData = PlayerDataManager.Instance.CurrentPlayerData;
+        playerData.CurrentHealth = playerData.BaseStats.Health;
+        UpdateHealthSlider();
+        // 可选：给予经验
+        int expToGive = ExperienceCurve.RequiredExp(playerData.Level) / 2;
+        PlayerDataManager.Instance.AddExperience(expToGive);
+    }
+
+    private System.Collections.IEnumerator ReleaseFatalLock()
+    {
+        yield return null;  // 等待一帧
+        isProcessingFatal = false;
     }
 
 
@@ -504,5 +565,83 @@ public class CombatManager : MonoBehaviour
     public void ResumeGameGradually(float duration = 0.3f)
     {
         StartCoroutine(GraduallyChangeTimeScale(1f, duration));
+    }
+
+    private Coroutine healthRegenCoroutine;
+
+    /// <summary>
+    /// 金色回血协程：1秒内将血条从当前值平滑增加到满值，期间血条显示金色
+    /// </summary>
+    private IEnumerator Co_RegenHealthGold(float duration)
+    {
+        PlayerData playerData = PlayerDataManager.Instance.CurrentPlayerData;
+        int targetHealth = playerData.BaseStats.Health;
+        int startHealth = playerData.CurrentHealth;  // 通常是0
+
+        float elapsed = 0f;
+
+        // 记录原始颜色，并改为金色
+        Color originalColorA = healthSliderA.fillRect.GetComponentInChildren<UnityEngine.UI.Image>().color;
+        Color originalColorB = healthSliderB.fillRect.GetComponentInChildren<UnityEngine.UI.Image>().color;
+
+        SetSliderColor(Color.yellow);  // 金色
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+            int newValue = Mathf.RoundToInt(Mathf.Lerp(startHealth, targetHealth, t));
+
+            playerData.CurrentHealth = newValue;
+
+            // 更新两个血条
+            healthSliderA.value = newValue;
+            healthSliderB.value = newValue;
+            if (healthText != null)
+                healthText.text = $"{newValue}/{targetHealth}";
+
+            yield return null;
+        }
+
+        // 确保最终值为满血
+        playerData.CurrentHealth = targetHealth;
+        healthSliderA.value = targetHealth;
+        healthSliderB.value = targetHealth;
+        if (healthText != null)
+            healthText.text = $"{targetHealth}/{targetHealth}";
+
+        // 恢复原始颜色
+        SetSliderColor(originalColorA, originalColorB);
+        healthRegenCoroutine = null;
+    }
+
+    /// <summary> 设置两个血条滑块的颜色 </summary>
+    private void SetSliderColor(Color color)
+    {
+        if (healthSliderA != null && healthSliderA.fillRect != null)
+        {
+            var img = healthSliderA.fillRect.GetComponent<UnityEngine.UI.Image>();
+            if (img != null) img.color = color;
+        }
+        if (healthSliderB != null && healthSliderB.fillRect != null)
+        {
+            var img = healthSliderB.fillRect.GetComponent<UnityEngine.UI.Image>();
+            if (img != null) img.color = color;
+        }
+    }
+
+    /// <summary> 恢复原始颜色（需要你预先保存原始颜色）</summary>
+    private void SetSliderColor(Color colorA, Color colorB)
+    {
+        if (healthSliderA != null && healthSliderA.fillRect != null)
+        {
+            var img = healthSliderA.fillRect.GetComponent<UnityEngine.UI.Image>();
+            if (img != null) img.color = colorA;
+        }
+        if (healthSliderB != null && healthSliderB.fillRect != null)
+        {
+            var img = healthSliderB.fillRect.GetComponent<UnityEngine.UI.Image>();
+            if (img != null) img.color = colorB;
+        }
     }
 }
