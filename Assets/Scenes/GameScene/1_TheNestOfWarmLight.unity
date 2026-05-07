@@ -2130,6 +2130,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0286d02b222c0844e8290762507b66d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletPrefabs:
+  - prefab: {fileID: 3305386069859194172, guid: 4c2371c4574876048a2eba38a1fac08b, type: 3}
+    warmupCount: 1500
+    maxPoolSize: 1500
+  - prefab: {fileID: 3305386069859194172, guid: 53830be08944f8145b549524dcd3abaa, type: 3}
+    warmupCount: 1500
+    maxPoolSize: 1500
   autoCreateOnEmpty: 1
   defaultInitialSize: 1500
 --- !u!4 &54640835
@@ -369374,6 +369381,7 @@ MonoBehaviour:
   energySlider: {fileID: 118499174}
   healthText: {fileID: 328244959}
   energyText: {fileID: 849017346}
+  activeEnemies: []
   memoryUI: {fileID: 84617777}
 --- !u!224 &1860646877
 RectTransform:

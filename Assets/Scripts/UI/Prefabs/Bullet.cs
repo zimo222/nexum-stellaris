@@ -524,30 +524,28 @@ public class Bullet : MonoBehaviour
 
     private Transform FindNearestEnemy()
     {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 1000f);
-        float minDist = float.MaxValue;
+        // 从 CombatManager 获取活跃敌人列表
+        List<GameObject> enemies = CombatManager.Instance.activeEnemies;
+
         Transform nearest = null;
-        foreach (var hit in hits)
+        float minSqrDist = float.MaxValue;
+        Vector2 pos = transform.position;
+
+        for (int i = 0; i < enemies.Count; i++)
         {
-            if (owner.CompareTag("Player") && hit.CompareTag("Enemy"))
+            GameObject enemy = enemies[i];
+            if (enemy == null) continue;
+
+            Vector2 enemyPos = enemy.transform.position;
+            float sqrDist = (enemyPos.x - pos.x) * (enemyPos.x - pos.x) + (enemyPos.y - pos.y) * (enemyPos.y - pos.y);
+
+            if (sqrDist < minSqrDist)
             {
-                float dist = Vector2.Distance(transform.position, hit.transform.position);
-                if (dist < minDist)
-                {
-                    minDist = dist;
-                    nearest = hit.transform;
-                }
-            }
-            else if (owner.CompareTag("Enemy") && hit.CompareTag("Player"))
-            {
-                float dist = Vector2.Distance(transform.position, hit.transform.position);
-                if (dist < minDist)
-                {
-                    minDist = dist;
-                    nearest = hit.transform;
-                }
+                minSqrDist = sqrDist;
+                nearest = enemy.transform;
             }
         }
+
         return nearest;
     }
 

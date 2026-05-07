@@ -29,7 +29,7 @@ public class CombatManager : MonoBehaviour
     // 战斗任务状态
     private QuestDefineSO currentCombatQuest;   // 当前进行的战斗任务数据
     private int currentWaveIndex = -1;           // 当前波次索引（-1表示未开始）
-    private List<GameObject> activeEnemies = new List<GameObject>(); // 当前存活的敌人列表
+    public List<GameObject> activeEnemies = new List<GameObject>(); // 当前存活的敌人列表
     private Vector2 combatSpawnCenter;
 
     private bool isAwakeCalled = false;
