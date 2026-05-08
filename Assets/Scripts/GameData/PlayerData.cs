@@ -22,6 +22,9 @@ public class PlayerData
     public int Experience;
     public int Crystals;                            // 水晶
     public int Coins;                               // 金币
+    public string CurrentScene = "1_TheNestOfWarmLight";      // 当前所在场景名
+    public double PosX = -86;              // X坐标
+    public double PosY = 105;              // Y坐标
 
     // ====================     角色与装备系统     ====================
     public CharacterStats BaseStats;                 // 基础属性

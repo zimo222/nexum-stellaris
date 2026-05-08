@@ -20,7 +20,7 @@ public class MainMenuPanel : BasePanel
         }
         else
         {
-            SceneDataManager.Instance.LoadScene("1_TheNestOfWarmLight", -86, 105);
+            SceneDataManager.Instance.LoadScene(PlayerDataManager.Instance.CurrentPlayerData.CurrentScene, (int)PlayerDataManager.Instance.CurrentPlayerData.PosX, (int)PlayerDataManager.Instance.CurrentPlayerData.PosY);
         }
     }
 

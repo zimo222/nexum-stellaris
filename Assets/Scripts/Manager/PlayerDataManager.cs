@@ -502,7 +502,28 @@ public class PlayerDataManager : MonoBehaviour
 
         SaveCurrentPlayerData();
     }
+
+    /// <summary>
+    /// 更新当前玩家的位置信息（场景名、X、Y坐标）
+    /// </summary>
+    public void UpdatePlayerPosition(string sceneName, double x, double y)
+    {
+        if (CurrentPlayerData == null)
+        {
+            Debug.LogWarning("当前无玩家数据，无法保存位置信息");
+            return;
+        }
+
+        CurrentPlayerData.CurrentScene = sceneName;
+        CurrentPlayerData.PosX = x;
+        CurrentPlayerData.PosY = y;
+
+        SaveCurrentPlayerData();          // 持久化到磁盘
+        OnPlayerDataChanged?.Invoke(CurrentPlayerData); // 触发数据变更事件
+        Debug.Log($"已保存玩家位置：场景={sceneName}, 坐标=({x}, {y})");
+    }
     #endregion
+
 
     // ====================   任务数据操作方法   ====================
     #region 任务数据操作方法
