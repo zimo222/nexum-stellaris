@@ -9111,6 +9111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Canvas: {fileID: 1009447842}
+  Image: {fileID: 834251893}
   textComponent: {fileID: 1975298225}
   defaultDisplayTime: 2
 --- !u!4 &920126887

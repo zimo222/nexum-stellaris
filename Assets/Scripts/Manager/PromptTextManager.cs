@@ -14,6 +14,7 @@ public class PromptTextManager : MonoBehaviour
     [Header("组件引用")]
     [Tooltip("TextMeshPro 文本组件，如果不指定则自动在子物体中查找")]
     [SerializeField] private GameObject Canvas;
+    [SerializeField] private GameObject Image;
     [SerializeField] private TMP_Text textComponent;
 
     [Header("设置")]
