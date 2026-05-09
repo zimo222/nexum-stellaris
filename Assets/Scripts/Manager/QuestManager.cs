@@ -271,6 +271,9 @@ public class QuestManager : MonoBehaviour
                     if (ItemObtainDisplayUI.Instance != null)
                         ItemObtainDisplayUI.Instance.ShowItemRewards(rewardIds);
                 }
+
+                if (questData.id == "MainQuest_001001") TutorialManager.Instance.StartTutorial("002");
+
                 //更新知识库
                 if (questId[0] == 'M')
                 {

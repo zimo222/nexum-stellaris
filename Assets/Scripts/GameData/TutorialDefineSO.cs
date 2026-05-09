@@ -28,6 +28,7 @@ public class TutorialStep
 
     [Header("完成条件")]
     public KeyCodeCondition keyCondition;
+    public string clickTargetName;      // 新字段：任意可点击对象名称
     public string targetButtonName;
 
     [Header("时间控制")]

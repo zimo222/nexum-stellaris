@@ -20,8 +20,9 @@ MonoBehaviour:
     keyCondition:
       keys: 61000000770000007300000064000000
       anyKey: 0
+    clickTargetName: 
     targetButtonName: 
-    minStayDuration: 3
+    minStayDuration: 1
     onStepStart:
       m_PersistentCalls:
         m_Calls: []
@@ -33,8 +34,9 @@ MonoBehaviour:
     keyCondition:
       keys: 66000000
       anyKey: 0
+    clickTargetName: 
     targetButtonName: 
-    minStayDuration: 3
+    minStayDuration: 1
     onStepStart:
       m_PersistentCalls:
         m_Calls: []
