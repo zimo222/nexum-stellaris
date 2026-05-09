@@ -71,3 +71,17 @@ MonoBehaviour:
     onStepComplete:
       m_PersistentCalls:
         m_Calls: []
+  - tipImage: {fileID: 21300000, guid: 9f025b7ca4c2e7741bb2694c08bc7015, type: 3}
+    highlightTargetName: 
+    keyCondition:
+      keys: 20000000
+      anyKey: 0
+    clickTargetName: 
+    targetButtonName: 
+    minStayDuration: 0
+    onStepStart:
+      m_PersistentCalls:
+        m_Calls: []
+    onStepComplete:
+      m_PersistentCalls:
+        m_Calls: []
