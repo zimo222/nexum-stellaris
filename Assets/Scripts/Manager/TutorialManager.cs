@@ -235,13 +235,16 @@ public class TutorialManager : MonoBehaviour
             if (cg == null) cg = tipImageUI.gameObject.AddComponent<CanvasGroup>();
             cg.alpha = 0f;
 
-            float fadeInDuration = 1f;
-            float fadeTimer = 0f;
-            while (fadeTimer < fadeInDuration)
+            float fadeInDuration = step.fadeInDuration;
+            if (fadeInDuration > 0f)
             {
-                fadeTimer += Time.unscaledDeltaTime;
-                cg.alpha = Mathf.Lerp(0f, 1f, fadeTimer / fadeInDuration);
-                yield return null;
+                float fadeTimer = 0f;
+                while (fadeTimer < fadeInDuration)
+                {
+                    fadeTimer += Time.unscaledDeltaTime;
+                    cg.alpha = Mathf.Lerp(0f, 1f, fadeTimer / fadeInDuration);
+                    yield return null;
+                }
             }
             cg.alpha = 1f;
         }
@@ -262,24 +265,29 @@ public class TutorialManager : MonoBehaviour
         }
 
         float elapsed = Time.unscaledTime - stepStartTime;
-        float waitBeforeFade = Mathf.Max(0, step.minStayDuration - elapsed - 1f);
+        // 等待剩余时间（确保最短停留时间满足，并预留淡出所需时长）
+        float waitBeforeFade = Mathf.Max(0, step.minStayDuration - elapsed - step.fadeOutDuration);
         if (waitBeforeFade > 0)
             yield return new WaitForSecondsRealtime(waitBeforeFade);
 
         currentExpectedClickName = null; // 清除监听
 
+        // 图片淡出
         if (tipImageUI != null && tipImageUI.gameObject.activeSelf)
         {
             CanvasGroup cg = tipImageUI.GetComponent<CanvasGroup>();
             if (cg == null) cg = tipImageUI.gameObject.AddComponent<CanvasGroup>();
-            float fadeDuration = 1f;
-            float startAlpha = cg.alpha;
-            float timer = 0f;
-            while (timer < fadeDuration)
+            float fadeOutDuration = step.fadeOutDuration;
+            if (fadeOutDuration > 0f)
             {
-                timer += Time.unscaledDeltaTime;
-                cg.alpha = Mathf.Lerp(startAlpha, 0f, timer / fadeDuration);
-                yield return null;
+                float startAlpha = cg.alpha;
+                float timer = 0f;
+                while (timer < fadeOutDuration)
+                {
+                    timer += Time.unscaledDeltaTime;
+                    cg.alpha = Mathf.Lerp(startAlpha, 0f, timer / fadeOutDuration);
+                    yield return null;
+                }
             }
             cg.alpha = 0f;
             tipImageUI.gameObject.SetActive(false);

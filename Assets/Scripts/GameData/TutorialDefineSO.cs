@@ -35,6 +35,12 @@ public class TutorialStep
     [Tooltip("步骤最短逗留时间（秒），包含最后 1 秒淡出动画")]
     public float minStayDuration = 2f;
 
+    [Tooltip("提示图片淡入动画时长（秒），设为0则无淡入")]
+    public float fadeInDuration = 1f;
+
+    [Tooltip("提示图片淡出动画时长（秒），设为0则无淡出")]
+    public float fadeOutDuration = 1f;
+
     [Header("步骤回调")]
     public UnityEngine.Events.UnityEvent onStepStart;
     public UnityEngine.Events.UnityEvent onStepComplete;

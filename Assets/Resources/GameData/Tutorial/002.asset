@@ -23,6 +23,8 @@ MonoBehaviour:
     clickTargetName: TaskPanel
     targetButtonName: 
     minStayDuration: 0
+    fadeInDuration: 0.5
+    fadeOutDuration: 0.5
     onStepStart:
       m_PersistentCalls:
         m_Calls: []
@@ -37,6 +39,8 @@ MonoBehaviour:
     clickTargetName: 
     targetButtonName: QuestItemButton(Clone)
     minStayDuration: 0
+    fadeInDuration: 0.5
+    fadeOutDuration: 0.5
     onStepStart:
       m_PersistentCalls:
         m_Calls: []
@@ -51,6 +55,8 @@ MonoBehaviour:
     clickTargetName: 
     targetButtonName: TrackButton
     minStayDuration: 0
+    fadeInDuration: 0.5
+    fadeOutDuration: 0.5
     onStepStart:
       m_PersistentCalls:
         m_Calls: []
@@ -65,6 +71,8 @@ MonoBehaviour:
     clickTargetName: 
     targetButtonName: ReturnButton_TaskDetail
     minStayDuration: 0
+    fadeInDuration: 0.5
+    fadeOutDuration: 0.5
     onStepStart:
       m_PersistentCalls:
         m_Calls: []
@@ -79,6 +87,8 @@ MonoBehaviour:
     clickTargetName: 
     targetButtonName: 
     minStayDuration: 0
+    fadeInDuration: 0.5
+    fadeOutDuration: 0.5
     onStepStart:
       m_PersistentCalls:
         m_Calls: []
