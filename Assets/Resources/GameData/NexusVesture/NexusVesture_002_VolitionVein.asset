@@ -18,11 +18,18 @@ MonoBehaviour:
   element: 
   baseStars: 0
   maxStars: 0
-  baseHealth: 0
-  baseAttack: 0
-  baseDefence: 0
+  baseHealth: 9
+  healthPerLevel: 0.35
+  baseAttack: 6
+  attackPerLevel: 0.35
+  baseDefence: 3
+  defencePerLevel: 0.15
   baseEnergy: 0
-  baseCritRate: 0
-  baseCritDamage: 0
-  baseElementBonus: 0
+  energyPerLevel: 0
+  baseCritRate: 0.0012
+  critRatePerLevel: 0.0001
+  baseCritDamage: 0.003
+  critDamagePerLevel: 0.00018
+  baseElementBonus: 0.002
+  elementBonusPerLevel: 0.00005
   icon: {fileID: 21300000, guid: 7aa852c80fd245e43a9dfb83bb5d2fc4, type: 3}

@@ -252,7 +252,7 @@ public class PlayerData
     private void InitializeDefaultNexumIdem()
     {
         
-        for (int i = 1; i <= 3; i++)
+        for (int i = 1; i <= 5; i++)
         {
             AddDefaultNExotext("Exotext_00" + i + "_VotiveEmber");
             AddDefaultNExotext("Exotext_00" + i + "_ThoughtChime");
@@ -263,7 +263,7 @@ public class PlayerData
             AddDefaultNExotext("Exotext_00" + i + "_MnemonicTool");
         }
         
-        for (int i = 1; i <= 2; i++)
+        for (int i = 1; i <= 5; i++)
         {
             AddDefaultNexusvesture("NexusVesture_00" + i + "_CogniThread");
             AddDefaultNexusvesture("NexusVesture_00" + i + "_TangibleNexus");
