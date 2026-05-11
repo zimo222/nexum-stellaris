@@ -73,7 +73,7 @@ public class PlayerData
     {
         // 基础属性先根据初始等级计算
         UpdateBaseStatsByLevel();
-        CurrentHealth = BaseStats.Health;   // 初始满血
+        CurrentHealth = (int)BaseStats.Health;   // 初始满血
         PlayerID = System.Guid.NewGuid().ToString();
         PlayerName = playerName;
         CreateTime = DateTime.Now;
@@ -112,14 +112,104 @@ public class PlayerData
     public void UpdateBaseStatsByLevel()
     {
         int lv = Level;
-        BaseStats.Health = 100 + 9 * lv;
-        BaseStats.Attack = 15 + 3 * lv;
-        BaseStats.Defence = Mathf.RoundToInt(10f + 0.9f * lv);   // 防御为整数，四舍五入
-        BaseStats.ElementBonus = 0f + 0.005f * lv;
-        BaseStats.CritRate = 0.05f + 0.0015f * lv;
-        BaseStats.CritDamage = 0.5f + 0.005f * lv;
+        // 生命：100 + 9*(lv-1)
+        BaseStats.Health = 100 + 9 * (lv - 1);
+        // 攻击：15 + 3*(lv-1)
+        BaseStats.Attack = 15 + 3 * (lv - 1);
+        // 防御：10 + 0.9*(lv-1)
+        BaseStats.Defence = Mathf.RoundToInt(10f + 0.9f * (lv - 1));
+        // 能量固定100
         BaseStats.Energy = 100;
+        // 元素加成：每级+0.2%，初始1% → 100级 1% + 19.8% = 20.8%
+        BaseStats.ElementBonus = 0.01f + 0.002f * (lv - 1);
+
+        // 心弦率（CritRate）：每级+0.3%，初始5% → 100级 5% + 29.7% = 34.7%
+        BaseStats.CritRate = 0.05f + 0.003f * (lv - 1);
+        // 绎动值（CritDamage）：每级+0.002，初始0.5 → 100级 0.5 + 0.002*99 = 0.698
+        BaseStats.CritDamage = 0.5f + 0.002f * (lv - 1);
+        // 限制绎动值不超过1.0（安全）
+        if (BaseStats.CritDamage > 1.0f) BaseStats.CritDamage = 1.0f;
     }
+
+    // 获取角色在指定等级下的基础属性（不含装备）
+    public CharacterStats GetBaseStatsAtLevel(int level)
+    {
+        CharacterStats stats = new CharacterStats();
+        stats.Health = 100 + 9 * (level - 1);
+        stats.Attack = 15 + 3 * (level - 1);
+        stats.Defence = Mathf.RoundToInt(10f + 0.9f * (level - 1));
+        stats.Energy = 100;
+        stats.ElementBonus = 0.01f + 0.002f * (level - 1);
+        stats.CritRate = 0.05f + 0.003f * (level - 1);
+        stats.CritDamage = 0.5f + 0.002f * (level - 1);
+        if (stats.CritDamage > 1.0f) stats.CritDamage = 1.0f;
+        return stats;
+    }
+
+    // 获取某武器在指定等级下的属性（从静态数据动态计算）
+    public CharacterStats GetExotextStatsAtLevel(ExotextDefineSO def, int level)
+    {
+        CharacterStats stats = new CharacterStats();
+        stats.Health = (int)(def.baseHealth + def.healthPerLevel * (level - 1));
+        stats.Attack = (int)(def.baseAttack + def.attackPerLevel * (level - 1));
+        stats.Defence = (int)(def.baseDefence + def.defencePerLevel * (level - 1));
+        stats.Energy = (int)(def.baseEnergy + def.energyPerLevel * (level - 1));
+        stats.ElementBonus = def.baseElementBonus + def.elementBonusPerLevel * (level - 1);
+        stats.CritRate = def.baseCritRate + def.critRatePerLevel * (level - 1);
+        stats.CritDamage = def.baseCritDamage + def.critDamagePerLevel * (level - 1);
+        return stats;
+    }
+
+    // 获取某防具在指定等级下的属性（类似）
+    public CharacterStats GetNexusVestureStatsAtLevel(NexusVestureDefineSO def, int level)
+    {
+        CharacterStats stats = new CharacterStats();
+        stats.Health = (int)(def.baseHealth + def.healthPerLevel * (level - 1));
+        stats.Attack = (int)(def.baseAttack + def.attackPerLevel * (level - 1));
+        stats.Defence = (int)(def.baseDefence + def.defencePerLevel * (level - 1));
+        stats.Energy = (int)(def.baseEnergy + def.energyPerLevel * (level - 1));
+        stats.ElementBonus = def.baseElementBonus + def.elementBonusPerLevel * (level - 1);
+        stats.CritRate = def.baseCritRate + def.critRatePerLevel * (level - 1);
+        stats.CritDamage = def.baseCritDamage + def.critDamagePerLevel * (level - 1);
+        return stats;
+    }
+
+    // 获取当前角色最终总属性（基于当前等级、已装备的武器和防具）
+    public CharacterStats GetTotalStatsAtLevel(int level)
+    {
+        CharacterStats total = GetBaseStatsAtLevel(level);
+
+        /*
+        // 遍历已装备的武器（EquippedExotextIds）
+        for (int i = 0; i < EquippedExotextIds.Length; i++)
+        {
+            string id = EquippedExotextIds[i];
+            if (string.IsNullOrEmpty(id)) continue;
+            var data = ExotextBag.Find(e => e.Id == id);
+            if (data == null) continue;
+            var def = GameDataManager.Instance.ExotextDict[data.Id];
+            total += GetExotextStatsAtLevel(def, level);
+        }
+        */
+
+        // 遍历已装备的防具
+        for (int i = 0; i < EquippedNexusVestureIds.Length; i++)
+        {
+            string id = EquippedNexusVestureIds[i];
+            if (string.IsNullOrEmpty(id)) continue;
+            var data = NexusVestureBag.Find(v => v.Id == id);
+            if (data == null) continue;
+            var def = GameDataManager.Instance.NexusVestureDict[data.Id];
+            total += GetNexusVestureStatsAtLevel(def, level);
+        }
+
+        // 限制心弦率最大0.5（50%）
+        total.CritRate = Mathf.Clamp01(total.CritRate);
+        // 限制绎动值最大1.0（100%）
+        if (total.CritDamage > 1.0f) total.CritDamage = 1.0f;
+        return total;
+    }
+
 
     public void SortedBag()
     {
@@ -257,35 +347,16 @@ public class PlayerData
         activeQuests.Add(quest);
     }
     #endregion
+    
 
 
-    public int TotalHealth => BaseStats.Health +
-        EquippedExotextIds.Where(id => !string.IsNullOrEmpty(id)).Sum(id => ExotextBag.Find(e => e.Id == id)?.Stats.Health ?? 0) +
-        EquippedNexusVestureIds.Where(id => !string.IsNullOrEmpty(id)).Sum(id => NexusVestureBag.Find(n => n.Id == id)?.Stats.Health ?? 0);
-
-    public int TotalAttack => BaseStats.Attack +
-        EquippedExotextIds.Where(id => !string.IsNullOrEmpty(id)).Sum(id => ExotextBag.Find(e => e.Id == id)?.Stats.Attack ?? 0) +
-        EquippedNexusVestureIds.Where(id => !string.IsNullOrEmpty(id)).Sum(id => NexusVestureBag.Find(n => n.Id == id)?.Stats.Attack ?? 0);
-
-    public int TotalDefence => BaseStats.Defence +
-        EquippedExotextIds.Where(id => !string.IsNullOrEmpty(id)).Sum(id => ExotextBag.Find(e => e.Id == id)?.Stats.Defence ?? 0) +
-        EquippedNexusVestureIds.Where(id => !string.IsNullOrEmpty(id)).Sum(id => NexusVestureBag.Find(n => n.Id == id)?.Stats.Defence ?? 0);
-
-    public int TotalEnergy => BaseStats.Energy +
-        EquippedExotextIds.Where(id => !string.IsNullOrEmpty(id)).Sum(id => ExotextBag.Find(e => e.Id == id)?.Stats.Energy ?? 0) +
-        EquippedNexusVestureIds.Where(id => !string.IsNullOrEmpty(id)).Sum(id => NexusVestureBag.Find(n => n.Id == id)?.Stats.Energy ?? 0);
-
-    public float TotalCritRate => Mathf.Clamp01(BaseStats.CritRate +
-        EquippedExotextIds.Where(id => !string.IsNullOrEmpty(id)).Sum(id => ExotextBag.Find(e => e.Id == id)?.Stats.CritRate ?? 0) +
-        EquippedNexusVestureIds.Where(id => !string.IsNullOrEmpty(id)).Sum(id => NexusVestureBag.Find(n => n.Id == id)?.Stats.CritRate ?? 0));
-
-    public float TotalCritDamage => BaseStats.CritDamage +
-        EquippedExotextIds.Where(id => !string.IsNullOrEmpty(id)).Sum(id => ExotextBag.Find(e => e.Id == id)?.Stats.CritDamage ?? 0) +
-        EquippedNexusVestureIds.Where(id => !string.IsNullOrEmpty(id)).Sum(id => NexusVestureBag.Find(n => n.Id == id)?.Stats.CritDamage ?? 0);
-
-    public float TotalElementBonus => BaseStats.ElementBonus +
-        EquippedExotextIds.Where(id => !string.IsNullOrEmpty(id)).Sum(id => ExotextBag.Find(e => e.Id == id)?.Stats.ElementBonus ?? 0) +
-        EquippedNexusVestureIds.Where(id => !string.IsNullOrEmpty(id)).Sum(id => NexusVestureBag.Find(n => n.Id == id)?.Stats.ElementBonus ?? 0);
+    public int TotalHealth => (int)GetTotalStatsAtLevel(Level).Health;
+    public int TotalAttack => (int)GetTotalStatsAtLevel(Level).Attack;
+    public int TotalDefence => (int)GetTotalStatsAtLevel(Level).Defence;
+    public int TotalEnergy => GetTotalStatsAtLevel(Level).Energy;
+    public float TotalCritRate => GetTotalStatsAtLevel(Level).CritRate;
+    public float TotalCritDamage => GetTotalStatsAtLevel(Level).CritDamage;
+    public float TotalElementBonus => GetTotalStatsAtLevel(Level).ElementBonus;
 }
 
 // ==================== 角色数据类 ====================
@@ -321,7 +392,7 @@ public class NexumIdemData
 
     public NexumIdemData(string id,
                         string element = "", int stars = 0,
-                        int health = 0, int attack = 0, int defence = 0,
+                        float health = 0, float attack = 0, float defence = 0,
                         int energy = 0, float critRate = 0f, float critDamage = 0f, float elementBonus = 0f)
     {
         Id = id;
@@ -335,8 +406,8 @@ public class NexumIdemData
         };
     }
 
-    public int Health => Stats.Health;
-    public int Attack => Stats.Attack;
+    public float Health => Stats.Health;
+    public float Attack => Stats.Attack;
     public float CritRate => Stats.CritRate;
     public float CritDamage => Stats.CritDamage;
     public float ElementBonus => Stats.ElementBonus;
@@ -350,7 +421,7 @@ public class ExotextData : NexumIdemData
 
     public ExotextData(string id, ExotextType type,
                         string element = "", int stars = 0, int maxstars = 0,
-                        int health = 0, int attack = 0, int defence = 0,
+                        float health = 0, float attack = 0, float defence = 0,
                         int energy = 0, float critRate = 0f, float critDamage = 0f, float elementBonus = 0f,
                         string introduction = "", string description = "")
         : base(id, element, stars, health, attack, defence, energy, critRate, critDamage, elementBonus)
@@ -367,7 +438,7 @@ public class NexusVestureData: NexumIdemData
 
     public NexusVestureData(string id, NexusVesturePosition position,
                         string element = "", int stars = 0, int maxstars = 0,
-                        int health = 0, int attack = 0, int defence = 0,
+                        float health = 0, float attack = 0, float defence = 0,
                         int energy = 0, float critRate = 0f, float critDamage = 0f, float elementBonus = 0f,
                         string introduction = "", string description = "")
         : base(id, element, stars, health, attack, defence, energy, critRate, critDamage, elementBonus)
@@ -456,9 +527,9 @@ public struct CharacterStats
     public int SStars;                               // 小星级
     public int Fragments;                            // 碎片
 
-    public int Health;                               // 生命值
-    public int Attack;                               // 攻击力
-    public int Defence;                              // 防御力
+    public float Health;                               // 生命值
+    public float Attack;                               // 攻击力
+    public float Defence;                              // 防御力
 
     public int Energy;                               // 能量
     public float CritRate;                           // 暴击率（0-1）

@@ -154,6 +154,10 @@ public class Player : Entity
 
     public void SpawnBullet()
     {
+
+        // 先尝试触发特效（可能会设置 currentSpellManaReduction）
+        TryTriggerSpecialEffect();
+
         if (playerData.CurrentEnergy < 10) return;
 
         CombatManager.Instance.CostEnergy(this.gameObject, 10);
@@ -195,5 +199,63 @@ public class Player : Entity
     protected void OnDestroy()
     {
         if (Instance == this) Instance = null;
+    }
+
+    // ================= 心弦/绎动特效逻辑 =================
+    private void TryTriggerSpecialEffect()
+    {
+        PlayerData pData = PlayerDataManager.Instance.CurrentPlayerData;
+        if (pData == null) return;
+
+        float heartStringRate = pData.TotalCritRate;    // 心弦率
+        float yiDongValue = pData.TotalCritDamage;      // 绎动值
+
+        if (Random.value > heartStringRate + 1) return;
+
+        // 获取当前装备的武器数据
+        ExotextData weapon = PlayerDataManager.Instance.GetEquippedExotext((ExotextType)selectedSpellIndex);
+        if (weapon == null) return;
+
+        // 获取武器定义
+        if (!GameDataManager.Instance.ExotextDict.TryGetValue(weapon.Id, out var def)) return;
+        if (def.possibleEffects == null || def.possibleEffects.Count == 0) return;
+
+        // 随机选择一个特效
+        var effectDef = def.possibleEffects[Random.Range(0, def.possibleEffects.Count)];
+        float strength = effectDef.baseStrength * yiDongValue;
+
+        // 应用效果
+        ApplySpecialEffect(effectDef, strength);
+
+        // 显示 UI 消息（不再使用 PromptTextManager）
+        string message = $"{effectDef.effectName}: {string.Format(effectDef.shortDesc, strength * 100f)}";
+        if (MessagePopupController.Instance != null)
+            MessagePopupController.Instance.ShowMessage(message);
+    }
+
+    private void ApplySpecialEffect(SpecialEffectDefineSO effectDef, float strength)
+    {
+        PlayerData pData = PlayerDataManager.Instance.CurrentPlayerData;
+        switch (effectDef.effectType)
+        {
+            case SpecialEffectType.WeaveMagic:
+                //pData.currentSpellManaReduction = Mathf.Clamp01(strength);
+                break;
+            case SpecialEffectType.Echo:
+                // 这里调用你的冷却减少系统，如果没有可以留空或实现简单逻辑
+                Debug.Log($"回响触发：技能冷却减少 {strength * 100}%");
+                // 例如: SkillManager.Instance.ReduceAllCooldowns(strength);
+                break;
+            case SpecialEffectType.Warmth:
+                // 护盾系统（你需要自己实现）
+                int maxHealth = pData.TotalHealth;
+                int shield = Mathf.RoundToInt(maxHealth * strength);
+                Debug.Log($"余温触发：获得 {shield} 点护盾");
+                // 例如: ShieldManager.Instance.AddShield(shield);
+                break;
+            default:
+                Debug.LogWarning($"未处理特效类型：{effectDef.effectType}");
+                break;
+        }
     }
 }

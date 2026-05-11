@@ -15,15 +15,22 @@ public class NexusVestureDefineSO : ScriptableObject
     public int baseStars;
     public int maxStars;
 
-    public int baseHealth;
-    public int baseAttack;
-    public int baseDefence;
-
+    public float baseHealth;
+    public float healthPerLevel;
+    public float baseAttack;
+    public float attackPerLevel;
+    public float baseDefence;
+    public float defencePerLevel;
 
     public int baseEnergy;
-    public float baseCritRate;
-    public float baseCritDamage;
+    public int energyPerLevel;
+
+    public float baseCritRate;    // 原 baseCritRate，心弦率基础
+    public float critRatePerLevel;
+    public float baseCritDamage;         // 原 baseCritDamage，绎动值基础
+    public float critDamagePerLevel;
     public float baseElementBonus;
+    public float elementBonusPerLevel;
 
     public Sprite icon;
     /*

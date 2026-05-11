@@ -57,17 +57,25 @@ public class CharacterPanelView : MonoBehaviour
 
     public void UpdateUI(PlayerData currentPlayerData)
     {
+        CharacterStats stats = currentPlayerData.GetTotalStatsAtLevel(currentPlayerData.Level);
 
         if (nameText != null) nameText.text = currentPlayerData.PlayerName;
         if (levelText != null) levelText.text = $"Lv.{currentPlayerData.Level}";
         if (expText != null) expText.text = $"EXP: {currentPlayerData.Experience}";
 
-        var stats = currentPlayerData.BaseStats;
+        /*
         if (healthText != null) healthText.text = $"{currentPlayerData.TotalHealth}";
         if (attackText != null) attackText.text = $"{currentPlayerData.TotalAttack}";
         if (defenceText != null) defenceText.text = $"{currentPlayerData.TotalDefence}";
         if (critRateText != null) critRateText.text = $"{currentPlayerData.TotalCritRate * 100}%";
         if (critDamageText != null) critDamageText.text = $"{currentPlayerData.TotalCritDamage * 100}%";
+        if (energyText != null) energyText.text = $"{currentPlayerData.TotalEnergy}";
+        */
+        if (healthText != null) healthText.text = $"{stats.Health}";
+        if (attackText != null) attackText.text = $"{stats.Attack}";
+        if (defenceText != null) defenceText.text = $"{stats.Defence}";
+        if (critRateText != null) critRateText.text = $"{(stats.CritRate * 100).ToString("G3")}%";
+        if (critDamageText != null) critDamageText.text = $"{(stats.CritDamage * 100).ToString("G3")}%";
         if (energyText != null) energyText.text = $"{currentPlayerData.TotalEnergy}";
     }
 }

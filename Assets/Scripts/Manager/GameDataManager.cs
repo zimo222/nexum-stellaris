@@ -12,6 +12,7 @@ public class GameDataManager : MonoBehaviour
     public Dictionary<string, BulletDefineSO> BulletDict { get; private set; }
     public Dictionary<string, SpellModuleSO> SpellModuleDict { get; private set; }
     public Dictionary<string, TutorialDefineSO> TutorialDict { get; private set; }
+    public Dictionary<string, SpecialEffectDefineSO> SpecialEffectDict { get; private set; }
 
     void Awake()
     {
@@ -26,7 +27,7 @@ public class GameDataManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
+        /*
         ExotextDefineSO[] exotexts = Resources.LoadAll<ExotextDefineSO>("GameData/Exotext");
         ExotextDict = exotexts.ToDictionary(w => w.id, w => w);
 
@@ -47,5 +48,34 @@ public class GameDataManager : MonoBehaviour
 
         TutorialDefineSO[] tutorials = Resources.LoadAll<TutorialDefineSO>("GameData/Tutorial");
         TutorialDict = tutorials.ToDictionary(t => t.sequenceName, t => t);
+        */
+        ExotextDict = LoadDict<ExotextDefineSO>("GameData/Exotext");
+        NexusVestureDict = LoadDict<NexusVestureDefineSO>("GameData/NexusVesture");
+        MaterialDict = LoadDict<MaterialDefineSO>("GameData/Material");
+        QuestDict = LoadDict<QuestDefineSO>("GameData/Quest");
+        BulletDict = LoadDict<BulletDefineSO>("GameData/Bullet");
+        SpellModuleDict = LoadDict<SpellModuleSO>("GameData/SpellModule");
+        TutorialDict = LoadDict<TutorialDefineSO>("GameData/Tutorial");
+        SpecialEffectDict = LoadDict<SpecialEffectDefineSO>("GameData/SpecialEffect");
+    }
+    // 通用加载方法，避免重复代码
+    private Dictionary<string, T> LoadDict<T>(string folder) where T : Object
+    {
+        T[] arr = Resources.LoadAll<T>(folder);
+        return arr.ToDictionary(item => GetId(item));
+    }
+
+    // 根据不同类型获取id字段（因为 ScriptableObject 没有统一id字段）
+    private string GetId<T>(T obj)
+    {
+        if (obj is ExotextDefineSO e) return e.id;
+        if (obj is NexusVestureDefineSO n) return n.id;
+        if (obj is MaterialDefineSO m) return m.id;
+        if (obj is QuestDefineSO q) return q.id;
+        if (obj is BulletDefineSO b) return b.id;
+        if (obj is SpellModuleSO s) return s.id;
+        if (obj is TutorialDefineSO t) return t.sequenceName;
+        if (obj is SpecialEffectDefineSO se) return se.id;
+        return null;
     }
 }

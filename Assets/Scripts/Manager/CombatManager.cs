@@ -207,11 +207,11 @@ public class CombatManager : MonoBehaviour
 
         if(player != null)
         {
-            healthSliderA.maxValue = player.BaseStats.Health;
+            healthSliderA.maxValue = player.TotalHealth;
             healthSliderA.value = player.CurrentHealth;
-            healthSliderB.maxValue = player.BaseStats.Health;
+            healthSliderB.maxValue = player.TotalHealth;
             healthSliderB.value = player.CurrentHealth;
-            healthText.text = player.CurrentHealth.ToString() + "/" + player.BaseStats.Health.ToString();
+            healthText.text = player.CurrentHealth.ToString() + "/" + player.TotalHealth.ToString();
             return;
         }
 
@@ -221,11 +221,11 @@ public class CombatManager : MonoBehaviour
         if (playerData == null) return;
 
         // 设置 Slider 的最大值和当前值
-        healthSliderA.maxValue = playerData.BaseStats.Health;
+        healthSliderA.maxValue = playerData.TotalHealth;
         healthSliderA.value = playerData.CurrentHealth;
-        healthSliderB.maxValue = playerData.BaseStats.Health;
+        healthSliderB.maxValue = playerData.TotalHealth;
         healthSliderB.value = playerData.CurrentHealth;
-        healthText.text = playerData.CurrentHealth.ToString() + "/" + playerData.BaseStats.Health.ToString();
+        healthText.text = playerData.CurrentHealth.ToString() + "/" + playerData.TotalHealth.ToString();
     }
 
     /// <summary>
@@ -269,7 +269,7 @@ public class CombatManager : MonoBehaviour
         {
             // 普通死亡重置血量（如果需要）
             PlayerData playerData = PlayerDataManager.Instance.CurrentPlayerData;
-            playerData.CurrentHealth = playerData.BaseStats.Health;
+            playerData.CurrentHealth = (int)playerData.TotalHealth;
         }
     }
 
@@ -290,7 +290,7 @@ public class CombatManager : MonoBehaviour
         RegisterEnemy(enemy);
         // 重置玩家血量到满血（从最大血量同步）
         PlayerData playerData = PlayerDataManager.Instance.CurrentPlayerData;
-        playerData.CurrentHealth = playerData.BaseStats.Health;
+        playerData.CurrentHealth = (int)playerData.TotalHealth;
 
         // 血量重置后更新血条
         UpdateHealthSlider();
@@ -411,7 +411,7 @@ public class CombatManager : MonoBehaviour
 
         // 重置玩家血量
         PlayerData playerData = PlayerDataManager.Instance.CurrentPlayerData;
-        playerData.CurrentHealth = playerData.BaseStats.Health;
+        playerData.CurrentHealth = (int)playerData.TotalHealth;
         // 可以触发玩家复活动画等，这里简单处理
 
         // 通知任务管理器战斗失败，回退任务
@@ -526,7 +526,7 @@ public class CombatManager : MonoBehaviour
     private void RecoverPlayer()
     {
         PlayerData playerData = PlayerDataManager.Instance.CurrentPlayerData;
-        playerData.CurrentHealth = playerData.BaseStats.Health;
+        playerData.CurrentHealth = (int)playerData.TotalHealth;
         UpdateHealthSlider();
         // 可选：给予经验
         int expToGive = ExperienceCurve.RequiredExp(playerData.Level) / 2;
@@ -575,7 +575,7 @@ public class CombatManager : MonoBehaviour
     private IEnumerator Co_RegenHealthGold(float duration)
     {
         PlayerData playerData = PlayerDataManager.Instance.CurrentPlayerData;
-        int targetHealth = playerData.BaseStats.Health;
+        int targetHealth = (int)playerData.TotalHealth;
         int startHealth = playerData.CurrentHealth;  // 通常是0
 
         float elapsed = 0f;
