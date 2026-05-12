@@ -32,12 +32,12 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   - tipImage: {fileID: 21300000, guid: 486f0b337999d5942b54759258df34cb, type: 3}
-    highlightTargetName: QuestItemButton(Clone)
+    highlightTargetName: QuestItemButton(Clone)MainQuest_001002
     keyCondition:
       keys: 
       anyKey: 0
     clickTargetName: 
-    targetButtonName: QuestItemButton(Clone)
+    targetButtonName: QuestItemButton(Clone)MainQuest_001002
     minStayDuration: 0
     fadeInDuration: 0.5
     fadeOutDuration: 0.5

@@ -21,6 +21,7 @@ public class ModuleLibraryItem : MonoBehaviour, IPointerClickHandler
     {
         module = moduleData;
         if (iconImage != null) iconImage.sprite = moduleData.icon;
+        this.name = moduleData.id;
         //if (moduleNameText != null) moduleNameText.text = moduleData.moduleName;
     }
 

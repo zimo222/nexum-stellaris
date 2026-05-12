@@ -22,7 +22,7 @@ MonoBehaviour:
       anyKey: 0
     clickTargetName: 
     targetButtonName: 
-    minStayDuration: 1
+    minStayDuration: 3
     fadeInDuration: 1
     fadeOutDuration: 1
     onStepStart:
@@ -41,6 +41,54 @@ MonoBehaviour:
     minStayDuration: 1
     fadeInDuration: 1
     fadeOutDuration: 1
+    onStepStart:
+      m_PersistentCalls:
+        m_Calls: []
+    onStepComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  - tipImage: {fileID: 21300000, guid: 60bd5d5363064e843bf70b9d9d7ba639, type: 3}
+    highlightTargetName: TipButton
+    keyCondition:
+      keys: 
+      anyKey: 0
+    clickTargetName: 
+    targetButtonName: TipButton
+    minStayDuration: 1
+    fadeInDuration: 1
+    fadeOutDuration: 0.5
+    onStepStart:
+      m_PersistentCalls:
+        m_Calls: []
+    onStepComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  - tipImage: {fileID: 21300000, guid: 7534271309d0aeb468a750cc4057a637, type: 3}
+    highlightTargetName: 
+    keyCondition:
+      keys: 
+      anyKey: 0
+    clickTargetName: TipImage
+    targetButtonName: 
+    minStayDuration: 1
+    fadeInDuration: 1
+    fadeOutDuration: 0.5
+    onStepStart:
+      m_PersistentCalls:
+        m_Calls: []
+    onStepComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  - tipImage: {fileID: 21300000, guid: ae753916afe64584ea2fc0452b267ccc, type: 3}
+    highlightTargetName: InterationButton
+    keyCondition:
+      keys: 66000000
+      anyKey: 0
+    clickTargetName: 
+    targetButtonName: InterationButton
+    minStayDuration: 1
+    fadeInDuration: 1
+    fadeOutDuration: 0.5
     onStepStart:
       m_PersistentCalls:
         m_Calls: []

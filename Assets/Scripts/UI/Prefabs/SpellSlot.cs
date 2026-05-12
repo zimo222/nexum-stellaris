@@ -12,7 +12,8 @@ public class SpellSlot : MonoBehaviour, IPointerClickHandler
     private void Start()
     {
         //if (iconImage != null)
-            //iconImage.gameObject.SetActive(false);
+        //iconImage.gameObject.SetActive(false);
+        this.name = this.name + slotIndex.ToString();
     }
 
     // ·ÅÈëÄ£¿é

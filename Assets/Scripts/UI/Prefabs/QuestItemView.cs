@@ -12,5 +12,6 @@ public class QuestItemView : MonoBehaviour
             questNameText.text = questData.questName;
         if (chapterNameText != null)
             chapterNameText.text = questData.chapterName + "   µÚ" + questData.questNum + "Ä»";
+        this.name += questData.id;
     }
 }

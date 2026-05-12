@@ -14,4 +14,340 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sequenceName: 003
   startDelay: 0
-  steps: []
+  steps:
+  - tipImage: {fileID: 21300000, guid: 7d0d9fc237b3c394c824e6fc51485152, type: 3}
+    highlightTargetName: CharacterPanelButton
+    keyCondition:
+      keys: 63000000
+      anyKey: 0
+    clickTargetName: 
+    targetButtonName: CharacterPanelButton
+    minStayDuration: 0
+    fadeInDuration: 0.5
+    fadeOutDuration: 0.5
+    onStepStart:
+      m_PersistentCalls:
+        m_Calls: []
+    onStepComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  - tipImage: {fileID: 21300000, guid: 70e72c618e0fdcb4da6ba7e8bed8cb7e, type: 3}
+    highlightTargetName: CharacterButton
+    keyCondition:
+      keys: 
+      anyKey: 0
+    clickTargetName: 
+    targetButtonName: CharacterButton
+    minStayDuration: 0
+    fadeInDuration: 0.5
+    fadeOutDuration: 0.5
+    onStepStart:
+      m_PersistentCalls:
+        m_Calls: []
+    onStepComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  - tipImage: {fileID: 21300000, guid: 653e9cf4ab2ba044bbfb0d69c8332914, type: 3}
+    highlightTargetName: EquipmentButton
+    keyCondition:
+      keys: 
+      anyKey: 0
+    clickTargetName: 
+    targetButtonName: EquipmentButton
+    minStayDuration: 0
+    fadeInDuration: 0.5
+    fadeOutDuration: 0.5
+    onStepStart:
+      m_PersistentCalls:
+        m_Calls: []
+    onStepComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  - tipImage: {fileID: 21300000, guid: b5916e70074b7a747a08ae57510b2803, type: 3}
+    highlightTargetName: Exotext_001_MnemonicTool
+    keyCondition:
+      keys: 
+      anyKey: 0
+    clickTargetName: Exotext_001_MnemonicTool
+    targetButtonName: 
+    minStayDuration: 0
+    fadeInDuration: 0.5
+    fadeOutDuration: 0.5
+    onStepStart:
+      m_PersistentCalls:
+        m_Calls: []
+    onStepComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  - tipImage: {fileID: 21300000, guid: 7efdb20c5c0cdb34a9506b59d3ec72f2, type: 3}
+    highlightTargetName: Exotext_001_VotiveEmber
+    keyCondition:
+      keys: 
+      anyKey: 0
+    clickTargetName: Exotext_001_VotiveEmber
+    targetButtonName: 
+    minStayDuration: 0
+    fadeInDuration: 0.5
+    fadeOutDuration: 0.5
+    onStepStart:
+      m_PersistentCalls:
+        m_Calls: []
+    onStepComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  - tipImage: {fileID: 21300000, guid: f90faa285ece4b84382c05ea56ddd34a, type: 3}
+    highlightTargetName: EquipButton
+    keyCondition:
+      keys: 
+      anyKey: 0
+    clickTargetName: 
+    targetButtonName: EquipButton
+    minStayDuration: 0
+    fadeInDuration: 0.5
+    fadeOutDuration: 0.5
+    onStepStart:
+      m_PersistentCalls:
+        m_Calls: []
+    onStepComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  - tipImage: {fileID: 21300000, guid: 33ec7b08e8c6dab4899e408cf779f67f, type: 3}
+    highlightTargetName: SkillButton
+    keyCondition:
+      keys: 
+      anyKey: 0
+    clickTargetName: 
+    targetButtonName: SkillButton
+    minStayDuration: 0
+    fadeInDuration: 0.5
+    fadeOutDuration: 0.5
+    onStepStart:
+      m_PersistentCalls:
+        m_Calls: []
+    onStepComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  - tipImage: {fileID: 21300000, guid: df820abd7a414314092e039a09198890, type: 3}
+    highlightTargetName: TipButton_002
+    keyCondition:
+      keys: 
+      anyKey: 0
+    clickTargetName: 
+    targetButtonName: TipButton_002
+    minStayDuration: 0
+    fadeInDuration: 0.5
+    fadeOutDuration: 0.5
+    onStepStart:
+      m_PersistentCalls:
+        m_Calls: []
+    onStepComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  - tipImage: {fileID: 21300000, guid: 49ac15a599123ca4c97ec8617bcc0839, type: 3}
+    highlightTargetName: 
+    keyCondition:
+      keys: 
+      anyKey: 0
+    clickTargetName: TipImage
+    targetButtonName: 
+    minStayDuration: 0
+    fadeInDuration: 0.5
+    fadeOutDuration: 0.5
+    onStepStart:
+      m_PersistentCalls:
+        m_Calls: []
+    onStepComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  - tipImage: {fileID: 21300000, guid: aad4e9f9e5cce084792302cc0f83bbbe, type: 3}
+    highlightTargetName: 
+    keyCondition:
+      keys: 
+      anyKey: 0
+    clickTargetName: TipImage
+    targetButtonName: 
+    minStayDuration: 0
+    fadeInDuration: 0.5
+    fadeOutDuration: 0.5
+    onStepStart:
+      m_PersistentCalls:
+        m_Calls: []
+    onStepComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  - tipImage: {fileID: 21300000, guid: 9537b21402f2cfa4084500cde2d8a9e8, type: 3}
+    highlightTargetName: Modifier_Accelerate_2.00X
+    keyCondition:
+      keys: 
+      anyKey: 0
+    clickTargetName: Modifier_Accelerate_2.00X
+    targetButtonName: 
+    minStayDuration: 0
+    fadeInDuration: 0.5
+    fadeOutDuration: 0.5
+    onStepStart:
+      m_PersistentCalls:
+        m_Calls: []
+    onStepComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  - tipImage: {fileID: 21300000, guid: ba048bf3d6b9d3e4d80ea763c02a0310, type: 3}
+    highlightTargetName: SpellSlot(Clone)0
+    keyCondition:
+      keys: 
+      anyKey: 0
+    clickTargetName: SpellSlot(Clone)0
+    targetButtonName: 
+    minStayDuration: 0
+    fadeInDuration: 0.5
+    fadeOutDuration: 0.5
+    onStepStart:
+      m_PersistentCalls:
+        m_Calls: []
+    onStepComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  - tipImage: {fileID: 21300000, guid: 3a36ba865c5a2a244983e66af156b5d3, type: 3}
+    highlightTargetName: AProjectile_FireBall_001
+    keyCondition:
+      keys: 
+      anyKey: 0
+    clickTargetName: AProjectile_FireBall_001
+    targetButtonName: 
+    minStayDuration: 0
+    fadeInDuration: 0.5
+    fadeOutDuration: 0.5
+    onStepStart:
+      m_PersistentCalls:
+        m_Calls: []
+    onStepComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  - tipImage: {fileID: 21300000, guid: 08b4391cec4b60848b34c62f334b4e35, type: 3}
+    highlightTargetName: SpellSlot(Clone)1
+    keyCondition:
+      keys: 
+      anyKey: 0
+    clickTargetName: SpellSlot(Clone)1
+    targetButtonName: 
+    minStayDuration: 0
+    fadeInDuration: 0.5
+    fadeOutDuration: 0.5
+    onStepStart:
+      m_PersistentCalls:
+        m_Calls: []
+    onStepComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  - tipImage: {fileID: 21300000, guid: 6b2214b5b2c98fd4a9b731f0e71ac66e, type: 3}
+    highlightTargetName: Corrector_Homing_5
+    keyCondition:
+      keys: 
+      anyKey: 0
+    clickTargetName: Corrector_Homing_5
+    targetButtonName: 
+    minStayDuration: 0
+    fadeInDuration: 0.5
+    fadeOutDuration: 0.5
+    onStepStart:
+      m_PersistentCalls:
+        m_Calls: []
+    onStepComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  - tipImage: {fileID: 21300000, guid: e905a30aec096d8408e5af8188e8f424, type: 3}
+    highlightTargetName: SpellSlot(Clone)2
+    keyCondition:
+      keys: 
+      anyKey: 0
+    clickTargetName: SpellSlot(Clone)2
+    targetButtonName: 
+    minStayDuration: 0
+    fadeInDuration: 0.5
+    fadeOutDuration: 0.5
+    onStepStart:
+      m_PersistentCalls:
+        m_Calls: []
+    onStepComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  - tipImage: {fileID: 21300000, guid: 35cc881aa09048444943e1d925f752f8, type: 3}
+    highlightTargetName: ReturnButton_CharacterPanel
+    keyCondition:
+      keys: 63000000
+      anyKey: 0
+    clickTargetName: 
+    targetButtonName: ReturnButton_CharacterPanel
+    minStayDuration: 0
+    fadeInDuration: 0.5
+    fadeOutDuration: 0.5
+    onStepStart:
+      m_PersistentCalls:
+        m_Calls: []
+    onStepComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  - tipImage: {fileID: 21300000, guid: 680954199ff38284e9d935d1a7c2448e, type: 3}
+    highlightTargetName: TaskPanel
+    keyCondition:
+      keys: 72000000
+      anyKey: 0
+    clickTargetName: TaskPanel
+    targetButtonName: 
+    minStayDuration: 0
+    fadeInDuration: 0.5
+    fadeOutDuration: 0.5
+    onStepStart:
+      m_PersistentCalls:
+        m_Calls: []
+    onStepComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  - tipImage: {fileID: 21300000, guid: cde0e1f74fd916149a6901a52f2d60bb, type: 3}
+    highlightTargetName: QuestItemButton(Clone)WorldQuest_001001
+    keyCondition:
+      keys: 
+      anyKey: 0
+    clickTargetName: 
+    targetButtonName: QuestItemButton(Clone)WorldQuest_001001
+    minStayDuration: 0
+    fadeInDuration: 0.5
+    fadeOutDuration: 0.5
+    onStepStart:
+      m_PersistentCalls:
+        m_Calls: []
+    onStepComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  - tipImage: {fileID: 21300000, guid: 69f9c643d22ca474589ebdc2d1734e51, type: 3}
+    highlightTargetName: TrackButton
+    keyCondition:
+      keys: 
+      anyKey: 0
+    clickTargetName: 
+    targetButtonName: TrackButton
+    minStayDuration: 0
+    fadeInDuration: 0.5
+    fadeOutDuration: 0.5
+    onStepStart:
+      m_PersistentCalls:
+        m_Calls: []
+    onStepComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  - tipImage: {fileID: 21300000, guid: 9a92a66a919ef634a88dd6399e59b84f, type: 3}
+    highlightTargetName: ReturnButton_TaskDetail
+    keyCondition:
+      keys: 
+      anyKey: 0
+    clickTargetName: 
+    targetButtonName: ReturnButton_TaskDetail
+    minStayDuration: 0
+    fadeInDuration: 0.5
+    fadeOutDuration: 0.5
+    onStepStart:
+      m_PersistentCalls:
+        m_Calls: []
+    onStepComplete:
+      m_PersistentCalls:
+        m_Calls: []
