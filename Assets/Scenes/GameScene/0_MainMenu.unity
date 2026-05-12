@@ -1102,7 +1102,7 @@ GameObject:
   - component: {fileID: 227364423}
   - component: {fileID: 227364425}
   - component: {fileID: 227364424}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1283,7 +1283,8 @@ GameObject:
   - component: {fileID: 267152958}
   - component: {fileID: 267152957}
   - component: {fileID: 267152955}
-  m_Layer: 5
+  - component: {fileID: 267152959}
+  m_Layer: 6
   m_Name: LoadingPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1365,6 +1366,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 267152954}
   m_CullTransparentMesh: 1
+--- !u!223 &267152959
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267152954}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 999
+  m_TargetDisplay: 0
 --- !u!1 &295022410
 GameObject:
   m_ObjectHideFlags: 0
@@ -1802,7 +1826,7 @@ GameObject:
   - component: {fileID: 397602478}
   - component: {fileID: 397602477}
   - component: {fileID: 397602481}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: TutorialManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2243,7 +2267,7 @@ GameObject:
   - component: {fileID: 465930312}
   - component: {fileID: 465930316}
   - component: {fileID: 465930315}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2264,10 +2288,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 397602480}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1920, y: 1080}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &465930312
 MonoBehaviour:
@@ -2319,6 +2343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8335e5d008006a748b26e25346d47f3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alphaThreshold: 0.1
 --- !u!223 &465930316
 Canvas:
   m_ObjectHideFlags: 0
@@ -2333,14 +2358,14 @@ Canvas:
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
-  m_OverrideSorting: 0
+  m_OverrideSorting: 1
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 998
   m_TargetDisplay: 0
 --- !u!1 &500715417
 GameObject:
@@ -8380,7 +8405,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 887159439}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8416,7 +8441,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 891483662}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13948,7 +13973,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1049289204}
   - component: {fileID: 1049289205}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14837,7 +14862,7 @@ GameObject:
   - component: {fileID: 1284530830}
   - component: {fileID: 1284530831}
   - component: {fileID: 1284530832}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: ProgressText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16277,7 +16302,7 @@ GameObject:
   - component: {fileID: 1423808839}
   - component: {fileID: 1423808841}
   - component: {fileID: 1423808840}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18450,7 +18475,7 @@ GameObject:
   - component: {fileID: 1919386636}
   - component: {fileID: 1919386635}
   - component: {fileID: 1919386634}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: TipText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19573,7 +19598,7 @@ GameObject:
   - component: {fileID: 2062120920}
   - component: {fileID: 2062120922}
   - component: {fileID: 2062120921}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}

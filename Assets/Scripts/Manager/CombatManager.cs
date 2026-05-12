@@ -157,7 +157,8 @@ public class CombatManager : MonoBehaviour
         {
             PlayerData playerData = PlayerDataManager.Instance.CurrentPlayerData;
             playerData.CurrentHealth -= amount;
-            playerComp.Damage(); // 触发受伤特效等
+            playerData.CurrentHealth = Math.Min(playerData.TotalHealth, playerData.CurrentHealth);
+            if(amount > 0) playerComp.Damage(); // 触发受伤特效等
 
             // 血量变化后立即更新血条
             UpdateHealthSlider();

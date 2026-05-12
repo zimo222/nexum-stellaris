@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 470e8797d563b394d86dda6db4f7a380, type: 3}
-  m_Name: SF_Bond
+  m_Name: SF_Recover
   m_EditorClassIdentifier: 
-  id: SF_Bond
-  effectName: SF_Bond
-  effectType: 5
-  baseStrength: 30
-  shortDesc: 
+  id: SF_Recover
+  effectName: "\u590D\u82CF"
+  effectType: 2
+  baseRateStrength: 0.5
+  baseDamageStrength: 0.2
+  shortDesc: "<color=#00FF00>\u5F53\u524D\u751F\u547D+{0:F0}%</color>"
   description: 
   icon: {fileID: 0}

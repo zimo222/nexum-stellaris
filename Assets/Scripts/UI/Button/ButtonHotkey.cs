@@ -9,14 +9,14 @@ public class ButtonHotkey : MonoBehaviour
     public KeyCode hotkey = KeyCode.None;
     public KeyCode alternativeHotkey = KeyCode.None;
 
-    // 透明阈值，alpha 小于此值视为完全透明，可以穿透
+    // ????????alpha С?????????????????????
     private const float AlphaThreshold = 0.1f;
 
     private Button button;
     private GraphicRaycaster graphicRaycaster;
     private RectTransform rectTransform;
-    private Canvas parentCanvas;          // 所属 Canvas
-    private Camera canvasCamera;          // Canvas 关联的相机
+    private Canvas parentCanvas;          // ???? Canvas
+    private Camera canvasCamera;          // Canvas ?????????
 
     void Awake()
     {
@@ -24,23 +24,23 @@ public class ButtonHotkey : MonoBehaviour
         rectTransform = GetComponent<RectTransform>();
         graphicRaycaster = GetComponentInParent<GraphicRaycaster>();
 
-        // 查找父级 Canvas
+        // ??????? Canvas
         parentCanvas = GetComponentInParent<Canvas>();
         if (parentCanvas == null)
         {
-            Debug.LogError($"ButtonHotkey: 在 {name} 的父级中未找到 Canvas，热键将无法正常工作。");
+            Debug.LogError($"ButtonHotkey: ?? {name} ???????δ??? Canvas????????????????????");
         }
         else
         {
             canvasCamera = parentCanvas.worldCamera;
             if (canvasCamera == null && parentCanvas.renderMode != RenderMode.ScreenSpaceOverlay)
             {
-                Debug.LogWarning($"ButtonHotkey: Canvas 模式为 {parentCanvas.renderMode} 但未绑定相机，可能导致坐标转换错误。");
+                Debug.LogWarning($"ButtonHotkey: Canvas ??? {parentCanvas.renderMode} ??δ?????????????????????????");
             }
         }
 
         if (graphicRaycaster == null)
-            Debug.LogWarning($"ButtonHotkey: 在 {name} 的父级中未找到 GraphicRaycaster，遮挡检测将失效。");
+            Debug.LogWarning($"ButtonHotkey: ?? {name} ???????δ??? GraphicRaycaster?????????Ч??");
     }
 
     void Update()
@@ -56,13 +56,13 @@ public class ButtonHotkey : MonoBehaviour
     }
 
     /// <summary>
-    /// 检查按钮中心点是否未被非透明 UI 遮挡（支持像素级透明穿透）
+    /// ??鰴?????????δ??????? UI ?????????????????????
     /// </summary>
     private bool IsButtonClickable()
     {
         if (EventSystem.current == null) return true;
 
-        // 获取按钮中心点的屏幕坐标
+        // ???????????????????
         Vector2 screenPos;
         if (parentCanvas != null && parentCanvas.renderMode != RenderMode.ScreenSpaceOverlay && canvasCamera != null)
         {
@@ -73,11 +73,11 @@ public class ButtonHotkey : MonoBehaviour
             screenPos = RectTransformUtility.WorldToScreenPoint(null, rectTransform.position);
         }
 
-        // 边界检查
+        // ?????
         if (screenPos.x < 0 || screenPos.x > Screen.width || screenPos.y < 0 || screenPos.y > Screen.height)
             return false;
 
-        // 执行射线检测
+        // ?????????
         PointerEventData eventData = new PointerEventData(EventSystem.current)
         {
             position = screenPos
@@ -87,40 +87,40 @@ public class ButtonHotkey : MonoBehaviour
 
         if (results.Count == 0) return false;
 
-        // 从最上层往下遍历
+        // ??????????±???
         foreach (RaycastResult result in results)
         {
             GameObject hitGo = result.gameObject;
-            // 命中按钮自身或其子物体，无论透明度如何都可点击
+            // ???а???????????????壬???????????ζ?????
             if (hitGo == gameObject || hitGo.transform.IsChildOf(transform))
                 return true;
 
-            // 获取该点的实际透明度（考虑像素级透明通道）
+            // ?????????????????????????????????
             float alpha = GetAlphaAtScreenPosition(hitGo, screenPos);
-            if (alpha < AlphaThreshold) // 透明，继续检查下一层
+            if (alpha < AlphaThreshold) // ?????????????????
                 continue;
 
-            // 不透明（或半透明但超过阈值）的阻挡物
+            // ???????????????????????????赲??
             return false;
         }
 
-        // 所有命中物体都是透明的，无有效遮挡
+        // ???????????嶼????????????Ч???
         return true;
     }
 
     /// <summary>
-    /// 获取指定屏幕坐标下，某个 UI 物体在该点的实际透明度（考虑像素级透明通道）
+    /// ??????????????????? UI ???????????????????????????????????
     /// </summary>
-    /// <param name="hitGameObject">射线击中的物体</param>
-    /// <param name="screenPos">屏幕坐标（像素）</param>
-    /// <returns>透明度 0..1</returns>
+    /// <param name="hitGameObject">??????е?????</param>
+    /// <param name="screenPos">????????????</param>
+    /// <returns>????? 0..1</returns>
     private float GetAlphaAtScreenPosition(GameObject hitGameObject, Vector2 screenPos)
     {
-        // 尝试获取 Graphic 组件（Image、Text 等）
+        // ?????? Graphic ?????Image??Text ???
         Graphic graphic = hitGameObject.GetComponent<Graphic>();
-        if (graphic == null) return 1f; // 非 Graphic 元素，保守视为不透明
+        if (graphic == null) return 1f; // ?? Graphic ????????????????
 
-        // 如果不是 Image，或者 Image 没有 Sprite，则使用整体透明度
+        // ??????? Image?????? Image ??? Sprite????????????????
         Image image = graphic as Image;
         if (image == null || image.sprite == null)
         {
@@ -131,32 +131,32 @@ public class ButtonHotkey : MonoBehaviour
         Texture2D texture = sprite.texture;
         if (texture == null || !texture.isReadable)
         {
-            // 纹理不可读，回退到整体透明度
+            // ?????????????????????????
             return GetOverallAlpha(graphic);
         }
 
-        // 将屏幕坐标转换为 UI 元素的局部坐标
+        // ????????????? UI ??????????
         RectTransform rectTrans = hitGameObject.GetComponent<RectTransform>();
         if (rectTrans == null) return GetOverallAlpha(graphic);
 
-        // 获取 Canvas 和相机
+        // ??? Canvas ?????
         Canvas canvas = graphic.canvas;
         Camera cam = canvas?.worldCamera;
         if (canvas != null && canvas.renderMode == RenderMode.ScreenSpaceOverlay)
             cam = null;
 
-        // 屏幕坐标 -> 局部坐标
+        // ??????? -> ???????
         if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTrans, screenPos, cam, out Vector2 localPoint))
         {
             return GetOverallAlpha(graphic);
         }
 
-        // 计算 UV 坐标（根据 Image 类型）
+        // ???? UV ???????? Image ?????
         Vector2 uv = CalculateUV(image, localPoint);
         if (uv.x < 0 || uv.x > 1 || uv.y < 0 || uv.y > 1)
             return GetOverallAlpha(graphic);
 
-        // 将 UV 映射到纹理像素坐标
+        // ?? UV ???????????????
         Rect spriteRect = sprite.rect;
         int pixelX = Mathf.FloorToInt(spriteRect.x + uv.x * spriteRect.width);
         int pixelY = Mathf.FloorToInt(spriteRect.y + uv.y * spriteRect.height);
@@ -166,7 +166,7 @@ public class ButtonHotkey : MonoBehaviour
         Color pixelColor = texture.GetPixel(pixelX, pixelY);
         float pixelAlpha = pixelColor.a;
 
-        // 乘以 Image.color.a 和父级 CanvasGroup 的影响
+        // ???? Image.color.a ????? CanvasGroup ?????
         float finalAlpha = pixelAlpha * image.color.a;
         Transform parent = image.transform;
         while (parent != null)
@@ -182,7 +182,7 @@ public class ButtonHotkey : MonoBehaviour
     }
 
     /// <summary>
-    /// 获取 Graphic 组件的整体透明度（忽略像素细节）
+    /// ??? Graphic ???????????????????????????
     /// </summary>
     private float GetOverallAlpha(Graphic graphic)
     {
@@ -201,7 +201,7 @@ public class ButtonHotkey : MonoBehaviour
     }
 
     /// <summary>
-    /// 根据 Image 的类型和局部坐标计算出 UV 坐标
+    /// ???? Image ????????????????? UV ????
     /// </summary>
     private Vector2 CalculateUV(Image image, Vector2 localPoint)
     {
@@ -224,7 +224,7 @@ public class ButtonHotkey : MonoBehaviour
     }
 
     /// <summary>
-    /// 为 Sliced / Tiled 模式计算 UV（九宫格映射）
+    /// ? Sliced / Tiled ?????? UV??????????
     /// </summary>
     private Vector2 GetUVForSlicedOrTiled(Image image, Vector2 localPoint)
     {
@@ -240,7 +240,7 @@ public class ButtonHotkey : MonoBehaviour
         float spriteWidth = spriteRect.width;
         float spriteHeight = spriteRect.height;
 
-        // 计算局部点相对于左下角的位置
+        // ???????????????????λ??
         float x = localPoint.x - rect.xMin;
         float y = localPoint.y - rect.yMin;
         float totalWidth = rect.width;
@@ -254,7 +254,7 @@ public class ButtonHotkey : MonoBehaviour
         float centerHeight = totalHeight - bottomHeight - topHeight;
 
         float u = 0, v = 0;
-        // X 方向
+        // X ????
         if (x <= leftWidth)
             u = Mathf.InverseLerp(0, leftWidth, x) * (leftBorder / spriteWidth);
         else if (x <= leftWidth + centerWidth)
@@ -262,7 +262,7 @@ public class ButtonHotkey : MonoBehaviour
         else
             u = Mathf.InverseLerp(leftWidth + centerWidth, totalWidth, x) * (rightBorder / spriteWidth) + ((spriteWidth - rightBorder) / spriteWidth);
 
-        // Y 方向
+        // Y ????
         if (y <= bottomHeight)
             v = Mathf.InverseLerp(0, bottomHeight, y) * (bottomBorder / spriteHeight);
         else if (y <= bottomHeight + centerHeight)
@@ -274,7 +274,7 @@ public class ButtonHotkey : MonoBehaviour
     }
 
     /// <summary>
-    /// 为 Filled 模式计算 UV（简化，基于 Rect 线性映射）
+    /// ? Filled ?????? UV?????????? Rect ???????
     /// </summary>
     private Vector2 GetUVForFilled(Image image, Vector2 localPoint)
     {

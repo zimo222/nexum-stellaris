@@ -6,32 +6,32 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Canvas))]
 public class TransparentAwareGraphicRaycaster : GraphicRaycaster
 {
-    [Tooltip("透明度低于此值的 UI 元素会被忽略，允许点击穿透")]
+    [Tooltip("???????????? UI ???????????????????")]
     [Range(0f, 1f)]
     public float alphaThreshold = 0.1f;
 
-    // 缓存结果列表，避免频繁分配
+    // ???????б??????????????
     private List<RaycastResult> m_RaycastResults = new List<RaycastResult>();
 
     public override void Raycast(PointerEventData eventData, List<RaycastResult> resultAppendList)
     {
-        // 先调用原始射线检测，获取所有命中的 UI（按深度排序）
+        // ???????????????????????е? UI???????????
         base.Raycast(eventData, m_RaycastResults);
         if (m_RaycastResults.Count == 0) return;
 
-        // 遍历所有命中结果（从最上层开始）
+        // ???????????н??????????????
         foreach (var result in m_RaycastResults)
         {
             GameObject go = result.gameObject;
-            // 获取该点的实际透明度（支持像素级透明）
+            // ?????????????????????????????
             float alpha = GetAlphaAtScreenPosition(go, eventData.position);
             if (alpha < alphaThreshold)
             {
-                // 透明物体：忽略，继续检查下一层
+                // ??????壺?????????????????
                 continue;
             }
 
-            // 找到第一个不透明的物体，将其加入结果列表并停止遍历
+            // ??????????????????壬??????????б?????????
             resultAppendList.Add(result);
             break;
         }
@@ -40,21 +40,21 @@ public class TransparentAwareGraphicRaycaster : GraphicRaycaster
     }
 
     /// <summary>
-    /// 获取指定屏幕坐标下，UI 物体在该点的实际透明度（考虑像素级透明通道）
+    /// ????????????????UI ???????????????????????????????????
     /// </summary>
     private float GetAlphaAtScreenPosition(GameObject target, Vector2 screenPos)
     {
         Graphic graphic = target.GetComponent<Graphic>();
-        if (graphic == null) return 1f; // 非 Graphic 元素，视为不透明
+        if (graphic == null) return 1f; // ?? Graphic ????????????
 
-        // 如果是 Image 且拥有可读纹理，进行像素级采样
+        // ????? Image ????п?????????????????????
         Image image = graphic as Image;
         if (image != null && image.sprite != null)
         {
             Texture2D tex = image.sprite.texture;
             if (tex != null && tex.isReadable)
             {
-                // 将屏幕坐标转换为 UI 元素的局部坐标
+                // ????????????? UI ??????????
                 RectTransform rectTrans = target.GetComponent<RectTransform>();
                 if (rectTrans != null)
                 {
@@ -75,7 +75,7 @@ public class TransparentAwareGraphicRaycaster : GraphicRaycaster
                             pixelY = Mathf.Clamp(pixelY, 0, tex.height - 1);
                             float pixelAlpha = tex.GetPixel(pixelX, pixelY).a;
 
-                            // 乘以 Image.color.a 和父级 CanvasGroup 的影响
+                            // ???? Image.color.a ????? CanvasGroup ?????
                             float finalAlpha = pixelAlpha * image.color.a;
                             Transform parent = image.transform;
                             while (parent != null)
@@ -92,7 +92,7 @@ public class TransparentAwareGraphicRaycaster : GraphicRaycaster
             }
         }
 
-        // 回退：使用整体透明度
+        // ?????????????????
         float alpha = graphic.color.a;
         Transform t = graphic.transform;
         while (t != null)
@@ -106,7 +106,7 @@ public class TransparentAwareGraphicRaycaster : GraphicRaycaster
     }
 
     /// <summary>
-    /// 根据 Image 类型和局部坐标计算出 UV 坐标（支持 Simple、Sliced、Tiled、Filled）
+    /// ???? Image ??????????????? UV ??????? Simple??Sliced??Tiled??Filled??
     /// </summary>
     private Vector2 CalculateUV(Image image, Vector2 localPoint)
     {
@@ -124,7 +124,7 @@ public class TransparentAwareGraphicRaycaster : GraphicRaycaster
                 return GetUVForSlicedOrTiled(image, localPoint);
 
             case Image.Type.Filled:
-                // 简化处理：线性映射（可自定义扩展）
+                // ???????????????????????????
                 return new Vector2(
                     Mathf.InverseLerp(rect.xMin, rect.xMax, localPoint.x),
                     Mathf.InverseLerp(rect.yMin, rect.yMax, localPoint.y)
@@ -161,7 +161,7 @@ public class TransparentAwareGraphicRaycaster : GraphicRaycaster
         float centerHeight = totalHeight - bottomHeight - topHeight;
 
         float u = 0, v = 0;
-        // X 方向
+        // X ????
         if (x <= leftWidth)
             u = Mathf.InverseLerp(0, leftWidth, x) * (leftBorder / spriteWidth);
         else if (x <= leftWidth + centerWidth)
@@ -169,7 +169,7 @@ public class TransparentAwareGraphicRaycaster : GraphicRaycaster
         else
             u = Mathf.InverseLerp(leftWidth + centerWidth, totalWidth, x) * (rightBorder / spriteWidth) + ((spriteWidth - rightBorder) / spriteWidth);
 
-        // Y 方向
+        // Y ????
         if (y <= bottomHeight)
             v = Mathf.InverseLerp(0, bottomHeight, y) * (bottomBorder / spriteHeight);
         else if (y <= bottomHeight + centerHeight)

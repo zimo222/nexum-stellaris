@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class Player : Entity
@@ -49,6 +51,9 @@ public class Player : Entity
     public WeaponSlotsUI weaponSlotsUI;
 
     private bool isAwakeCalled = false;
+
+    [Header("实时战斗数值")]
+    private int magicCost;
 
     protected override void Awake()
     {
@@ -155,14 +160,18 @@ public class Player : Entity
     public void SpawnBullet()
     {
 
+
+        List<string> moduleIds = PlayerDataManager.Instance.GetWeaponModuleList(selectedSpellIndex);
+
+        magicCost = 5 * moduleIds.Count(id => !string.IsNullOrEmpty(id));
+
         // 先尝试触发特效（可能会设置 currentSpellManaReduction）
         TryTriggerSpecialEffect();
 
-        if (playerData.CurrentEnergy < 10) return;
+        if (playerData.CurrentEnergy < magicCost) return;
 
-        CombatManager.Instance.CostEnergy(this.gameObject, 10);
+        CombatManager.Instance.CostEnergy(this.gameObject, magicCost);
 
-        List<string> moduleIds = PlayerDataManager.Instance.GetWeaponModuleList(selectedSpellIndex);
         SpellSequence sequence = SpellSequenceBuilder.BuildSequence(moduleIds);
 
         SpellExecutor executor = GetComponent<SpellExecutor>();
@@ -210,7 +219,7 @@ public class Player : Entity
         float heartStringRate = pData.TotalCritRate;    // 心弦率
         float yiDongValue = pData.TotalCritDamage;      // 绎动值
 
-        if (Random.value > heartStringRate + 1) return;
+        //if (Random.value > heartStringRate) return;
 
         // 获取当前装备的武器数据
         ExotextData weapon = PlayerDataManager.Instance.GetEquippedExotext((ExotextType)selectedSpellIndex);
@@ -221,16 +230,24 @@ public class Player : Entity
         if (def.possibleEffects == null || def.possibleEffects.Count == 0) return;
 
         // 随机选择一个特效
-        var effectDef = def.possibleEffects[Random.Range(0, def.possibleEffects.Count)];
-        float strength = effectDef.baseStrength * yiDongValue;
+        foreach(var sf in def.possibleEffects)
+        {
+            if (Random.value > heartStringRate * sf.baseRateStrength) continue;
+            //var effectDef = def.possibleEffects[Random.Range(0, def.possibleEffects.Count)];
+            var effectDef = sf;
+            float strength = effectDef.baseDamageStrength * yiDongValue;
 
-        // 应用效果
-        ApplySpecialEffect(effectDef, strength);
+            // 应用效果
+            ApplySpecialEffect(effectDef, strength);
 
-        // 显示 UI 消息（不再使用 PromptTextManager）
-        string message = $"{effectDef.effectName}: {string.Format(effectDef.shortDesc, strength * 100f)}";
-        if (MessagePopupController.Instance != null)
-            MessagePopupController.Instance.ShowMessage(message);
+            // 显示 UI 消息（不再使用 PromptTextManager）
+            //string message = effectDef.shortDesc;
+            string template = effectDef.shortDesc;   // 从配置读取："<color=#0000FF>魔法消耗-{0:F0}%</color>"
+            string message = string.Format(template, strength * 100f);
+            if (MessagePopupController.Instance != null)
+                MessagePopupController.Instance.ShowMessage(message);
+        }
+
     }
 
     private void ApplySpecialEffect(SpecialEffectDefineSO effectDef, float strength)
@@ -239,7 +256,15 @@ public class Player : Entity
         switch (effectDef.effectType)
         {
             case SpecialEffectType.WeaveMagic:
+                magicCost = (int)((1 - strength) * magicCost);
+                break;
+            case SpecialEffectType.Recover:
                 //pData.currentSpellManaReduction = Mathf.Clamp01(strength);
+                CombatManager.Instance.ApplyDamage(null, this.gameObject, (int)(-this.playerData.TotalHealth * strength));
+                break;
+            case SpecialEffectType.Regenerate:
+                //pData.currentSpellManaReduction = Mathf.Clamp01(strength);
+                this.GetComponent<BuffController>().AddBuff(BuffType.HealthRegen, 5f, this.playerData.TotalHealth * strength, 1f);
                 break;
             case SpecialEffectType.Echo:
                 // 这里调用你的冷却减少系统，如果没有可以留空或实现简单逻辑

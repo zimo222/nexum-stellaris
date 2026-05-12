@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(Image))]
 public class TransparentRaycastFilter : MonoBehaviour, ICanvasRaycastFilter
 {
-    [Tooltip("透明度低于此值的像素视为完全透明，点击会穿透")]
+    [Tooltip("?????????????????????????????????")]
     [Range(0f, 1f)]
     public float alphaThreshold = 0.1f;
 
@@ -25,21 +25,21 @@ public class TransparentRaycastFilter : MonoBehaviour, ICanvasRaycastFilter
 
     public bool IsRaycastLocationValid(Vector2 screenPos, Camera eventCamera)
     {
-        // 如果没有图片或纹理不可读，使用常规阻挡逻辑（不穿透）
+        // ???????????????????????ó????赲????????????
         if (image == null || image.sprite == null || texture == null || !texture.isReadable)
-            return true; // 默认允许射线命中（不穿透）
+            return true; // ??????????????У????????
 
-        // 将屏幕坐标转换为图片的局部坐标
+        // ???????????????????????
         RectTransform rectTransform = transform as RectTransform;
         if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, screenPos, eventCamera, out Vector2 localPoint))
             return false;
 
-        // 获取 UV 坐标（支持 Simple、Sliced、Tiled、Filled）
+        // ??? UV ??????? Simple??Sliced??Tiled??Filled??
         Vector2 uv = GetUV(localPoint);
         if (uv.x < 0 || uv.x > 1 || uv.y < 0 || uv.y > 1)
             return false;
 
-        // 采样纹理像素 alpha
+        // ???????????? alpha
         Rect spriteRect = sprite.rect;
         int pixelX = Mathf.FloorToInt(spriteRect.x + uv.x * spriteRect.width);
         int pixelY = Mathf.FloorToInt(spriteRect.y + uv.y * spriteRect.height);
@@ -47,7 +47,7 @@ public class TransparentRaycastFilter : MonoBehaviour, ICanvasRaycastFilter
         pixelY = Mathf.Clamp(pixelY, 0, texture.height - 1);
 
         float pixelAlpha = texture.GetPixel(pixelX, pixelY).a;
-        // 乘以 Image.color.a 和 CanvasGroup 的透明度
+        // ???? Image.color.a ?? CanvasGroup ???????
         float finalAlpha = pixelAlpha * image.color.a;
         Transform parent = transform;
         while (parent != null)
@@ -58,7 +58,7 @@ public class TransparentRaycastFilter : MonoBehaviour, ICanvasRaycastFilter
             parent = parent.parent;
         }
 
-        // 如果该点的透明度 >= 阈值，则阻挡点击（射线命中）；否则穿透
+        // ???????????? >= ????????赲????????????У????????
         return finalAlpha >= alphaThreshold;
     }
 
@@ -76,7 +76,7 @@ public class TransparentRaycastFilter : MonoBehaviour, ICanvasRaycastFilter
             case Image.Type.Tiled:
                 return GetUVForSlicedOrTiled(localPoint);
             case Image.Type.Filled:
-                // 简化，按需扩展
+                // ???????????
                 return new Vector2(
                     Mathf.InverseLerp(rect.xMin, rect.xMax, localPoint.x),
                     Mathf.InverseLerp(rect.yMin, rect.yMax, localPoint.y)

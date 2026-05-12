@@ -11,7 +11,7 @@ public class TestShortcuts : MonoBehaviour
             PlayerDataManager.Instance.AddExperience(50 * level * level + 150 * level + 200);
         }
         
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             PlayerDataManager.Instance.CurrentPlayerData.Level = 1;
         }

@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9ecfbec26ca4d2b42933cc5e3a45a3f9, type: 2}
+  m_sharedMaterial: {fileID: -7505621804509920388, guid: 9ecfbec26ca4d2b42933cc5e3a45a3f9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 5702562246798086085}
   - component: {fileID: 6848839681045750211}
   - component: {fileID: 7725351547176634057}
+  - component: {fileID: 6861314066480960820}
   m_Layer: 3
   m_Name: TextBuffPrefabs
   m_TagString: Untagged
@@ -236,3 +237,15 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!225 &6861314066480960820
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8577317890321156606}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0

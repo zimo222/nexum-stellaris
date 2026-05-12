@@ -5,6 +5,8 @@ public enum SpecialEffectType
 {
     None,
     WeaveMagic,   // 织法：减少本次技能能量消耗
+    Recover,      // 复苏：立即回复一定百分比生命
+    Regenerate,   // 再生：接下来数秒内持续回复生命或能量。
     Echo,         // 回响：减少技能冷却
     Warmth,       // 余温：获得护盾
     Memory,       // 追忆：叠层爆炸（暂不实现）
@@ -19,7 +21,8 @@ public class SpecialEffectDefineSO : ScriptableObject
     public SpecialEffectType effectType;
 
     [Tooltip("基础强度值，例如 0.15 代表减少15%消耗")]
-    public float baseStrength;
+    public float baseRateStrength;
+    public float baseDamageStrength;
 
     [Tooltip("UI短描述模板，如“魔法消耗减少{0}%”")]
     public string shortDesc;

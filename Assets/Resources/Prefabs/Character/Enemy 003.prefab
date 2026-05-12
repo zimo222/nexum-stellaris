@@ -176,7 +176,7 @@ MonoBehaviour:
     m_Bits: 8
   maxHealth: 10000
   currentHealth: 10000
-  attackDamage: 50
+  attackDamage: 150
   stunDuration: 0
   stunDirection: {x: 0, y: 0}
   counterImage: {fileID: 6682031143710235560}
@@ -184,7 +184,7 @@ MonoBehaviour:
   idleTime: 1
   battleTime: 5
   attackDistance: 50
-  attackCooldown: 2
+  attackCooldown: 1
   lastTimeAttacked: 0
   patrolRange: 1000
   healthSlider: {fileID: 3082885153660524806}

@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: SF_WeaveMagic
   m_EditorClassIdentifier: 
   id: SF_WeaveMagic
-  effectName: SF_WeaveMagic
+  effectName: "\u7EC7\u6CD5"
   effectType: 1
-  baseStrength: 30
-  shortDesc: 
-  description: 
+  baseRateStrength: 0.5
+  baseDamageStrength: 0.5
+  shortDesc: "<color=#08B6DF>\u9B54\u6CD5\u6D88\u8017-{0:F0}%</color>"
+  description: "$\"<color=#0000FF>\u9B54\u6CD5\u6D88\u8017-{strength * 100f:F0}%</color>\""
   icon: {fileID: 0}

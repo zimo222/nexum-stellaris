@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 470e8797d563b394d86dda6db4f7a380, type: 3}
-  m_Name: SF_Warmth
+  m_Name: SF_Regenerate
   m_EditorClassIdentifier: 
-  id: SF_Warmth
-  effectName: SF_Warmth
+  id: SF_Regenerate
+  effectName: "\u518D\u751F"
   effectType: 3
-  baseStrength: 30
-  shortDesc: 
+  baseRateStrength: 0.5
+  baseDamageStrength: 0.04
+  shortDesc: "<color=#00FF00>\u6301\u7EED\u56DE\u8840+{0:F0}%</color>"
   description: 
   icon: {fileID: 0}
