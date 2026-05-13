@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e4a0bcac50fd954092a1c8d99bd6843, type: 3}
-  m_Name: AProjectile_FireBall_001
+  m_Name: Projectile_FireBall_004
   m_EditorClassIdentifier: 
-  id: AProjectile_FireBall_001
-  moduleName: "\u5149"
+  id: Projectile_FireBall_004
+  moduleName: "\u6728"
   moduleType: 0
   delay: 0
-  bulletDefine: {fileID: 11400000, guid: 2e1294ea4b3b6fb439274bbe0843efbf, type: 2}
+  bulletDefine: {fileID: 11400000, guid: b0f8958c0cb8c91438e47fd17b04ad1b, type: 2}
   speedMultiplier: 1
   damageMultiplier: 100
   homingStrength: 0
@@ -30,5 +30,5 @@ MonoBehaviour:
   orbitSpeed: 0
   fieldAngle: 0
   recoilForce: 0
-  introduction: "\u53D1\u5C04\u4E00\u4E2A\u5149\u9B54\u6CD5\u7403"
-  icon: {fileID: 21300000, guid: bfdf3c2b8ef28ff49a9d211f148f5cb1, type: 3}
+  introduction: "\u53D1\u5C04\u4E00\u4E2A\u6728\u5143\u7D20\u9B54\u6CD5\u7403"
+  icon: {fileID: 21300000, guid: dc37d5760308ad747b88d325892c783d, type: 3}
