@@ -279,7 +279,9 @@ public class CombatManager : MonoBehaviour
             // 普通死亡重置血量（如果需要）
             PlayerData playerData = PlayerDataManager.Instance.CurrentPlayerData;
             playerData.CurrentHealth = (int)playerData.TotalHealth;
+            UpdateHealthSlider();
         }
+        PromptTextManager.Instance.ShowMessage("嘎嘎，战斗失败");
     }
 
     public void EnemyDefeated(GameObject enemy)
