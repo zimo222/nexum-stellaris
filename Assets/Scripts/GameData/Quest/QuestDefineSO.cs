@@ -26,7 +26,15 @@ public class DialogueEntry
 
     [Header("对话框架模式")]
     public YesNo useCGMode = YesNo.Yes;      // Yes = 传统CG对话, No = 使用 dialogueFrame
- }
+
+
+    [Header("对话结束后的角色移动（可选）")]
+    public bool moveAfterDialogue = false;               // 是否在说完这句话后移动
+    public string moveCharacterId;                       // 移动的角色ID（speakerId 或 "Player"）
+    public List<Vector2> waypoints;                      // 路径点（世界坐标）
+    public float moveSpeed = 2f;                         // 移动速度
+    public bool waitForMoveComplete = true;              // 是否等待移动完成再继续下一句
+}
 
 [CreateAssetMenu(fileName = "NewQuest", menuName = "GameData/QuestDefine")]
 public class QuestDefineSO : ScriptableObject
@@ -76,6 +84,10 @@ public class QuestDefineSO : ScriptableObject
 
     [Header("任务所在地图")]
     public string questSceneName;       // 例如 "Scene1", "Scene2"
+
+
+    // 新增：混合步骤列表（优先使用）
+    public List<QuestStep> steps;
 
 }
 public enum YesNo
