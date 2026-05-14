@@ -99,11 +99,34 @@ public class Player : Entity
 
         if (GetComponent<NonSingletonMark>() == null)
         {
-            CombatManager.Instance.RegisterPlayer(gameObject);
+            // 使用协程延迟注册，直到 CombatManager 实例就绪
+            StartCoroutine(RegisterToCombatManagerWhenReady());
         }
 
         stateMachine.Initialize(idleState);
         DeadlockDetector.Log("[Player] Start end");
+    }
+
+    private System.Collections.IEnumerator RegisterToCombatManagerWhenReady()
+    {
+        // 等待最多 5 秒，直到 CombatManager.Instance 不为 null
+        float timeout = 5f;
+        float elapsed = 0f;
+        while (CombatManager.Instance == null && elapsed < timeout)
+        {
+            yield return null; // 等待一帧
+            elapsed += Time.deltaTime;
+        }
+
+        if (CombatManager.Instance != null)
+        {
+            CombatManager.Instance.RegisterPlayer(gameObject);
+            DeadlockDetector.Log("[Player] Registered to CombatManager");
+        }
+        else
+        {
+            Debug.LogError("[Player] Failed to register to CombatManager: Instance still null after timeout");
+        }
     }
 
     protected override void Update()

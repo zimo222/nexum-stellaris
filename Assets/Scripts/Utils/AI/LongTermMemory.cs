@@ -30,7 +30,7 @@ public class LongTermMemory : MonoBehaviour
         {
             id = Guid.NewGuid().ToString();
             this.text = text;
-            embedding = emb.ToList();
+            embedding = (emb != null ? emb.ToList() : null);
             timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
         }
     }

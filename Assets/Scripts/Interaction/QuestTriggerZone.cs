@@ -110,7 +110,7 @@ public class QuestTriggerZone : MonoBehaviour
 
         if (!IsReferenceValid(interactButton))
         {
-            Debug.LogError($"经过 {maxRetryCount} 次尝试后仍未找到名称为 '{buttonName}' 的按钮。请检查：\n" +
+            Debug.Log($"经过 {maxRetryCount} 次尝试后仍未找到名称为 '{buttonName}' 的按钮。请检查：\n" +
                            "1. 按钮的实际名称（包括大小写、空格）\n" +
                            "2. 按钮是否在场景中（即使是未激活状态）\n" +
                            "3. 尝试在 Inspector 中手动拖拽引用");
@@ -119,7 +119,7 @@ public class QuestTriggerZone : MonoBehaviour
         if (IsReferenceValid(interactButton))
             ConfigureButton();
         else
-            Debug.LogError("QuestTriggerZone: 无法获得交互按钮引用，将无法触发交互");
+            Debug.Log("QuestTriggerZone: 无法获得交互按钮引用，将无法触发交互");
 
         isHotReferencingDone = true;
         findButtonCoroutine = null;

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -23,7 +24,6 @@ public class BulletPool : MonoBehaviour
     private Dictionary<GameObject, Queue<GameObject>> pools = new Dictionary<GameObject, Queue<GameObject>>();
     private Dictionary<GameObject, int> totalCreated = new Dictionary<GameObject, int>();
 
-    // 存储预热创建的空容器（用于跨场景持久化）
     private GameObject poolContainer;
 
     private void Awake()
@@ -35,20 +35,16 @@ public class BulletPool : MonoBehaviour
         }
         Instance = this;
 
-        // 创建一个隐藏的父物体来存放所有预热子弹，并设为 DontDestroyOnLoad
         poolContainer = new GameObject("BulletPoolContainer");
         DontDestroyOnLoad(poolContainer);
-
         DontDestroyOnLoad(gameObject);
 
-        // 预热
         foreach (var config in warmupConfigs)
         {
             if (config.prefab == null) continue;
             WarmupPool(config.prefab, config.warmupCount);
         }
 
-        // 监听场景切换，清理场景中的残留子弹（可选）
         SceneManager.activeSceneChanged += OnSceneChanged;
     }
 
@@ -59,21 +55,21 @@ public class BulletPool : MonoBehaviour
 
     private void OnSceneChanged(Scene oldScene, Scene newScene)
     {
-        // 场景切换时，清理池中所有未使用的子弹实例（可选，避免内存堆积）
-        // 注意：DontDestroyOnLoad 容器中的子弹不会被清理
-        // 如果不需要自动清理，可以删除这个方法
         CleanupUnusedBullets();
     }
 
     /// <summary>
-    /// 清理所有池中未使用的子弹（不销毁 DontDestroyOnLoad 容器中的子弹）
+    /// 清理所有池中未使用的子弹
     /// </summary>
     private void CleanupUnusedBullets()
     {
-        foreach (var kvp in pools)
+        // 关键修复：先获取所有键的副本，避免在遍历时修改字典
+        List<GameObject> keys = pools.Keys.ToList();
+        foreach (var prefab in keys)
         {
-            var queue = kvp.Value;
-            // 重新创建一个空的队列，原来的子弹销毁
+            if (!pools.ContainsKey(prefab)) continue;
+
+            var queue = pools[prefab];
             var newQueue = new Queue<GameObject>();
             while (queue.Count > 0)
             {
@@ -81,8 +77,8 @@ public class BulletPool : MonoBehaviour
                 if (obj != null)
                     Destroy(obj);
             }
-            pools[kvp.Key] = newQueue;
-            totalCreated[kvp.Key] = 0;
+            pools[prefab] = newQueue;
+            totalCreated[prefab] = 0;
         }
 
         // 重新预热
@@ -93,9 +89,6 @@ public class BulletPool : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 预热对象池（创建的子弹会放到 DontDestroyOnLoad 容器中）
-    /// </summary>
     private void WarmupPool(GameObject prefab, int count)
     {
         if (!pools.ContainsKey(prefab))
@@ -105,32 +98,31 @@ public class BulletPool : MonoBehaviour
             {
                 GameObject obj = CreateNewBullet(prefab);
                 obj.SetActive(false);
-                // 将预热子弹放到持久化容器中
                 obj.transform.SetParent(poolContainer.transform);
                 queue.Enqueue(obj);
             }
             pools[prefab] = queue;
             totalCreated[prefab] = count;
-            Debug.Log($"预热子弹池: {prefab.name} 预创建 {count} 颗，已放入持久化容器");
+            Debug.Log($"预热子弹池: {prefab.name} 预创建 {count} 颗");
         }
         else
         {
             Queue<GameObject> queue = pools[prefab];
             int current = queue.Count;
-            for (int i = current; i < count; i++)
+            if (current < count)
             {
-                GameObject obj = CreateNewBullet(prefab);
-                obj.SetActive(false);
-                obj.transform.SetParent(poolContainer.transform);
-                queue.Enqueue(obj);
+                for (int i = current; i < count; i++)
+                {
+                    GameObject obj = CreateNewBullet(prefab);
+                    obj.SetActive(false);
+                    obj.transform.SetParent(poolContainer.transform);
+                    queue.Enqueue(obj);
+                }
+                totalCreated[prefab] = count;
             }
-            totalCreated[prefab] = count;
         }
     }
 
-    /// <summary>
-    /// 注册一种子弹类型，并预创建一定数量的实例
-    /// </summary>
     public void RegisterBulletType(GameObject prefab, int initialSize = -1)
     {
         if (prefab == null) return;
@@ -178,7 +170,6 @@ public class BulletPool : MonoBehaviour
         if (pool.Count > 0)
         {
             obj = pool.Dequeue();
-            // 从持久化容器中移出，放到场景根下（或保持原父物体，但需要确保激活后可见）
             obj.transform.SetParent(null);
         }
         else
@@ -216,7 +207,6 @@ public class BulletPool : MonoBehaviour
             bullet.ResetToPool();
 
         bulletObj.SetActive(false);
-        // 归还时也放回持久化容器
         bulletObj.transform.SetParent(poolContainer.transform);
         pools[prefab].Enqueue(bulletObj);
     }

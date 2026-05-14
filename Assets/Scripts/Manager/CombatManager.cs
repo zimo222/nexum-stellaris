@@ -206,13 +206,17 @@ public class CombatManager : MonoBehaviour
     {
         if (healthSliderA == null) return;
 
-        if(player != null)
+        if (player != null)
         {
             healthSliderA.maxValue = player.TotalHealth;
             healthSliderA.value = player.CurrentHealth;
-            healthSliderB.maxValue = player.TotalHealth;
-            healthSliderB.value = player.CurrentHealth;
-            healthText.text = player.CurrentHealth.ToString() + "/" + player.TotalHealth.ToString();
+            if (healthSliderB != null)
+            {
+                healthSliderB.maxValue = player.TotalHealth;
+                healthSliderB.value = player.CurrentHealth;
+            }
+            if (healthText != null)
+                healthText.text = player.CurrentHealth.ToString() + "/" + player.TotalHealth.ToString();
             return;
         }
 
@@ -221,12 +225,15 @@ public class CombatManager : MonoBehaviour
         PlayerData playerData = PlayerDataManager.Instance.CurrentPlayerData;
         if (playerData == null) return;
 
-        // 设置 Slider 的最大值和当前值
         healthSliderA.maxValue = playerData.TotalHealth;
         healthSliderA.value = playerData.CurrentHealth;
-        healthSliderB.maxValue = playerData.TotalHealth;
-        healthSliderB.value = playerData.CurrentHealth;
-        healthText.text = playerData.CurrentHealth.ToString() + "/" + playerData.TotalHealth.ToString();
+        if (healthSliderB != null)
+        {
+            healthSliderB.maxValue = playerData.TotalHealth;
+            healthSliderB.value = playerData.CurrentHealth;
+        }
+        if (healthText != null)
+            healthText.text = playerData.CurrentHealth.ToString() + "/" + playerData.TotalHealth.ToString();
     }
 
     /// <summary>
@@ -240,7 +247,8 @@ public class CombatManager : MonoBehaviour
         {
             energySlider.maxValue = player.BaseStats.Energy;
             energySlider.value = player.CurrentEnergy;
-            energyText.text = player.CurrentEnergy.ToString() + "/" + player.BaseStats.Energy.ToString();
+            if (energyText != null)
+                energyText.text = player.CurrentEnergy.ToString() + "/" + player.BaseStats.Energy.ToString();
             return;
         }
 
@@ -249,10 +257,10 @@ public class CombatManager : MonoBehaviour
         PlayerData playerData = PlayerDataManager.Instance.CurrentPlayerData;
         if (playerData == null) return;
 
-        // 设置 Slider 的最大值和当前值
         energySlider.maxValue = playerData.BaseStats.Energy;
         energySlider.value = playerData.CurrentEnergy;
-        energyText.text = playerData.CurrentEnergy.ToString() + "/" + playerData.BaseStats.Energy.ToString();
+        if (energyText != null)
+            energyText.text = playerData.CurrentEnergy.ToString() + "/" + playerData.BaseStats.Energy.ToString();
     }
 
     private void PlayerDefeated()
