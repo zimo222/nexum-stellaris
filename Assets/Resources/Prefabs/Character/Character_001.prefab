@@ -505,13 +505,9 @@ GameObject:
   - component: {fileID: 6520083323395392935}
   - component: {fileID: 6959124833004774697}
   - component: {fileID: 2832463258213110880}
-  - component: {fileID: 8608482226242235155}
-  - component: {fileID: 5621322446323924751}
-  - component: {fileID: 1255718027021788137}
   - component: {fileID: 2593109588123396441}
-  - component: {fileID: 1149536458154388525}
-  - component: {fileID: 3713119161358142204}
-  - component: {fileID: 6727123790432567984}
+  - component: {fileID: 3928987432983781055}
+  - component: {fileID: 52915781664956050}
   m_Layer: 3
   m_Name: Character_001
   m_TagString: Player
@@ -643,69 +639,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &8608482226242235155
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8331150679915891357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fb8f7d3fbff14443b6ecc94b9fc5970, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  knockbackDirection: {x: 0, y: 0}
-  knockbackDuration: 0
-  attackCheck: {fileID: 0}
-  attackCheckRadius: 0
-  groundCheck: {fileID: 0}
-  groundCheckDistance: 0.3
-  wallCheck: {fileID: 0}
-  wallCheckDistance: 0
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 0
-  attackMovement: []
-  counterAttackDuration: 0.2
-  isIdle: 0
-  moveSpeed: 70
-  jumpForce: 200
-  gravityScale: 500
-  dashSpeed: 300
-  dashDuration: 0.2
-  attackType: 0
-  energyRegenRate: 2
-  selectedSpellIndex: 0
-  weaponSlotsUI: {fileID: 0}
---- !u!114 &5621322446323924751
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8331150679915891357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c08c8d540f7fc6458e177995dc9b5dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  flashDuration: 0.2
-  hitMat: {fileID: 2100000, guid: 9d7faeccf815dea40800da53af57718a, type: 2}
---- !u!114 &1255718027021788137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8331150679915891357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c374682b1cb2c82499bbf65076082c3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stepInterval: 0.1
-  firePoint: {fileID: 8498469332027969764}
 --- !u!114 &2593109588123396441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -718,8 +651,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d86e8a8173f0e874da638cf71a2d5fd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakerId: Player
---- !u!114 &1149536458154388525
+  speakerId: Character_001
+--- !u!114 &3928987432983781055
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -728,24 +661,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8331150679915891357}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf859144b7c03304f8f56a812f079ba0, type: 3}
+  m_Script: {fileID: 11500000, guid: babd69401badb0546aa2b3b90c1ab80c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saveInterval: 10
---- !u!114 &3713119161358142204
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8331150679915891357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af7c1403ec3bdcd489883b211d91b0f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  showDebugLog: 1
---- !u!114 &6727123790432567984
+--- !u!114 &52915781664956050
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

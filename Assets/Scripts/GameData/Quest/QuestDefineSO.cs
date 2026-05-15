@@ -28,12 +28,8 @@ public class DialogueEntry
     public YesNo useCGMode = YesNo.Yes;      // Yes = 传统CG对话, No = 使用 dialogueFrame
 
 
-    [Header("对话结束后的角色移动（可选）")]
-    public bool moveAfterDialogue = false;               // 是否在说完这句话后移动
-    public string moveCharacterId;                       // 移动的角色ID（speakerId 或 "Player"）
-    public List<Vector2> waypoints;                      // 路径点（世界坐标）
-    public float moveSpeed = 2f;                         // 移动速度
-    public bool waitForMoveComplete = true;              // 是否等待移动完成再继续下一句
+    [Header("对话结束后的控制指令序列")]
+    public List<QuestControl> controls;
 }
 
 [CreateAssetMenu(fileName = "NewQuest", menuName = "GameData/QuestDefine")]
@@ -94,4 +90,29 @@ public enum YesNo
 {
     No = 0,   // 默认值
     Yes = 1
+}
+
+public enum ControlType
+{
+    Spawn,      // 生成角色
+    Destroy,    // 销毁角色
+    Move        // 移动角色
+}
+
+[System.Serializable]
+public class QuestControl
+{
+    [Tooltip("延迟执行时间（秒）")]
+    public float delay = 0f;
+
+    public ControlType type;
+
+    [Tooltip("角色的speakerId 或 \"Player\"")]
+    public string characterId;
+
+    [Tooltip("生成/移动的目标位置（Spawn/Move使用）")]
+    public Vector2 position;
+
+    [Tooltip("移动速度（仅Move使用）")]
+    public float moveSpeed = 2f;
 }

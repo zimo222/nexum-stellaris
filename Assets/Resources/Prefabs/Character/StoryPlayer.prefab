@@ -91,7 +91,7 @@ SpriteRenderer:
   m_SortingLayerID: 1493905729
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 782534154, guid: 50669e9da5a53d246800f9adacf4e43d, type: 3}
+  m_Sprite: {fileID: -284555525, guid: 68676681779edf740a2bb2ba1b71ce83, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -112,7 +112,7 @@ Animator:
   m_GameObject: {fileID: 2191195388912254083}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f017e3ddf8ff99a4695e6b6528f398bf, type: 2}
+  m_Controller: {fileID: 9100000, guid: eeae3af972ef2f3428ef097d56ac64a8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -506,10 +506,10 @@ GameObject:
   - component: {fileID: 6959124833004774697}
   - component: {fileID: 2832463258213110880}
   - component: {fileID: 2593109588123396441}
-  - component: {fileID: 1857448137929889730}
-  - component: {fileID: 388512640399018550}
+  - component: {fileID: 3928987432983781055}
+  - component: {fileID: 52915781664956050}
   m_Layer: 3
-  m_Name: Character_002
+  m_Name: StoryPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -651,8 +651,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d86e8a8173f0e874da638cf71a2d5fd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakerId: Character_002
---- !u!114 &1857448137929889730
+  speakerId: Player
+--- !u!114 &3928987432983781055
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -664,7 +664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: babd69401badb0546aa2b3b90c1ab80c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &388512640399018550
+--- !u!114 &52915781664956050
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
