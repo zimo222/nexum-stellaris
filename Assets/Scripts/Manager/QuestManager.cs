@@ -479,7 +479,7 @@ public class QuestManager : MonoBehaviour
             typingCoroutine = StartCoroutine(TypeText(entry.content));
         }
     }
-
+    /*
     private Transform FindNPCDialogueRoot(string speakerId)
     {
         if (string.IsNullOrEmpty(speakerId)) return null;
@@ -488,6 +488,18 @@ public class QuestManager : MonoBehaviour
         var npcs = FindObjectsOfType<NPCIdentifier>();
         foreach (var npc in npcs)
             if (npc.speakerId == speakerId)
+                return npc.transform;
+        return null;
+    }
+    */
+    private Transform FindNPCDialogueRoot(string speakerId)
+    {
+        if (string.IsNullOrEmpty(speakerId)) return null;
+        if (speakerId == "Player")
+            return GameObject.FindGameObjectWithTag("Player")?.transform;
+        var npcs = FindObjectsOfType<NPCIdentifier>();
+        foreach (var npc in npcs)
+            if (npc.HasId(speakerId))
                 return npc.transform;
         return null;
     }

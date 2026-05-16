@@ -71,11 +71,19 @@ public class QuestControlExecutor : MonoBehaviour
         dynamicCharacters[id] = goNPC;
     }
 
+    /*
     private void EnsureIdentifier(GameObject go, string id)
     {
         var idComp = go.GetComponent<NPCIdentifier>();
         if (idComp == null) idComp = go.AddComponent<NPCIdentifier>();
         idComp.speakerId = id;
+    }*/
+    private void EnsureIdentifier(GameObject go, string id)
+    {
+        var idComp = go.GetComponent<NPCIdentifier>();
+        if (idComp == null)
+            idComp = go.AddComponent<NPCIdentifier>();
+        idComp.AddId(id);
     }
 
     private void EnsureMover(GameObject go)
@@ -127,6 +135,7 @@ public class QuestControlExecutor : MonoBehaviour
         yield return mover.MoveToPosition(ctrl.position, ctrl.moveSpeed);
     }
 
+    /*
     private GameObject FindCharacter(string id)
     {
         if (dynamicCharacters.TryGetValue(id, out GameObject go))
@@ -134,6 +143,18 @@ public class QuestControlExecutor : MonoBehaviour
         var npcs = FindObjectsOfType<NPCIdentifier>();
         foreach (var npc in npcs)
             if (npc.speakerId == id)
+                return npc.gameObject;
+        if (id == "Player")
+            return GameObject.FindGameObjectWithTag("Player");
+        return null;
+    }*/
+    private GameObject FindCharacter(string id)
+    {
+        if (dynamicCharacters.TryGetValue(id, out GameObject go))
+            return go;
+        var npcs = FindObjectsOfType<NPCIdentifier>();
+        foreach (var npc in npcs)
+            if (npc.HasId(id))
                 return npc.gameObject;
         if (id == "Player")
             return GameObject.FindGameObjectWithTag("Player");
