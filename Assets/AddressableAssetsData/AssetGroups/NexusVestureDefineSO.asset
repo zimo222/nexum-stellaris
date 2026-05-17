@@ -1,0 +1,175 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: NexusVestureDefineSO
+  m_EditorClassIdentifier: 
+  m_GroupName: NexusVestureDefineSO
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 8e26c425db7c9cb46b8dba7ce97c4880
+  m_SerializeEntries:
+  - m_GUID: 1bcf3e05c5f084545aa66673a9066dd9
+    m_Address: GameData/NexusVesture/NexusVesture_002_TangibleNexus
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - NexusVestureDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2204d3a54e46f34488d6dc5c69e92d10
+    m_Address: GameData/NexusVesture/NexusVesture_004_CogniThread
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - NexusVestureDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 26b8fe50f04ee1b40a727356b8e6abb7
+    m_Address: GameData/NexusVesture/NexusVesture_001_ImprintStep
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - NexusVestureDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2a61752bb8170084b95eb0c8260a5297
+    m_Address: GameData/NexusVesture/NexusVesture_002_AbyssalHeart
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - NexusVestureDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 30d250fbd29c7374588b9d20d05b72bb
+    m_Address: GameData/NexusVesture/NexusVesture_005_CogniThread
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - NexusVestureDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 338508eaaa0fd7c45b4cb6b5f1f8a331
+    m_Address: GameData/NexusVesture/NexusVesture_004_ImprintStep
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - NexusVestureDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3473ec9727ad84541b3dbd3ae641dcf1
+    m_Address: GameData/NexusVesture/NexusVesture_004_VolitionVein
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - NexusVestureDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 36709b41ab9973c46bde0b4c9806019b
+    m_Address: GameData/NexusVesture/NexusVesture_005_TangibleNexus
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - NexusVestureDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3dcb5b0c03bf5944b89b2270d1cb6230
+    m_Address: GameData/NexusVesture/NexusVesture_003_ImprintStep
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - NexusVestureDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 742a409a901eee748bd9e06506c441f6
+    m_Address: GameData/NexusVesture/NexusVesture_001_AbyssalHeart
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - NexusVestureDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7d6bdcf40327df840abbd8b5c25c07df
+    m_Address: GameData/NexusVesture/NexusVesture_002_CogniThread
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - NexusVestureDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8219f008b3b5b9e44bb8cdd2af274da0
+    m_Address: GameData/NexusVesture/NexusVesture_003_TangibleNexus
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - NexusVestureDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8f95046d7e7f1034884526783d2341a1
+    m_Address: GameData/NexusVesture/NexusVesture_002_VolitionVein
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - NexusVestureDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 965bffedae97b8b45aa41a1d45890570
+    m_Address: GameData/NexusVesture/NexusVesture_003_CogniThread
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - NexusVestureDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 98c6136c95566694cb5057797dc78a25
+    m_Address: GameData/NexusVesture/NexusVesture_004_AbyssalHeart
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - NexusVestureDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9b9d69ecff39167418fd112bf499a725
+    m_Address: GameData/NexusVesture/NexusVesture_004_TangibleNexus
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - NexusVestureDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9cc8e95d42e09dd478a77200eda3ad92
+    m_Address: GameData/NexusVesture/NexusVesture_005_AbyssalHeart
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - NexusVestureDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9f3ba9ca60d2595459d68aed6b0a148f
+    m_Address: GameData/NexusVesture/NexusVesture_002_ImprintStep
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - NexusVestureDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b0720ce908fc4a74489eb7513808bed4
+    m_Address: GameData/NexusVesture/NexusVesture_001_VolitionVein
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - NexusVestureDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b0be5294b6256c442a3f61654ce1a502
+    m_Address: GameData/NexusVesture/NexusVesture_005_VolitionVein
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - NexusVestureDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b33672fe529a4614a8faab7ff4aed627
+    m_Address: GameData/NexusVesture/NexusVesture_005_ImprintStep
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - NexusVestureDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c97ad89873aa70a40a3f2971c1b405af
+    m_Address: GameData/NexusVesture/NexusVesture_001_CogniThread
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - NexusVestureDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cf9b201cad32ad04bad67dc8054330fc
+    m_Address: GameData/NexusVesture/NexusVesture_003_VolitionVein
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - NexusVestureDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e8d302ebf91ec85478295524139c5cd3
+    m_Address: GameData/NexusVesture/NexusVesture_003_AbyssalHeart
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - NexusVestureDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eca3aa09a89379544a5fa90433566bec
+    m_Address: GameData/NexusVesture/NexusVesture_001_TangibleNexus
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - NexusVestureDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: d1b71da346606704184deafeb1da283f, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 5045f1cc6776fa34b9b7535611b4272f, type: 2}
+    - {fileID: 11400000, guid: fd86ca541031c2e44aa299b18b140e07, type: 2}

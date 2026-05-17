@@ -11,9 +11,10 @@ public enum SpellModuleType
 }
 
 [CreateAssetMenu(fileName = "NewSpellModule", menuName = "GameData/SpellModule")]
-public class SpellModuleSO : ScriptableObject
+public class SpellModuleSO : ScriptableObject, IHaveId
 {
     public string id;
+    public string Id => id;
     public string moduleName;
     public SpellModuleType moduleType;
 

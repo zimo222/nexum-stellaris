@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: BulletDefineSO
+  m_EditorClassIdentifier: 
+  m_GroupName: BulletDefineSO
+  m_Data:
+    m_SerializedData: []
+  m_GUID: dbde8b653c20b23408c6d78e0668b962
+  m_SerializeEntries:
+  - m_GUID: 013616e24e9e23b419645b32bf0b4843
+    m_Address: GameData/Bullet/EdgeText/Bullet_004
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BulletDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2e1294ea4b3b6fb439274bbe0843efbf
+    m_Address: GameData/Bullet/VotiveEmber/Bullet_001
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BulletDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 42bcc7bb965e8fa47a1c9d3770ac923d
+    m_Address: GameData/Bullet/EdgeText/Bullet_BlueForward
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BulletDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 65ac02e8032768d4098a9f9c379c149e
+    m_Address: GameData/Bullet/VotiveEmber/Bullet_006
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BulletDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 74fe2c509087bd449938a0f1f2c84a59
+    m_Address: GameData/Bullet/EdgeText/Bullet_006
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BulletDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 96de75c6ad6463b47aa99107ab4240ad
+    m_Address: GameData/Bullet/EdgeText/Bullet_BlueBehind
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BulletDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9d2cfaaab6922fb4ea1a5b9edf2c1021
+    m_Address: GameData/Bullet/EdgeText/Bullet_005
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BulletDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a60aece0488a19b42945aefb6051e535
+    m_Address: GameData/Bullet/EdgeText/Bullet_007
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BulletDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b0f8958c0cb8c91438e47fd17b04ad1b
+    m_Address: GameData/Bullet/VotiveEmber/Bullet_004
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BulletDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b21648954e62a5c4dab08c5b90316524
+    m_Address: GameData/Bullet/EdgeText/Bullet_BlueUp
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BulletDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cab3d4abf3e17a94dab7e6754e0dae01
+    m_Address: GameData/Bullet/VotiveEmber/Bullet_002
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BulletDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d0c26d422d658ab4babb942be14f0860
+    m_Address: GameData/Bullet/VotiveEmber/Bullet_005
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BulletDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e0451a4989d513c45946571bee48ba73
+    m_Address: GameData/Bullet/VotiveEmber/Bullet_007
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BulletDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fc7181729a66e4146a9238da483e2d02
+    m_Address: GameData/Bullet/VotiveEmber/Bullet_003
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BulletDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: d1b71da346606704184deafeb1da283f, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 6b3fdf23f0d3aa5459da2d35caddb3b3, type: 2}
+    - {fileID: 11400000, guid: ca6d09f447188d14f99ddfa190f9904b, type: 2}

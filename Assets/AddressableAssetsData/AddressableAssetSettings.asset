@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 468a46d0ae32c3544b7d98094e6448a9, type: 3}
   m_Name: AddressableAssetSettings
   m_EditorClassIdentifier: 
-  m_DefaultGroup: 530fa07975c2c0a4cb2ec3fcad4c8f13
+  m_DefaultGroup: bc68b7a9e3c8c98478ce91f2c4be8737
   m_currentHash:
     serializedVersion: 2
-    Hash: 5a76dd004097df012145cd98edd4d0b9
+    Hash: 14483656c771b4c0de0202de898cac8f
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_BundleLocalCatalog: 0
@@ -44,12 +44,18 @@ MonoBehaviour:
   m_BuildAddressablesWithPlayerBuild: 0
   m_overridePlayerVersion: '[UnityEditor.PlayerSettings.bundleVersion]'
   m_GroupAssets:
+  - {fileID: 11400000, guid: 99fc43651a984da489d1f558b920131a, type: 2}
   - {fileID: 11400000, guid: 98d9b2f75a0242c4db1ca3ba48aec12f, type: 2}
   - {fileID: 11400000, guid: 007371bc6af5cdb4bb82b1475fb677d6, type: 2}
   - {fileID: 11400000, guid: bf764055dfaba2048be8f7bb97a1064c, type: 2}
+  - {fileID: 11400000, guid: f40ee490e6b022745bee337141519061, type: 2}
   - {fileID: 11400000, guid: e4d4961d790ae704b8621afc6c898648, type: 2}
+  - {fileID: 11400000, guid: 78ffa1ad77068b44ba47f5268562ea8b, type: 2}
+  - {fileID: 11400000, guid: 109bdf9207048ef44a4ba458708ee5e9, type: 2}
   - {fileID: 11400000, guid: 5eb6e4e4cb5496640992117b9890eaba, type: 2}
+  - {fileID: 11400000, guid: f23672cf457f59d4dbd8693cb9bcf3ce, type: 2}
   - {fileID: 11400000, guid: 88235d29c8ce51843b3cddcc10000169, type: 2}
+  - {fileID: 11400000, guid: a3d264d3b19f86b49a93fb72751d13a0, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -94,6 +100,13 @@ MonoBehaviour:
     - Locale
     - Locale-zh-Hans
     - Locale-en
+    - BulletDefineSO
+    - ExotextDefineSO
+    - NexusVestureDefineSO
+    - QuestDefineSO
+    - SpecialEffectDefineSO
+    - SpellModuleDefineSO
+    - TutorialDefineSO
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 8c9344e645c87a3448554d36da94c739, type: 2}

@@ -1,0 +1,271 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: SpellModuleSO
+  m_EditorClassIdentifier: 
+  m_GroupName: SpellModuleSO
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 530fa07975c2c0a4cb2ec3fcad4c8f13
+  m_SerializeEntries:
+  - m_GUID: 006ee0acfc8559e45982efa6d1926efc
+    m_Address: GameData/SpellModule/VotiveEmber/Corrector_Rotate_R100
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0299b65b5ef2d7d42baf20582ee82116
+    m_Address: GameData/SpellModule/VotiveEmber/Corrector_Rotate_R150
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 179fc7c8d07828149a8615139ee25550
+    m_Address: GameData/SpellModule/VotiveEmber/Modifier_Accelerate_1.50X
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1d1bad0995b3fd84991b3998d87ccbd1
+    m_Address: GameData/SpellModule/VotiveEmber/Modifier_Multishot_8X
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2223fe23692cd174aae7840760221756
+    m_Address: GameData/SpellModule/VotiveEmber/Projectile_FireBall_003
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2568e1f63d58dbf428d9e794bbf04751
+    m_Address: GameData/SpellModule/VotiveEmber/Corrector_Split_3X
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 280db4205ae27bd4d94cbc610cd3329e
+    m_Address: GameData/SpellModule/VotiveEmber/Corrector_Rotate_R050
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 362d2e66c1eab4d4b85c585559e4969f
+    m_Address: GameData/SpellModule/VotiveEmber/Corrector_Split_2X
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3880441aca4e9e744826b9e5f54e4d46
+    m_Address: GameData/SpellModule/VotiveEmber/Modifier_Recoil_00001
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3ddcd07d97ea7b144b363c4ade45ca60
+    m_Address: GameData/SpellModule/VotiveEmber/Projectile_FireBall_007
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 45ed24b1f5e5796439d0de07e35b9d15
+    m_Address: GameData/SpellModule/VotiveEmber/Projectile_FireBall_005
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 54ecce62def814c44939856397d15241
+    m_Address: GameData/SpellModule/VotiveEmber/Modifier_Recoil_10000
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 56fd1671fb9a68d45a2eb79725f7df10
+    m_Address: GameData/SpellModule/VotiveEmber/Modifier_Multishot_4X
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 576158bfd2480c245bba834ddbd45ba6
+    m_Address: GameData/SpellModule/VotiveEmber/Modifier_Accelerate_2.00X
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 70c92c3ab8db722429fa090c20d1531d
+    m_Address: GameData/SpellModule/VotiveEmber/AProjectile_FireBall_002
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 71ff643e9d9e2274184e93b86d9c6248
+    m_Address: GameData/SpellModule/VotiveEmber/MultiCast_Say_2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 72b124333e7c1fa44874a0bfcddc085c
+    m_Address: GameData/SpellModule/VotiveEmber/Modifier_FieldAngle_360
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 730d108fa08437742b10e73163e5b82d
+    m_Address: GameData/SpellModule/VotiveEmber/Corrector_Homing_3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 74b78d319ce430348b9377f5ab7e6451
+    m_Address: GameData/SpellModule/VotiveEmber/MultiCast_Say_3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 77c03ef13de92d449a76325d044c13e4
+    m_Address: GameData/SpellModule/VotiveEmber/Modifier_Decelerate_0.75X
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7e181287f02141747b220bf8ba4eda3c
+    m_Address: GameData/SpellModule/VotiveEmber/Modifier_FieldAngle_060
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7fcc7e27af9ec1f4a8fcbc3e553ae3ee
+    m_Address: GameData/SpellModule/VotiveEmber/Modifier_Accelerate_1.25X
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 889fdf5a57d10c947bc76a07d0294cf3
+    m_Address: GameData/SpellModule/EdgeText/Projectile_SwordEnergy_BlueForward
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8f2c6e7fbaeeece44bf589488a64092e
+    m_Address: GameData/SpellModule/VotiveEmber/Corrector_Homing_1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 940c7fc0966360e489bef85578b2a862
+    m_Address: GameData/SpellModule/VotiveEmber/Modifier_Decelerate_0.50X
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 972fa69f73b57bc4ebc0ff6359712745
+    m_Address: GameData/SpellModule/VotiveEmber/Modifier_Recoil_00010
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9a26922d779affb40bd187e9b593e69c
+    m_Address: GameData/SpellModule/VotiveEmber/Corrector_Split_4X
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a0610dcd8c0d32f4789022edc0cfe3c6
+    m_Address: GameData/SpellModule/VotiveEmber/Modifier_Accelerate_1.75X
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a9e396188d309504d864a02413242902
+    m_Address: GameData/SpellModule/VotiveEmber/Modifier_Recoil_01000
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b0eb469cdbc7a2146a5a4dff52fb59f1
+    m_Address: GameData/SpellModule/VotiveEmber/Corrector_Homing_5
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b8826b06504c79440b720203c993fd57
+    m_Address: GameData/SpellModule/VotiveEmber/Modifier_FieldAngle_000
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: beb696dd1545c754e9200406111ec639
+    m_Address: GameData/SpellModule/VotiveEmber/Modifier_FieldAngle_030
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c1020e91b196fc44183753119e9231d5
+    m_Address: GameData/SpellModule/EdgeText/Projectile_SwordEnergy_BlueUp
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ca97359a1e60e354c8eb509d4dc75c9c
+    m_Address: GameData/SpellModule/VotiveEmber/Modifier_Decelerate_0.25X
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cf9605c093aee5c44ac02f3356349271
+    m_Address: GameData/SpellModule/VotiveEmber/Projectile_FireBall_004
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cffadef4d747b3b4aae3dba66d43a877
+    m_Address: GameData/SpellModule/VotiveEmber/AProjectile_FireBall_001
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d8a4835b24f571d478c3968440ebeda0
+    m_Address: GameData/SpellModule/VotiveEmber/Projectile_FireBall_006
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dd991c521394e5541b20fe8050fd0b65
+    m_Address: GameData/SpellModule/VotiveEmber/Modifier_Multishot_2X
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e2676ab76863e8b48ad093b9c575f842
+    m_Address: GameData/SpellModule/VotiveEmber/Modifier_FieldAngle_180
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e5d5f98629d48d940813562518e6de26
+    m_Address: GameData/SpellModule/VotiveEmber/Corrector_Rotate_R200
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ff688389738bbcf4e91263b2c2f797b7
+    m_Address: GameData/SpellModule/EdgeText/Projectile_SwordEnergy_BlueBehind
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: d1b71da346606704184deafeb1da283f, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: f0b1a27b361ae254aba3a71a90cc2ffe, type: 2}
+    - {fileID: 11400000, guid: 69aea60fcca04a84ba342eaf57bf5ca1, type: 2}

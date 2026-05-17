@@ -1,10 +1,24 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
+
+/// <summary>
+/// 为 ScriptableObject 提供统一的 Id 访问接口
+/// 需要你的所有数据定义类（ExotextDefineSO等）实现此接口
+/// </summary>
+public interface IHaveId
+{
+    string Id { get; }
+}
 
 public class GameDataManager : MonoBehaviour
 {
     public static GameDataManager Instance { get; private set; }
+
+    // 对外暴露的字典（与原接口完全一致）
     public Dictionary<string, ExotextDefineSO> ExotextDict { get; private set; }
     public Dictionary<string, NexusVestureDefineSO> NexusVestureDict { get; private set; }
     public Dictionary<string, MaterialDefineSO> MaterialDict { get; private set; }
@@ -14,10 +28,16 @@ public class GameDataManager : MonoBehaviour
     public Dictionary<string, TutorialDefineSO> TutorialDict { get; private set; }
     public Dictionary<string, SpecialEffectDefineSO> SpecialEffectDict { get; private set; }
 
+    // 标记数据是否加载完成
+    public bool IsReady { get; private set; } = false;
+
+    // 存储加载句柄，用于释放资源
+    private List<AsyncOperationHandle> _loadHandles = new List<AsyncOperationHandle>();
+
     void Awake()
     {
         DeadlockDetector.Log($"[{GetType().Name}] Awake on {gameObject.name}");
-        // 实现简单的单例
+
         if (Instance == null)
         {
             Instance = this;
@@ -26,56 +46,109 @@ public class GameDataManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
-        /*
-        ExotextDefineSO[] exotexts = Resources.LoadAll<ExotextDefineSO>("GameData/Exotext");
-        ExotextDict = exotexts.ToDictionary(w => w.id, w => w);
 
-        NexusVestureDefineSO[] nexusvestures = Resources.LoadAll<NexusVestureDefineSO>("GameData/NexusVesture");
-        NexusVestureDict = nexusvestures.ToDictionary(w => w.id, w => w);
+        // 初始化为空字典，避免外部访问时报 NullReferenceException
+        ExotextDict = new Dictionary<string, ExotextDefineSO>();
+        NexusVestureDict = new Dictionary<string, NexusVestureDefineSO>();
+        MaterialDict = new Dictionary<string, MaterialDefineSO>();
+        QuestDict = new Dictionary<string, QuestDefineSO>();
+        BulletDict = new Dictionary<string, BulletDefineSO>();
+        SpellModuleDict = new Dictionary<string, SpellModuleSO>();
+        TutorialDict = new Dictionary<string, TutorialDefineSO>();
+        SpecialEffectDict = new Dictionary<string, SpecialEffectDefineSO>();
 
-        MaterialDefineSO[] materials = Resources.LoadAll<MaterialDefineSO>("GameData/Material");
-        MaterialDict = materials.ToDictionary(w => w.id, w => w);
-
-        QuestDefineSO[] quests = Resources.LoadAll<QuestDefineSO>("GameData/Quest");
-        QuestDict = quests.ToDictionary(w => w.id, w => w);
-
-        BulletDefineSO[] bullets = Resources.LoadAll<BulletDefineSO>("GameData/Bullet");
-        BulletDict = bullets.ToDictionary(b => b.id, b => b);
-
-        SpellModuleSO[] modules = Resources.LoadAll<SpellModuleSO>("GameData/SpellModule");
-        SpellModuleDict = modules.ToDictionary(m => m.id, m => m);
-
-        TutorialDefineSO[] tutorials = Resources.LoadAll<TutorialDefineSO>("GameData/Tutorial");
-        TutorialDict = tutorials.ToDictionary(t => t.sequenceName, t => t);
-        */
-        ExotextDict = LoadDict<ExotextDefineSO>("GameData/Exotext");
-        NexusVestureDict = LoadDict<NexusVestureDefineSO>("GameData/NexusVesture");
-        MaterialDict = LoadDict<MaterialDefineSO>("GameData/Material");
-        QuestDict = LoadDict<QuestDefineSO>("GameData/Quest");
-        BulletDict = LoadDict<BulletDefineSO>("GameData/Bullet");
-        SpellModuleDict = LoadDict<SpellModuleSO>("GameData/SpellModule");
-        TutorialDict = LoadDict<TutorialDefineSO>("GameData/Tutorial");
-        SpecialEffectDict = LoadDict<SpecialEffectDefineSO>("GameData/SpecialEffect");
-    }
-    // 通用加载方法，避免重复代码
-    private Dictionary<string, T> LoadDict<T>(string folder) where T : Object
-    {
-        T[] arr = Resources.LoadAll<T>(folder);
-        return arr.ToDictionary(item => GetId(item));
+        // 开始异步加载所有数据（不阻塞 Awake）
+        StartCoroutine(LoadAllDataCoroutine());
     }
 
-    // 根据不同类型获取id字段（因为 ScriptableObject 没有统一id字段）
-    private string GetId<T>(T obj)
+    /// <summary>
+    /// 协程加载所有数据字典
+    /// </summary>
+    private System.Collections.IEnumerator LoadAllDataCoroutine()
     {
-        if (obj is ExotextDefineSO e) return e.id;
-        if (obj is NexusVestureDefineSO n) return n.id;
-        if (obj is MaterialDefineSO m) return m.id;
-        if (obj is QuestDefineSO q) return q.id;
-        if (obj is BulletDefineSO b) return b.id;
-        if (obj is SpellModuleSO s) return s.id;
-        if (obj is TutorialDefineSO t) return t.sequenceName;
-        if (obj is SpecialEffectDefineSO se) return se.id;
-        return null;
+        // 并行加载所有任务
+        var exotextTask = LoadDictAsync<ExotextDefineSO>("ExotextDefineSO");
+        var nexusTask = LoadDictAsync<NexusVestureDefineSO>("NexusVestureDefineSO");
+        //var materialTask = LoadDictAsync<MaterialDefineSO>("MaterialDefineSO");
+        var questTask = LoadDictAsync<QuestDefineSO>("QuestDefineSO");
+        var bulletTask = LoadDictAsync<BulletDefineSO>("BulletDefineSO");
+        var spellTask = LoadDictAsync<SpellModuleSO>("SpellModuleDefineSO");
+        var tutorialTask = LoadDictAsync<TutorialDefineSO>("TutorialDefineSO");
+        var effectTask = LoadDictAsync<SpecialEffectDefineSO>("SpecialEffectDefineSO");
+
+        // 等待所有任务完成
+        yield return new WaitUntil(() =>
+            exotextTask.IsCompleted &&
+            nexusTask.IsCompleted &&
+            //materialTask.IsCompleted &&
+            questTask.IsCompleted &&
+            bulletTask.IsCompleted &&
+            spellTask.IsCompleted &&
+            tutorialTask.IsCompleted &&
+            effectTask.IsCompleted
+        );
+
+        // 将结果赋值给公共字典（注意：如果任务出错，Result 可能为 null，我们保留空字典）
+        if (exotextTask.Result != null) ExotextDict = exotextTask.Result;
+        if (nexusTask.Result != null) NexusVestureDict = nexusTask.Result;
+        //if (materialTask.Result != null) MaterialDict = materialTask.Result;
+        if (questTask.Result != null) QuestDict = questTask.Result;
+        if (bulletTask.Result != null) BulletDict = bulletTask.Result;
+        if (spellTask.Result != null) SpellModuleDict = spellTask.Result;
+        if (tutorialTask.Result != null) TutorialDict = tutorialTask.Result;
+        if (effectTask.Result != null) SpecialEffectDict = effectTask.Result;
+
+        IsReady = true;
+        Debug.Log($"[{GetType().Name}] All game data loaded successfully from Addressables.");
+    }
+
+    /// <summary>
+    /// 异步加载指定标签的所有资源，并转换为 Dictionary<string, T>
+    /// </summary>
+    private async Task<Dictionary<string, T>> LoadDictAsync<T>(string label) where T : UnityEngine.Object, IHaveId
+    {
+        try
+        {
+            // 加载所有带有此标签的 T 类型资源
+            var handle = Addressables.LoadAssetsAsync<T>(label, null);
+            _loadHandles.Add(handle); // 存储句柄，便于后续释放
+            var assets = await handle.Task;
+
+            if (assets == null || assets.Count == 0)
+            {
+                Debug.LogWarning($"No assets found for label '{label}'. Make sure your ScriptableObjects are marked with Addressable and label '{label}'.");
+                return new Dictionary<string, T>();
+            }
+
+            // 根据 Id 构建字典
+            return assets.ToDictionary(asset => asset.Id);
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Failed to load Addressables with label '{label}': {ex.Message}");
+            return new Dictionary<string, T>();
+        }
+    }
+
+    /// <summary>
+    /// 外部可调用此方法等待数据加载完成（例如在场景切换前）
+    /// </summary>
+    public async Task WaitUntilReady()
+    {
+        while (!IsReady)
+            await Task.Yield();
+    }
+
+    private void OnDestroy()
+    {
+        // 释放所有 Addressables 加载句柄，避免内存泄漏
+        foreach (var handle in _loadHandles)
+        {
+            if (handle.IsValid())
+                Addressables.Release(handle);
+        }
+        _loadHandles.Clear();
     }
 }

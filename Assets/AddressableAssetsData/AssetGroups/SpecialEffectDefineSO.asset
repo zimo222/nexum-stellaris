@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: SpecialEffectDefineSO
+  m_EditorClassIdentifier: 
+  m_GroupName: SpecialEffectDefineSO
+  m_Data:
+    m_SerializedData: []
+  m_GUID: e225bbbec3db842468b190ee5ad7154b
+  m_SerializeEntries:
+  - m_GUID: 914a2890b02565d43af2f011774b487b
+    m_Address: GameData/SpecialEffect/SF_Recover
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpecialEffectDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9a5ab668c69e23c4c9a45d6ac3e07aea
+    m_Address: GameData/SpecialEffect/SF_Regenerate
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpecialEffectDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: af5750ee2157ca342a0529999533a40b
+    m_Address: GameData/SpecialEffect/SF_WeaveMagic
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpecialEffectDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: d1b71da346606704184deafeb1da283f, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 76049fb1141f3104c99621d7236d9f5f, type: 2}
+    - {fileID: 11400000, guid: f22cb918923d03f4c8363b682ad91ca1, type: 2}

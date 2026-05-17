@@ -5,9 +5,10 @@ using UnityEngine;
 
 // ÎäÆ÷¶¨ÒåSO
 [CreateAssetMenu(fileName = "NewExotext", menuName = "GameData/ExotextDefine")]
-public class ExotextDefineSO : ScriptableObject
+public class ExotextDefineSO : ScriptableObject, IHaveId
 {
     public string id;
+    public string Id => id;
     public string exotextName;
 
     public ExotextType type;

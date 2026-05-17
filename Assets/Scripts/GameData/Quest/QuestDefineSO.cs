@@ -33,9 +33,10 @@ public class DialogueEntry
 }
 
 [CreateAssetMenu(fileName = "NewQuest", menuName = "GameData/QuestDefine")]
-public class QuestDefineSO : ScriptableObject
+public class QuestDefineSO : ScriptableObject, IHaveId
 {
     public string id;                           // 任务ID（唯一）
+    public string Id => id;
     public string questName;                     // 任务名称
     public string questNum;                     // 任务名称
 

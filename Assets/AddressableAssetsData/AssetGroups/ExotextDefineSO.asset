@@ -1,0 +1,235 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: ExotextDefineSO
+  m_EditorClassIdentifier: 
+  m_GroupName: ExotextDefineSO
+  m_Data:
+    m_SerializedData: []
+  m_GUID: b1acaeef4e2f161478586b24ba273e13
+  m_SerializeEntries:
+  - m_GUID: 02b59e77dd5ae864483f6a800cd77e89
+    m_Address: GameData/Exotext/Exotext_003_StellarScribe
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 03133e544d2090f448c5a5312239eddc
+    m_Address: GameData/Exotext/Exotext_002_DuoVoice
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 06484e776fb977349b7dbe1c29e6444f
+    m_Address: GameData/Exotext/Exotext_004_VotiveEmber
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 21510266fcd9ca8459d0d048f32a7bbf
+    m_Address: GameData/Exotext/Exotext_004_ThreadShot
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 21eac6f269f9de24b9d88fbfcf288b88
+    m_Address: GameData/Exotext/Exotext_005_ThreadShot
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2e87c5fb9fc13774e84ab70a6c51ed5d
+    m_Address: GameData/Exotext/Exotext_003_ThoughtChime
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 39f4f2776bf276b47a7bc633e917d655
+    m_Address: GameData/Exotext/Exotext_005_ThoughtChime
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3a164bbac180c1542bfaf5f788319d6e
+    m_Address: GameData/Exotext/Exotext_003_EdgeText
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3b5c646ee7e964a4691daab0ee0c98be
+    m_Address: GameData/Exotext/Exotext_001_VotiveEmber
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3cef6bbd3b26faa41af3802ac9341d39
+    m_Address: GameData/Exotext/Exotext_005_EdgeText
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 49a6485f6a7624c47bc7a9f8b08a6ad9
+    m_Address: GameData/Exotext/Exotext_002_VotiveEmber
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4ced09d88939887418baf72b07668ec3
+    m_Address: GameData/Exotext/Exotext_002_EdgeText
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5532d17eacbef0b4685e18918bb3f71f
+    m_Address: GameData/Exotext/Exotext_001_DuoVoice
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5aaf8739548d89b4d8737c8207fb8132
+    m_Address: GameData/Exotext/Exotext_005_MnemonicTool
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6bd4cef373023b54a9107d0c34071d0b
+    m_Address: GameData/Exotext/Exotext_003_DuoVoice
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 79afd046eec161f449a07da7a4386c92
+    m_Address: GameData/Exotext/Exotext_004_MnemonicTool
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7aaca567010036b47aa1ba71f9002673
+    m_Address: GameData/Exotext/Exotext_001_StellarScribe
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8c0cf84b83a28e14f8158ff6e6d3fe51
+    m_Address: GameData/Exotext/Exotext_002_ThoughtChime
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 91bef9887f2b16d47ab42be1783e1333
+    m_Address: GameData/Exotext/Exotext_005_VotiveEmber
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 92320480c3e09714b93b12514595d402
+    m_Address: GameData/Exotext/Exotext_002_StellarScribe
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9b549832ae4822844937bdfa44a4e2da
+    m_Address: GameData/Exotext/Exotext_002_MnemonicTool
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9d91dd680f6b4b84eac7ff2057542638
+    m_Address: GameData/Exotext/Exotext_003_VotiveEmber
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9f7afcf06a6819f439ebc3b5e7b71feb
+    m_Address: GameData/Exotext/Exotext_001_EdgeText
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a3f371747170ffc42ac6d8f5f8c79f61
+    m_Address: GameData/Exotext/Exotext_003_MnemonicTool
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ab4c7a74834d6254b8f40474d23529b0
+    m_Address: GameData/Exotext/Exotext_001_MnemonicTool
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ab7aaee7806132b459cb66eef3b87319
+    m_Address: GameData/Exotext/Exotext_001_ThoughtChime
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b25647f1c3d23a54495bacd87860be57
+    m_Address: GameData/Exotext/Exotext_005_StellarScribe
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b87a1ea288176464e83ba981c6a68c18
+    m_Address: GameData/Exotext/Exotext_004_EdgeText
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c23fe6ae3160d6243aae3af663263572
+    m_Address: GameData/Exotext/Exotext_004_ThoughtChime
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c2d9627815c4fcf49893ee242bc7ae88
+    m_Address: GameData/Exotext/Exotext_002_ThreadShot
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c35bbed60dcece045af714ac5f8f4bd9
+    m_Address: GameData/Exotext/Exotext_001_ThreadShot
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c9fcbb36e4d9711478a89f02941940f7
+    m_Address: GameData/Exotext/Exotext_003_ThreadShot
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cb0ba029c3bb155489537b130e92bfb8
+    m_Address: GameData/Exotext/Exotext_004_StellarScribe
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dd2fbe076bba80e498a1325506fb80bc
+    m_Address: GameData/Exotext/Exotext_005_DuoVoice
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f4a3710d396b03643aa26071721ac0ce
+    m_Address: GameData/Exotext/Exotext_004_DuoVoice
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ExotextDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: d1b71da346606704184deafeb1da283f, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 337c8f3800495514f9580632ea137b89, type: 2}
+    - {fileID: 11400000, guid: 0e209f09698479b47a6bf1b31641fa96, type: 2}

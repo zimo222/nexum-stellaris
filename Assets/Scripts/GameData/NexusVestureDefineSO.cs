@@ -3,9 +3,10 @@ using UnityEngine;
 
 // Ê¥ºÛ¶¨ÒåSO
 [CreateAssetMenu(fileName = "NewNexusVesture", menuName = "GameData/NexusVestureDefine")]
-public class NexusVestureDefineSO : ScriptableObject
+public class NexusVestureDefineSO : ScriptableObject, IHaveId
 {
     public string id;
+    public string Id => id;
     public string nexusvectureName;
 
     public NexusVesturePosition Position;

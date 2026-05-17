@@ -47,9 +47,10 @@ public class TutorialStep
 }
 
 [CreateAssetMenu(fileName = "NewTutorial", menuName = "GameData/TutorialDefine")]
-public class TutorialDefineSO : ScriptableObject
+public class TutorialDefineSO : ScriptableObject, IHaveId
 {
     public string sequenceName;
+    public string Id => sequenceName;
 
     [Tooltip("教程启动前的延迟时间（秒），0表示立即开始")]
     public float startDelay = 0f;

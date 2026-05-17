@@ -14,9 +14,10 @@ public enum SpecialEffectType
 }
 
 [CreateAssetMenu(fileName = "NewSpecialEffect", menuName = "GameData/SpecialEffectDefine")]
-public class SpecialEffectDefineSO : ScriptableObject
+public class SpecialEffectDefineSO : ScriptableObject, IHaveId
 {
     public string id;                 // 唯一标识
+    public string Id => id;
     public string effectName;         // 显示名称，如“织法”
     public SpecialEffectType effectType;
 

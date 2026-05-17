@@ -1,0 +1,217 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: QuestDefineSO
+  m_EditorClassIdentifier: 
+  m_GroupName: QuestDefineSO
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 1eaf84591b53d9346a165d01dd1511e9
+  m_SerializeEntries:
+  - m_GUID: 124bb1816747a0c41b192cce9d2b75f3
+    m_Address: GameData/Quest/MainQuest_005001
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1b6325038f278a2498e74836195c3d22
+    m_Address: GameData/Quest/MainQuest_006003
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1d8715eba653ddc419ad3c6ccc7f71ea
+    m_Address: GameData/Quest/MainQuest_001001
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1da8d49632580014fa0c36b1a5050f1e
+    m_Address: GameData/Quest/MainQuest_002004
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1ffa1f4b234255d46b63921b18f17a6f
+    m_Address: GameData/Quest/MainQuest_006001
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 29f3bcc59d658b04fa7b1d7641383c7a
+    m_Address: GameData/Quest/MainQuest_005007
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2ae670c836515bb46971e7c2c9aa97e5
+    m_Address: GameData/Quest/MainQuest_005002
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2d1ec4352e29df040b0b06161129ea28
+    m_Address: GameData/Quest/WorldQuest_001001
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2fb6b8acf0fbc5c4c8d52bcfbcb7cfd1
+    m_Address: GameData/Quest/MainQuest_004002
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 327b7bce6d024fc4484695a4dc8677d7
+    m_Address: GameData/Quest/MainQuest_003004
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 43e093dc419b97d4c8444e9980209d5c
+    m_Address: GameData/Quest/MainQuest_002002
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4f0545187b7836f40af3bdbbca7cdd8b
+    m_Address: GameData/Quest/MainQuest_003002
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 642a7681f5a40c44c9e58208b0f00cc8
+    m_Address: GameData/Quest/MainQuest_004005
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8866b54dae0acac4297436ebe8ab074c
+    m_Address: GameData/Quest/MainQuest_005003
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8e64f6a09a845944f8f9171dfc9f3f9a
+    m_Address: GameData/Quest/MainQuest_003001
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9d1413cc9f6f68d4fbc8a42a82dbc4c6
+    m_Address: GameData/Quest/MainQuest_003003
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9f9c82a7effbad24b9789ed5cbbb2cfd
+    m_Address: GameData/Quest/MainQuest_004003
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a50b91a056e70694fb5746e666348942
+    m_Address: GameData/Quest/MainQuest_002003
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ad32521c9430eea448b158dfbdc13007
+    m_Address: GameData/Quest/MainQuest_003005
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b7ed77bc7b56aea4f8813c22ae5a4379
+    m_Address: GameData/Quest/MainQuest_006002
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bce3d6a71cf3895419d50dc1c6e7e5cf
+    m_Address: GameData/Quest/MainQuest_001002
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: be1d5faa1b1efeb4191a0dcabeb76c00
+    m_Address: GameData/Quest/MainQuest_004004
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c9437aa1e5dbff749a925a47c69de00c
+    m_Address: GameData/Quest/MainQuest_005008
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e46de63dba8d7a249aa2ee073fd6ef29
+    m_Address: GameData/Quest/WorldQuest_001002
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ea544047c55202c4d811f8f66a29579a
+    m_Address: GameData/Quest/MainQuest_005004
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ebdd2753006d5db40b32daa41aa6851f
+    m_Address: GameData/Quest/MainQuest_004001
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ee17bd58910d019439f35b01a3d53b49
+    m_Address: GameData/Quest/MainQuest_005005
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ef930104ae425e94eb08ab5df73d6283
+    m_Address: GameData/Quest/MainQuest_005009
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f096ebebb8445a84280cbe49728e258b
+    m_Address: GameData/Quest/MainQuest_002005
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f7c6c3521a4af5644840ca9c29d7f19c
+    m_Address: GameData/Quest/MainQuest_005006
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f96ee2448e5374f4fa4eeb9a67d43aca
+    m_Address: GameData/Quest/MainQuest_005010
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ff36245778e014b4cab0135d59b0cc9c
+    m_Address: GameData/Quest/MainQuest_002001
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: d1b71da346606704184deafeb1da283f, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: e81982da5c10086429f6cb25d1009973, type: 2}
+    - {fileID: 11400000, guid: 76a80bd7d746b1b4cbcd97b914800344, type: 2}
