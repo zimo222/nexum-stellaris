@@ -37,13 +37,22 @@ public class SpellCraftingPanel : MonoBehaviour
             slot.craftingPanel = this;
             slots.Add(slot);
         }
-
+        /*
         foreach (var kv in GameDataManager.Instance.SpellModuleDict)
         {
             GameObject itemObj = Instantiate(libraryItemPrefab, libraryContainer);
             ModuleLibraryItem item = itemObj.GetComponent<ModuleLibraryItem>();
             item.craftingPanel = this;
             item.Init(kv.Value);
+            item.gameObject.SetActive(true);
+        }
+        */
+        foreach (var kv in GameDataManager.Instance.ExotextDict[PlayerDataManager.Instance.CurrentPlayerData.EquippedExotextIds[currentWeaponIndex]].spellModuleSOs)
+        {
+            GameObject itemObj = Instantiate(libraryItemPrefab, libraryContainer);
+            ModuleLibraryItem item = itemObj.GetComponent<ModuleLibraryItem>();
+            item.craftingPanel = this;
+            item.Init(kv);
             item.gameObject.SetActive(true);
         }
     }
@@ -90,6 +99,23 @@ public class SpellCraftingPanel : MonoBehaviour
             }
             else
                 slots[i].ClearSlot();
+        }
+
+        for (int i = libraryContainer.childCount - 1; i >= 0; i--)
+        {
+            Transform child = libraryContainer.GetChild(i);
+            // 若只想销毁预制体实例，可额外判断是否为预制体
+            // if (PrefabUtility.IsPartOfPrefabInstance(child)) { Destroy(child.gameObject); }
+            Destroy(child.gameObject);
+        }
+        if (GameDataManager.Instance.ExotextDict.TryGetValue(PlayerDataManager.Instance.CurrentPlayerData.EquippedExotextIds[currentWeaponIndex], out ExotextDefineSO k) == false) return;
+        foreach (var kv in k.spellModuleSOs)
+        {
+            GameObject itemObj = Instantiate(libraryItemPrefab, libraryContainer);
+            ModuleLibraryItem item = itemObj.GetComponent<ModuleLibraryItem>();
+            item.craftingPanel = this;
+            item.Init(kv);
+            item.gameObject.SetActive(true);
         }
     }
 

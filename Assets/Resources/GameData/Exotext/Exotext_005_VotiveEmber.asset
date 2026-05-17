@@ -34,3 +34,17 @@ MonoBehaviour:
   elementBonusPerLevel: 0.0001
   icon: {fileID: 21300000, guid: de7e9ef444e3ad04691c29d1a4d99aae, type: 3}
   possibleEffects: []
+  spellModuleSOs:
+  - {fileID: 11400000, guid: cffadef4d747b3b4aae3dba66d43a877, type: 2}
+  - {fileID: 11400000, guid: 70c92c3ab8db722429fa090c20d1531d, type: 2}
+  - {fileID: 11400000, guid: 7fcc7e27af9ec1f4a8fcbc3e553ae3ee, type: 2}
+  - {fileID: 11400000, guid: 179fc7c8d07828149a8615139ee25550, type: 2}
+  - {fileID: 11400000, guid: a0610dcd8c0d32f4789022edc0cfe3c6, type: 2}
+  - {fileID: 11400000, guid: 576158bfd2480c245bba834ddbd45ba6, type: 2}
+  - {fileID: 11400000, guid: ca97359a1e60e354c8eb509d4dc75c9c, type: 2}
+  - {fileID: 11400000, guid: 940c7fc0966360e489bef85578b2a862, type: 2}
+  - {fileID: 11400000, guid: 77c03ef13de92d449a76325d044c13e4, type: 2}
+  - {fileID: 11400000, guid: 71ff643e9d9e2274184e93b86d9c6248, type: 2}
+  - {fileID: 11400000, guid: 74b78d319ce430348b9377f5ab7e6451, type: 2}
+  - {fileID: 11400000, guid: d8a4835b24f571d478c3968440ebeda0, type: 2}
+  - {fileID: 11400000, guid: 3ddcd07d97ea7b144b363c4ade45ca60, type: 2}

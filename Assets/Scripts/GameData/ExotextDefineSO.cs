@@ -39,6 +39,10 @@ public class ExotextDefineSO : ScriptableObject
     // ========== 新增 ==========
     [Header("特殊效果（心弦/绎动）")]
     public List<SpecialEffectDefineSO> possibleEffects;  // 该武器可能触发的特效列表
+
+
+    [Header("可用模块")]
+    public List<SpellModuleSO> spellModuleSOs;
     /*
     [TextArea] public string introduction;
     [TextArea] public string description;
