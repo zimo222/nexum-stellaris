@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e4a0bcac50fd954092a1c8d99bd6843, type: 3}
+  m_Name: Projectile_SwordEnergy_GreenBehind
+  m_EditorClassIdentifier: 
+  id: Projectile_SwordEnergy_GreenBehind
+  moduleName: "\u5203\xB7\u56DE\u5F71\xB7\u7EFF"
+  moduleType: 0
+  delay: 0
+  bulletDefine: {fileID: 11400000, guid: a5bb6576e0d814043b1bb0c994f5d23e, type: 2}
+  speedMultiplier: 0.001
+  damageMultiplier: 100
+  homingStrength: 0
+  rotateSpeed: 0
+  splitCount: 0
+  splitAngle: 0
+  burstCount: 0
+  burstDelay: 0
+  multicastCount: 0
+  orbitRadius: 0
+  orbitSpeed: 0
+  fieldAngle: 0
+  recoilForce: 0
+  introduction: "\u5411\u540E\u64A4\u6B65\uFF0C\u8FDB\u884C\u653B\u51FB"
+  icon: {fileID: 21300000, guid: 5d90016719f6ab14e8155cdd7284b77e, type: 3}

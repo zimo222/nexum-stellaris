@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Bullet_BlueForward
   m_EditorClassIdentifier: 
   id: Bullet_BlueForward
-  speed: 200
+  speed: 150
   damage: 2
   prefab: {fileID: 3305386069859194172, guid: bfa7ccc4552a0594a8833f370c10e3c5, type: 3}
-  lifetime: 0.5
-  recoilForce: 0.01
+  lifetime: 0.2
+  recoilForce: -0.2

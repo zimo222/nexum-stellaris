@@ -29,6 +29,18 @@ MonoBehaviour:
     m_SerializedLabels:
     - SpellModuleDefineSO
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0320f55898bff654b9545bfbb7e4914a
+    m_Address: GameData/SpellModule/EdgeText/Projectile_SwordEnergy_RedBehind.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 12e1a65480d45464c9a7caeec363fd25
+    m_Address: GameData/SpellModule/EdgeText/Projectile_SwordEnergy_PurpleForward.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 179fc7c8d07828149a8615139ee25550
     m_Address: GameData/SpellModule/VotiveEmber/Modifier_Accelerate_1.50X
     m_ReadOnly: 0
@@ -53,8 +65,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - SpellModuleDefineSO
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 25b0e45405abd724796b2869df9ae347
+    m_Address: GameData/SpellModule/EdgeText/Projectile_SwordEnergy_BlueBehind 2.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 280db4205ae27bd4d94cbc610cd3329e
     m_Address: GameData/SpellModule/VotiveEmber/Corrector_Rotate_R050
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 33aba7cb264b7c84883bb3a7df56fd47
+    m_Address: GameData/SpellModule/EdgeText/Projectile_SwordEnergy_RedForward.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - SpellModuleDefineSO
@@ -101,6 +125,18 @@ MonoBehaviour:
     m_SerializedLabels:
     - SpellModuleDefineSO
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 58de5ace32b60814c9b55ac5da2deb0c
+    m_Address: GameData/SpellModule/EdgeText/Projectile_SwordEnergy_YellowBehind.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 61196133babdb6e498b10b1e4afbd592
+    m_Address: GameData/SpellModule/EdgeText/Projectile_SwordEnergy_PurpleUp.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 70c92c3ab8db722429fa090c20d1531d
     m_Address: GameData/SpellModule/VotiveEmber/AProjectile_FireBall_002
     m_ReadOnly: 0
@@ -133,6 +169,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 77c03ef13de92d449a76325d044c13e4
     m_Address: GameData/SpellModule/VotiveEmber/Modifier_Decelerate_0.75X
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7931c4bc14e09f647b499e298031235b
+    m_Address: GameData/SpellModule/EdgeText/Projectile_SwordEnergy_GreenUp.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - SpellModuleDefineSO
@@ -185,8 +227,26 @@ MonoBehaviour:
     m_SerializedLabels:
     - SpellModuleDefineSO
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a3496a00539887549882c02d874a5e8f
+    m_Address: GameData/SpellModule/EdgeText/Projectile_SwordEnergy_GreenBehind.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a5409a2bb8fdf2342a3732c0636cc548
+    m_Address: GameData/SpellModule/EdgeText/Projectile_SwordEnergy_GreenForward.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a9e396188d309504d864a02413242902
     m_Address: GameData/SpellModule/VotiveEmber/Modifier_Recoil_01000
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ab8b326b41d54984a8c32981cba378ac
+    m_Address: GameData/SpellModule/EdgeText/Projectile_SwordEnergy_YellowForward.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - SpellModuleDefineSO
@@ -199,6 +259,18 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b8826b06504c79440b720203c993fd57
     m_Address: GameData/SpellModule/VotiveEmber/Modifier_FieldAngle_000
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b883243c372c0794090cb12ed5bb7147
+    m_Address: GameData/SpellModule/EdgeText/Projectile_SwordEnergy_RedUp.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ba33132edcd2bbb429fd0d720d956dbf
+    m_Address: GameData/SpellModule/EdgeText/Projectile_SwordEnergy_YellowUp.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - SpellModuleDefineSO

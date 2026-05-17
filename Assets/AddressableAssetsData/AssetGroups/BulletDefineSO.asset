@@ -17,12 +17,6 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: dbde8b653c20b23408c6d78e0668b962
   m_SerializeEntries:
-  - m_GUID: 013616e24e9e23b419645b32bf0b4843
-    m_Address: GameData/Bullet/EdgeText/Bullet_004
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - BulletDefineSO
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2e1294ea4b3b6fb439274bbe0843efbf
     m_Address: GameData/Bullet/VotiveEmber/Bullet_001
     m_ReadOnly: 0
@@ -41,26 +35,8 @@ MonoBehaviour:
     m_SerializedLabels:
     - BulletDefineSO
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 74fe2c509087bd449938a0f1f2c84a59
-    m_Address: GameData/Bullet/EdgeText/Bullet_006
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - BulletDefineSO
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 96de75c6ad6463b47aa99107ab4240ad
     m_Address: GameData/Bullet/EdgeText/Bullet_BlueBehind
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - BulletDefineSO
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9d2cfaaab6922fb4ea1a5b9edf2c1021
-    m_Address: GameData/Bullet/EdgeText/Bullet_005
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - BulletDefineSO
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a60aece0488a19b42945aefb6051e535
-    m_Address: GameData/Bullet/EdgeText/Bullet_007
     m_ReadOnly: 0
     m_SerializedLabels:
     - BulletDefineSO

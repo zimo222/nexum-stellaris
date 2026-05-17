@@ -66,7 +66,7 @@ public static class BulletFactory
 
             // 初始化子弹（传递修正类列表和源预制体）
             bullet.Initialize(finalDirection, owner, speed * Random.Range(0.5f, 2.0f), damage, position,
-                             spellPackage.correctors, spellPackage.projectile.prefab);
+                             spellPackage.correctors, spellPackage.projectile.prefab, spellPackage.projectile.lifetime);
         }
         return null;
     }

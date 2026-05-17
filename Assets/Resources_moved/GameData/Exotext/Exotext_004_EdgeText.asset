@@ -34,3 +34,7 @@ MonoBehaviour:
   elementBonusPerLevel: 0.0001
   icon: {fileID: 21300000, guid: f365312ff3cf82e458d3088bd42706ec, type: 3}
   possibleEffects: []
+  spellModuleSOs:
+  - {fileID: 11400000, guid: 25b0e45405abd724796b2869df9ae347, type: 2}
+  - {fileID: 11400000, guid: 12e1a65480d45464c9a7caeec363fd25, type: 2}
+  - {fileID: 11400000, guid: 61196133babdb6e498b10b1e4afbd592, type: 2}

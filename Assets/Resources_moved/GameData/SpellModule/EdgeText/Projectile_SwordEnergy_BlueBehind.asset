@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Projectile_SwordEnergy_BlueBehind
   m_EditorClassIdentifier: 
   id: Projectile_SwordEnergy_BlueBehind
-  moduleName: "\u5203\xB7\u540E\u64A4\xB7\u84DD"
+  moduleName: "\u5203\xB7\u56DE\u5F71\xB7\u84DD"
   moduleType: 0
   delay: 0
   bulletDefine: {fileID: 11400000, guid: 96de75c6ad6463b47aa99107ab4240ad, type: 2}
