@@ -317,6 +317,7 @@ GameObject:
   - component: {fileID: 77939421}
   - component: {fileID: 77939420}
   - component: {fileID: 77939419}
+  - component: {fileID: 77939422}
   m_Layer: 5
   m_Name: ReturnButton
   m_TagString: Untagged
@@ -388,6 +389,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 77939422}
+        m_TargetAssemblyTypeName: AudioEventTrigger, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 675585359}
         m_TargetAssemblyTypeName: SettingsPanel, Assembly-CSharp
         m_MethodName: OnClickOut
@@ -438,6 +451,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 77939417}
   m_CullTransparentMesh: 1
+--- !u!114 &77939422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77939417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd95755855ace9f42807172f1965e287, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trigger: 8
+  trackName: Click
+  soundClip: {fileID: 8300000, guid: 9384da7c5ca666e49ab47ed0b47b7437, type: 3}
+  volume: 0.8
+  loop: 0
+  useFade: 0
+  fadeInTime: 0.2
+  fadeOutTime: 0.2
+  stopOnExit: 0
 --- !u!1 &86589189
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,6 +559,7 @@ GameObject:
   - component: {fileID: 92314140}
   - component: {fileID: 92314139}
   - component: {fileID: 92314138}
+  - component: {fileID: 92314141}
   m_Layer: 5
   m_Name: ArchiveButton
   m_TagString: Untagged
@@ -596,6 +631,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 77939422}
+        m_TargetAssemblyTypeName: AudioEventTrigger, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 2056281424}
         m_TargetAssemblyTypeName: MainMenuPanel, Assembly-CSharp
         m_MethodName: OnClick
@@ -646,6 +693,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 92314136}
   m_CullTransparentMesh: 1
+--- !u!114 &92314141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92314136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd95755855ace9f42807172f1965e287, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trigger: 8
+  trackName: Click
+  soundClip: {fileID: 8300000, guid: 9384da7c5ca666e49ab47ed0b47b7437, type: 3}
+  volume: 0.8
+  loop: 0
+  useFade: 0
+  fadeInTime: 0.2
+  fadeOutTime: 0.2
+  stopOnExit: 0
 --- !u!1 &118828077
 GameObject:
   m_ObjectHideFlags: 0
@@ -2018,6 +2086,7 @@ GameObject:
   - component: {fileID: 448665545}
   - component: {fileID: 448665544}
   - component: {fileID: 448665543}
+  - component: {fileID: 448665546}
   m_Layer: 5
   m_Name: ReturnButton
   m_TagString: Untagged
@@ -2089,6 +2158,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 77939422}
+        m_TargetAssemblyTypeName: AudioEventTrigger, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 59521035}
         m_TargetAssemblyTypeName: SettingsPanel, Assembly-CSharp
         m_MethodName: OnClickOut
@@ -2139,6 +2220,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 448665541}
   m_CullTransparentMesh: 1
+--- !u!114 &448665546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 448665541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd95755855ace9f42807172f1965e287, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trigger: 8
+  trackName: Click
+  soundClip: {fileID: 8300000, guid: 9384da7c5ca666e49ab47ed0b47b7437, type: 3}
+  volume: 0.8
+  loop: 0
+  useFade: 0
+  fadeInTime: 0.2
+  fadeOutTime: 0.2
+  stopOnExit: 0
 --- !u!1 &459397059
 GameObject:
   m_ObjectHideFlags: 0
@@ -2789,6 +2891,7 @@ GameObject:
   - component: {fileID: 633462916}
   - component: {fileID: 633462915}
   - component: {fileID: 633462914}
+  - component: {fileID: 633462917}
   m_Layer: 5
   m_Name: MusicButton
   m_TagString: Untagged
@@ -2859,7 +2962,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 633462915}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 77939422}
+        m_TargetAssemblyTypeName: AudioEventTrigger, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &633462915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2898,6 +3013,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 633462912}
   m_CullTransparentMesh: 1
+--- !u!114 &633462917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 633462912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd95755855ace9f42807172f1965e287, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trigger: 8
+  trackName: Click
+  soundClip: {fileID: 8300000, guid: 9384da7c5ca666e49ab47ed0b47b7437, type: 3}
+  volume: 0.8
+  loop: 0
+  useFade: 0
+  fadeInTime: 0.2
+  fadeOutTime: 0.2
+  stopOnExit: 0
 --- !u!1 &643403225
 GameObject:
   m_ObjectHideFlags: 0
@@ -2910,6 +3046,7 @@ GameObject:
   - component: {fileID: 643403229}
   - component: {fileID: 643403228}
   - component: {fileID: 643403227}
+  - component: {fileID: 643403230}
   m_Layer: 5
   m_Name: SettingButton
   m_TagString: Untagged
@@ -2981,6 +3118,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 77939422}
+        m_TargetAssemblyTypeName: AudioEventTrigger, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 2056281424}
         m_TargetAssemblyTypeName: MainMenuPanel, Assembly-CSharp
         m_MethodName: OnClick
@@ -3031,6 +3180,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 643403225}
   m_CullTransparentMesh: 1
+--- !u!114 &643403230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 643403225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd95755855ace9f42807172f1965e287, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trigger: 8
+  trackName: Click
+  soundClip: {fileID: 8300000, guid: 9384da7c5ca666e49ab47ed0b47b7437, type: 3}
+  volume: 0.8
+  loop: 0
+  useFade: 0
+  fadeInTime: 0.2
+  fadeOutTime: 0.2
+  stopOnExit: 0
 --- !u!1 &665480648
 GameObject:
   m_ObjectHideFlags: 0
@@ -8480,6 +8650,7 @@ GameObject:
   - component: {fileID: 898752262}
   - component: {fileID: 898752261}
   - component: {fileID: 898752260}
+  - component: {fileID: 898752263}
   m_Layer: 5
   m_Name: ChineseButton
   m_TagString: Untagged
@@ -8550,7 +8721,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 898752261}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 77939422}
+        m_TargetAssemblyTypeName: AudioEventTrigger, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &898752261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8589,6 +8772,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 898752258}
   m_CullTransparentMesh: 1
+--- !u!114 &898752263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 898752258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd95755855ace9f42807172f1965e287, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trigger: 8
+  trackName: Click
+  soundClip: {fileID: 8300000, guid: 9384da7c5ca666e49ab47ed0b47b7437, type: 3}
+  volume: 0.8
+  loop: 0
+  useFade: 0
+  fadeInTime: 0.2
+  fadeOutTime: 0.2
+  stopOnExit: 0
 --- !u!1 &907076109
 GameObject:
   m_ObjectHideFlags: 0
@@ -14065,6 +14269,7 @@ GameObject:
   - component: {fileID: 1062248383}
   - component: {fileID: 1062248382}
   - component: {fileID: 1062248381}
+  - component: {fileID: 1062248384}
   m_Layer: 5
   m_Name: QuitButton
   m_TagString: Untagged
@@ -14136,6 +14341,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 77939422}
+        m_TargetAssemblyTypeName: AudioEventTrigger, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 2056281424}
         m_TargetAssemblyTypeName: MainMenuPanel, Assembly-CSharp
         m_MethodName: OnQuit
@@ -14186,6 +14403,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1062248379}
   m_CullTransparentMesh: 1
+--- !u!114 &1062248384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062248379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd95755855ace9f42807172f1965e287, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trigger: 8
+  trackName: Click
+  soundClip: {fileID: 8300000, guid: 9384da7c5ca666e49ab47ed0b47b7437, type: 3}
+  volume: 0.8
+  loop: 0
+  useFade: 0
+  fadeInTime: 0.2
+  fadeOutTime: 0.2
+  stopOnExit: 0
 --- !u!1 &1086342769
 GameObject:
   m_ObjectHideFlags: 0
@@ -14451,6 +14689,7 @@ GameObject:
   - component: {fileID: 1129245885}
   - component: {fileID: 1129245884}
   - component: {fileID: 1129245883}
+  - component: {fileID: 1129245886}
   m_Layer: 5
   m_Name: ReturnButton
   m_TagString: Untagged
@@ -14522,6 +14761,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 77939422}
+        m_TargetAssemblyTypeName: AudioEventTrigger, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 59521035}
         m_TargetAssemblyTypeName: SettingsPanel, Assembly-CSharp
         m_MethodName: OnClickOut
@@ -14572,6 +14823,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1129245881}
   m_CullTransparentMesh: 1
+--- !u!114 &1129245886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129245881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd95755855ace9f42807172f1965e287, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trigger: 8
+  trackName: Click
+  soundClip: {fileID: 8300000, guid: 9384da7c5ca666e49ab47ed0b47b7437, type: 3}
+  volume: 0.8
+  loop: 0
+  useFade: 0
+  fadeInTime: 0.2
+  fadeOutTime: 0.2
+  stopOnExit: 0
 --- !u!1 &1204603849
 GameObject:
   m_ObjectHideFlags: 0
@@ -14584,6 +14856,7 @@ GameObject:
   - component: {fileID: 1204603853}
   - component: {fileID: 1204603852}
   - component: {fileID: 1204603851}
+  - component: {fileID: 1204603854}
   m_Layer: 5
   m_Name: LanguageButton
   m_TagString: Untagged
@@ -14655,6 +14928,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 77939422}
+        m_TargetAssemblyTypeName: AudioEventTrigger, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 675585359}
         m_TargetAssemblyTypeName: SettingsPanel, Assembly-CSharp
         m_MethodName: OnClickIn
@@ -14705,6 +14990,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1204603849}
   m_CullTransparentMesh: 1
+--- !u!114 &1204603854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1204603849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd95755855ace9f42807172f1965e287, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trigger: 8
+  trackName: Click
+  soundClip: {fileID: 8300000, guid: 9384da7c5ca666e49ab47ed0b47b7437, type: 3}
+  volume: 0.8
+  loop: 0
+  useFade: 0
+  fadeInTime: 0.2
+  fadeOutTime: 0.2
+  stopOnExit: 0
 --- !u!1 &1213772199
 GameObject:
   m_ObjectHideFlags: 0
@@ -16170,6 +16476,7 @@ GameObject:
   - component: {fileID: 1410923390}
   - component: {fileID: 1410923389}
   - component: {fileID: 1410923388}
+  - component: {fileID: 1410923391}
   m_Layer: 5
   m_Name: StartButton
   m_TagString: Untagged
@@ -16241,6 +16548,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 77939422}
+        m_TargetAssemblyTypeName: AudioEventTrigger, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 2056281424}
         m_TargetAssemblyTypeName: MainMenuPanel, Assembly-CSharp
         m_MethodName: OnStartGame
@@ -16291,6 +16610,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1410923386}
   m_CullTransparentMesh: 1
+--- !u!114 &1410923391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1410923386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd95755855ace9f42807172f1965e287, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trigger: 8
+  trackName: Click
+  soundClip: {fileID: 8300000, guid: 9384da7c5ca666e49ab47ed0b47b7437, type: 3}
+  volume: 0.8
+  loop: 0
+  useFade: 0
+  fadeInTime: 0.2
+  fadeOutTime: 0.2
+  stopOnExit: 0
 --- !u!1 &1423808838
 GameObject:
   m_ObjectHideFlags: 0
@@ -16475,6 +16815,7 @@ GameObject:
   - component: {fileID: 1502853236}
   - component: {fileID: 1502853235}
   - component: {fileID: 1502853234}
+  - component: {fileID: 1502853237}
   m_Layer: 5
   m_Name: EnglishButton
   m_TagString: Untagged
@@ -16545,7 +16886,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1502853235}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 77939422}
+        m_TargetAssemblyTypeName: AudioEventTrigger, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1502853235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16584,6 +16937,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1502853232}
   m_CullTransparentMesh: 1
+--- !u!114 &1502853237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502853232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd95755855ace9f42807172f1965e287, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trigger: 8
+  trackName: Click
+  soundClip: {fileID: 8300000, guid: 9384da7c5ca666e49ab47ed0b47b7437, type: 3}
+  volume: 0.8
+  loop: 0
+  useFade: 0
+  fadeInTime: 0.2
+  fadeOutTime: 0.2
+  stopOnExit: 0
 --- !u!1 &1517190101
 GameObject:
   m_ObjectHideFlags: 0
@@ -17651,6 +18025,7 @@ GameObject:
   - component: {fileID: 1655693372}
   - component: {fileID: 1655693371}
   - component: {fileID: 1655693370}
+  - component: {fileID: 1655693373}
   m_Layer: 5
   m_Name: ReturnButton
   m_TagString: Untagged
@@ -17722,6 +18097,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 77939422}
+        m_TargetAssemblyTypeName: AudioEventTrigger, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1301383377}
         m_TargetAssemblyTypeName: BPanel, Assembly-CSharp
         m_MethodName: OnClickOut
@@ -17772,6 +18159,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1655693368}
   m_CullTransparentMesh: 1
+--- !u!114 &1655693373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655693368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd95755855ace9f42807172f1965e287, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trigger: 8
+  trackName: Click
+  soundClip: {fileID: 8300000, guid: 9384da7c5ca666e49ab47ed0b47b7437, type: 3}
+  volume: 0.8
+  loop: 0
+  useFade: 0
+  fadeInTime: 0.2
+  fadeOutTime: 0.2
+  stopOnExit: 0
 --- !u!1 &1738622345
 GameObject:
   m_ObjectHideFlags: 0
@@ -18726,6 +19134,50 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1 &1945013747
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1945013748}
+  - component: {fileID: 1945013749}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1945013748
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945013747}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 25.996956, y: 63.587566, z: 219.36876}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1945013749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945013747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 051aefc286e1c214ab30e750af83edd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1953716683
 GameObject:
   m_ObjectHideFlags: 0
@@ -18738,6 +19190,7 @@ GameObject:
   - component: {fileID: 1953716687}
   - component: {fileID: 1953716686}
   - component: {fileID: 1953716685}
+  - component: {fileID: 1953716688}
   m_Layer: 5
   m_Name: ResolutionButton
   m_TagString: Untagged
@@ -18809,6 +19262,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 77939422}
+        m_TargetAssemblyTypeName: AudioEventTrigger, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 675585359}
         m_TargetAssemblyTypeName: SettingsPanel, Assembly-CSharp
         m_MethodName: OnClickIn
@@ -18859,6 +19324,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1953716683}
   m_CullTransparentMesh: 1
+--- !u!114 &1953716688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1953716683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd95755855ace9f42807172f1965e287, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trigger: 8
+  trackName: Click
+  soundClip: {fileID: 8300000, guid: 9384da7c5ca666e49ab47ed0b47b7437, type: 3}
+  volume: 0.8
+  loop: 0
+  useFade: 0
+  fadeInTime: 0.2
+  fadeOutTime: 0.2
+  stopOnExit: 0
 --- !u!1 &1975298223
 GameObject:
   m_ObjectHideFlags: 0
@@ -19355,6 +19841,7 @@ GameObject:
   - component: {fileID: 2054540302}
   - component: {fileID: 2054540301}
   - component: {fileID: 2054540300}
+  - component: {fileID: 2054540303}
   m_Layer: 5
   m_Name: PlusButton
   m_TagString: Untagged
@@ -19425,7 +19912,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2054540301}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 77939422}
+        m_TargetAssemblyTypeName: AudioEventTrigger, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2054540301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19464,6 +19963,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2054540298}
   m_CullTransparentMesh: 1
+--- !u!114 &2054540303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054540298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd95755855ace9f42807172f1965e287, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trigger: 8
+  trackName: Click
+  soundClip: {fileID: 8300000, guid: 9384da7c5ca666e49ab47ed0b47b7437, type: 3}
+  volume: 0.8
+  loop: 0
+  useFade: 0
+  fadeInTime: 0.2
+  fadeOutTime: 0.2
+  stopOnExit: 0
 --- !u!1 &2056281419
 GameObject:
   m_ObjectHideFlags: 0
@@ -19989,4 +20509,5 @@ SceneRoots:
   - {fileID: 1128269165}
   - {fileID: 118828079}
   - {fileID: 397602480}
+  - {fileID: 1945013748}
   - {fileID: 1086342771}

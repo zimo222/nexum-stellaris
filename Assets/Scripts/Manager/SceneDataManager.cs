@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
@@ -42,17 +43,27 @@ public class SceneDataManager : Singleton<SceneDataManager>
         {
             Debug.LogError("LoadingPanel 未赋值！");
         }
+
+        // 创建背景音乐音轨，循环播放，音量0.5
+        var bgmTrack = AudioManager.Instance.CreateTrack("BGM", loop: true, volume: 0.3f);
+        bgmTrack.PlayWithFadeIn(Resources.Load<AudioClip>("Audio/BGM/MainTheme1"), fadeInTime: 10f);
+        var teleTrack = AudioManager.Instance.CreateTrack("Teleport", loop: false, volume: 0.2f);
+        var clickTrack = AudioManager.Instance.CreateTrack("Click", loop: false, volume: 0.5f);
     }
 
     public void LoadScene(string sceneName, int xposition = 0, int yposition = 0)
     {
         if (isLoading) return;
+
+        var bgmTrack = AudioManager.Instance.GetTrack("BGM");
+        bgmTrack.FadeOutAndStop(3f);
         StartCoroutine(LoadSceneAsync(sceneName, xposition, yposition));
     }
 
     private IEnumerator LoadSceneAsync(string targetScene, int xposition, int yposition)
     {
-
+        var teleTrack = AudioManager.Instance.GetTrack("Teleport");
+        teleTrack.Play(Resources.Load<AudioClip>("Audio/SFX/Teleport"));
         string logPath = Application.persistentDataPath + "/load_log.txt";
         StringBuilder sb = new StringBuilder();
         sb.AppendLine($"=== Load Started at {System.DateTime.Now} ===");
@@ -181,6 +192,8 @@ public class SceneDataManager : Singleton<SceneDataManager>
         }
         else
         {
+            AudioManager.Instance.ChangeSceneMusic(targetScene);
+
             RestoreGameStateForScene(xposition, yposition); // 恢复玩家位置等
 
             // 刷新所有热引用

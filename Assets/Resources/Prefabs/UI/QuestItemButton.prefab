@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3948936198353586356}
   - component: {fileID: 7725123185169380122}
   - component: {fileID: 4676189639380258882}
+  - component: {fileID: 5619479357668148199}
   m_Layer: 5
   m_Name: QuestItemButton
   m_TagString: Untagged
@@ -123,7 +124,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3948936198353586356}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5619479357668148199}
+        m_TargetAssemblyTypeName: AudioEventTrigger, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4676189639380258882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,6 +151,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questNameText: {fileID: 1163739604492446498}
   chapterNameText: {fileID: 4025677775053815592}
+--- !u!114 &5619479357668148199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51878450906487200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd95755855ace9f42807172f1965e287, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trigger: 0
+  trackName: Click
+  soundClip: {fileID: 8300000, guid: 9384da7c5ca666e49ab47ed0b47b7437, type: 3}
+  volume: 0.8
+  loop: 0
+  useFade: 0
+  fadeInTime: 0.2
+  fadeOutTime: 0.2
+  stopOnExit: 0
 --- !u!1 &3447760356056379916
 GameObject:
   m_ObjectHideFlags: 0
