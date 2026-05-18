@@ -36,3 +36,10 @@ MonoBehaviour:
   possibleEffects: []
   spellModuleSOs:
   - {fileID: 11400000, guid: 7ee8615be3b758042a0d2ef276dfe22d, type: 2}
+  - {fileID: 11400000, guid: 362d2e66c1eab4d4b85c585559e4969f, type: 2}
+  - {fileID: 11400000, guid: 2568e1f63d58dbf428d9e794bbf04751, type: 2}
+  - {fileID: 11400000, guid: 9a26922d779affb40bd187e9b593e69c, type: 2}
+  - {fileID: 11400000, guid: 3880441aca4e9e744826b9e5f54e4d46, type: 2}
+  - {fileID: 11400000, guid: 972fa69f73b57bc4ebc0ff6359712745, type: 2}
+  - {fileID: 11400000, guid: a9e396188d309504d864a02413242902, type: 2}
+  - {fileID: 11400000, guid: 54ecce62def814c44939856397d15241, type: 2}
