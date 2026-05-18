@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,6 +26,8 @@ public class QuestManager : MonoBehaviour
     public Image backgroundImage;
     public TMP_Text speakerText;
     public TMP_Text dialogueContentText;
+    public GameObject interationButton;
+    public GameObject tipText;
 
     [Header("动画参数")]
     public float fadeDuration = 0.3f;
@@ -38,7 +41,7 @@ public class QuestManager : MonoBehaviour
     private Coroutine panelCoroutine;
     private List<DialogueEntry> currentDialogue;
     private int currentDialogueIndex;
-    private bool isDialoguePlaying;
+    public bool isDialoguePlaying;
     private Coroutine typingCoroutine;
     private bool isTextFullyDisplayed;
     private Player playerController;
@@ -56,6 +59,7 @@ public class QuestManager : MonoBehaviour
 
     private bool isInDialogue = false;
     private bool isExecutingControls = false;
+
 
     void Awake()
     {
@@ -243,7 +247,42 @@ public class QuestManager : MonoBehaviour
         {
             isQuestActive = true;
             StartDialogue(questData.dialogueEntries, currentInteractiveQuestId);
+            JinYong(questData.id);
         }
+    }
+
+    public void JinYong(string questId)
+    {
+        Debug.Log("禁用");
+        // 在场景中查找指定名称的 GameObject
+        GameObject targetUI = GameObject.Find(questId);
+        if (targetUI == null)
+        {
+            Debug.LogWarning($"未找到名为 {questId} 的 UI 对象");
+            return;
+        }
+
+        if (interationButton == null)
+        {
+            Debug.LogWarning($"未找到名为 {questId} 的 UI 对象");
+            return;
+        }
+        interationButton.gameObject.SetActive(false);
+
+        // 查找名为 "Image" 的子物体并禁用
+        Transform imageChild = targetUI.transform.Find("Image/DefaultImage");
+        if (imageChild != null)
+            imageChild.gameObject.SetActive(false);
+        else
+            Debug.LogWarning($"在 {questId} 下未找到 Image 子物体");
+
+        // 查找名为 "Light2D" 的子物体并禁用
+        Transform light2DChild = targetUI.transform.Find("Image/Light 2D");
+        if (light2DChild != null)
+            light2DChild.gameObject.SetActive(false);
+        else
+            Debug.LogWarning($"在 {questId} 下未找到 Light2D 子物体");
+        tipText.SetActive(true);
     }
 
     public void UnlockQuest(string questId)
@@ -393,7 +432,6 @@ public class QuestManager : MonoBehaviour
             return;
         }
         currentInteractiveQuestId = questId;
-        Debug.Log("currentInteractiveQuestId:" + currentInteractiveQuestId);
         if (currentDialogueFrame != null) currentDialogueFrame.SetActive(false);
         if (backgroundImage != null) backgroundImage.gameObject.SetActive(false);
         
@@ -410,7 +448,6 @@ public class QuestManager : MonoBehaviour
 
     private void ShowDialogueEntry(DialogueEntry entry)
     {
-        Debug.Log("currentInteractiveQuestId:" + currentInteractiveQuestId);
         if (currentDialogueFrame != null)
         {
             currentDialogueFrame.SetActive(false);
@@ -433,7 +470,6 @@ public class QuestManager : MonoBehaviour
             if (typingCoroutine != null) StopCoroutine(typingCoroutine);
             typingCoroutine = StartCoroutine(TypeText(entry.content));
 
-            Debug.Log("currentInteractiveQuestId:" + currentInteractiveQuestId);
         }
         else
         {
@@ -527,10 +563,9 @@ public class QuestManager : MonoBehaviour
 
     private void EndDialogue()
     {
-
+        tipText.SetActive(false);
         isDialoguePlaying = false;
         Debug.Log("结束对话");
-        isDialoguePlaying = false;
         if (dialoguePanel != null) dialoguePanel.SetActive(false);
         if (typingCoroutine != null) StopCoroutine(typingCoroutine);
         if (currentDialogueFrame != null) currentDialogueFrame.SetActive(false);

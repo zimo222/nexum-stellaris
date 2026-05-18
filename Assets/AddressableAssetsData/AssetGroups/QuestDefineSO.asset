@@ -77,8 +77,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - QuestDefineSO
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 40560c5c4dd552f45b7698c7e151ac06
+    m_Address: GameData/Quest/WorldQuest_002002.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 43e093dc419b97d4c8444e9980209d5c
     m_Address: GameData/Quest/MainQuest_002002
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4da9c86f9f99d304ebe692a31665d48e
+    m_Address: GameData/Quest/WorldQuest_003001.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - QuestDefineSO
@@ -91,6 +103,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 642a7681f5a40c44c9e58208b0f00cc8
     m_Address: GameData/Quest/MainQuest_004005
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 65e3e77912d4b884fbe0f2e49e87104e
+    m_Address: GameData/Quest/WorldQuest_002001.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - QuestDefineSO
@@ -151,6 +169,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c9437aa1e5dbff749a925a47c69de00c
     m_Address: GameData/Quest/MainQuest_005008
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d8970771a8759cf4782dfde130fe8ecf
+    m_Address: GameData/Quest/WorldQuest_003002.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - QuestDefineSO

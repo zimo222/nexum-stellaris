@@ -229,7 +229,7 @@ public class QuestTriggerZone : MonoBehaviour
         {
             //如果是任务碰撞器根据追踪的是否是当前任务来判断是否显示
             if(triggerType == TriggerType.Plot)
-                trackingIndicator.SetActive(trackedQuestId == questId);
+                trackingIndicator.SetActive(trackedQuestId == questId && !QuestManager.Instance.isDialoguePlaying);
             else//如果是场景碰撞器根据前置任务是否完成来判断是否显示
             {
                 //trackingIndicator.SetActive(PlayerDataManager.Instance.HasCompletedQuest(questId));
@@ -315,6 +315,8 @@ public class QuestTriggerZone : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;
+
+        if (QuestManager.Instance.isDialoguePlaying) return;
 
         if (triggerType == TriggerType.Plot)
         {

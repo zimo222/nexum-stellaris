@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d476a2b0564d52b4882c53d711eeea11, type: 3}
+  m_Name: WorldQuest_003001
+  m_EditorClassIdentifier: 
+  id: WorldQuest_003001
+  questName: "\u6E38\u8361\u8FF7\u96FE\xB7\u4E00"
+  questNum: "\u4E00"
+  chapterName: "\u539F\u91CE\u4E4B\u7AE0"
+  chapterNum: 
+  place: "\u539F\u91CE"
+  lastQuestId: MainQuest_003003
+  category: 1
+  contentType: 1
+  nextQuestIds:
+  - WorldQuest_003002
+  description: "\u829D\u58EB\u795E\u9B54\uFF0C\u6253\u4E00\u4E0B\u8BD5\u8BD5"
+  dialogueEntries: []
+  objectives: []
+  waves:
+  - waveName: 
+    enemies:
+    - enemyPrefab: {fileID: 220537008825880356, guid: d58b3c2281ad1974fae4450263bd5989, type: 3}
+      count: 1
+  Reward:
+  - NexusVesture_005_AbyssalHeart
+  - NexusVesture_004_AbyssalHeart
+  exp: 0
+  isSceneTrans: 0
+  targetSceneName: 
+  targetX: 0
+  targetY: 0
+  autoStartNextQuest: 0
+  questSceneName: 3_TheVerdantMeadow
+  steps: []

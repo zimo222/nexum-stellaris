@@ -23,76 +23,94 @@ MonoBehaviour:
   contentType: 0
   nextQuestIds:
   - MainQuest_003004
+  - WorldQuest_003001
   description: "\u80CC\u5F71\u5C06\u5C71\u810A\u7EBF\u524A\u8584\u4E00\u5BF8\u3002"
   dialogueEntries:
   - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
     content: "\u6709\u4E00\u5929\u508D\u665A\uFF0C\u6211\u4EEC\u5750\u5728\u5C71\u5761\u4E0A\u770B\u65E5\u843D\u3002"
     useCGMode: 1
+    controls: []
   - background: {fileID: 21300000, guid: 52fcca12ffb3bcd4fa5172fde0148246, type: 3}
     speakerId: 
     content: 
     useCGMode: 1
+    controls: []
   - background: {fileID: 21300000, guid: 52fcca12ffb3bcd4fa5172fde0148246, type: 3}
     speakerId: Player
     content: "\u201C\u5C0F\u539F\u3002\u201D"
     useCGMode: 1
+    controls: []
   - background: {fileID: 21300000, guid: 52fcca12ffb3bcd4fa5172fde0148246, type: 3}
     speakerId: "\u5C0F\u539F"
     content: "\u201C\u55EF\u3002\u201D"
     useCGMode: 1
+    controls: []
   - background: {fileID: 21300000, guid: 52fcca12ffb3bcd4fa5172fde0148246, type: 3}
     speakerId: Player
     content: "\u201C\u4F60\u4F1A\u4E00\u76F4\u8D70\u5417\uFF1F\u201D"
     useCGMode: 1
+    controls: []
   - background: {fileID: 21300000, guid: 52fcca12ffb3bcd4fa5172fde0148246, type: 3}
     speakerId: 
     content: "\u5979\u770B\u7740\u8FDC\u5904\u7684\u5C71\uFF0C\u6C89\u9ED8\u4E86\u4E00\u4F1A\u3002"
     useCGMode: 1
+    controls: []
   - background: {fileID: 21300000, guid: 52fcca12ffb3bcd4fa5172fde0148246, type: 3}
     speakerId: "\u5C0F\u539F"
     content: "\u201C\u4E0D\u4F1A\u3002\u201D"
     useCGMode: 1
+    controls: []
   - background: {fileID: 21300000, guid: 52fcca12ffb3bcd4fa5172fde0148246, type: 3}
     speakerId: Player
     content: "\u201C\u4E3A\u4EC0\u4E48\uFF1F\u201D"
     useCGMode: 1
+    controls: []
   - background: {fileID: 21300000, guid: 52fcca12ffb3bcd4fa5172fde0148246, type: 3}
     speakerId: "\u5C0F\u539F"
     content: "\u201C\u56E0\u4E3A\u6211\u8FD8\u6709\u4E8B\u8981\u505A\u3002\u201D"
     useCGMode: 1
+    controls: []
   - background: {fileID: 21300000, guid: 52fcca12ffb3bcd4fa5172fde0148246, type: 3}
     speakerId: "\u5C0F\u539F"
     content: "\u201C\u6211\u79BB\u5F00\u5BB6\u7684\u65F6\u5019\uFF0C\u6CA1\u6709\u8DDF\u4EFB\u4F55\u4EBA\u8BF4\u3002\u6211\u7238\u5988\u53EF\u80FD\u8FD8\u5728\u627E\u6211\u3002\u201D"
     useCGMode: 1
+    controls: []
   - background: {fileID: 21300000, guid: 52fcca12ffb3bcd4fa5172fde0148246, type: 3}
     speakerId: Player
     content: "\u201C\u90A3\u4F60\u60F3\u56DE\u53BB\u5417\uFF1F\u201D"
     useCGMode: 1
+    controls: []
   - background: {fileID: 21300000, guid: 52fcca12ffb3bcd4fa5172fde0148246, type: 3}
     speakerId: 
     content: "\u5979\u6CA1\u6709\u56DE\u7B54\u3002\u98CE\u5439\u8FC7\u6765\uFF0C\u628A\u8349\u5439\u5F97\u6C99\u6C99\u54CD\u3002"
     useCGMode: 1
+    controls: []
   - background: {fileID: 21300000, guid: f9705936c74533a419361e7f7ad64f99, type: 3}
     speakerId: Player
     content: "\u201C\u6211\u4EEC\u505A\u4E2A\u7EA6\u5B9A\u5427\u3002\u201D"
     useCGMode: 1
+    controls: []
   - background: {fileID: 21300000, guid: f9705936c74533a419361e7f7ad64f99, type: 3}
     speakerId: "\u5C0F\u539F"
     content: "\u201C\u4EC0\u4E48\u7EA6\u5B9A\uFF1F\u201D"
     useCGMode: 1
+    controls: []
   - background: {fileID: 21300000, guid: f9705936c74533a419361e7f7ad64f99, type: 3}
     speakerId: Player
     content: "\u201C\u65E0\u8BBA\u4EE5\u540E\u5728\u54EA\u91CC\uFF0C\u65E0\u8BBA\u8FC7\u4E86\u591A\u4E45\uFF0C\u90FD\u8981\u8BB0\u5F97\u2014\u2014\u66FE\u7ECF\u6709\u4E2A\u4EBA\uFF0C\u966A\u4F60\u8D70\u8FC7\u8FD9\u7247\u539F\u91CE\u3002\u201D"
     useCGMode: 1
+    controls: []
   - background: {fileID: 21300000, guid: f9705936c74533a419361e7f7ad64f99, type: 3}
     speakerId: 
     content: "\u4ED6\u8F6C\u8FC7\u5934\u770B\u7740\u6211\uFF0C\u7136\u540E\u7B11\u4E86\u3002"
     useCGMode: 1
+    controls: []
   - background: {fileID: 21300000, guid: fa87d48e5159a774582e92c34d2fafcb, type: 3}
     speakerId: "\u5C0F\u539F"
     content: "\u201C\u597D\u3002\u201D"
     useCGMode: 1
+    controls: []
   objectives: []
   waves: []
   Reward: []
@@ -103,3 +121,4 @@ MonoBehaviour:
   targetY: 0
   autoStartNextQuest: 0
   questSceneName: 3_TheVerdantMeadow
+  steps: []

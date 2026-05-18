@@ -29,26 +29,32 @@ MonoBehaviour:
     speakerId: 
     content: "\u4E94\u5C81\u90A3\u5E74\uFF0C\u6211\u7B2C\u4E00\u6B21\u505A\u90A3\u4E2A\u68A6\u3002"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: f2f872176434c134c88fb80820f55f6b, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
     content: "\u68A6\u91CC\u6211\u4E00\u4E2A\u4EBA\u7AD9\u5728\u96FE\u91CC\u3002\u6CA1\u6709\u8DEF\uFF0C\u6CA1\u6709\u58F0\u97F3\uFF0C\u558A\u4E0D\u51FA\u58F0\u3002\u6211\u62FC\u547D\u8DD1\uFF0C\u4F46\u811A\u4E0B\u4EC0\u4E48\u90FD\u6CA1\u6709\uFF0C\u50CF\u8E29\u5728\u865A\u7A7A\u91CC\u3002\u96FE\u91CC\u6709\u4E1C\u897F\u5728\u770B\u6211\u2014\u2014\u4E0D\u662F\u773C\u775B\uFF0C\u662F\u4E00\u79CD\u201C\u77E5\u9053\u201D\uFF0C\u77E5\u9053\u6211\u5F88\u5C0F\uFF0C\u77E5\u9053\u6211\u5F88\u5BB3\u6015\u3002"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: b80aafef15946754599a77ea589487cb, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: a2c8c1ee994bafb46bb14830e0c3475d, type: 3}
     speakerId: 
     content: "\u6211\u8DD1\u554A\u8DD1\uFF0C\u8DD1\u5230\u817F\u8F6F\uFF0C\u8DD1\u5230\u5598\u4E0D\u8FC7\u6C14\u3002\u7136\u540E\u6211\u6454\u5012\u4E86\u3002"
     useCGMode: 1
+    controls: []
   - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
     content: "(\u60CA\u9192)"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: e57d0af5ace973d4083ae27bfb86f39e, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: d78f1b3812f11e84583efab8bb400ffd, type: 3}
     speakerId: 
     content: "\u6307\u5C16\u6709\u4E00\u7F15\u5FAE\u5F31\u7684\u5149\u3002\u5F88\u7EC6\uFF0C\u5F88\u6DE1\uFF0C\u50CF\u8424\u706B\u866B\u7684\u5C3E\u5DF4\u3002\u4F46\u5B83\u70EB\u70EB\u7684\uFF0C\u50CF\u521A\u521A\u88AB\u8C01\u63E1\u8FC7\u3002"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: e57d0af5ace973d4083ae27bfb86f39e, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: d78f1b3812f11e84583efab8bb400ffd, type: 3}
     speakerId: 
     content: "\u5B83\u6CA1\u6709\u4EFB\u4F55\u529B\u91CF\u3002\u53EA\u5728\u6700\u5B64\u72EC\u7684\u65F6\u5019\uFF0C\u63D0\u9192\u6211\uFF1A\u4F60\u66FE\u88AB\u8FD9\u6837\u63E1\u7D27\u8FC7\u3002"
     useCGMode: 1
+    controls: []
   objectives: []
   waves: []
   Reward:
@@ -63,3 +69,4 @@ MonoBehaviour:
   targetY: 0
   autoStartNextQuest: 0
   questSceneName: 1_TheNestOfWarmLight
+  steps: []
