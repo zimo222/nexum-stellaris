@@ -536,8 +536,8 @@ public class QuestManager : MonoBehaviour
     private Transform FindNPCDialogueRoot(string speakerId)
     {
         if (string.IsNullOrEmpty(speakerId)) return null;
-        if (speakerId == "Player")
-            return GameObject.FindGameObjectWithTag("Player")?.transform;
+        if (speakerId == "Player") return GameObject.Find("StoryPlayer(Clone)").transform;
+            //return GameObject.FindGameObjectWithTag("Player")?.transform;
         var npcs = FindObjectsOfType<NPCIdentifier>();
         foreach (var npc in npcs)
             if (npc.HasId(speakerId))

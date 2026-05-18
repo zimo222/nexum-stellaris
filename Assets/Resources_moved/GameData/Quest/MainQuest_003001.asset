@@ -29,90 +29,137 @@ MonoBehaviour:
     speakerId: 
     content: "\uFF08\u8D70\u51FA\u7EAF\u767D\u56DE\u5ECA\uFF09"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 47e1822add5a64a4aacf7724ff7cd758, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
     content: "\uFF08\u773C\u524D\u4E0D\u518D\u662F\u5ECA\u67F1\u548C\u5149\uFF0C\u800C\u662F\u4E00\u7247\u5BBD\u9614\u7684\u539F\u91CE\u3002\u8FDC\u5904\u6709\u5C71\uFF0C\u5C71\u811A\u4E0B\u6709\u4E00\u6761\u6CB3\uFF0C\u6CB3\u9762\u4E0A\u95EA\u7740\u788E\u91D1\u4F3C\u7684\u5149\u3002\u5929\u5F88\u84DD\uFF0C\u84DD\u5F97\u4E0D\u50CF\u771F\u7684\u3002\u98CE\u5439\u8FC7\u6765\uFF0C\u5E26\u7740\u9752\u8349\u548C\u6CE5\u571F\u7684\u5473\u9053\u3002\uFF09"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 47e1822add5a64a4aacf7724ff7cd758, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
     content: "\uFF08\u8FD9\u91CC\u4E0D\u662F\u6545\u4E61\u3002\u662F\u4E00\u4E2A\u4ECE\u672A\u89C1\u8FC7\u7684\u5730\u65B9\u3002\uFF09"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 13c4c6d281129694ca74e9014d2cd541, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 6c4352cf4061bc4459d08ccf769efb74, type: 3}
     speakerId: 
     content: "\u6211\u6F2B\u65E0\u76EE\u7684\u5730\u8D70\u3002\u811A\u4E0B\u7684\u8349\u5730\u5F88\u8F6F\uFF0C\u8E29\u4E0A\u53BB\u4F1A\u9677\u4E0B\u53BB\u4E00\u70B9\u70B9\u3002\u8D70\u7D2F\u4E86\uFF0C\u6211\u8EBA\u4E0B\u6765\uFF0C\u770B\u4E91\u4ECE\u5934\u9876\u98D8\u8FC7\u3002"
     useCGMode: 1
+    controls:
+    - delay: 0
+      type: 0
+      characterId: Character_002
+      position: {x: 520, y: -310}
+      moveSpeed: 0
+    - delay: 0
+      type: 0
+      characterId: Player
+      position: {x: 440, y: -310}
+      moveSpeed: 0
+    - delay: 0.2
+      type: 2
+      characterId: Character_002
+      position: {x: 490, y: -310}
+      moveSpeed: 110
+    - delay: 0.2
+      type: 2
+      characterId: Player
+      position: {x: 430, y: -310}
+      moveSpeed: 110
   - background: {fileID: 21300000, guid: 4e49d5986d6e9bd41aaa92c07fa1bbe1, type: 3}
     speakerId: "\uFF1F\uFF1F\uFF1F"
     content: "\u201C\u4F60\u662F\u8C01\uFF1F\u201D"
-    useCGMode: 1
-  - background: {fileID: 21300000, guid: 4e49d5986d6e9bd41aaa92c07fa1bbe1, type: 3}
-    speakerId: "\uFF1F\uFF1F\uFF1F"
-    content: "\u58F0\u97F3\u4ECE\u65C1\u8FB9\u4F20\u6765\u3002\u6211\u5750\u8D77\u6765\uFF0C\u770B\u89C1\u4E00\u4E2A\u5C11\u5E74\u8E72\u5728\u4E0D\u8FDC\u5904\uFF0C\u624B\u91CC\u634F\u7740\u4E00\u6839\u8349\u830E\uFF0C\u6B63\u6B6A\u7740\u5934\u770B\u6211\u3002"
-    useCGMode: 1
+    useCGMode: 0
+    controls:
+    - delay: 1
+      type: 2
+      characterId: Player
+      position: {x: 450, y: -310}
+      moveSpeed: 110
   - background: {fileID: 21300000, guid: 4e49d5986d6e9bd41aaa92c07fa1bbe1, type: 3}
     speakerId: Player
     content: "\u201C\u6211\uFF1F\u201D"
-    useCGMode: 1
+    useCGMode: 0
+    controls: []
   - background: {fileID: 21300000, guid: 4e49d5986d6e9bd41aaa92c07fa1bbe1, type: 3}
     speakerId: Player
     content: "\u201C\u6211\u4E5F\u4E0D\u77E5\u9053\u3002\u201D"
-    useCGMode: 1
-  - background: {fileID: 21300000, guid: 4e49d5986d6e9bd41aaa92c07fa1bbe1, type: 3}
-    speakerId: Player
-    content: "\u201C\u6211\u4E5F\u4E0D\u77E5\u9053\u3002\u201D"
-    useCGMode: 1
-  - background: {fileID: 21300000, guid: 4e49d5986d6e9bd41aaa92c07fa1bbe1, type: 3}
+    useCGMode: 0
+    controls: []
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
     content: "\u4ED6\u7B11\u4E86\u3002"
     useCGMode: 1
+    controls: []
   - background: {fileID: 21300000, guid: 4e49d5986d6e9bd41aaa92c07fa1bbe1, type: 3}
     speakerId: "\uFF1F\uFF1F\uFF1F"
     content: "\u201C\u90A3\u4F60\u8DDF\u6211\u4E00\u6837\u3002\u201D"
-    useCGMode: 1
+    useCGMode: 0
+    controls: []
   - background: {fileID: 21300000, guid: 4e49d5986d6e9bd41aaa92c07fa1bbe1, type: 3}
     speakerId: Player
     content: "\u201C\u4F60\u4E5F\u4E0D\u77E5\u9053\u81EA\u5DF1\u662F\u8C01\uFF1F\u201D"
-    useCGMode: 1
+    useCGMode: 0
+    controls: []
   - background: {fileID: 21300000, guid: 4e49d5986d6e9bd41aaa92c07fa1bbe1, type: 3}
     speakerId: "\uFF1F\uFF1F\uFF1F"
     content: "\u201C\u6211\u77E5\u9053\u3002\u201D"
-    useCGMode: 1
+    useCGMode: 0
+    controls: []
   - background: {fileID: 21300000, guid: 4e49d5986d6e9bd41aaa92c07fa1bbe1, type: 3}
     speakerId: "\uFF1F\uFF1F\uFF1F"
     content: "\u201C\u4F46\u6211\u4E0D\u60F3\u544A\u8BC9\u4F60\u3002\u201C"
-    useCGMode: 1
+    useCGMode: 0
+    controls: []
   - background: {fileID: 21300000, guid: 4e49d5986d6e9bd41aaa92c07fa1bbe1, type: 3}
     speakerId: "\uFF1F\uFF1F\uFF1F"
     content: "\u201D\u90A3\u4E2A\u540D\u5B57\u6240\u4EE3\u8868\u7684\u4EBA\uFF0C\u4E0D\u662F\u6211\u4E86\u3002\u201C"
-    useCGMode: 1
-  - background: {fileID: 21300000, guid: 4e49d5986d6e9bd41aaa92c07fa1bbe1, type: 3}
+    useCGMode: 0
+    controls: []
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
     content: "\u4ED6\u7684\u773C\u775B\u662F\u6DF1\u68D5\u8272\u7684\uFF0C\u50CF\u79CB\u5929\u7684\u571F\u5730\u3002"
     useCGMode: 1
+    controls: []
   - background: {fileID: 21300000, guid: 4e49d5986d6e9bd41aaa92c07fa1bbe1, type: 3}
     speakerId: Player
     content: "\u201C\u90A3\u4F60\u73B0\u5728\u53EB\u4EC0\u4E48\uFF1F\u201D"
-    useCGMode: 1
+    useCGMode: 0
+    controls: []
   - background: {fileID: 21300000, guid: 4e49d5986d6e9bd41aaa92c07fa1bbe1, type: 3}
     speakerId: "\uFF1F\uFF1F\uFF1F"
     content: ......
-    useCGMode: 1
+    useCGMode: 0
+    controls: []
   - background: {fileID: 21300000, guid: 4e49d5986d6e9bd41aaa92c07fa1bbe1, type: 3}
-    speakerId: "\uFF1F\uFF1F\uFF1F"
+    speakerId: "\u5C0F\u539F"
     content: "\"\u53EB\u6211\u5C0F\u539F\u5427\u3002\""
-    useCGMode: 1
+    useCGMode: 0
+    controls: []
   - background: {fileID: 21300000, guid: 8412b85fd45f2c445a2fe9772ec7d048, type: 3}
     speakerId: Player
     content: "\u201C\u5C0F\u539F\uFF1F\u201D"
-    useCGMode: 1
+    useCGMode: 0
+    controls: []
   - background: {fileID: 21300000, guid: 8412b85fd45f2c445a2fe9772ec7d048, type: 3}
     speakerId: "\u5C0F\u539F"
     content: "\u201C\u55EF\u3002\u201D"
-    useCGMode: 1
-  - background: {fileID: 21300000, guid: 8412b85fd45f2c445a2fe9772ec7d048, type: 3}
-    speakerId: "\u5C0F\u539F"
+    useCGMode: 0
+    controls:
+    - delay: 0
+      type: 1
+      characterId: Player
+      position: {x: 0, y: 0}
+      moveSpeed: 0
+    - delay: 0
+      type: 1
+      characterId: Character_002
+      position: {x: 0, y: 0}
+      moveSpeed: 0
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
+    speakerId: 
     content: "\u4ED6\u5E94\u4E86\u3002"
     useCGMode: 1
+    controls: []
   objectives: []
   waves: []
   Reward: []
@@ -123,3 +170,4 @@ MonoBehaviour:
   targetY: 0
   autoStartNextQuest: 0
   questSceneName: 3_TheVerdantMeadow
+  steps: []
