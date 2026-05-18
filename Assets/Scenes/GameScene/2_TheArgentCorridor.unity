@@ -9242,7 +9242,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1080, y: -700}
+  m_AnchoredPosition: {x: 1080, y: -1000}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &273759520
@@ -11595,7 +11595,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 500, y: -1415}
+  m_AnchoredPosition: {x: 0, y: -1415}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &330011444
@@ -27512,7 +27512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f547b47a56b05954ea64ce1ffe483dac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knowledgeBase: {fileID: 0}
+  knowledgeBase: {fileID: 821801569}
   guestText: {fileID: 1124325352}
   questPanel: {fileID: 1375307682}
   panelTaskNameText: {fileID: 1592459605}
@@ -27522,6 +27522,7 @@ MonoBehaviour:
   speakerText: {fileID: 1568900367}
   dialogueContentText: {fileID: 1240206435}
   interationButton: {fileID: 679126614}
+  Arrow: {fileID: 1301574347}
   tipText: {fileID: 1548741091}
   fadeDuration: 0.3
   displayTime: 1
@@ -120333,7 +120334,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1080, y: -40}
+  m_AnchoredPosition: {x: 1080, y: -330}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1224514880
@@ -186370,7 +186371,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -13}
+  m_AnchoredPosition: {x: 0, y: -15}
   m_SizeDelta: {x: 140, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1872410673

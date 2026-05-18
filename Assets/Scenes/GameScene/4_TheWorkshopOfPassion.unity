@@ -10741,7 +10741,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -13}
+  m_AnchoredPosition: {x: 0, y: -15}
   m_SizeDelta: {x: 140, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &356677082
@@ -109669,7 +109669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f547b47a56b05954ea64ce1ffe483dac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knowledgeBase: {fileID: 0}
+  knowledgeBase: {fileID: 1408478780}
   guestText: {fileID: 1830802046}
   questPanel: {fileID: 72452704}
   panelTaskNameText: {fileID: 497668324}
@@ -109679,6 +109679,7 @@ MonoBehaviour:
   speakerText: {fileID: 1311816227}
   dialogueContentText: {fileID: 1184873396}
   interationButton: {fileID: 268667994}
+  Arrow: {fileID: 371441567}
   tipText: {fileID: 424089933}
   fadeDuration: 0.3
   displayTime: 1

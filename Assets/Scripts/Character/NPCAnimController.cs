@@ -21,6 +21,8 @@ public class NPCAnimController : MonoBehaviour
         if (isMoving)
             lastMoveDir = velocity.normalized;
 
+        GetComponentInChildren<SpriteRenderer>().flipX = (lastMoveDir.x < 0);
+
         if (animator != null)
         {
             animator.SetBool("Idle", !isMoving);

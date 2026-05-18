@@ -27,6 +27,7 @@ public class QuestManager : MonoBehaviour
     public TMP_Text speakerText;
     public TMP_Text dialogueContentText;
     public GameObject interationButton;
+    public GameObject Arrow;
     public GameObject tipText;
 
     [Header("动画参数")]
@@ -268,6 +269,7 @@ public class QuestManager : MonoBehaviour
             return;
         }
         interationButton.gameObject.SetActive(false);
+        Arrow.gameObject.SetActive(false);
 
         // 查找名为 "Image" 的子物体并禁用
         Transform imageChild = targetUI.transform.Find("Image/DefaultImage");
@@ -567,6 +569,7 @@ public class QuestManager : MonoBehaviour
     private void EndDialogue()
     {
         tipText.SetActive(false);
+        Arrow.gameObject.SetActive(true);
         isDialoguePlaying = false;
         Debug.Log("结束对话");
         if (dialoguePanel != null) dialoguePanel.SetActive(false);
