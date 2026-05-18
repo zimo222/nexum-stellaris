@@ -137,6 +137,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - SpellModuleDefineSO
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 65a69081120e25547b1b8471112b349c
+    m_Address: GameData/SpellModule/ThreadShot/Projectile_Arrow_Blue.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 70c92c3ab8db722429fa090c20d1531d
     m_Address: GameData/SpellModule/VotiveEmber/AProjectile_FireBall_002
     m_ReadOnly: 0
@@ -181,6 +187,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7e181287f02141747b220bf8ba4eda3c
     m_Address: GameData/SpellModule/VotiveEmber/Modifier_FieldAngle_060
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7ee8615be3b758042a0d2ef276dfe22d
+    m_Address: GameData/SpellModule/ThreadShot/Projectile_Arrow_Purple.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - SpellModuleDefineSO
@@ -247,6 +259,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ab8b326b41d54984a8c32981cba378ac
     m_Address: GameData/SpellModule/EdgeText/Projectile_SwordEnergy_YellowForward.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aecf1ee0acaec1245938fa85c7bbd608
+    m_Address: GameData/SpellModule/ThreadShot/Projectile_Arrow_Green.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - SpellModuleDefineSO
@@ -325,6 +343,18 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e5d5f98629d48d940813562518e6de26
     m_Address: GameData/SpellModule/VotiveEmber/Corrector_Rotate_R200
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f0167caeb15b0e84bbf1cb7d09ae7cc1
+    m_Address: GameData/SpellModule/ThreadShot/Projectile_Arrow_Yellow.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f67c154b6bdfc3344a9015307327b32e
+    m_Address: GameData/SpellModule/ThreadShot/Projectile_Arrow_Red.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - SpellModuleDefineSO

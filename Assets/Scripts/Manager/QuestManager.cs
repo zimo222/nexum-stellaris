@@ -282,6 +282,8 @@ public class QuestManager : MonoBehaviour
             light2DChild.gameObject.SetActive(false);
         else
             Debug.LogWarning($"在 {questId} 下未找到 Light2D 子物体");
+
+
         tipText.SetActive(true);
     }
 
@@ -426,6 +428,7 @@ public class QuestManager : MonoBehaviour
 
         isInDialogue = true;  // 新增
         Debug.Log("开始对话");
+        JinYong(questId);
         if (dialogueList == null || dialogueList.Count == 0)
         {
             CompleteQuest(questId);

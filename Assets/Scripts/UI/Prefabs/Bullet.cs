@@ -406,7 +406,7 @@ public class Bullet : MonoBehaviour
         Vector2 newOffset = Quaternion.Euler(0, 0, orbitAngle) * Vector2.right * orbitRadius;
         transform.position = orbitCenter + newOffset;
 
-        float rad = orbitAngle * Mathf.Deg2Rad;
+        float rad = (orbitAngle + 90f) * Mathf.Deg2Rad;
         Vector2 tangent = new Vector2(-Mathf.Sin(rad), Mathf.Cos(rad));
         transform.up = tangent;
     }
