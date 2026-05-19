@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WorldQuest_003001
   m_EditorClassIdentifier: 
   id: WorldQuest_003001
-  questName: "\u6E38\u8361\u8FF7\u96FE\xB7\u4E00"
+  questName: "\u6E38\u8361\xB7\u4E00"
   questNum: "\u4E00"
   chapterName: "\u539F\u91CE\u4E4B\u7AE0"
   chapterNum: 
