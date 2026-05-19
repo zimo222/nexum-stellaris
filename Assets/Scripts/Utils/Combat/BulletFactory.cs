@@ -16,7 +16,7 @@ public static class BulletFactory
 
         // 基础属性
         float speed = spellPackage.projectile.speed;
-        int damage = (int)spellPackage.projectile.damage; // 基础伤害，后续可叠加角色攻击力
+        int damage = (int)PlayerDataManager.Instance.CurrentPlayerData.GetTotalStatsAtLevel(PlayerDataManager.Instance.CurrentPlayerData.Level).Attack * (int)spellPackage.projectile.damage; // 基础伤害，后续可叠加角色攻击力
         int num = 1;
         int fieldAngle = 0;
         float recoilForce = spellPackage.projectile.recoilForce;

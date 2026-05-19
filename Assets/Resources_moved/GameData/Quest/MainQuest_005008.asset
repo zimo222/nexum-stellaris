@@ -32,9 +32,11 @@ MonoBehaviour:
     - enemyPrefab: {fileID: 220537008825880356, guid: adae7a49ed3a48a43aa63afdf36dfd1b, type: 3}
       count: 1
   Reward: []
+  exp: 0
   isSceneTrans: 0
   targetSceneName: 
   targetX: 0
   targetY: 0
-  autoStartNextQuest: 1
+  autoStartNextQuest: 0
   questSceneName: 5_TheHallOfUniversalConcord
+  steps: []

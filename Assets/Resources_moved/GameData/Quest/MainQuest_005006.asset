@@ -29,266 +29,342 @@ MonoBehaviour:
     speakerId: 
     content: 
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 2ddb96f8b4b29d04686ce1af1356335f, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: d78f1b3812f11e84583efab8bb400ffd, type: 3}
     speakerId: 
     content: 
     useCGMode: 1
-  - background: {fileID: 21300000, guid: b81340451cb2b044a9d8173129f5c8b8, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: d78f1b3812f11e84583efab8bb400ffd, type: 3}
+    speakerId: 
+    content: "\u90A3\u662F\u5979\u7B2C\u4E00\u6B21\u77E5\u6653\u5BB3\u6015"
+    useCGMode: 1
+    controls: []
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
     content: 
     useCGMode: 1
-  - background: {fileID: 21300000, guid: bac723aaa43289142bcf63162799b5ed, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
+    speakerId: 
+    content: "\u5979\u4EE5\u4E3A\u63E1\u4F4F\uFF0C\u5C31\u6C38\u8FDC\u4E0D\u4F1A\u611F\u53D7\u5931\u53BB"
+    useCGMode: 1
+    controls: []
+  - background: {fileID: 21300000, guid: 2a43505b5641c0747949d3b13846b99d, type: 3}
     speakerId: 
     content: 
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 3d1bdda2084f17c46bc82e263af87d97, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 2a43505b5641c0747949d3b13846b99d, type: 3}
+    speakerId: 
+    content: "\u5979\u521B\u9020\u4E86\u4E00\u4E2A\u4F3C\u4E4E\u6C38\u8FDC\u4E0D\u4F1A\u79BB\u5F00\u5979\u7684\u4EBA"
+    useCGMode: 1
+    controls: []
+  - background: {fileID: 21300000, guid: be971fe1ecc8e524bad10ae6e16079fc, type: 3}
     speakerId: 
     content: 
     useCGMode: 1
-  - background: {fileID: 21300000, guid: bc16dfcd6a95c0443ac02478f774826d, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: be971fe1ecc8e524bad10ae6e16079fc, type: 3}
+    speakerId: 
+    content: "\u5979\u5C06\u5979\u7528\u9501\u94FE\u675F\u7F1A"
+    useCGMode: 1
+    controls: []
+  - background: {fileID: 21300000, guid: 4691182f3b15d5a4d80802ee85721ebd, type: 3}
     speakerId: 
     content: 
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 78043d3e50d1a0442897465e13238974, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 4691182f3b15d5a4d80802ee85721ebd, type: 3}
+    speakerId: 
+    content: "\u5979\u8D70\u4E86\uFF0C\u5979\u6CA1\u6709\u633D\u7559"
+    useCGMode: 1
+    controls: []
+  - background: {fileID: 21300000, guid: 400c05ff21643df41b12551ff2df2347, type: 3}
     speakerId: 
     content: 
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 1b4bfa7bc11b2504288d23e3fc708ffe, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 400c05ff21643df41b12551ff2df2347, type: 3}
+    speakerId: 
+    content: "\u5979\u60F3\u5C3D\u5DF1\u6240\u80FD\u53BB\u7559\u4E0B\u5979\u3002"
+    useCGMode: 1
+    controls: []
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
     content: 
     useCGMode: 1
-  - background: {fileID: 21300000, guid: bef7d4cba48d4b04f9702ff01130263e, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 8767c97641823524ca0fb43abdb809d6, type: 3}
     speakerId: 
     content: 
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 15c70a69d12e14a4a9b7f5a1d9f4be2c, type: 3}
-    speakerId: 
-    content: 
-    useCGMode: 1
-  - background: {fileID: 21300000, guid: f2e44d3089ab12247bb7beb83ebf70cd, type: 3}
-    speakerId: 
-    content: 
-    useCGMode: 1
-  - background: {fileID: 21300000, guid: 7ad4f3a1247562440a6566c171ad4fbc, type: 3}
-    speakerId: "Kianna\xB7Argent"
+    controls: []
+  - background: {fileID: 21300000, guid: 8767c97641823524ca0fb43abdb809d6, type: 3}
+    speakerId: "\u7EAF\u767D"
     content: "\u201C\u4F60\u6765\u4E86\u3002\u201D"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 7ad4f3a1247562440a6566c171ad4fbc, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 8767c97641823524ca0fb43abdb809d6, type: 3}
     speakerId: Player
     content: "\u201C\u8FD9\u91CC\u662F\u54EA\u91CC\uFF1F\u201D"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 7ad4f3a1247562440a6566c171ad4fbc, type: 3}
-    speakerId: "Kianna\xB7Argent"
+    controls: []
+  - background: {fileID: 21300000, guid: 8767c97641823524ca0fb43abdb809d6, type: 3}
+    speakerId: "\u7EAF\u767D"
     content: "\u201C\u662F\u4F60\u5FC3\u91CC\u6700\u6DF1\u7684\u5730\u65B9\u3002\u201D"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 7ad4f3a1247562440a6566c171ad4fbc, type: 3}
-    speakerId: "Kianna\xB7Argent"
+    controls: []
+  - background: {fileID: 21300000, guid: 8767c97641823524ca0fb43abdb809d6, type: 3}
+    speakerId: "\u7EAF\u767D"
     content: "\u201C\u4F60\u7EC8\u4E8E\u8D70\u5230\u8FD9\u91CC\u4E86\u3002\u201D"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 7ad4f3a1247562440a6566c171ad4fbc, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 8767c97641823524ca0fb43abdb809d6, type: 3}
     speakerId: Player
     content: "\u201C\u8FD9\u4E9B\u58C1\u753B\u2026\u2026\u201D"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 7ad4f3a1247562440a6566c171ad4fbc, type: 3}
-    speakerId: "Kianna\xB7Argent"
+    controls: []
+  - background: {fileID: 21300000, guid: 8767c97641823524ca0fb43abdb809d6, type: 3}
+    speakerId: "\u7EAF\u767D"
     content: "\u201C\u90FD\u662F\u4F60\u4E0D\u6562\u770B\u7684\u8BB0\u5FC6\u3002\u201D"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 7ad4f3a1247562440a6566c171ad4fbc, type: 3}
-    speakerId: "Kianna\xB7Argent"
+    controls: []
+  - background: {fileID: 21300000, guid: 8767c97641823524ca0fb43abdb809d6, type: 3}
+    speakerId: "\u7EAF\u767D"
     content: "\u201C\u4F60\u4E00\u76F4\u5728\u9003\u3002\u4ECE\u6211\u8EAB\u4E0A\u9003\uFF0C\u4ECE\u4ED6\u4EEC\u8EAB\u4E0A\u9003\uFF0C\u4ECE\u81EA\u5DF1\u8EAB\u4E0A\u9003\u3002\u201D"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 7ad4f3a1247562440a6566c171ad4fbc, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 8767c97641823524ca0fb43abdb809d6, type: 3}
     speakerId: Player
     content: "\u201C\u6211\u2026\u2026\u201D"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 7ad4f3a1247562440a6566c171ad4fbc, type: 3}
-    speakerId: "Kianna\xB7Argent"
+    controls: []
+  - background: {fileID: 21300000, guid: 8767c97641823524ca0fb43abdb809d6, type: 3}
+    speakerId: "\u7EAF\u767D"
     content: "\u201C\u6CA1\u5173\u7CFB\u3002\u201D"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 7ad4f3a1247562440a6566c171ad4fbc, type: 3}
-    speakerId: "Kianna\xB7Argent"
+    controls: []
+  - background: {fileID: 21300000, guid: 8767c97641823524ca0fb43abdb809d6, type: 3}
+    speakerId: "\u7EAF\u767D"
     content: "\u201C\u9003\u4E86\u8FD9\u4E48\u4E45\uFF0C\u5F88\u7D2F\u5427\uFF1F\u201D"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 7ad4f3a1247562440a6566c171ad4fbc, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 8767c97641823524ca0fb43abdb809d6, type: 3}
+    speakerId: "\u7EAF\u767D"
+    content: "\"\u4F60\u53EA\u9700\u8BB0\u5F97\uFF0C\u4F60\u4EE5\u540E\u8FD8\u4F1A\u9047\u89C1\u5F88\u591A\u4EBA\uFF0C\u4E5F\u4F1A\u548C\u5F88\u591A\u4EBA\u5206\u79BB\u3002\u6CA1\u6709\u8C01\u80FD\u4E00\u76F4\u966A\u7740\u8C01\u3002\u4F46\u90A3\u4E9B\u4E00\u8D77\u8D70\u8FC7\u7684\u65F6\u95F4\uFF0C\u8BF4\u8FC7\u7684\u8BDD\uFF0C\u7B11\u8FC7\u3001\u54ED\u8FC7\u7684\u77AC\u95F4\uFF0C\u90FD\u4F1A\u7559\u5728\u4F60\u5FC3\u91CC\u3002\u90A3\u5C31\u662F\u4F60\u4EEC\u4E4B\u95F4\u7684\u7F81\u7ECA\uFF0C\u662F\u5F7C\u6B64\u66FE\u7ECF\u5B58\u5728\u7684\u8BC1\u660E\u3002\u53EA\u8981\u4F60\u4E0D\u66FE\u5FD8\u8BB0\uFF0C\u4F60\u5C31\u4E0D\u662F\u4E00\u4E2A\u4EBA\uFF0C\u4ED6\u4EEC\u4E5F\u4ECE\u6765\u6CA1\u6709\u771F\u6B63\u79BB\u5F00\u8FC7\u3002\u201D"
+    useCGMode: 1
+    controls: []
+  - background: {fileID: 21300000, guid: 8767c97641823524ca0fb43abdb809d6, type: 3}
     speakerId: Player
     content: "\u201C......\u201D"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 7ad4f3a1247562440a6566c171ad4fbc, type: 3}
-    speakerId: "Kianna\xB7Argent"
+    controls: []
+  - background: {fileID: 21300000, guid: 8767c97641823524ca0fb43abdb809d6, type: 3}
+    speakerId: "\u7EAF\u767D"
     content: "\u201C\u4F60\u77E5\u9053\u6211\u662F\u8C01\u5417\uFF1F\u201D"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 7ad4f3a1247562440a6566c171ad4fbc, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 8767c97641823524ca0fb43abdb809d6, type: 3}
     speakerId: Player
     content: "\u201C\u4F60\u662F\u7EAF\u767D\u3002\u201D"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 7ad4f3a1247562440a6566c171ad4fbc, type: 3}
-    speakerId: "Kianna\xB7Argent"
+    controls: []
+  - background: {fileID: 21300000, guid: 8767c97641823524ca0fb43abdb809d6, type: 3}
+    speakerId: "\u7EAF\u767D"
     content: "\u201C\u7EAF\u767D\u662F\u8C01\uFF1F\u201D"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 7ad4f3a1247562440a6566c171ad4fbc, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 8767c97641823524ca0fb43abdb809d6, type: 3}
     speakerId: Player
     content: '"......"'
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 0687d895e1af74642b70e706f376d195, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 8767c97641823524ca0fb43abdb809d6, type: 3}
     speakerId: 
     content: 
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 0687d895e1af74642b70e706f376d195, type: 3}
-    speakerId: "Kianna\xB7Argent"
-    content: "\u201C\u4F60\u4ECE\u51FA\u751F\u5C31\u8BA4\u8BC6\u6211\u4E86\u3002\u201D"
+    controls: []
+  - background: {fileID: 21300000, guid: 8767c97641823524ca0fb43abdb809d6, type: 3}
+    speakerId: "\u7EAF\u767D"
+    content: "\u201C\u4F60\u5F88\u4E45\u4E4B\u524D\u5C31\u8BA4\u8BC6\u6211\u4E86\u3002\u201D"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 0687d895e1af74642b70e706f376d195, type: 3}
-    speakerId: "Kianna\xB7Argent"
+    controls: []
+  - background: {fileID: 21300000, guid: 8767c97641823524ca0fb43abdb809d6, type: 3}
+    speakerId: "\u7EAF\u767D"
     content: "\u201C\u6211\u662F\u4F60\u5FC3\u91CC\u90A3\u4E2A\u2018\u7406\u60F3\u4E2D\u7684\u81EA\u5DF1\u2019\u3002\u90A3\u4E2A\u4E0D\u4F1A\u5BB3\u6015\u88AB\u9057\u5FD8\u7684\u4EBA\u3002\u90A3\u4E2A\u8DB3\u591F\u575A\u5F3A\u3001\u53EF\u4EE5\u72EC\u81EA\u8D70\u4E0B\u53BB\u7684\u4EBA\u3002\u201D"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 0687d895e1af74642b70e706f376d195, type: 3}
-    speakerId: "Kianna\xB7Argent"
+    controls: []
+  - background: {fileID: 21300000, guid: 8767c97641823524ca0fb43abdb809d6, type: 3}
+    speakerId: "\u7EAF\u767D"
     content: "\u201C\u4F60\u628A\u6211\u5851\u9020\u6210\u2018\u89C2\u6D4B\u8005\u2019\uFF0C\u5851\u9020\u6210\u2018\u5411\u5BFC\u2019\uFF0C\u5851\u9020\u6210\u4E00\u4E2A\u6C38\u8FDC\u4E0D\u4F1A\u79BB\u5F00\u4F60\u7684\u5F71\u5B50\u3002\u7136\u540E\u4F60\u628A\u6211\u9501\u5728\u796D\u575B\u4E0A\uFF0C\u4EE5\u4E3A\u8FD9\u6837\u5C31\u80FD\u6C38\u8FDC\u7559\u4F4F\u6211\u3002\u201D"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 0687d895e1af74642b70e706f376d195, type: 3}
-    speakerId: "Kianna\xB7Argent"
+    controls: []
+  - background: {fileID: 21300000, guid: 8767c97641823524ca0fb43abdb809d6, type: 3}
+    speakerId: "\u7EAF\u767D"
     content: "\u201C\u4F46\u4F60\u7559\u4E0D\u4F4F\u7684\u3002\u201D"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 0687d895e1af74642b70e706f376d195, type: 3}
-    speakerId: "Kianna\xB7Argent"
+    controls: []
+  - background: {fileID: 21300000, guid: 8767c97641823524ca0fb43abdb809d6, type: 3}
+    speakerId: "\u7EAF\u767D"
     content: "\u201C\u56E0\u4E3A\u6211\u4E0D\u662F\u53E6\u4E00\u4E2A\u4EBA\u3002\u6211\u662F\u4F60\u3002\u201D"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 0687d895e1af74642b70e706f376d195, type: 3}
-    speakerId: "Kianna\xB7Argent"
+    controls: []
+  - background: {fileID: 21300000, guid: 8767c97641823524ca0fb43abdb809d6, type: 3}
+    speakerId: "\u7EAF\u767D"
     content: "\u201C\u90A3\u4E9B\u9501\u94FE\uFF0C\u662F\u4F60\u5BF9\u81EA\u5DF1\u7684\u6346\u7ED1\u3002\u4F60\u4EE5\u4E3A\u53EA\u8981\u628A\u6211\u9501\u4F4F\uFF0C\u4F60\u5C31\u4E0D\u4F1A\u5931\u53BB\u6211\u3002\u4F46\u4F60\u5931\u53BB\u7684\uFF0C\u662F\u4F60\u81EA\u5DF1\u3002\u201D"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 16601ecd273b5b040948bba2c3c0638a, type: 3}
-    speakerId: "Kianna\xB7Argent"
+    controls: []
+  - background: {fileID: 21300000, guid: f4b8b4bc8ba3c91408f921d5741b17d1, type: 3}
+    speakerId: "\u7EAF\u767D"
     content: "\u201C\u4F60\u770B\u770B\u6211\u3002\u201D"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 16601ecd273b5b040948bba2c3c0638a, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
     content: 
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 16601ecd273b5b040948bba2c3c0638a, type: 3}
-    speakerId: "Kianna\xB7Argent"
+    controls: []
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
+    speakerId: "\u7EAF\u767D"
     content: "\u201C\u4F60\u518D\u770B\u770B\u4F60\u81EA\u5DF1\u3002\u201D"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: cf84891e2aaaaa54099be44f9ccea4da, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: f4b8b4bc8ba3c91408f921d5741b17d1, type: 3}
     speakerId: 
     content: 
     useCGMode: 1
-  - background: {fileID: 21300000, guid: cf84891e2aaaaa54099be44f9ccea4da, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
     content: "(\u5979\u4E0D\u518D\u662F\u201C\u7EAF\u767D\u201D\u3002\u5979\u662F\u6211\u3002)"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: cf84891e2aaaaa54099be44f9ccea4da, type: 3}
-    speakerId: "Kianna\xB7Argent"
+    controls: []
+  - background: {fileID: 21300000, guid: f4b8b4bc8ba3c91408f921d5741b17d1, type: 3}
+    speakerId: "\u7EAF\u767D"
     content: "\u201C\u4F60\u660E\u767D\u4E86\u3002\u201D"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: cf84891e2aaaaa54099be44f9ccea4da, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: f4b8b4bc8ba3c91408f921d5741b17d1, type: 3}
     speakerId: Player
     content: "\u201C\u6211\u2026\u2026\u201D"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: cf84891e2aaaaa54099be44f9ccea4da, type: 3}
-    speakerId: "Kianna\xB7Argent"
+    controls: []
+  - background: {fileID: 21300000, guid: f4b8b4bc8ba3c91408f921d5741b17d1, type: 3}
+    speakerId: "\u7EAF\u767D"
     content: "\u201C\u4E0D\u8981\u6015\u3002\u201D"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: cf84891e2aaaaa54099be44f9ccea4da, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
-    content: "\u5979\u7684\u58F0\u97F3\u6BD4\u4EFB\u4F55\u65F6\u5019\u90FD\u6E29\u67D4"
+    content: "(\u5979\u7684\u58F0\u97F3\u6BD4\u4EFB\u4F55\u65F6\u5019\u90FD\u6E29\u67D4)"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: cf84891e2aaaaa54099be44f9ccea4da, type: 3}
-    speakerId: "Kianna\xB7Argent"
-    content: "\u201C\u6211\u4E0D\u662F\u8981\u79BB\u5F00\u4F60\u3002\u6211\u662F\u8981\u56DE\u5230\u4F60\u5FC3\u91CC\u3002\u56DE\u5230\u6211\u5E94\u8BE5\u5728\u7684\u5730\u65B9\u3002\u201D"
+    controls: []
+  - background: {fileID: 21300000, guid: f4b8b4bc8ba3c91408f921d5741b17d1, type: 3}
+    speakerId: "\u7EAF\u767D"
+    content: "\u201C\u6211\u4E0D\u4F1A\u79BB\u5F00\u4F60\u3002\u6211\u662F\u8981\u56DE\u5230\u4F60\u5FC3\u91CC\u3002\u56DE\u5230\u6211\u5E94\u8BE5\u5728\u7684\u5730\u65B9\u3002\u201D"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: cf84891e2aaaaa54099be44f9ccea4da, type: 3}
-    speakerId: "Kianna\xB7Argent"
+    controls: []
+  - background: {fileID: 21300000, guid: f4b8b4bc8ba3c91408f921d5741b17d1, type: 3}
+    speakerId: "\u7EAF\u767D"
     content: "\u201C\u4ECE\u4ECA\u4EE5\u540E\uFF0C\u6211\u4E0D\u518D\u662F\u7AD9\u5728\u5ECA\u67F1\u65C1\u7684\u2018\u89C2\u6D4B\u8005\u2019\u3002\u6211\u662F\u4F60\u7684\u4E00\u90E8\u5206\u3002\u662F\u4F60\u6BCF\u4E00\u6B21\u5FC3\u8DF3\u91CC\uFF0C\u90A3\u4E2A\u544A\u8BC9\u4F60\u2018\u4F60\u53EF\u4EE5\u2019\u7684\u58F0\u97F3\u3002\u201D"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 2702ea2483e858947acce26fc5ed9006, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
-    content: "\u5979\u7684\u624B\u7A7F\u8FC7\u955C\u9762\u3002"
+    content: "(\u5979\u7684\u624B\u7A7F\u8FC7\u955C\u9762)"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 2702ea2483e858947acce26fc5ed9006, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
     content: "\u955C\u9762\u6CDB\u8D77\u6D9F\u6F2A\u3002\u5979\u7684\u624B\u4F38\u51FA\u6765\uFF0C\u94F6\u767D\u8272\u7684\u6307\u5C16\u5728\u7A7A\u6C14\u4E2D\u5FAE\u5FAE\u53D1\u5149\u3002"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 2702ea2483e858947acce26fc5ed9006, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
     content: "\u6211\u4F38\u51FA\u624B\uFF0C\u63E1\u4F4F\u5979\u7684\u624B\u3002"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 2702ea2483e858947acce26fc5ed9006, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
     content: "\u4E0D\u662F\u51C9\u7684\u3002\u662F\u6E29\u7684\u3002\u548C\u6211\u81EA\u5DF1\u7684\u4F53\u6E29\u4E00\u6A21\u4E00\u6837\u3002"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: a4e2e9911bb671e4abad6efb33af3634, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
     content: "\u5979\u4ECE\u955C\u4E2D\u8D70\u51FA\u6765\u3002\u94F6\u767D\u8272\u7684\u5149\u8292\u7B3C\u7F69\u7740\u5979\uFF0C\u4E5F\u7B3C\u7F69\u7740\u6211\u3002\u5979\u770B\u7740\u6211\uFF0C\u7B11\u4E86\u2014\u2014\u773C\u7736\u7EA2\u7EA2\u7684\uFF0C\u4F46\u7B11\u7740\u3002"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 2702ea2483e858947acce26fc5ed9006, type: 3}
-    speakerId: "Kianna\xB7Argent"
+    controls: []
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
+    speakerId: "\u7EAF\u767D"
     content: "\u201C\u8C22\u8C22\u4F60\u6CA1\u6709\u5FD8\u8BB0\u6211\u3002\u201D"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: a4e2e9911bb671e4abad6efb33af3634, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
-    content: "\u5979\u62E5\u62B1\u4E86\u6211\u3002"
+    content: "(\u5979\u62E5\u62B1\u4E86\u6211)"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: a4e2e9911bb671e4abad6efb33af3634, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
     content: "\u90A3\u4E2A\u62E5\u62B1\u5F88\u8F7B\uFF0C\u5F88\u77ED\u3002\u4F46\u90A3\u4E00\u77AC\u95F4\uFF0C\u6211\u611F\u89C9\u5230\u7684\u4E0D\u662F\u4E00\u4E2A\u4EBA\u7684\u6E29\u5EA6\u2014\u2014\u662F\u4E09\u80A1\u529B\u91CF\u540C\u65F6\u6D8C\u5165\u3002"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: edb284c9b543c50479448c0ba53f1f8b, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
     content: "\u4E00\u80A1\u6696\u91D1\u8272\uFF0C\u6765\u81EA\u5FC3\u5E95\u6700\u6DF1\u5904\uFF0C\u90A3\u662F\u4E94\u5C81\u7684\u81EA\u5DF1\uFF0C\u90A3\u4E2A\u6E34\u671B\u88AB\u7231\u7684\u5C0F\u5B69\u3002"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: edb284c9b543c50479448c0ba53f1f8b, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
     content: "\u4E00\u80A1\u94F6\u767D\u8272\uFF0C\u6765\u81EA\u6240\u6709\u5411\u5F80\u7684\u65B9\u5411\uFF0C\u90A3\u662F\u5979\uFF0C\u662F\u6211\u4E00\u76F4\u60F3\u6210\u4E3A\u7684\u4EBA\u3002"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: edb284c9b543c50479448c0ba53f1f8b, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
     content: "\u4E00\u80A1\u6697\u7070\u8272\uFF0C\u6765\u81EA\u521A\u521A\u6D88\u6563\u7684\u96FE\uFF0C\u90A3\u662F\u6240\u6709\u6211\u4E0D\u6562\u627F\u8BA4\u7684\u6050\u60E7\uFF0C\u662F\u6211\u4E00\u76F4\u9003\u907F\u7684\u81EA\u5DF1\u3002"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: edb284c9b543c50479448c0ba53f1f8b, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
     content: "\u5B83\u4EEC\u6CA1\u6709\u51B2\u7A81\uFF0C\u6CA1\u6709\u5BF9\u6297\u3002\u5B83\u4EEC\u53EA\u662F\u2026\u2026\u540C\u65F6\u5B58\u5728\u3002"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 24eeda6d6ca63f446bbc47db639f12fc, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
     content: "\u5979\u677E\u5F00\u624B\uFF0C\u770B\u7740\u6211\u3002"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 24eeda6d6ca63f446bbc47db639f12fc, type: 3}
-    speakerId: "Kiaana\xB7Argent"
+    controls: []
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
+    speakerId: "\u7EAF\u767D"
     content: "\u201C\u53BB\u5427\u3002\u201D"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 24eeda6d6ca63f446bbc47db639f12fc, type: 3}
-    speakerId: "Kiaana\xB7Argent"
+    controls: []
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
+    speakerId: "\u7EAF\u767D"
     content: "\u201C\u7EE7\u7EED\u8D70\u4E0B\u53BB\u3002\u201D"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 30c2264fa5808ba49a46a0c88086b1a9, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
-    content: "\u7136\u540E\u5979\u6D88\u5931\u4E86\u3002"
+    content: "(\u5979\u6D88\u5931\u4E86)"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 30c2264fa5808ba49a46a0c88086b1a9, type: 3}
-    speakerId: 
-    content: "\u4E0D\u662F\u6D88\u6563\uFF0C\u662F\u878D\u5408\u3002"
-    useCGMode: 1
-  - background: {fileID: 21300000, guid: 30c2264fa5808ba49a46a0c88086b1a9, type: 3}
-    speakerId: 
-    content: "\u662F\u56DE\u5230\u5979\u6765\u7684\u90A3\u4E2A\u5730\u65B9\u2014\u2014\u56DE\u5230\u6E0A\u5FC3\uFF0C\u56DE\u5230\u601D\u7F15\uFF0C\u56DE\u5230\u6BCF\u4E00\u4EF6\u7ECE\u8BED\u91CC\uFF0C\u56DE\u5230\u6211\u7684\u6BCF\u4E00\u6B21\u5FC3\u8DF3\u91CC\u3002"
-    useCGMode: 1
-  - background: {fileID: 21300000, guid: 30c2264fa5808ba49a46a0c88086b1a9, type: 3}
-    speakerId: 
-    content: "\u4F46\u8FD9\u4E00\u6B21\uFF0C\u6211\u77E5\u9053\uFF0C\u56DE\u6765\u7684\u4E0D\u53EA\u662F\u5979\u3002"
-    useCGMode: 1
-  - background: {fileID: 21300000, guid: 30c2264fa5808ba49a46a0c88086b1a9, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
     content: "\u6211\u4F4E\u5934\u770B\u81EA\u5DF1\u7684\u80F8\u53E3\u3002\u6E0A\u5FC3\u8FD8\u5728\u3002\u90A3\u4E9B\u88C2\u75D5\u6CA1\u6709\u6D88\u5931\uFF0C\u4F46\u5B83\u4EEC\u88AB\u5149\u586B\u6EE1\u4E86\u3002"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 30c2264fa5808ba49a46a0c88086b1a9, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
     content: "\u957F\u5ECA\u6D88\u5931\u4E86\u3002\u6211\u7AD9\u5728\u865A\u7A7A\u4E2D\uFF0C\u80F8\u53E3\u6E29\u70ED\u3002"
     useCGMode: 1
+    controls: []
   - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
     content: "\u8FD9\u4E00\u6B21\uFF0C\u6211\u4E0D\u518D\u8FF7\u832B\u3002"
     useCGMode: 1
+    controls: []
   objectives: []
   waves: []
   Reward: []
@@ -299,3 +375,4 @@ MonoBehaviour:
   targetY: 0
   autoStartNextQuest: 1
   questSceneName: 5_TheHallOfUniversalConcord
+  steps: []

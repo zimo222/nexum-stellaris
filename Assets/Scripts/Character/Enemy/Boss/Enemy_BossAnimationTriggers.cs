@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using UnityEngine;
 
 public class Enemy_BossAnimationTriggers : MonoBehaviour
@@ -11,6 +12,7 @@ public class Enemy_BossAnimationTriggers : MonoBehaviour
 
     private void AttackTrigger()
     {
+        if (boss.anim.GetBool("PhaseAttack")) return;
         Collider2D[] colliders = Physics2D.OverlapCircleAll(boss.attackCheck.position, boss.attackCheckRadius);
         foreach (var hit in colliders)
         {

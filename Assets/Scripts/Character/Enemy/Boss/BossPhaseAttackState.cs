@@ -39,6 +39,7 @@ public class BossPhaseAttackState : EnemyState
         {
             hasDamaged = true;
             string questId = CombatManager.Instance.CurrentCombatQuestId;
+            Debug.Log("CurrentCombatQuestIdL:" + questId);
             if (questId == "MainQuest_005004")
             {
                 CombatManager.Instance.EnemyDefeated(boss.transform.gameObject);

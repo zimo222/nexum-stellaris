@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 
@@ -12,9 +13,13 @@ public class PromptTextManager : MonoBehaviour
     public static PromptTextManager Instance { get; private set; }
 
     [Header("组件引用")]
-    [Tooltip("TextMeshPro 文本组件，如果不指定则自动在子物体中查找")]
+    [Tooltip("父级 Canvas 物体（用于整体激活/禁用）")]
     [SerializeField] private GameObject Canvas;
+
+    [Tooltip("背景图片物体（可选，需要其上挂载 Image 组件）")]
     [SerializeField] private GameObject Image;
+
+    [Tooltip("TextMeshPro 文本组件，如果不指定则自动在子物体中查找")]
     [SerializeField] private TMP_Text textComponent;
 
     [Header("设置")]
@@ -23,6 +28,12 @@ public class PromptTextManager : MonoBehaviour
 
     private GameObject textGameObject;   // 文本物体（用于激活/禁用）
     private Coroutine currentCoroutine;  // 当前正在运行的协程
+    private Image backgroundImage;       // 背景图片组件（从 Image 物体上获取）
+
+    // 用于记录原始位置（局部坐标，避免受父物体移动影响）
+    private Vector3 originalTextLocalPos;
+    private Vector3 originalBgLocalPos;
+    private bool hasOriginalPos = false; // 是否已记录原始位置
 
     private void Awake()
     {
@@ -51,17 +62,39 @@ public class PromptTextManager : MonoBehaviour
 
         textGameObject = textComponent.gameObject;
 
-        // 确保初始状态为禁用（符合默认子对象禁用）
+        // 获取背景图片组件（如果 Image 物体存在且挂载了 Image 组件）
+        if (Image != null)
+        {
+            backgroundImage = Image.GetComponent<Image>();
+            if (backgroundImage == null)
+            {
+                Debug.LogWarning("PromptTextManager: Image 物体存在，但未找到 Image 组件，背景颜色将无法生效。");
+            }
+        }
+        else
+        {
+            backgroundImage = null;
+        }
+
+        // 记录原始局部位置（确保在初始状态下记录，即使物体是禁用的）
+        originalTextLocalPos = textComponent.transform.localPosition;
+        if (backgroundImage != null)
+        {
+            originalBgLocalPos = backgroundImage.transform.localPosition;
+        }
+        hasOriginalPos = true;
+
+        // 确保初始状态为禁用
         if (textGameObject.activeSelf)
         {
             Canvas.SetActive(false);
             textGameObject.SetActive(false);
+            if (Image != null) Image.SetActive(false);
         }
     }
 
     private void OnDisable()
     {
-        // 当管理器自身被禁用时，停止当前协程，防止残留
         if (currentCoroutine != null)
         {
             StopCoroutine(currentCoroutine);
@@ -74,7 +107,10 @@ public class PromptTextManager : MonoBehaviour
     /// </summary>
     /// <param name="message">要显示的文本内容</param>
     /// <param name="duration">显示时长（秒），可选，不传或 <=0 则使用默认时长</param>
-    public void ShowMessage(string message, float duration = -1f)
+    /// <param name="fontColor">字体颜色，默认纯白色（Color.white）</param>
+    /// <param name="backgroundColor">背景颜色，默认纯黑色（Color.black）</param>
+    /// <param name="y">纵向偏移量（像素或世界单位，取决于Canvas模式），正数向上，负数向下</param>
+    public void ShowMessage(string message, float duration = -1f, Color? fontColor = null, Color? backgroundColor = null, int y = 0)
     {
         if (textComponent == null)
         {
@@ -82,56 +118,73 @@ public class PromptTextManager : MonoBehaviour
             return;
         }
 
-        // 确定显示时长
-        float displayTime = (duration > 0) ? duration : defaultDisplayTime;
+        // 1. 恢复原始位置（清除上次可能残留的偏移）
+        RestoreOriginalPositions();
 
-        // 如果时长极小或为零，直接隐藏（避免瞬间显示）
+        // 2. 应用字体颜色
+        textComponent.color = fontColor ?? Color.white;
+
+        // 3. 应用背景颜色
+        if (backgroundImage != null)
+        {
+            backgroundImage.color = backgroundColor ?? Color.black;
+        }
+        else if (backgroundColor.HasValue)
+        {
+            Debug.LogWarning("PromptTextManager: 未找到背景图片组件，无法设置背景颜色。");
+        }
+
+        // 4. 应用纵向偏移（基于原始位置）
+        if (y != 0)
+        {
+            Vector3 newTextPos = originalTextLocalPos + new Vector3(0, y, 0);
+            textComponent.transform.localPosition = newTextPos;
+
+            if (backgroundImage != null)
+            {
+                Vector3 newBgPos = originalBgLocalPos + new Vector3(0, y, 0);
+                backgroundImage.transform.localPosition = newBgPos;
+            }
+        }
+
+        // 5. 确定显示时长
+        float displayTime = (duration > 0) ? duration : defaultDisplayTime;
         if (displayTime <= 0.01f)
         {
             HideImmediately();
             return;
         }
 
-        // 停止当前正在运行的协程，以重置计时
+        // 6. 停止当前协程
         if (currentCoroutine != null)
         {
             StopCoroutine(currentCoroutine);
             currentCoroutine = null;
         }
 
-        // 更新文本内容
+        // 7. 更新文本内容
         textComponent.text = message;
 
-        // 激活文本物体（如果尚未激活）
+        // 8. 激活所有相关物体
         if (!textGameObject.activeSelf)
         {
-            Canvas.SetActive(true);
+            if (Canvas != null) Canvas.SetActive(true);
+            if (Image != null) Image.SetActive(true);
             textGameObject.SetActive(true);
         }
 
-        // 启动新的隐藏协程
+        // 9. 启动隐藏协程
         currentCoroutine = StartCoroutine(HideAfterDelay(displayTime));
     }
 
-    /// <summary>
-    /// 协程：等待指定时间后隐藏文本物体
-    /// </summary>
     private IEnumerator HideAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-
-        // 隐藏文本物体
-        if (textGameObject != null && textGameObject.activeSelf)
-        {
-            Canvas.SetActive(false);
-            textGameObject.SetActive(false);
-        }
-
-        currentCoroutine = null;
+        HideImmediately();
     }
 
     /// <summary>
-    /// 立即隐藏当前显示的文本，并停止计时
+    /// 立即隐藏当前显示的文本，并停止计时，同时恢复原始位置
     /// </summary>
     public void HideImmediately()
     {
@@ -143,8 +196,26 @@ public class PromptTextManager : MonoBehaviour
 
         if (textGameObject != null && textGameObject.activeSelf)
         {
-            Canvas.SetActive(false);
+            if (Canvas != null) Canvas.SetActive(false);
+            if (Image != null) Image.SetActive(false);
             textGameObject.SetActive(false);
+        }
+
+        // 恢复原始位置
+        RestoreOriginalPositions();
+    }
+
+    /// <summary>
+    /// 将文本和背景的位置恢复为原始记录值
+    /// </summary>
+    private void RestoreOriginalPositions()
+    {
+        if (!hasOriginalPos) return;
+
+        textComponent.transform.localPosition = originalTextLocalPos;
+        if (backgroundImage != null)
+        {
+            backgroundImage.transform.localPosition = originalBgLocalPos;
         }
     }
 

@@ -612,6 +612,7 @@ public class QuestManager : MonoBehaviour
         {
             currentInteractiveQuestId = questId;
             waitingForInteraction = true;
+            interationButton.SetActive(true);
             Debug.Log("按F或点击按钮开始任务");
         }
     }
