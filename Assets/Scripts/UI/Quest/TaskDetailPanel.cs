@@ -227,7 +227,7 @@ public class TaskDetailPanel : BPanel
                     detail += " (已完成)";
             }
         }
-        taskDetailText.text = detail;
+        taskDetailText.text = detail.Replace("\\n", "\n");
 
         // 生成奖励图标
         GenerateRewardIcons(questData);
