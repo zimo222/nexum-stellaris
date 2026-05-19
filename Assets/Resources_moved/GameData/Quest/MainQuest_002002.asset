@@ -112,7 +112,9 @@ MonoBehaviour:
       moveSpeed: 0
   objectives: []
   waves: []
-  Reward: []
+  Reward:
+  - Exotext_004_ThoughtChime
+  - Exotext_002_EdgeText
   exp: 2370
   isSceneTrans: 0
   targetSceneName: 

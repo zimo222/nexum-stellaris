@@ -138,7 +138,9 @@ MonoBehaviour:
       moveSpeed: 0
   objectives: []
   waves: []
-  Reward: []
+  Reward:
+  - Exotext_003_DuoVoice
+  - Exotext_003_ThreadShot
   exp: 6000
   isSceneTrans: 0
   targetSceneName: 

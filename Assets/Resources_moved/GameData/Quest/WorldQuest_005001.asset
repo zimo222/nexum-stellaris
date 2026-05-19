@@ -10,31 +10,35 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d476a2b0564d52b4882c53d711eeea11, type: 3}
-  m_Name: WorldQuest_003002
+  m_Name: WorldQuest_005001
   m_EditorClassIdentifier: 
-  id: WorldQuest_003002
-  questName: "\u6E38\u8361\xB7\u4E8C"
-  questNum: "\u4E8C"
-  chapterName: "\u539F\u91CE\u4E4B\u7AE0"
+  id: WorldQuest_005001
+  questName: "\u9ED1\u96FE\xB7\u4E00"
+  questNum: "\u4E00"
+  chapterName: "\u5171\u9E23\u4E4B\u7AE0"
   chapterNum: 
-  place: "\u539F\u91CE"
-  lastQuestId: WorldQuest_003001
+  place: "\u5171\u9E23\u5927\u5385"
+  lastQuestId: MainQuest_005010
   category: 1
   contentType: 1
-  nextQuestIds: []
+  nextQuestIds:
+  - WorldQuest_005002
   description: "\u829D\u58EB\u795E\u9B54\uFF0C\u6253\u4E00\u4E0B\u8BD5\u8BD5"
   dialogueEntries: []
   objectives: []
   waves:
   - waveName: 
     enemies:
-    - enemyPrefab: {fileID: 220537008825880356, guid: d58b3c2281ad1974fae4450263bd5989, type: 3}
-      count: 3
+    - enemyPrefab: {fileID: 220537008825880356, guid: d32223e736f03494b85483eb2cdc750c, type: 3}
+      count: 1
+  - waveName: 
+    enemies:
+    - enemyPrefab: {fileID: 220537008825880356, guid: d32223e736f03494b85483eb2cdc750c, type: 3}
+      count: 2
   Reward:
-  - NexusVesture_003_CogniThread
-  - NexusVesture_003_VolitionVein
-  - NexusVesture_003_ImprintStep
-  exp: 7500
+  - NexusVesture_001_AbyssalHeart
+  - NexusVesture_001_TangibleNexus
+  exp: 12800
   isSceneTrans: 0
   targetSceneName: 
   targetX: 0

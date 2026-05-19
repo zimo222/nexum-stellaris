@@ -30,11 +30,11 @@ MonoBehaviour:
   - waveName: 
     enemies:
     - enemyPrefab: {fileID: 220537008825880356, guid: d58b3c2281ad1974fae4450263bd5989, type: 3}
-      count: 1
+      count: 2
   Reward:
-  - NexusVesture_005_AbyssalHeart
-  - NexusVesture_004_AbyssalHeart
-  exp: 0
+  - NexusVesture_003_AbyssalHeart
+  - NexusVesture_003_TangibleNexus
+  exp: 7500
   isSceneTrans: 0
   targetSceneName: 
   targetX: 0

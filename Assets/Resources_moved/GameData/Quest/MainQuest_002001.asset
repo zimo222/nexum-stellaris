@@ -53,7 +53,8 @@ MonoBehaviour:
   objectives: []
   waves: []
   Reward:
-  - Exotext_003_VotiveEmber
+  - Exotext_005_ThoughtChime
+  - Exotext_001_EdgeText
   exp: 2000
   isSceneTrans: 1
   targetSceneName: 2_TheArgentCorridor

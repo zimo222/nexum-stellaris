@@ -57,8 +57,9 @@ MonoBehaviour:
     controls: []
   objectives: []
   waves: []
-  Reward: []
-  exp: 0
+  Reward:
+  - Exotext_001_MnemonicTool
+  exp: 12800
   isSceneTrans: 0
   targetSceneName: 
   targetX: 0

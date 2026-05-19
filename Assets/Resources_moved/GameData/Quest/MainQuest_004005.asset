@@ -127,7 +127,8 @@ MonoBehaviour:
     controls: []
   objectives: []
   waves: []
-  Reward: []
+  Reward:
+  - Exotext_001_StellarScribe
   exp: 11000
   isSceneTrans: 0
   targetSceneName: 

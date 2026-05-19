@@ -31,10 +31,14 @@ MonoBehaviour:
     - enemyPrefab: {fileID: 220537008825880356, guid: 8813d5ae6fb6a2e43bc65afaded4465e, type: 3}
       count: 2
   Reward:
-  - NexusVesture_003_AbyssalHeart
+  - NexusVesture_005_CogniThread
+  - NexusVesture_005_VolitionVein
+  - NexusVesture_005_ImprintStep
+  exp: 800
   isSceneTrans: 0
   targetSceneName: 
   targetX: 0
   targetY: 0
   autoStartNextQuest: 0
   questSceneName: 1_TheNestOfWarmLight
+  steps: []

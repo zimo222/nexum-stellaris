@@ -102,7 +102,7 @@ MonoBehaviour:
   objectives: []
   waves: []
   Reward: []
-  exp: 0
+  exp: 51200
   isSceneTrans: 0
   targetSceneName: 6_TheStellarWish
   targetX: 0

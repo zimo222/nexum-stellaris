@@ -31,9 +31,10 @@ MonoBehaviour:
     - enemyPrefab: {fileID: 220537008825880356, guid: d58b3c2281ad1974fae4450263bd5989, type: 3}
       count: 1
   Reward:
-  - NexusVesture_005_AbyssalHeart
   - NexusVesture_004_AbyssalHeart
-  exp: 0
+  - NexusVesture_004_TangibleNexus
+  - NexusVesture_004_ImprintStep
+  exp: 3481
   isSceneTrans: 0
   targetSceneName: 
   targetX: 0

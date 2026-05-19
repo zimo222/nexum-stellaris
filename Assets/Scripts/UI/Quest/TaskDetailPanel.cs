@@ -252,7 +252,7 @@ public class TaskDetailPanel : BPanel
     {
         ClearRewardIcons();
 
-        if (questData.Reward == null || questData.Reward.Count == 0) return;
+        if ((questData.Reward == null || questData.Reward.Count == 0) && questData.exp == 0) return;
         if (rewardContainer == null || rewardIconPrefab == null)
         {
             Debug.LogWarning("奖励容器或奖励预制体未指定！");

@@ -62,7 +62,9 @@ MonoBehaviour:
     controls: []
   objectives: []
   waves: []
-  Reward: []
+  Reward:
+  - Exotext_002_ThoughtChime
+  - Exotext_004_EdgeText
   exp: 3110
   isSceneTrans: 0
   targetSceneName: 

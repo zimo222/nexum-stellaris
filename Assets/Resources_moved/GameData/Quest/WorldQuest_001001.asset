@@ -33,8 +33,8 @@ MonoBehaviour:
       count: 1
   Reward:
   - NexusVesture_005_AbyssalHeart
-  - NexusVesture_004_AbyssalHeart
-  exp: 0
+  - NexusVesture_005_TangibleNexus
+  exp: 800
   isSceneTrans: 0
   targetSceneName: 
   targetX: 0

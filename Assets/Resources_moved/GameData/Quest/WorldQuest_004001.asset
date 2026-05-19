@@ -10,18 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d476a2b0564d52b4882c53d711eeea11, type: 3}
-  m_Name: WorldQuest_003002
+  m_Name: WorldQuest_004001
   m_EditorClassIdentifier: 
-  id: WorldQuest_003002
-  questName: "\u6E38\u8361\xB7\u4E8C"
-  questNum: "\u4E8C"
-  chapterName: "\u539F\u91CE\u4E4B\u7AE0"
+  id: WorldQuest_004001
+  questName: "\u95EF\u5165\xB7\u4E00"
+  questNum: "\u4E00"
+  chapterName: "\u70BD\u7ED8\u4E4B\u7AE0"
   chapterNum: 
-  place: "\u539F\u91CE"
-  lastQuestId: WorldQuest_003001
+  place: "\u75F4\u8FF7\u5DE5\u574A"
+  lastQuestId: MainQuest_004003
   category: 1
   contentType: 1
-  nextQuestIds: []
+  nextQuestIds:
+  - WorldQuest_004002
   description: "\u829D\u58EB\u795E\u9B54\uFF0C\u6253\u4E00\u4E0B\u8BD5\u8BD5"
   dialogueEntries: []
   objectives: []
@@ -30,11 +31,14 @@ MonoBehaviour:
     enemies:
     - enemyPrefab: {fileID: 220537008825880356, guid: d58b3c2281ad1974fae4450263bd5989, type: 3}
       count: 3
+  - waveName: 
+    enemies:
+    - enemyPrefab: {fileID: 220537008825880356, guid: d32223e736f03494b85483eb2cdc750c, type: 3}
+      count: 1
   Reward:
-  - NexusVesture_003_CogniThread
-  - NexusVesture_003_VolitionVein
-  - NexusVesture_003_ImprintStep
-  exp: 7500
+  - NexusVesture_002_CogniThread
+  - NexusVesture_002_VolitionVein
+  exp: 11000
   isSceneTrans: 0
   targetSceneName: 
   targetX: 0
