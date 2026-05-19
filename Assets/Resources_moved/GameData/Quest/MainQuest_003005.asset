@@ -27,52 +27,84 @@ MonoBehaviour:
   dialogueEntries:
   - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
-    content: 
-    useCGMode: 1
-  - background: {fileID: 21300000, guid: 2b185ff8c0bf8d742ad5a63e7f709e8d, type: 3}
-    speakerId: 
-    content: 
-    useCGMode: 1
-  - background: {fileID: 21300000, guid: 2b185ff8c0bf8d742ad5a63e7f709e8d, type: 3}
-    speakerId: 
     content: "\u5FFD\u7136\u60F3\u627E\u7EAF\u767D\u3002\u4E00\u56DE\u5934\uFF0C\u53D1\u73B0\u5979\u4E0D\u5728\u3002\u6211\u52AA\u529B\u56DE\u60F3\u2014\u2014\u4E0A\u6B21\u770B\u89C1\u5979\u662F\u4EC0\u4E48\u65F6\u5019\uFF1F\u60F3\u4E0D\u8D77\u6765\u3002"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 608c1b40ea014824aa9a20f47cc4b81e, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: Player
     content: "\u201C\u7EAF\u767D\uFF1F\u201D"
     useCGMode: 1
-  - background: {fileID: 21300000, guid: 608c1b40ea014824aa9a20f47cc4b81e, type: 3}
+    controls: []
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
     content: ......
     useCGMode: 1
-  - background: {fileID: 21300000, guid: d3f59ba16f065644ca9bc2f80d18ab87, type: 3}
-    speakerId: 
+    controls: []
+  - background: {fileID: 21300000, guid: f7f38534755aef247b3f53c2b51337f7, type: 3}
+    speakerId: Player
     content: "\"\u7EAF\u767D\uFF01\""
     useCGMode: 1
+    controls:
+    - delay: 0
+      type: 0
+      characterId: Player
+      position: {x: -470, y: -420}
+      moveSpeed: 0
+    - delay: 0
+      type: 0
+      characterId: Character_001
+      position: {x: -390, y: -420}
+      moveSpeed: 0
+    - delay: 0.2
+      type: 2
+      characterId: Player
+      position: {x: -480, y: -420}
+      moveSpeed: 110
+    - delay: 0.2
+      type: 2
+      characterId: Character_001
+      position: {x: -400, y: -420}
+      moveSpeed: 110
   - background: {fileID: 21300000, guid: 6888e285f79dc7c4eb873f9aeaf26c9b, type: 3}
-    speakerId: "Kianna\xB7Argent"
+    speakerId: "\u7EAF\u767D"
     content: "\u201C\u6211\u5728\u3002\u201D"
-    useCGMode: 1
+    useCGMode: 0
+    controls:
+    - delay: 0.5
+      type: 2
+      characterId: Player
+      position: {x: -470, y: -420}
+      moveSpeed: 110
   - background: {fileID: 21300000, guid: 6888e285f79dc7c4eb873f9aeaf26c9b, type: 3}
     speakerId: Player
     content: "\u201C\u4F60\u53BB\u54EA\u4E86\uFF1F\u201D"
-    useCGMode: 1
+    useCGMode: 0
+    controls: []
   - background: {fileID: 21300000, guid: 6888e285f79dc7c4eb873f9aeaf26c9b, type: 3}
-    speakerId: "Kianna\xB7Argent"
-    content: "\u201C\u4E00\u76F4\u5728\u3002\u201D"
-    useCGMode: 1
+    speakerId: "\u7EAF\u767D"
+    content: "\u201C\u4E00\u76F4\u5728\u8FD9\u91CC\u7B49\u4F60\u3002\u201D"
+    useCGMode: 0
+    controls: []
   - background: {fileID: 21300000, guid: 6888e285f79dc7c4eb873f9aeaf26c9b, type: 3}
-    speakerId: "Kianna\xB7Argent"
+    speakerId: "\u7EAF\u767D"
     content: "\"\u522B\u6015\u3002\""
-    useCGMode: 1
-  - background: {fileID: 21300000, guid: 5f414e5b174d9ce44a42c759895d4fee, type: 3}
-    speakerId: 
-    content: 
-    useCGMode: 1
-  - background: {fileID: 21300000, guid: 5f414e5b174d9ce44a42c759895d4fee, type: 3}
+    useCGMode: 0
+    controls:
+    - delay: 1
+      type: 1
+      characterId: Player
+      position: {x: 0, y: 0}
+      moveSpeed: 0
+    - delay: 1
+      type: 1
+      characterId: Character_001
+      position: {x: 0, y: 0}
+      moveSpeed: 0
+  - background: {fileID: 21300000, guid: 72ff1f47c01b662459660fcbe0e9fb5a, type: 3}
     speakerId: 
     content: "\u6211\u770B\u7740\u5979\u3002\u671D\u9633\u7684\u7B2C\u4E00\u7F15\u5149\u7167\u5728\u5979\u8138\u4E0A\uFF0C\u628A\u94F6\u767D\u8272\u7684\u5934\u53D1\u67D3\u6210\u6DE1\u6DE1\u7684\u91D1\u8272\u3002\u201D\u6211\u811A\u4E0B\u7684\u5149\u70B9\uFF0C\u6697\u4E86\u4E00\u77AC\u3002"
     useCGMode: 1
+    controls: []
   objectives: []
   waves: []
   Reward: []
@@ -83,3 +115,4 @@ MonoBehaviour:
   targetY: 0
   autoStartNextQuest: 0
   questSceneName: 3_TheVerdantMeadow
+  steps: []
