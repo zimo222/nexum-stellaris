@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Bullet_YellowBehind
   speed: 0.001
-  damage: 2
+  damage: 3
   prefab: {fileID: 3305386069859194172, guid: 8ec60726754ad9541a3276eaffd2ce09, type: 3}
   lifetime: 0.3
   recoilForce: 0.2

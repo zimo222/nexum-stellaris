@@ -21,7 +21,7 @@ public class PlayerEscapeTrigger : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
         // 检查离开的对象是否位于 "Player" 图层
-        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player")  && other.gameObject.name == "Player")
         {
             // 调用战斗失败逻辑
             if (CombatManager.Instance != null)

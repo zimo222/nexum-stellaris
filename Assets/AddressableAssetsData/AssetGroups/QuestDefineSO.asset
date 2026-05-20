@@ -221,6 +221,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - QuestDefineSO
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ed8df5d8e3426a3438492c5226a07369
+    m_Address: GameData/Quest/WorldQuest_005002 1.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - QuestDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ee17bd58910d019439f35b01a3d53b49
     m_Address: GameData/Quest/MainQuest_005005
     m_ReadOnly: 0

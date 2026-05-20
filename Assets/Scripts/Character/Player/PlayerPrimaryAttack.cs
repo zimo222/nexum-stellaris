@@ -59,7 +59,7 @@ public class PlayerPrimaryAttackState : PlayerState
         {
             Vector2 moveDir = new Vector2(xInput, yInput).normalized;
             // 使用 ForceMode2D.Force 持续施加力，不会覆盖现有速度
-            rb.AddForce(moveDir * player.moveSpeed * 0.0001f, ForceMode2D.Force);
+            rb.AddForce(moveDir * player.totalMoveSpeed * 0.0001f, ForceMode2D.Force);
         }
 
         // 动画播放完毕（triggerCalled 由 AnimationFinishTrigger 事件设置）后回到 Idle

@@ -33,7 +33,10 @@ MonoBehaviour:
   baseElementBonus: 0.003
   elementBonusPerLevel: 0.0001
   icon: {fileID: 21300000, guid: 6b6af721a219d1c49b5696b8496520b7, type: 3}
-  possibleEffects: []
+  possibleEffects:
+  - {fileID: 11400000, guid: 914a2890b02565d43af2f011774b487b, type: 2}
+  - {fileID: 11400000, guid: 9a5ab668c69e23c4c9a45d6ac3e07aea, type: 2}
+  - {fileID: 11400000, guid: af5750ee2157ca342a0529999533a40b, type: 2}
   spellModuleSOs:
   - {fileID: 11400000, guid: f67c154b6bdfc3344a9015307327b32e, type: 2}
   - {fileID: 11400000, guid: 7fcc7e27af9ec1f4a8fcbc3e553ae3ee, type: 2}

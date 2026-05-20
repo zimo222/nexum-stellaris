@@ -8,11 +8,12 @@ using UnityEngine;
 public enum BuffType
 {
     HealthRegen,        // 持续回血
+    EnergyRegen,        // 持续回能
+    AttackUp,           // 增加攻击
     MoveSpeedUp,        // 增加移速
     AttackSpeedUp,      // 增加攻速
     DefenseUp,          // 增加防御
-    DamageReduction,    // 减伤
-    EnergyRegen,        // 持续回能
+    DamageReduction    // 减伤
 }
 
 /// <summary>
@@ -80,7 +81,7 @@ public class BuffController : MonoBehaviour
             Debug.LogError("BuffController 需要挂载在 Player 物体上");
 
         // 记录原始值（假设 Player 类中有 moveSpeed，攻速可能在状态机中）
-        originalMoveSpeed = player.moveSpeed;
+        originalMoveSpeed = player.totalMoveSpeed;
         // 如果你有攻击速度字段，请在这里获取，例如 player.attackSpeed = 1f;
         // originalAttackSpeed = player.attackSpeed;
         originalDefence = PlayerDataManager.Instance.CurrentPlayerData.TotalDefence;
@@ -138,14 +139,14 @@ public class BuffController : MonoBehaviour
     public void AddBuff(BuffType type, float duration, float intensity, float tickInterval = 1f)
     {
         // 检查是否已存在同类型且未过期的 Buff，可以选择覆盖或叠加（这里简单实现：移除旧的同类型，再添加新的）
-        for (int i = 0; i < activeBuffs.Count; i++)
+       /* for (int i = 0; i < activeBuffs.Count; i++)
         {
             if (activeBuffs[i].type == type)
             {
                 RemoveBuffAt(i);
                 i--;
             }
-        }
+        }*/
         Buff newBuff = new Buff(type, duration, intensity, tickInterval);
         activeBuffs.Add(newBuff);
         ApplyAllBuffs();
@@ -218,7 +219,7 @@ public class BuffController : MonoBehaviour
             }
         }
 
-        player.moveSpeed = originalMoveSpeed * (1f + moveSpeedBonus);
+        //player.moveSpeed = originalMoveSpeed * (1f + moveSpeedBonus);
         // player.attackSpeed = originalAttackSpeed * (1f + attackSpeedBonus);
         finalDefence = originalDefence + Mathf.RoundToInt(originalDefence * defenceBonus);
         // 需要修改玩家实时防御？你现在的防御是通过 TotalDefence 计算的，可能需要在 CombatManager 中动态获取加成
@@ -235,6 +236,34 @@ public class BuffController : MonoBehaviour
         foreach (var buff in activeBuffs)
         {
             if (buff.type == BuffType.DefenseUp)
+                bonus += buff.intensity;
+        }
+        return bonus;
+    }
+
+    /// <summary>
+    /// 获取攻击加成值（用于伤害计算）
+    /// </summary>
+    public float GetAttackBonusPercent()
+    {
+        float bonus = 0f;
+        foreach (var buff in activeBuffs)
+        {
+            if (buff.type == BuffType.AttackUp)
+                bonus += buff.intensity;
+        }
+        return bonus;
+    }
+
+    /// <summary>
+    /// 获取移速加成值
+    /// </summary>
+    public float GetMoveSpeedBonusPercent()
+    {
+        float bonus = 0f;
+        foreach (var buff in activeBuffs)
+        {
+            if (buff.type == BuffType.MoveSpeedUp)
                 bonus += buff.intensity;
         }
         return bonus;
@@ -273,6 +302,7 @@ public class BuffController : MonoBehaviour
             case BuffType.EnergyRegen:
                 int newEnergy = pData.CurrentEnergy + Mathf.RoundToInt(buff.intensity);
                 pData.CurrentEnergy = Mathf.Min(newEnergy, pData.TotalEnergy);
+                if (showDebugLog) Debug.Log($"Buff 回魔: +{buff.intensity}, 当前魔法 {pData.CurrentEnergy}");
                 //CombatManager.Instance?.UpdateEnergySlider();
                 break;
         }

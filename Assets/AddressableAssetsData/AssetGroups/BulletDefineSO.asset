@@ -35,6 +35,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - BulletDefineSO
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9379c5ea58730124ca1caa284ee13b5b
+    m_Address: GameData/Bullet/StellarScribe/MagicArray_Blue.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BulletDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 96de75c6ad6463b47aa99107ab4240ad
     m_Address: GameData/Bullet/EdgeText/Bullet_BlueBehind
     m_ReadOnly: 0

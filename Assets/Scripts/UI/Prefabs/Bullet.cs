@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -63,6 +64,7 @@ public class Bullet : MonoBehaviour
             UpdateOrbit();
         }
 
+        if (bulletId[0] == 'M') return;
         if (rb != null && rb.velocity != Vector2.zero)
         {
             float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
@@ -76,12 +78,13 @@ public class Bullet : MonoBehaviour
     // 初始化
     // ----------------------------------------------------------------------
 
-    public void Initialize(Vector2 direction, GameObject owner, float speed, int damage,
+    public void Initialize(string id, Vector2 direction, GameObject owner, float speed, int damage,
                           Vector2 spawnPos, List<SpellModuleSO> correctors, GameObject sourcePrefab,
                           float lifeTime = 5f)
     {
         ResetToPool();
 
+        this.bulletId = id;
         this.owner = owner;
         this.speed = speed;
         this.damage = damage;
@@ -120,6 +123,31 @@ public class Bullet : MonoBehaviour
             Vector3 angles = transform.localEulerAngles;
             angles.z = angle;
             transform.localEulerAngles = angles;
+        }
+
+
+        switch (bulletId)
+        {
+            case "MagicArray_Blue":
+                Player.Instance.gameObject.GetComponent<BuffController>().AddBuff(BuffType.EnergyRegen, 10f, 100 * 0.05f, 1f);
+                if (MessagePopupController.Instance != null) MessagePopupController.Instance.ShowMessage($"<color=#08B6DF>持续回魔+5%</color>");
+                break;
+            case "MagicArray_Green":
+                Player.Instance.gameObject.GetComponent<BuffController>().AddBuff(BuffType.HealthRegen, 10f, Player.Instance.playerData.TotalHealth * 0.05f, 1f);
+                if (MessagePopupController.Instance != null) MessagePopupController.Instance.ShowMessage($"<color=#00FF00>持续回血+5%</color>");
+                break;
+            case "MagicArray_Purple":
+                Player.Instance.gameObject.GetComponent<BuffController>().AddBuff(BuffType.MoveSpeedUp, 10f, 0.1f);
+                if (MessagePopupController.Instance != null) MessagePopupController.Instance.ShowMessage($"<color=#9400D3>移速增幅+10%</color>");
+                break;
+            case "MagicArray_Red":
+                Player.Instance.gameObject.GetComponent<BuffController>().AddBuff(BuffType.AttackUp, 10f, 0.1f);
+                if (MessagePopupController.Instance != null) MessagePopupController.Instance.ShowMessage($"<color=#FF0000>攻击增幅+10%</color>");
+                break;
+            case "MagicArray_Yellow":
+                Player.Instance.gameObject.GetComponent<BuffController>().AddBuff(BuffType.DefenseUp, 10f, 0.1f);
+                if (MessagePopupController.Instance != null) MessagePopupController.Instance.ShowMessage($"<color=#FFA500>防御增幅+10%</color>");
+                break;
         }
     }
 

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Bullet_YellowUp
   speed: 0.001
-  damage: 100
+  damage: 3
   prefab: {fileID: 3305386069859194172, guid: 37c01afb4c4f7994db276179e725cda4, type: 3}
   lifetime: 0.5
   recoilForce: 0

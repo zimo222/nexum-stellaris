@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Bullet_005
   speed: 200
-  damage: 1
+  damage: 2
   prefab: {fileID: 3305386069859194172, guid: 48b1ac9f529bb4e4cac1dc1b16010ecb, type: 3}
   lifetime: 5
   recoilForce: 0.01

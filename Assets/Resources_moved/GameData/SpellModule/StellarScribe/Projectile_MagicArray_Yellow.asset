@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e4a0bcac50fd954092a1c8d99bd6843, type: 3}
+  m_Name: Projectile_MagicArray_Yellow
+  m_EditorClassIdentifier: 
+  id: Projectile_MagicArray_Yellow
+  moduleName: "\u6CD5\u9635\xB7\u9EC4"
+  moduleType: 0
+  delay: 0
+  bulletDefine: {fileID: 11400000, guid: a0fa1b0e18367d546ba0f5f02e205b1e, type: 2}
+  speedMultiplier: 0.001
+  damageMultiplier: 100
+  homingStrength: 0
+  rotateSpeed: 0
+  splitCount: 0
+  splitAngle: 0
+  burstCount: 0
+  burstDelay: 0
+  multicastCount: 0
+  orbitRadius: 0
+  orbitSpeed: 0
+  fieldAngle: 0
+  recoilForce: 0
+  introduction: "\u53EC\u5524\u9EC4\u8272\u6CD5\u9635"
+  icon: {fileID: 21300000, guid: ab9f5f46ef18df845a7af4bd6839abd8, type: 3}

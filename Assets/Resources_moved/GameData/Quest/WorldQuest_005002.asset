@@ -21,7 +21,8 @@ MonoBehaviour:
   lastQuestId: WorldQuest_005001
   category: 1
   contentType: 1
-  nextQuestIds: []
+  nextQuestIds:
+  - WorldQuest_005003
   description: "\u829D\u58EB\u795E\u9B54\uFF0C\u6253\u4E00\u4E0B\u8BD5\u8BD5"
   dialogueEntries: []
   objectives: []
@@ -44,5 +45,5 @@ MonoBehaviour:
   targetX: 0
   targetY: 0
   autoStartNextQuest: 0
-  questSceneName: 3_TheVerdantMeadow
+  questSceneName: 5_TheHallOfUniversalConcord
   steps: []

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Bullet_RedUp
   speed: 0.001
-  damage: 100
+  damage: 3
   prefab: {fileID: 3305386069859194172, guid: 0d8ceaf065084144a81eab5f079b1671, type: 3}
   lifetime: 0.5
   recoilForce: 0

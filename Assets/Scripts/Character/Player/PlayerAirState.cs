@@ -22,7 +22,7 @@ public class PlayerAirState : PlayerState
 
         // 继续应用重力
         float newYVelocity = rb.velocity.y - player.gravityScale * Time.deltaTime;
-        rb.velocity = new Vector2(xInput * player.moveSpeed, newYVelocity);
+        rb.velocity = new Vector2(xInput * player.totalMoveSpeed, newYVelocity);
 
         player.FlipController(xInput, yInput);
 

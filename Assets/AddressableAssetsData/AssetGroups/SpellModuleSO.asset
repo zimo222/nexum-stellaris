@@ -35,6 +35,18 @@ MonoBehaviour:
     m_SerializedLabels:
     - SpellModuleDefineSO
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0a31bcb5cc92a2d4dba1fe20ada5f62f
+    m_Address: Assets/Resources_moved/GameData/SpellModule/StellarScribe/Projectile_MagicArray_Yellow.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0ff54f80eb9a4ed4c8278f6a6af23b2f
+    m_Address: GameData/Bullet/StellarScribe/MagicArray_Purple.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 12e1a65480d45464c9a7caeec363fd25
     m_Address: GameData/SpellModule/EdgeText/Projectile_SwordEnergy_PurpleForward.asset
     m_ReadOnly: 0
@@ -49,6 +61,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1d1bad0995b3fd84991b3998d87ccbd1
     m_Address: GameData/SpellModule/VotiveEmber/Modifier_Multishot_8X
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 209307065a5225c468e1ac015c262144
+    m_Address: GameData/SpellModule/StellarScribe/Projectile_MagicArray_Blue.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - SpellModuleDefineSO
@@ -83,6 +101,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - SpellModuleDefineSO
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 35b994739460c8640a39d904044c514e
+    m_Address: Assets/Resources_moved/GameData/SpellModule/StellarScribe/Projectile_MagicArray_Green.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 362d2e66c1eab4d4b85c585559e4969f
     m_Address: GameData/SpellModule/VotiveEmber/Corrector_Split_2X
     m_ReadOnly: 0
@@ -109,6 +133,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 54ecce62def814c44939856397d15241
     m_Address: GameData/SpellModule/VotiveEmber/Modifier_Recoil_10000
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 56f080a5d89ea1149b48c26941e6f7a6
+    m_Address: Assets/Resources_moved/GameData/SpellModule/StellarScribe/Projectile_MagicArray_Purple.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - SpellModuleDefineSO
@@ -203,6 +233,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - SpellModuleDefineSO
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 85c0bb4281657904abf1e962bc6adfa6
+    m_Address: GameData/Bullet/StellarScribe/MagicArray_Green.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 889fdf5a57d10c947bc76a07d0294cf3
     m_Address: GameData/SpellModule/EdgeText/Projectile_SwordEnergy_BlueForward
     m_ReadOnly: 0
@@ -239,6 +275,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - SpellModuleDefineSO
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a0fa1b0e18367d546ba0f5f02e205b1e
+    m_Address: GameData/Bullet/StellarScribe/MagicArray_Yellow.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a3496a00539887549882c02d874a5e8f
     m_Address: GameData/SpellModule/EdgeText/Projectile_SwordEnergy_GreenBehind.asset
     m_ReadOnly: 0
@@ -247,6 +289,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a5409a2bb8fdf2342a3732c0636cc548
     m_Address: GameData/SpellModule/EdgeText/Projectile_SwordEnergy_GreenForward.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a8ac1d1c38a17d6409747828d3a4c040
+    m_Address: GameData/SpellModule/StellarScribe/Projectile_MagicArray_Red.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - SpellModuleDefineSO
@@ -289,6 +337,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ba33132edcd2bbb429fd0d720d956dbf
     m_Address: GameData/SpellModule/EdgeText/Projectile_SwordEnergy_YellowUp.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpellModuleDefineSO
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bd8eda278ec3de54aa03565058ee4f61
+    m_Address: GameData/Bullet/StellarScribe/MagicArray_Red.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - SpellModuleDefineSO

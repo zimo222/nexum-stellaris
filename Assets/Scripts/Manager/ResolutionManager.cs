@@ -29,14 +29,14 @@ public class ResolutionManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            LoadSettings();          // 加载上次保存的设置
+            LoadSettings();          // 加载上次保存的设置（首次会设置默认1920x1080非全屏）
             ApplyCurrentSettings();   // 应用加载的设置
         }
         else
         {
             Destroy(gameObject);
         }
-        if(IsFullscreen) ToggleFullscreen();
+        // 注意：删除了原来的 if(IsFullscreen) ToggleFullscreen(); 这行会导致问题
     }
 
     /// <summary>
@@ -121,29 +121,57 @@ public class ResolutionManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 从 PlayerPrefs 加载设置（若不存在则使用当前屏幕设置）
+    /// 从 PlayerPrefs 加载设置（若不存在则使用默认 1920x1080 非全屏）
     /// </summary>
     private void LoadSettings()
     {
-        int width = PlayerPrefs.GetInt(resolutionWidthKey, Screen.currentResolution.width);
-        int height = PlayerPrefs.GetInt(resolutionHeightKey, Screen.currentResolution.height);
-        bool fullscreen = PlayerPrefs.GetInt(fullscreenKey, Screen.fullScreen ? 1 : 0) == 1;
+        // 检查是否有保存过分辨率（通过判断键是否存在）
+        bool hasSavedResolution = PlayerPrefs.HasKey(resolutionWidthKey) && PlayerPrefs.HasKey(resolutionHeightKey);
 
-        // 查找对应的分辨率对象（填充刷新率）
-        Resolution res = new Resolution { width = width, height = height };
-        Resolution matched = Screen.resolutions.FirstOrDefault(r => r.width == width && r.height == height);
-        if (matched.Equals(default(Resolution)))
+        if (!hasSavedResolution)
         {
-            // 保存的分辨率不再支持？则使用当前屏幕分辨率
-            res = Screen.currentResolution;
+            // 首次运行：设置为 1920x1080，非全屏，刷新率 60（如果系统支持更高则用系统匹配）
+            int defaultWidth = 1920;
+            int defaultHeight = 1080;
+            bool defaultFullscreen = false;
+
+            // 尝试找到 1920x1080 且刷新率合理的分辨率（尽量取 60Hz 或系统第一个匹配的）
+            Resolution defaultRes = Screen.resolutions.FirstOrDefault(r => r.width == defaultWidth && r.height == defaultHeight);
+            if (defaultRes.Equals(default(Resolution)))
+            {
+                // 若系统不支持 1920x1080，则使用当前屏幕分辨率（fallback）
+                defaultRes = Screen.currentResolution;
+                defaultWidth = defaultRes.width;
+                defaultHeight = defaultRes.height;
+            }
+
+            CurrentResolution = defaultRes;
+            IsFullscreen = defaultFullscreen;
+            // 立即保存一次，避免下次启动仍认为首次
+            SaveSettings();
         }
         else
         {
-            res.refreshRate = matched.refreshRate;
-        }
+            // 已有保存的记录，正常读取
+            int width = PlayerPrefs.GetInt(resolutionWidthKey);
+            int height = PlayerPrefs.GetInt(resolutionHeightKey);
+            bool fullscreen = PlayerPrefs.GetInt(fullscreenKey, 0) == 1;
 
-        CurrentResolution = res;
-        IsFullscreen = fullscreen;
+            Resolution res = new Resolution { width = width, height = height };
+            Resolution matched = Screen.resolutions.FirstOrDefault(r => r.width == width && r.height == height);
+            if (matched.Equals(default(Resolution)))
+            {
+                // 保存的分辨率不再支持？则使用当前屏幕分辨率
+                res = Screen.currentResolution;
+            }
+            else
+            {
+                res.refreshRate = matched.refreshRate;
+            }
+
+            CurrentResolution = res;
+            IsFullscreen = fullscreen;
+        }
     }
 
     /// <summary>

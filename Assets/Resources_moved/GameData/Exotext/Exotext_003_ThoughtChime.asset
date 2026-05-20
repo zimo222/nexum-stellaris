@@ -33,4 +33,18 @@ MonoBehaviour:
   baseElementBonus: 0.003
   elementBonusPerLevel: 0.0001
   icon: {fileID: 21300000, guid: c41a3c8faadce644cb5394f96c6d5899, type: 3}
-  possibleEffects: []
+  possibleEffects:
+  - {fileID: 11400000, guid: 914a2890b02565d43af2f011774b487b, type: 2}
+  - {fileID: 11400000, guid: 9a5ab668c69e23c4c9a45d6ac3e07aea, type: 2}
+  - {fileID: 11400000, guid: af5750ee2157ca342a0529999533a40b, type: 2}
+  spellModuleSOs:
+  - {fileID: 11400000, guid: cffadef4d747b3b4aae3dba66d43a877, type: 2}
+  - {fileID: 11400000, guid: 70c92c3ab8db722429fa090c20d1531d, type: 2}
+  - {fileID: 11400000, guid: 280db4205ae27bd4d94cbc610cd3329e, type: 2}
+  - {fileID: 11400000, guid: 006ee0acfc8559e45982efa6d1926efc, type: 2}
+  - {fileID: 11400000, guid: 0299b65b5ef2d7d42baf20582ee82116, type: 2}
+  - {fileID: 11400000, guid: e5d5f98629d48d940813562518e6de26, type: 2}
+  - {fileID: 11400000, guid: dd991c521394e5541b20fe8050fd0b65, type: 2}
+  - {fileID: 11400000, guid: 56fd1671fb9a68d45a2eb79725f7df10, type: 2}
+  - {fileID: 11400000, guid: 1d1bad0995b3fd84991b3998d87ccbd1, type: 2}
+  - {fileID: 11400000, guid: cf9605c093aee5c44ac02f3356349271, type: 2}

@@ -346,6 +346,7 @@ GameObject:
   - component: {fileID: 142214264}
   - component: {fileID: 142214263}
   - component: {fileID: 142214272}
+  - component: {fileID: 142214273}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -365,7 +366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d86e8a8173f0e874da638cf71a2d5fd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakerId: Player
+  speakerIds: []
 --- !u!114 &142214264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -427,6 +428,65 @@ MonoBehaviour:
   dashDuration: 0.2
   attackType: 0
   energyRegenRate: 2
+  playerData:
+    PlayerID: 
+    PlayerName: 
+    Level: 1
+    Experience: 0
+    Crystals: 0
+    Coins: 0
+    CurrentScene: 1_TheNestOfWarmLight
+    PosX: -86
+    PosY: 105
+    BaseStats:
+      Element: 
+      Level: 0
+      Exp: 0
+      Stars: 0
+      SStars: 0
+      Fragments: 0
+      Health: 0
+      Attack: 0
+      Defence: 0
+      Energy: 0
+      CritRate: 0
+      CritDamage: 0
+      ElementBonus: 0
+    CurrentHealth: 0
+    CurrentEnergy: 0
+    skillNum: 0
+    Skills: []
+    EquippedExotextIds:
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    EquippedNexusVestureIds:
+    - 
+    - 
+    - 
+    - 
+    - 
+    ExotextBag: []
+    NexusVestureBag: []
+    MaterialBag: []
+    equippedModuleIdsForWeapons:
+    - moduleIds: []
+    - moduleIds: []
+    - moduleIds: []
+    - moduleIds: []
+    - moduleIds: []
+    - moduleIds: []
+    - moduleIds: []
+    equippedModuleIds: []
+    activeQuests: []
+    completedQuestIds: []
+    MusicVolume: 0.8
+    SFXVolume: 0.8
+    LastLoginIP: 
   selectedSpellIndex: 0
   weaponSlotsUI: {fileID: 0}
 --- !u!50 &142214267
@@ -567,6 +627,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81b15b4f4f7d1ad44bdf090e90b38fdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &142214273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142214262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af7c1403ec3bdcd489883b211d91b0f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showDebugLog: 0
 --- !u!1 &153329350
 GameObject:
   m_ObjectHideFlags: 0

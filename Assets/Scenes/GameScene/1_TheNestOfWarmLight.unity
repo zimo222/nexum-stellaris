@@ -2323,7 +2323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoCreateOnEmpty: 1
-  defaultInitialSize: 6150
+  defaultInitialSize: 6200
   warmupConfigs:
   - prefab: {fileID: 3305386069859194172, guid: 4c2371c4574876048a2eba38a1fac08b, type: 3}
     warmupCount: 500
@@ -2379,6 +2379,16 @@ MonoBehaviour:
     warmupCount: 500
   - prefab: {fileID: 3305386069859194172, guid: 6c155f2b3b86d0049aadddc667cf999d, type: 3}
     warmupCount: 500
+  - prefab: {fileID: 3305386069859194172, guid: edf6dfe867c406640ad0d3c8fd410738, type: 3}
+    warmupCount: 10
+  - prefab: {fileID: 3305386069859194172, guid: 967289d283b8a204f8f13f224934af89, type: 3}
+    warmupCount: 10
+  - prefab: {fileID: 3305386069859194172, guid: 9e1b605a5d048e04ab2c8b5cc9dd9453, type: 3}
+    warmupCount: 10
+  - prefab: {fileID: 3305386069859194172, guid: 20d10746ceae8c14790630ca72c5d2ab, type: 3}
+    warmupCount: 10
+  - prefab: {fileID: 3305386069859194172, guid: 74a41adb6324d544293b1cac92f6fbf1, type: 3}
+    warmupCount: 10
 --- !u!4 &54640835
 Transform:
   m_ObjectHideFlags: 0
@@ -39901,6 +39911,7 @@ GameObject:
   - component: {fileID: 565897173}
   - component: {fileID: 565897176}
   - component: {fileID: 565897177}
+  - component: {fileID: 565897178}
   m_Layer: 3
   m_Name: PlayerImage
   m_TagString: Untagged
@@ -40022,8 +40033,22 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 1493905729
-  m_SortingOrder: -1
+  m_SortingOrder: -10000
   m_TargetDisplay: 0
+--- !u!114 &565897178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565897171}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b8663eacbc5d374a99909c15efb64e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sortingOrderBase: 0
+  offsetMultiplier: 100
 --- !u!1 &573462916
 GameObject:
   m_ObjectHideFlags: 0
@@ -119501,6 +119526,65 @@ MonoBehaviour:
   dashDuration: 0.2
   attackType: 0
   energyRegenRate: 2
+  playerData:
+    PlayerID: 
+    PlayerName: 
+    Level: 1
+    Experience: 0
+    Crystals: 0
+    Coins: 0
+    CurrentScene: 1_TheNestOfWarmLight
+    PosX: -86
+    PosY: 105
+    BaseStats:
+      Element: 
+      Level: 0
+      Exp: 0
+      Stars: 0
+      SStars: 0
+      Fragments: 0
+      Health: 0
+      Attack: 0
+      Defence: 0
+      Energy: 0
+      CritRate: 0
+      CritDamage: 0
+      ElementBonus: 0
+    CurrentHealth: 0
+    CurrentEnergy: 0
+    skillNum: 0
+    Skills: []
+    EquippedExotextIds:
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    EquippedNexusVestureIds:
+    - 
+    - 
+    - 
+    - 
+    - 
+    ExotextBag: []
+    NexusVestureBag: []
+    MaterialBag: []
+    equippedModuleIdsForWeapons:
+    - moduleIds: []
+    - moduleIds: []
+    - moduleIds: []
+    - moduleIds: []
+    - moduleIds: []
+    - moduleIds: []
+    - moduleIds: []
+    equippedModuleIds: []
+    activeQuests: []
+    completedQuestIds: []
+    MusicVolume: 0.8
+    SFXVolume: 0.8
+    LastLoginIP: 
   selectedSpellIndex: 0
   weaponSlotsUI: {fileID: 1627737819}
 --- !u!50 &1054977168

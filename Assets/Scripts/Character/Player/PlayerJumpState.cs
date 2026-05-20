@@ -22,7 +22,7 @@ public class PlayerJumpState : PlayerState
 
         // 应用自定义重力（使上升速度逐渐减小）
         float newYVelocity = rb.velocity.y - player.gravityScale * Time.deltaTime;
-        rb.velocity = new Vector2(xInput * player.moveSpeed, newYVelocity);
+        rb.velocity = new Vector2(xInput * player.totalMoveSpeed, newYVelocity);
 
         // 根据水平速度翻转
         player.FlipController(xInput, yInput);

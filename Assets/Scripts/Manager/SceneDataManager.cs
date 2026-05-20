@@ -62,6 +62,7 @@ public class SceneDataManager : Singleton<SceneDataManager>
 
     private IEnumerator LoadSceneAsync(string targetScene, int xposition, int yposition)
     {
+        if (SceneManager.GetActiveScene().name == "A") { xposition = -86; yposition = 105; }
         var teleTrack = AudioManager.Instance.GetTrack("Teleport");
         teleTrack.Play(Resources.Load<AudioClip>("Audio/SFX/Teleport"));
         string logPath = Application.persistentDataPath + "/load_log.txt";

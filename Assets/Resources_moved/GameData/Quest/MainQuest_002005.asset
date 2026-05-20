@@ -120,12 +120,12 @@ MonoBehaviour:
       characterId: "Kianna\xB7Argent"
       position: {x: 100, y: -1415}
       moveSpeed: 70
-    - delay: 5
+    - delay: 10
       type: 1
       characterId: Player
       position: {x: 60, y: -1415}
       moveSpeed: 70
-    - delay: 5
+    - delay: 10
       type: 1
       characterId: Character_001
       position: {x: 60, y: -1415}

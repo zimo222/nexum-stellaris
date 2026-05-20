@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Bullet_RedBehind
   speed: 0.001
-  damage: 2
+  damage: 3
   prefab: {fileID: 3305386069859194172, guid: 72e7fd55a2c023d4eaa596a7e79cc14b, type: 3}
   lifetime: 0.3
   recoilForce: 0.2

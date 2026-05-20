@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Bullet_PurpleUp
   speed: 0.001
-  damage: 100
+  damage: 3
   prefab: {fileID: 3305386069859194172, guid: 1496c8068bc37de48a91fc8a5d1881ab, type: 3}
   lifetime: 0.5
   recoilForce: 0

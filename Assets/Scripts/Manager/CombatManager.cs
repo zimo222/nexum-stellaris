@@ -158,7 +158,16 @@ public class CombatManager : MonoBehaviour
         if (playerComp != null)
         {
             PlayerData playerData = PlayerDataManager.Instance.CurrentPlayerData;
-            playerData.CurrentHealth -= amount;
+            if (amount > 0)
+            {
+                float totalDefence = playerData.TotalDefence * (1f + Player.GetComponent<BuffController>().GetDefenseBonusPercent());
+                playerData.CurrentHealth -= (int)Mathf.Floor(amount * (1f - (0.5f * totalDefence) / (totalDefence + 100f)));
+            }
+            else
+            {
+                playerData.CurrentHealth -= amount;
+
+            }
             playerData.CurrentHealth = Math.Min(playerData.TotalHealth, playerData.CurrentHealth);
             if(amount > 0) playerComp.Damage(); // 触发受伤特效等
 

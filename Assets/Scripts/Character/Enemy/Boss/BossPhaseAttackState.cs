@@ -16,7 +16,7 @@ public class BossPhaseAttackState : EnemyState
     {
         base.Enter();
         hasDamaged = false;
-
+        Debug.Log("秒杀");
         // 第三阶段：使用普通攻击动画（Attack = true）
         boss.anim.SetBool("Attack", true);
 

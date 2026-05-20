@@ -17,6 +17,7 @@ public class Player : Entity
 
     [Header("Move info")]
     public float moveSpeed = 12f;
+    public float totalMoveSpeed => (GetComponent<NonSingletonMark>() != null ? moveSpeed * (1f + this.GetComponent<BuffController>().GetMoveSpeedBonusPercent()) : moveSpeed);
     public float jumpForce;
     public float gravityScale = 20f;
 
@@ -43,7 +44,7 @@ public class Player : Entity
     public PlayerCounterAttackState counterAttack { get; private set; }
     #endregion
 
-    private PlayerData playerData;
+    public PlayerData playerData;
 
     [Header("Spell selection")]
     public int selectedSpellIndex = 0;
@@ -253,6 +254,7 @@ public class Player : Entity
         if (def.possibleEffects == null || def.possibleEffects.Count == 0) return;
 
         // 随机选择一个特效
+        /*
         foreach(var sf in def.possibleEffects)
         {
             if (Random.value > heartStringRate * sf.baseRateStrength) continue;
@@ -270,7 +272,21 @@ public class Player : Entity
             if (MessagePopupController.Instance != null)
                 MessagePopupController.Instance.ShowMessage(message);
         }
+        */
 
+        if (Random.value > heartStringRate) return;
+        var effectDef = def.possibleEffects[Random.Range(0, def.possibleEffects.Count)];
+        float strength = effectDef.baseDamageStrength * yiDongValue;
+
+        // 应用效果
+        ApplySpecialEffect(effectDef, strength);
+
+        // 显示 UI 消息（不再使用 PromptTextManager）
+        //string message = effectDef.shortDesc;
+        string template = effectDef.shortDesc;   // 从配置读取："<color=#0000FF>魔法消耗-{0:F0}%</color>"
+        string message = string.Format(template, strength * 100f);
+        if (MessagePopupController.Instance != null) MessagePopupController.Instance.ShowMessage(message);
+        
     }
 
     private void ApplySpecialEffect(SpecialEffectDefineSO effectDef, float strength)

@@ -16,7 +16,7 @@ public static class BulletFactory
 
         // 基础属性
         float speed = spellPackage.projectile.speed;
-        int damage = (int)PlayerDataManager.Instance.CurrentPlayerData.GetTotalStatsAtLevel(PlayerDataManager.Instance.CurrentPlayerData.Level).Attack * (int)spellPackage.projectile.damage; // 基础伤害，后续可叠加角色攻击力
+        int damage = (int)(PlayerDataManager.Instance.CurrentPlayerData.GetTotalStatsAtLevel(PlayerDataManager.Instance.CurrentPlayerData.Level).Attack * (1 + Player.Instance.gameObject.GetComponent<BuffController>().GetAttackBonusPercent()) * spellPackage.projectile.damage); // 基础伤害，后续可叠加角色攻击力
         int num = 1;
         int fieldAngle = 0;
         float recoilForce = spellPackage.projectile.recoilForce;
@@ -40,7 +40,7 @@ public static class BulletFactory
         }
 
 
-        for (int i = 0; i < num; i++)
+        for (int i = 0; i < Mathf.Min(num, 100); i++)
         {
             // 计算最终方向：若 fieldAngle > 0，则在 [ -fieldAngle/2 , fieldAngle/2 ] 范围内随机旋转
             Vector2 finalDirection = direction;
@@ -65,7 +65,7 @@ public static class BulletFactory
             }
 
             // 初始化子弹（传递修正类列表和源预制体）
-            bullet.Initialize(finalDirection, owner, speed * Random.Range(0.5f, 2.0f), damage, position,
+            bullet.Initialize(spellPackage.projectile.id, finalDirection, owner, speed * Random.Range(0.5f, 2.0f), damage / num, position,
                              spellPackage.correctors, spellPackage.projectile.prefab, spellPackage.projectile.lifetime);
         }
         return null;

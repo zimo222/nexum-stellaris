@@ -5,7 +5,19 @@ public class FollowPlayer2D : MonoBehaviour
     public Vector3 offset = new Vector3(0, 0, 0);
     public float smoothSpeed = 0.125f;
 
-    void LateUpdate()
+    private void Awake()
+    {
+        
+
+    }
+
+    private void Start()
+    {
+        
+
+    }
+
+    void Update()
     {
         // 通过单例获取当前唯一存活的玩家
         if (Player.Instance == null) return;
